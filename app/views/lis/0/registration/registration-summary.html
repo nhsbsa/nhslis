@@ -1,0 +1,85 @@
+ {% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <div class="text">
+
+    <h1 class="heading-large">
+      Check your details
+    </h1>
+
+    <table class="data-table">
+      <tr>
+        <td>First name</td>
+        <td>Jane</td>
+        <td><a href="registration">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Last name</td>
+        <td>Doe</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Date of birth</td>
+        <td>24 March 2016</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Email address</td>
+        <td>jane.doe@inter.net</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Telephone number</td>
+        <td>0191 123 1234</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td>Street, Newcastle, NE1 123</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do you have a partner?</td>
+        <td>Yes</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Partner's first name</td>
+        <td>John</td>
+        <td><a href="registration">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Partner's last name</td>
+        <td>Doe</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Partner's date of birth</td>
+        <td>24 March 2016</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+
+    </table>
+    
+    <p>
+      <a class="button" href="registration-done">Register</a>
+    </p>
+
+  </div>
+  </div>
+  </div>
+  
+</main>
+
+{% endblock %}

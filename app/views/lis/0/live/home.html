@@ -1,0 +1,62 @@
+{% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+        
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <h1 class="heading-large">
+      Where do you and your partner live?
+  </h1>
+
+  <form action="" method="get" class="form">
+
+    <div class="form-item-wrapper">
+      <div class="form-group">
+        <input type="radio" id="employed" name="work">
+        <label class="form-control-radio" for="employed">
+          In a property we own (including mortgaged)
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="radio" id="self" name="work">
+        <label class="form-control-radio" for="self">
+          In rented accommodation
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="radio" id="trainee" name="work">
+        <label class="form-control-radio" for="trainee">
+          In someone else's home (for example friends, relatives, parents)
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="radio" id="trainee" name="work">
+        <label class="form-control-radio" for="trainee">
+          We are homeless
+        </label>
+      </div>
+    </div>  
+        
+    {{
+      form_macros.button({
+        href: 'council-tax',
+        label: 'Save and continue'
+      })
+    }}
+    
+    <p class="navigation"><a class="cancel" href="../lis-home">Cancel - back to my low income scheme home</a></p>
+
+  </form>
+    </div>
+    </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,121 @@
+ {% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <div class="text">
+
+    <h1 class="heading-large">
+      Check your details
+    </h1>
+
+    <table class="data-table">
+      <!--
+      <tr>
+        <td>Dependant children</td>
+        <td>Yes</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>First child</td>
+        <td>John Doe</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Date of birth</td>
+        <td>24 March 2016</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      -->
+      <tr>
+        <td>Do you have a job</td>
+        <td>Yes</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Type of work</td>
+        <td>Employed</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Hours worked each week?</td>
+        <td>10</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Are you in full time education?</td>
+        <td>Yes</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>University</td>
+        <td>Newcastle</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Course</td>
+        <td>Course title</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Term start date</td>
+        <td>29/03/2016</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Term end date</td>
+        <td>29/06/2016</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Is this your final or only year?</td>
+        <td>No</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Tuition fees</td>
+        <td>SLC</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Support</td>
+        <td>Loan</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Student support</td>
+        <td>No</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Benefits</td>
+        <td>No</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Allowances</td>
+        <td>No</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+    </table>
+    
+    <p>
+      <a class="button" href="../lis-home">Save - continue to my low income scheme home</a>
+    </p>
+
+  </div>
+  </div>
+  </div>
+  
+</main>
+
+{% endblock %}

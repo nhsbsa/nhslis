@@ -1,0 +1,58 @@
+ {% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+      
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <h1 class="heading-large">
+      Support
+  </h1>
+  
+  <h2 class="headding-large">Has your partner applied for any of the following from the Student loans company, the Student awards agency for Scotland or the NHS?</h2>
+
+  <form action="" method="get" class="form">
+
+    <div class="form-item-wrapper">
+      <div class="form-group">
+        <input type="checkbox" id="fee" name="minor">
+        <label class="form-control-checkbox" for="fee">
+          Tuition fee support
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="loan" name="minor">
+        <label class="form-control-checkbox" for="loan">
+          Loan support
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="grant" name="minor">
+        <label class="form-control-checkbox" for="grant">
+          Grant support
+        </label>
+      </div>
+    </div>  
+    
+    {{
+      form_macros.button({
+        href: 'support',
+        label: 'Save and continue'
+      })
+    }}
+    
+    <p class="navigation"><a class="cancel" href="../lis-home">Cancel - back to my low income scheme home</a></p>
+    
+  </form>
+    </div>
+    </div>
+</main>
+
+{% endblock %}
