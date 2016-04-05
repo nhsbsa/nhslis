@@ -8,56 +8,53 @@
 {% block content %}
 
 <main id="content" role="main">
-  
+        
   <div class="grid-row">
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-    About your x benefit
+      Which of the following pensions do you receive?
   </h1>
-  
-  <h2 class="heading-medium">When do you receive your x benefit?</h2>
-  
+  <p>Tick all that apply</p>
+
   <form action="" method="get" class="form">
 
     <div class="form-item-wrapper">
       <div class="form-group">
-        <input type="radio" id="week" name="minor">
-        <label class="form-control-radio" for="week">
-          Weekly
+        <input type="checkbox" id="employed" name="work">
+        <label class="form-control-checkbox" for="employed">
+          State pension
         </label>
       </div>
       <div class="form-group">
-        <input type="radio" id="fortnight" name="minor">
-        <label class="form-control-radio" for="fortnight">
-          Fortnightly
+        <input type="checkbox" id="self" name="work">
+        <label class="form-control-checkbox" for="self">
+          Private pension
         </label>
       </div>
       <div class="form-group">
-        <input type="radio" id="month" name="minor">
-        <label class="form-control-radio" for="month">
-         Monthly
+        <input type="checkbox" id="trainee" name="work">
+        <label class="form-control-checkbox" for="trainee">
+          Pension from employment
         </label>
       </div>
       <div class="form-group">
-        <input type="radio" id="year" name="minor">
-        <label class="form-control-radio" for="year">
-          Annually
+        <input type="checkbox" id="trainee" name="work">
+        <label class="form-control-checkbox" for="trainee">
+          War disablement pension 
         </label>
       </div>
-      
-    {{
-      form_macros.text_field({
-        id: 'first-name',
-        label: 'How much do you receive?'
-      })
-    }}
-
+      <div class="form-group">
+        <input type="checkbox" id="trainee" name="work">
+        <label class="form-control-checkbox" for="trainee">
+          War window’s pension
+        </label>
+      </div>
     </div>  
-    
+        
     {{
       form_macros.button({
-        href: 'allowances',
+        href: 'pension-amount',
         label: 'Save and continue'
       })
     }}

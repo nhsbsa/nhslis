@@ -13,21 +13,21 @@
     <div class="column-two-thirds">
 
       <h1 class="heading-large">
-        Do you have a job?
+        Do you receive carer's allowance?
       </h1>
   
-      <form action="work-handler" method="get" class="form">
+      <form action="" method="get" class="form">
           <div class="form-item-wrapper">
             <fieldset>
               <div class="inline-form-groups">
                 <div class="form-group">
-                  <input type="radio" id="binary-yes" name="work" value="yes">
+                  <input type="radio" id="binary-yes" name="binary">
                   <label class="form-control-radio" for="binary-yes">
                     Yes
                   </label>
                 </div>
                 <div class="form-group">
-                  <input type="radio" id="binary-no" name="work" value="no">
+                  <input type="radio" id="binary-no" name="binary">
                   <label class="form-control-radio" for="binary-no">
                     No
                   </label>
@@ -36,8 +36,9 @@
             </fieldset>
           </div>
 
-        {{
+            {{
           form_macros.button({
+            href: 'benefit4',
             label: 'Save and continue'
           })
         }}

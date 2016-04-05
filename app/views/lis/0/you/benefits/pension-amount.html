@@ -8,40 +8,56 @@
 {% block content %}
 
 <main id="content" role="main">
-    
+  
   <div class="grid-row">
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-      Do you receive any of the following allowances?
+    About your state pension
   </h1>
-
+  
+  <h2 class="heading-medium">How often do you receive your state pension payments?</h2>
+  
   <form action="" method="get" class="form">
 
     <div class="form-item-wrapper">
       <div class="form-group">
-        <input type="checkbox" id="group-one" name="minor">
-        <label class="form-control-checkbox" for="group-one">
-          Allowances group 1 - item 1
+        <input type="radio" id="week" name="minor">
+        <label class="form-control-radio" for="week">
+          Weekly
         </label>
       </div>
       <div class="form-group">
-        <input type="checkbox" id="group-two" name="minor">
-        <label class="form-control-checkbox" for="group-two">
-          Allowances group 1 - item 2
+        <input type="radio" id="fortnight" name="minor">
+        <label class="form-control-radio" for="fortnight">
+          Fortnightly
         </label>
       </div>
       <div class="form-group">
-        <input type="checkbox" id="group-three" name="minor">
-        <label class="form-control-checkbox" for="group-three">
-         Allowances group 1 - item 3
+        <input type="radio" id="month" name="minor">
+        <label class="form-control-radio" for="month">
+         Monthly
         </label>
       </div>
+      <div class="form-group">
+        <input type="radio" id="year" name="minor">
+        <label class="form-control-radio" for="year">
+          Annually
+        </label>
+      </div>
+      
+    {{
+      form_macros.text_field({
+        id: 'first-name',
+        label: 'How much do you receive?'
+      })
+    }}
+
     </div>  
     
     {{
       form_macros.button({
-        href: 'allowance-amount',
+        href: 'pension-credit',
         label: 'Save and continue'
       })
     }}

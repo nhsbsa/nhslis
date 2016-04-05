@@ -1,4 +1,4 @@
-{% extends 'templates/nhs_transaction_layout.html' %}
+ {% extends 'templates/nhs_transaction_layout.html' %}
 {% import 'includes/form_macros.html' as form_macros %}
 
 {% block afterHeader %}
@@ -8,40 +8,42 @@
 {% block content %}
 
 <main id="content" role="main">
-      
+        
   <div class="grid-row">
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-      Do you receive any of the following benefits?
+      Do you receive any of the following?
   </h1>
+  <p>Tick all that apply</p>
 
   <form action="" method="get" class="form">
 
     <div class="form-item-wrapper">
       <div class="form-group">
-        <input type="checkbox" id="group-one" name="minor">
-        <label class="form-control-checkbox" for="group-one">
-          Benefits group 1 - item 1
+        <input type="checkbox" id="ba" name="bgroup4">
+        <label class="form-control-checkbox" for="ba">
+          Bereavement allowance
         </label>
       </div>
       <div class="form-group">
-        <input type="checkbox" id="group-two" name="minor">
-        <label class="form-control-checkbox" for="group-two">
-          Benefits group 1 - item 2
+        <input type="checkbox" id="wpa" name="bgroup4">
+        <label class="form-control-checkbox" for="wpa">
+          Widowed parents allowance
         </label>
       </div>
+      <p class="form-block">or</p>
       <div class="form-group">
-        <input type="checkbox" id="group-three" name="minor">
-        <label class="form-control-checkbox" for="group-three">
-          Benefits group 1 - item 3
+        <input type="checkbox" id="none" name="bgroup4">
+        <label class="form-control-checkbox" for="none">
+          I don't receive any of these
         </label>
       </div>
-    </div>  
-    
+    </div>
+
     {{
       form_macros.button({
-        href: 'benefit-amount',
+        href: 'benefit7 ',
         label: 'Save and continue'
       })
     }}
