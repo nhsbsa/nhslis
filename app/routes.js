@@ -124,14 +124,22 @@ module.exports = {
     app.get('/lis/0/you/benefits/pension-handler', function(req, res) {
       console.log(req.query);
       if (req.query.pension === 'no') {
-        res.redirect('/lis/0/you/benefits/benefit-group1');
+        res.redirect('/lis/0/you/benefits/benefits');
       } else {
         res.redirect('/lis/0/you/benefits/pension-type');
       }
     });
     
-      
-      
+    //benefits
+    app.get('/lis/0/you/benefits/benefit-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.benefit === 'no') {
+        res.redirect('/lis/0/you/benefits/other-money');
+      } else {
+        res.redirect('/lis/0/you/benefits/benefit-group1');
+      }
+    });
+
     // Change or cancel appointment fork:
     app.get('/change-or-cancel-an-appointment/path-handler', function(req, res) {
       console.log(req.query);
