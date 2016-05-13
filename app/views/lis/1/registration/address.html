@@ -20,19 +20,35 @@
 
     {{
       form_macros.text_field({
-        id: 'first-name'
+        id: 'address-line-one',
+        label: 'Building and street'
       })
     }}
     
     {{
       form_macros.text_field({
-        id: 'first-name'
+        id: 'address-line-two'
       })
     }}
     
     {{
       form_macros.text_field({
-        id: 'first-name'
+        id: 'first-name',
+        label: 'Town or city'
+      })
+    }}
+        
+    {{
+      form_macros.text_field({
+        id: 'county',
+        label: 'County(optional)'
+      })
+    }}
+        
+    {{
+      form_macros.text_field({
+        id: 'county',
+        label: 'Postcode'
       })
     }}
         

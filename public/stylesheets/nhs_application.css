@@ -1897,3 +1897,5 @@ label, .form-label, .form-label-bold {
 .navigation {
   text-decoration: underline; }
 
+#address-line-one, #address-line-two {
+  width: 100%; }
