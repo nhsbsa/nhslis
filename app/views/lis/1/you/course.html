@@ -8,53 +8,33 @@
 {% block content %}
 
 <main id="content" role="main">
-        
+    
   <div class="grid-row">
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-      Your address
+      Your course
   </h1>
 
   <form action="" method="get" class="form">
 
     {{
       form_macros.text_field({
-        id: 'address-line-one',
-        label: 'Building and street'
+        id: 'address',
+        label: 'University'
       })
     }}
     
     {{
       form_macros.text_field({
-        id: 'address-line-two'
+        id: 'address',
+        label: 'Course name'
       })
     }}
     
-    {{
-      form_macros.text_field({
-        id: 'first-name',
-        label: 'Town or city'
-      })
-    }}
-        
-    {{
-      form_macros.text_field({
-        id: 'county',
-        label: 'County (optional)'
-      })
-    }}
-        
-    {{
-      form_macros.text_field({
-        id: 'postcode',
-        label: 'Postcode'
-      })
-    }}
-        
     {{
       form_macros.button({
-        href: 'contact',
+        href: 'term-start',
         label: 'Save and continue'
       })
     }}

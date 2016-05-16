@@ -1,3 +1,5 @@
+var version = 1;
+
 var querystring = require('querystring');
 
 module.exports = {
@@ -40,6 +42,23 @@ module.exports = {
       });
     });
     
+    //about you summary
+    app.get('/lis/1/you/about-you-summary', function (req, res) {
+      res.render('lis/1/you/about-you-summary', {
+        'myWork' : myWork
+      });
+    });
+    
+    //education
+    app.get('/lis/1/you/education-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.education === 'yes') {
+        res.redirect('/lis/1/you/course');
+      } else {
+        res.redirect('/lis/1/you/work');
+      }
+    });
+    
     //education
     app.get('/lis/0/you/education-handler', function(req, res) {
       console.log(req.query);
@@ -61,6 +80,16 @@ module.exports = {
         res.redirect('/lis/0/you/benefits/pension');
       }
     });
+        
+    //pension
+    app.get('/lis/1/you/pension/pension-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.pension === 'no') {
+        res.redirect('/lis/1/you/benefits/benefit-group1');
+      } else {
+        res.redirect('/lis/1/you/pension/pension-credit');
+      }
+    });
 
     //pension
     app.get('/lis/0/you/benefits/pension-handler', function(req, res) {
@@ -71,7 +100,17 @@ module.exports = {
         res.redirect('/lis/0/you/benefits/pension-type');
       }
     });
-    
+        
+    //benefits
+    app.get('/lis/1/you/benefits/benefit-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.benefit === 'no') {
+        res.redirect('/lis/1/you/benefits/other-money');
+      } else {
+        res.redirect('/lis/1/you/benefits/benefit-group1');
+      }
+    });
+
     //benefits
     app.get('/lis/0/you/benefits/benefit-handler', function(req, res) {
       console.log(req.query);
@@ -81,6 +120,6 @@ module.exports = {
         res.redirect('/lis/0/you/benefits/benefit-group1');
       }
     });
-    
+        
   }
 };
