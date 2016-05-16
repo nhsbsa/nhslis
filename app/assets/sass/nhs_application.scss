@@ -123,3 +123,7 @@ h1 {
 #address-line-one, #address-line-two {
   width :100%;
 }
+
+li {
+  list-style: none inside circle;
+}
