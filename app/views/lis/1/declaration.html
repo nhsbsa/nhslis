@@ -1,0 +1,43 @@
+{% extends 'templates/nhs_transaction_layout.html' %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    
+  <div class="grid-row">
+    
+    <div class="column-two-thirds">
+
+      <div class="text">
+        
+        <h1 class="heading-xlarge">Declaration</h1>
+        
+        <p class="intro-to-list">
+          Some text here for a declaration, maybe with a tick box to agree to it
+        </p>
+
+        <ul class="list list-bullet">
+          <li>getting income support</li>
+          <li>getting pension credit guarantee credit</li>
+          <li>getting universal credit</li> 
+          <li>named on, or entitled to, an NHS Tax Credit Exemption certificate</li>
+        </ul>
+        
+        
+        <p>
+          <a class="button button-get-started" href="full-help">Submit</a>
+        </p>
+         
+      </div>
+      
+    </div>
+      
+  </div>
+  
+</main>
+
+{% endblock %}
