@@ -8,53 +8,27 @@
 {% block content %}
 
 <main id="content" role="main">
-        
+      
   <div class="grid-row">
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-      Your address
+      Term end
   </h1>
 
   <form action="" method="get" class="form">
 
     {{
-      form_macros.text_field({
-        id: 'address-line-one',
-        label: 'Building and street'
+      form_macros.date_field({
+        label: 'Term end date',
+        hint_date: '31 7 1961',
+        id_prefix: 'dob-'
       })
     }}
-    
-    {{
-      form_macros.text_field({
-        id: 'address-line-two'
-      })
-    }}
-    
-    {{
-      form_macros.text_field({
-        id: 'first-name',
-        label: 'Town or city'
-      })
-    }}
-        
-    {{
-      form_macros.text_field({
-        id: 'county',
-        label: 'County (optional)'
-      })
-    }}
-        
-    {{
-      form_macros.text_field({
-        id: 'postcode',
-        label: 'Postcode'
-      })
-    }}
-        
+
     {{
       form_macros.button({
-        href: 'contact',
+        href: 'final-year',
         label: 'Save and continue'
       })
     }}
