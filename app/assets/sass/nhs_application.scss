@@ -79,8 +79,14 @@
     line-height: 1.25;
     border-bottom: 1px solid #bfc1c3;
     padding: 15px 0;
-  }
-  &.living-summary {
+  } &.you-summary {
+    tr {
+      td:first-child {
+        width: 60%;
+        padding-right: 4%;
+      }
+    }
+  } &.living-summary {
     tr {
       td:first-child {
           width: 65%;
@@ -91,8 +97,7 @@
           padding-right: 2.5%;
       }
     }
-  }
-  &.assets-summary {
+  } &.assets-summary {
     tr {
       td:first-child {
           width: 75%;
@@ -126,3 +131,4 @@ p.intro-to-list {
   padding-bottom: 0;
   margin-bottom: 0.5rem;
 }
+

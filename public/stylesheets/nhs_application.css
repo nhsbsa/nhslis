@@ -1878,6 +1878,9 @@ label, .form-label, .form-label-bold {
     line-height: 1.25;
     border-bottom: 1px solid #bfc1c3;
     padding: 15px 0; }
+  .data-table.you-summary tr td:first-child {
+    width: 60%;
+    padding-right: 4%; }
   .data-table.living-summary tr td:first-child {
     width: 65%;
     padding-right: 2.5%; }

@@ -18,7 +18,7 @@ module.exports = {
     
     // add your routes here
 
-    //LIS 0.1
+    //LIS
     var myWork;
 
     app.get('/lis/0', function (req, res) {
@@ -50,16 +50,6 @@ module.exports = {
     });
     
     //education
-    app.get('/lis/1/you/education-handler', function(req, res) {
-      console.log(req.query);
-      if (req.query.education === 'yes') {
-        res.redirect('/lis/1/you/course');
-      } else {
-        res.redirect('/lis/1/you/work');
-      }
-    });
-    
-    //education
     app.get('/lis/0/you/education-handler', function(req, res) {
       console.log(req.query);
       if (req.query.education === 'yes') {
@@ -68,7 +58,17 @@ module.exports = {
         res.redirect('/lis/0/you/work');
       }
     });
-
+    
+    //education
+    app.get('/lis/1/you/education-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.education === 'yes') {
+        res.redirect('/lis/1/you/work');
+      } else {
+        res.redirect('/lis/1/you/work');
+      }
+    });
+    
     //work
     app.get('/lis/0/you/work-handler', function(req, res) {
       console.log(req.query);
@@ -78,6 +78,18 @@ module.exports = {
       } else {
         myWork = 'No';
         res.redirect('/lis/0/you/benefits/pension');
+      }
+    });
+        
+    //work
+    app.get('/lis/1/you/work-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.work === 'yes') {
+        myWork = 'Yes';
+        res.redirect('/lis/1/you/pension/pension');
+      } else {
+        myWork = 'No';
+        res.redirect('/lis/1/you/pension/pension');
       }
     });
         
