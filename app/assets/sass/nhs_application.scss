@@ -114,16 +114,15 @@
   text-decoration: underline;
 }
 
-h1 {
-  .hint {
-    
-  }
-}
-
 #address-line-one, #address-line-two {
   width :100%;
 }
 
 li {
   list-style: none inside disc;
+}
+
+p.intro-to-list {
+  padding-bottom: 0;
+  margin-bottom: 0.5rem;
 }
