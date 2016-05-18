@@ -8,33 +8,43 @@
 {% block content %}
 
 <main id="content" role="main">
-  
+    
   <div class="grid-row">
     <div class="column-two-thirds">
 
+  <!-- <p class="navigation"><a class="back-to-previous">Back</a></p> -->
+
   <h1 class="heading-large">
-    Contact details
+    About you
   </h1>
 
   <form action="" method="get" class="form">
 
     {{
       form_macros.text_field({
-        id: 'email',
-        label: 'Email address'
+        id: 'first-name',
+        label: 'First name'
       })
     }}
 
     {{
       form_macros.text_field({
-        id: 'telephone',
-        label: 'Telephone number (optional)'
+        id: 'last-name',
+        label: 'Last name'
+      })
+    }}
+
+    {{
+      form_macros.date_field({
+        label: 'Date of birth',
+        hint_date: '31 7 1961',
+        id_prefix: 'dob-'
       })
     }}
 
     {{
       form_macros.button({
-        href: 'registration-summary',
+        href: 'contact',
         label: 'Next'
       })
     }}

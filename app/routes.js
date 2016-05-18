@@ -63,9 +63,9 @@ module.exports = {
     app.get('/lis/1/you/education-handler', function(req, res) {
       console.log(req.query);
       if (req.query.education === 'yes') {
-        res.redirect('/lis/1/you/work');
+        res.redirect('/lis/1/you/pension/pension');
       } else {
-        res.redirect('/lis/1/you/work');
+        res.redirect('/lis/1/you/pension/pension');
       }
     });
     
@@ -86,10 +86,10 @@ module.exports = {
       console.log(req.query);
       if (req.query.work === 'yes') {
         myWork = 'Yes';
-        res.redirect('/lis/1/you/pension/pension');
+        res.redirect('/lis/1/you/education');
       } else {
         myWork = 'No';
-        res.redirect('/lis/1/you/pension/pension');
+        res.redirect('/lis/1/you/education');
       }
     });
         
