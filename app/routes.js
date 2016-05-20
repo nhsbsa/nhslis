@@ -76,6 +76,16 @@ module.exports = {
       res.render('lis/0/');
     });
     
+    //kickout
+    app.get('/lis/1/kickout-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.kickout === 'continue') {
+        res.redirect('/lis/1/you/registration');
+      } else {
+        res.redirect('/lis/1/kickout');
+      }
+    });
+
     //partner
     app.get('/lis/0/registration/partner-handler', function (req, res) {
       console.log(req.query);
