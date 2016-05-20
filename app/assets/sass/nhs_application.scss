@@ -142,3 +142,18 @@ p.intro-to-list {
 .panel-border-wide {
     border-left-width: 10px;
   }
+
+
+.notice {
+    position: relative;
+    .icon {
+      position: absolute;
+      left: 0;
+      top: 30%;
+      margin-top: -17px;
+  } strong {
+      display: block;
+      padding-left: 65px;
+      margin-left: -15px;
+  }
+}
