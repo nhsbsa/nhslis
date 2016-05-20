@@ -15,8 +15,7 @@
   <!-- <p class="navigation"><a class="back-to-previous">Back</a></p> -->
 
   <h1 class="heading-large">
-    Do you or your partner have any other money?
-    <span class="form-hint">For example cash</span>
+    Do you have any property or land in this country or abroad?
   </h1>
 
   <form action="" method="get" class="form">
@@ -26,31 +25,21 @@
         <div class="inline-form-groups">
           <div class="form-group">
             <input type="radio" id="email" name="contact">
-            <label class="form-control-radio js-toggle" for="email" data-show="#contact-email-address" data-hide="#contact-mobile-number">
+            <label class="form-control-radio" for="email" data-show="#contact-email-address" data-hide="#contact-mobile-number">
               Yes
             </label>
           </div>
           <div class="form-group">
             <input type="radio" id="mobile" name="contact">
-            <label class="form-control-radio js-toggle" for="mobile" data-hide="#contact-email-address">
+            <label class="form-control-radio" for="mobile" data-hide="#contact-email-address">
               No
             </label>
           </div>
         </div>
 
-        <div class="js-hidden panel-indent" id="contact-email-address">
-          <label class="form-label-bold" for="email-address">
-            Total value of money
-          </label>
-          <p class="form-hint">Please tell us the combined total of any money you and your partner have</p>
-          <input type="text" id="email-address" class="form-control">
-        </div>
-      </fieldset>
-    </div>
-
     {{
       form_macros.button({
-        href: 'assets-summary',
+        href: 'money',
         label: 'Next'
       })
     }}

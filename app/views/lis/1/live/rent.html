@@ -24,31 +24,24 @@
         <div class="inline-form-groups">
           <div class="form-group">
             <input type="radio" id="email" name="contact">
-            <label class="form-control-radio js-toggle" for="email" data-show="#contact-email-address" data-hide="#contact-mobile-number">
+            <label class="form-control-radio" for="email" data-show="#contact-email-address" data-hide="#contact-mobile-number">
               Yes
             </label>
           </div>
           <div class="form-group">
             <input type="radio" id="mobile" name="contact">
-            <label class="form-control-radio js-toggle" for="mobile" data-hide="#contact-email-address">
+            <label class="form-control-radio" for="mobile" data-hide="#contact-email-address">
               No
             </label>
           </div>
-        </div>
-
-        <div class="js-hidden panel-indent" id="contact-email-address">
-          <label class="form-label-bold" for="email-address">
-            How much rent do you pay each month?
-          </label>
-          <input type="text" id="email-address" class="form-control">
         </div>
       </fieldset>
     </div>
 
     {{
       form_macros.button({
-        href: 'council-tax',
-        label: 'Save and continue'
+        href: 'rent-amount',
+        label: 'Next'
       })
     }}
     
