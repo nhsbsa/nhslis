@@ -1,4 +1,11 @@
-var version = 1;
+var partner = false;
+var partnerText = "you";
+
+var partnerCheck = function (partnerStatus) {
+  if (partnerStatus == true) {
+    var partnerText = "you or your partner";
+  }
+}
 
 var querystring = require('querystring');
 
@@ -19,12 +26,30 @@ module.exports = {
     // add your routes here
     
     //LIS sprint 1
+    //property
+    app.get('/lis/1/assets/property', function (req, res) {
+      res.render('lis/1/assets/property', {
+        'partnerText' : partnerText
+      });
+    });
     
     //about you summary
     app.get('/lis/1/you/about-you-summary', function (req, res) {
       res.render('lis/1/you/about-you-summary', {
         'myWork' : myWork
       });
+    });
+    
+    //partner
+    app.get('/lis/1/partner/partner-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.partner === 'yes') {
+        partnerCheck(true);
+        res.render('lis/1/partner/summary');
+      } else {
+        partnerCheck(false);
+        res.render('lis/1/partner/summary');
+      }
     });
     
     //education
