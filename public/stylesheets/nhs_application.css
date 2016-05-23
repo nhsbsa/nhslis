@@ -1931,3 +1931,14 @@ p.intro-to-list {
     display: block;
     padding-left: 65px;
     margin-left: -15px; }
+
+.important-info {
+  font-weight: bold;
+  font-size: 140%;
+  padding-bottom: 15px; }
+
+.highlight-block {
+  float: left;
+  border-top: 5px solid #0072C6;
+  margin-top: 20px;
+  padding-top: 10px; }
