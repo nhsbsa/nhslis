@@ -26,6 +26,17 @@ module.exports = {
     // add your routes here
     
     //LIS sprint 1
+    
+    //kickout
+    app.get('/lis/1/kickout-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.kickout === 'continue') {
+        res.redirect('/lis/1/lis-home');
+      } else {
+        res.redirect('/lis/1/kickout');
+      }
+    });
+    
     //property
     app.get('/lis/1/assets/property', function (req, res) {
       res.render('lis/1/assets/property', {
@@ -99,16 +110,6 @@ module.exports = {
 
     app.get('/lis/0', function (req, res) {
       res.render('lis/0/');
-    });
-    
-    //kickout
-    app.get('/lis/1/kickout-handler', function(req, res) {
-      console.log(req.query);
-      if (req.query.kickout === 'continue') {
-        res.redirect('/lis/1/you/registration');
-      } else {
-        res.redirect('/lis/1/kickout');
-      }
     });
 
     //partner
