@@ -1,0 +1,93 @@
+ {% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+        
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <h1 class="heading-large">
+      Do you receive any of the following?
+  </h1>
+  <p>Tick all that apply</p>
+
+  <form action="" method="get" class="form">
+
+    <div class="form-item-wrapper">
+      <div class="form-group">
+        <input type="checkbox" id="aa" name="minor">
+        <label class="form-control-checkbox" for="aa">
+          Attendance allowance
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="ba" name="minor">
+        <label class="form-control-checkbox" for="ba">
+          Bereavement allowance
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="ca" name="minor">
+        <label class="form-control-checkbox" for="ca">
+          Carers allowance
+        </label>
+      </div> 
+      <div class="form-group">
+        <input type="checkbox" id="ctc" name="minor">
+        <label class="form-control-checkbox" for="ctc">
+         Child tax credits
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="mp" name="minor">
+        <label class="form-control-checkbox" for="mp">
+         Maintenance payments
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="ma" name="minor">
+        <label class="form-control-checkbox" for="ma">
+         Maternity allowance
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="wpa" name="minor">
+        <label class="form-control-checkbox" for="wpa">
+          Widowed parents allowance
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="wb" name="minor">
+        <label class="form-control-checkbox" for="wb">
+          Widows benefits
+        </label>
+      </div>
+      <p class="form-block">or</p>
+      <div class="form-group">
+        <input type="checkbox" id="none" name="bgroup2">
+        <label class="form-control-checkbox" for="none">
+          I don't receive any of these
+        </label>
+      </div>
+    </div>
+    {{
+      form_macros.button({
+        href: 'benefit7',
+        label: 'Next'
+      })
+    }}
+    
+<!--<p class="navigation"><a class="cancel" href="../lis-home">             Cancel - back to my low income scheme home</a>           </p> Cancel - back to my low income scheme home</a></p> -->
+
+  </form>
+    </div>
+    </div>
+</main>
+
+{% endblock %}

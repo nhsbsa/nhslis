@@ -1,5 +1,8 @@
 var partner = false;
 var partnerText = "you";
+var stateP = false;
+var privateP = false;
+
 
 var partnerCheck = function (partnerStatus) {
   if (partnerStatus == true) {
@@ -24,6 +27,124 @@ module.exports = {
     });
     
     // add your routes here
+    
+    //LIS sprint 2
+    
+    //pension
+    app.get('/lis/2/you/pension/pension-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.pension === 'no') {
+        res.redirect('/lis/2/you/benefits/benefit-group1');
+      } else {
+        res.redirect('/lis/2/you/pension/pension-credit');
+      }
+    });
+
+    //pension-type
+    app.get('/lis/2/you/pension/pension-type-handler', function(req, res) {
+      var pensions = req.query.pensiontype;
+      console.log(pensions);
+      if (pensions == 'state') {
+        stateP = true;
+        res.render('lis/2/you/pension/pension-amount');
+      } else if(pensions == 'private') {
+        privateP = true;
+        res.render('lis/2/you/pension/private-pension-amount');
+      } else {
+        for (pension in pensions) {
+          console.log(pensions[pension]); 
+            if(pensions[pension] == 'state') {
+              stateP = true;
+            } else if(pensions[pension] == 'private') {
+              privateP = true;
+            }
+        };
+        if(stateP == true) {
+          res.render('lis/2/you/pension/pension-amount');
+        } else if(privateP == true) {
+          res.render('lis/2/you/pension/private-pension-amount');
+        }
+      }
+    });
+    
+    //state-pension
+    app.get('/lis/2/you/pension/state-pension-handler', function(req, res) {
+      if (privateP == true) {
+        res.render('lis/2/you/pension/private-pension-amount', {'privateP' : privateP });
+      } else if (privateP == false) {
+        res.render('lis/2/you/benefits/benefit-group1', {'privateP' : privateP });
+      }
+    });
+
+    //kickout
+    app.get('/lis/2/kickout-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.kickout === 'continue') {
+        res.redirect('/lis/2/lis-home');
+      } else {
+        res.redirect('/lis/2/kickout');
+      }
+    });
+    
+    //property
+    app.get('/lis/2/assets/property', function (req, res) {
+      res.render('lis/2/assets/property', {
+        'partnerText' : partnerText
+      });
+    });
+    
+    //about you summary
+    app.get('/lis/2/you/about-you-summary', function (req, res) {
+      res.render('lis/2/you/about-you-summary', {
+        'myWork' : myWork
+      });
+    });
+    
+    //partner
+    app.get('/lis/2/partner/partner-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.partner === 'yes') {
+        partnerCheck(true);
+        res.render('lis/2/partner/summary');
+      } else {
+        partnerCheck(false);
+        res.render('lis/2/partner/summary');
+      }
+    });
+    
+    //education
+    app.get('/lis/2/you/education-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.education === 'yes') {
+        res.redirect('/lis/2/you/pension/pension');
+      } else {
+        res.redirect('/lis/2/you/pension/pension');
+      }
+    });
+    
+    //work
+    app.get('/lis/2/you/work-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.work === 'yes') {
+        myWork = 'Yes';
+        res.redirect('/lis/2/you/education');
+      } else {
+        myWork = 'No';
+        res.redirect('/lis/2/you/education');
+      }
+    });
+        
+    //benefits
+    app.get('/lis/2/you/benefits/benefit-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.benefit === 'no') {
+        res.redirect('/lis/2/you/benefits/other-money');
+      } else {
+        res.redirect('/lis/2/you/benefits/benefit-group1');
+      }
+    });
+    
+    
     
     //LIS sprint 1
     

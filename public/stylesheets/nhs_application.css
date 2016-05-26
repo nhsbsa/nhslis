@@ -1942,3 +1942,6 @@ p.intro-to-list {
   border-top: 5px solid #0072C6;
   margin-top: 20px;
   padding-top: 10px; }
+
+.strong {
+  font-weight: bold; }

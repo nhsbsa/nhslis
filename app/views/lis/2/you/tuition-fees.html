@@ -1,0 +1,56 @@
+ {% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+      
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <h1 class="heading-large">
+     Do any of the following pay your tuition fees?
+  </h1>
+  
+  <form action="" method="get" class="form">
+
+    <div class="form-item-wrapper">
+      <div class="form-group">
+        <input type="radio" id="slc" name="tuition">
+        <label class="form-control-radio" for="slc">
+          Student loans company
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="radio" id="sas" name="tuition">
+        <label class="form-control-radio" for="sas">
+          Student awards agency for Scotland
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="radio" id="nhs" name="tuition">
+        <label class="form-control-radio" for="nhs">
+          National Health Service
+        </label>
+      </div>
+    </div>  
+    
+    {{
+      form_macros.button({
+        href: 'support-application',
+        label: 'Next'
+      })
+    }}
+        
+<!--<p class="navigation"><a class="cancel" href="../lis-home">             Cancel - back to my low income scheme home</a>           </p> Cancel - back to my low income scheme home</a></p> -->
+
+  </form>
+    </div>
+    </div>
+</main>
+
+{% endblock %}
