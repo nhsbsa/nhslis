@@ -72,6 +72,10 @@
   ol { @extend .list-number; }
 }
 
+// LIS
+
+$nhs-blue: #0072C6;
+
 .data-table {
   margin-bottom: 30px;
   td {
@@ -166,7 +170,7 @@ p.intro-to-list {
 
 .highlight-block {
   float: left;
-  border-top: 5px solid #0072C6;
+  border-top: 5px solid $nhs-blue;
   margin-top: 20px;
   padding-top: 10px;
 }
@@ -180,3 +184,69 @@ p.intro-to-list {
   vertical-align:text-top;
   padding-left:1em;
 }
+
+
+//done-page
+
+.done-panel {
+  background-color: $nhs-blue;
+  text-align: center;
+  color: white;
+  padding: 20px 0;
+  margin: 30px 0;
+  h1 {
+    line-height: 3rem;
+  }
+  h4 {
+    padding-top: 0;
+  }
+  h2 {
+    padding-top: 0;
+  }
+}
+
+#done-tick {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding: 4px 12px 4px 4px;;
+  background-color: $nhs-blue;
+  background-image: url("/public/images/done-tick.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+hr {
+    padding-bottom: 1rem;
+    padding-top: 2rem;
+}
+
+.lede .intro {
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
