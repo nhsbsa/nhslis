@@ -30,6 +30,17 @@ module.exports = {
     
     //LIS sprint 2
     
+    //pension-credit
+    app.get('/lis/2/you/pension/pencred-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.prencred === 'none') {
+        res.redirect('/lis/2/you/pension/pension-type');
+      } else {
+        res.redirect('/lis/2/kickout');
+      }
+    });
+
+
     //pension
     app.get('/lis/2/you/pension/pension-handler', function(req, res) {
       console.log(req.query);

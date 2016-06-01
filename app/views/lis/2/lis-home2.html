@@ -1,4 +1,4 @@
-  {% extends 'templates/nhs_transaction_layout.html' %}
+{% extends 'templates/nhs_transaction_layout.html' %}
 
 {% block afterHeader %}
   {% include "includes/service-headers/low-income.html" %}
@@ -19,11 +19,11 @@
         <p class="lede">
           Complete the following sections.
         </p>
-    
+      <!--
         <p>
           If you need to leave the service your information will be saved.
         </p>
-    
+    -->
         <table class="data-table">
           <tr>
             <td>About you</td>
@@ -31,21 +31,29 @@
           </tr>
           <tr>
             <td>About your partner</td>
-            <td><a href="partner/partner">View or edit</a> <img src="/public/images/tick_gr.png" class="section-tick"></td>
+            <td><a href="partner/partner">Start</a></td>
           </tr>
           <tr>
             <td>Property, savings &amp; money</td>
-            <td><a href="assets/property">View or edit</a> <img src="/public/images/tick_gr.png" class="section-tick"></td>
+            <td><a href="assets/property">Start</a></td>
           </tr>
           <tr>
             <td>About where you live</td>
-            <td><a href="live/home">View or edit</a> <img src="/public/images/tick_gr.png" class="section-tick"></td>
+            <td><a href="live/home">Start</a></td>
           </tr>
         </table>
         
+        <div class="panel panel-border-wide">
+          <p>
+            You can submit your application here once you have answered all of the questions above.
+          </p>
+        </div>
+  
+      <!--
         <p>
-          <a class="button" href="declaration">Next</a>
+          <a class="button" href="declaration">Submit</a>
         </p>
+     -->   
       </div>
       
     </div>
