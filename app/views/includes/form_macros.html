@@ -1,3 +1,17 @@
+{% macro amount_field(i) %}
+  <div class="form-item-wrapper">
+    <div class="form-group">
+      <label class="form-label-bold" for="{{ i.id }}">
+        {{ i.label|safe }}
+      </label>
+      {% if i.hint %}
+        <p class="form-hint">{{ i.hint|safe }}</p>
+      {% endif %}
+      <p class="amount">£</p><input type="text" id="{{ i.id }}" name="{{ i.id }}" value="{{ i.value }}" class="form-control {{ i.class }}">
+    </div>
+  </div>
+{% endmacro %}
+
 {% macro text_field(i) %}
   <div class="form-item-wrapper">
     <div class="form-group">

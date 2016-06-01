@@ -103,6 +103,10 @@ fieldset {
   }
 }
 
+.form-control,.ui-autocomplete > #money-amount {
+  width:94%;
+}
+
 textarea.form-control {
   min-height: 10rem;
   padding-top: 1rem;
