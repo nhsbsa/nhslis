@@ -40,7 +40,6 @@ module.exports = {
       }
     });
 
-
     //pension
     app.get('/lis/2/you/pension/pension-handler', function(req, res) {
       console.log(req.query);
@@ -155,7 +154,15 @@ module.exports = {
       }
     });
     
-    
+    //bank accounts
+    app.get('/lis/2/assets/account-type-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.banktype === 'bank') {
+        res.redirect('/lis/2/assets/accounts');
+      } else {
+        res.redirect('/lis/2/assets/other');
+      }
+    });
     
     //LIS sprint 1
     
