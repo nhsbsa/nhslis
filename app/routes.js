@@ -30,6 +30,26 @@ module.exports = {
     
     //LIS sprint 2
     
+    //other people living in your home
+    app.get('/lis/2/live/people-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.people === 'yes') {
+        res.redirect('/lis/2/live/others/name');
+      } else {
+        res.redirect('/lis/2/live/living-summary');
+      }
+    });
+
+    //where you live
+    app.get('/lis/2/live/home-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.home === 'own') {
+        res.redirect('/lis/2/live/mortgaged/joint');
+      } else {
+        res.redirect('/lis/2/live/joint');
+      }
+    });
+
     //pension-credit
     app.get('/lis/2/you/pension/pencred-handler', function(req, res) {
       console.log(req.query);
@@ -39,7 +59,6 @@ module.exports = {
         res.redirect('/lis/2/you/pension/pension-type');
       }
     });
-
 
     //pension
     app.get('/lis/2/you/pension/pension-handler', function(req, res) {
