@@ -33,10 +33,10 @@ module.exports = {
     //pension-credit
     app.get('/lis/2/you/pension/pencred-handler', function(req, res) {
       console.log(req.query);
-      if (req.query.prencred === 'none') {
-        res.redirect('/lis/2/you/pension/pension-type');
-      } else {
+      if (req.query.prencred === 'ib') {
         res.redirect('/lis/2/kickout');
+      } else {
+        res.redirect('/lis/2/you/pension/pension-type');
       }
     });
 
