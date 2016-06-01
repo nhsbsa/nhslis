@@ -221,6 +221,9 @@ fieldset {
     -moz-box-shadow: inset 0px 0px 0px 2px #231f20;
     box-shadow: inset 0px 0px 0px 2px #231f20; }
 
+.form-control, .ui-autocomplete-input > #money-amount {
+  width: 70%; }
+
 textarea.form-control {
   min-height: 10rem;
   padding-top: 1rem;
@@ -1950,6 +1953,12 @@ p.intro-to-list {
   width: 10%;
   vertical-align: text-top;
   padding-left: 1em; }
+
+.amount {
+  font-size: 2.121rem;
+  float: left;
+  margin: 0.3rem 0.8rem 0 0;
+  font-weight: bold; }
 
 .done-panel {
   background-color: #0072C6;

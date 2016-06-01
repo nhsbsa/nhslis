@@ -15,41 +15,25 @@
   <!-- <p class="navigation"><a class="back-to-previous">Back</a></p> -->
 
   <h1 class="heading-large">
-    Do you or your partner have any money in bank or building society accounts?
+    What is the total amount you have in bank, building society or savings accounts?
+    <span class="form-hint">Please tell us the combined amount from all of the accounts you have</span>
   </h1>
 
   <form action="" method="get" class="form">
 
 <div class="form-item-wrapper">
-  <fieldset>
-    <div class="inline-form-groups">
-      <div class="form-group">
-        <input type="radio" id="email" name="contact">
-        <label class="form-control-radio js-toggle" for="email" data-show="#contact-email-address" data-hide="#contact-mobile-number">
-          Yes
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="radio" id="mobile" name="contact">
-        <label class="form-control-radio js-toggle" for="mobile" data-hide="#contact-email-address">
-          No
-        </label>
-      </div>
-    </div>
 
-    <div class="js-hidden panel-indent" id="contact-email-address">
-      <label class="form-label-bold" for="email-address">
-        Total held in accounts
-      </label>
-      <p class="form-hint">Please tell us the combined amount from all of the accounts you and your partner have</p>
-      <input type="text" id="email-address" class="form-control">
-    </div>
-  </fieldset>
+    {{
+      form_macros.amount_field({
+        id: 'money-amount'
+      })
+    }}
+
 </div>
 
     {{
       form_macros.button({
-        href: 'bonds',
+        href: 'other',
         label: 'Next'
       })
     }}
