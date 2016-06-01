@@ -39,11 +39,22 @@
         </div>
 
         <div class="js-hidden panel-indent" id="contact-email-address">
+        
+          {{
+            form_macros.amount_field({
+              id: 'money-amount',
+              hint: 'Please tell us the combined total of any money you have',
+              label: 'Total value of money'
+            })
+          }}
+
+        <!--
           <label class="form-label-bold" for="email-address">
             Total value of money
           </label>
           <p class="form-hint">Please tell us the combined total of any money you have</p>
           <input type="text" id="email-address" class="form-control">
+          -->
         </div>
       </fieldset>
     </div>
