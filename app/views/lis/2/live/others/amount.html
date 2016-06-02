@@ -47,12 +47,13 @@
         </label>
       </div>
       
-    {{
-      form_macros.text_field({
-        id: 'first-name',
-        label: 'How much do they receive before tax and national insurance are taken off?'
-      })
-    }}
+      {{
+        form_macros.amount_field({
+          id: 'money-amount',
+          label: 'How much do they receive before tax and national insurance are taken off?'
+        })
+      }}
+
 
     </div>  
     

@@ -31,7 +31,7 @@ module.exports = {
     //LIS sprint 2
     
     //other people living in your home
-    app.get('/lis/2/live/people-handler', function(req, res) {
+    app.get('/lis/2/live/others/people-handler', function(req, res) {
       console.log(req.query);
       if (req.query.people === 'yes') {
         res.redirect('/lis/2/live/others/name');
