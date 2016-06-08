@@ -1876,6 +1876,10 @@ label, .form-label, .form-label-bold {
 
 .data-table {
   margin-bottom: 30px; }
+  .data-table th {
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 1.3157894737; }
   .data-table td {
     display: table-cell;
     line-height: 1.25;
@@ -1890,6 +1894,10 @@ label, .form-label, .form-label-bold {
   .data-table.living-summary tr td:nth-child(2) {
     width: 20%;
     padding-right: 2.5%; }
+  .data-table.cert-table {
+    margin-top: 30px; }
+    .data-table.cert-table tr td:nth-child(2) {
+      padding-right: 4%; }
   .data-table.assets-summary tr td:first-child {
     width: 75%;
     padding-right: 2.5%; }
@@ -1987,3 +1995,15 @@ hr {
   padding-bottom: 1rem;
   padding-top: 2rem; }
 
+.cert-description li {
+  padding-left: 15px;
+  list-style-position: inside; }
+.cert-description li:nth-child(1) {
+  list-style: disc;
+  padding-left: 0px;
+  list-style-position: inside; }
+.cert-description .large, .cert-description .cost {
+  font-size: 24px;
+  clear: both; }
+.cert-description .cost {
+  margin-bottom: 5px; }

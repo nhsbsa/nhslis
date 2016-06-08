@@ -78,6 +78,11 @@ $nhs-blue: #0072C6;
 
 .data-table {
   margin-bottom: 30px;
+  th {
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 1.3157894737;
+  }
   td {
     display: table-cell;
     line-height: 1.25;
@@ -99,6 +104,13 @@ $nhs-blue: #0072C6;
       td:nth-child(2) {
           width: 20%;
           padding-right: 2.5%;
+      }
+    }
+  } &.cert-table {
+    margin-top :30px;
+    tr {
+      td:nth-child(2) {
+        padding-right: 4%;
       }
     }
   } &.assets-summary {
@@ -228,6 +240,21 @@ hr {
     padding-top: 2rem;
 }
 
-.lede .intro {
-  
+.cert-description {
+  li {
+    padding-left: 15px;
+    list-style-position: inside;
+  }
+  li:nth-child(1) {
+    list-style: disc;
+    padding-left: 0px;
+    list-style-position: inside;
+  }
+  .large, .cost {
+    font-size: 24px;
+    clear: both;
+  }
+  .cost {
+    margin-bottom: 5px;
+  }
 }
