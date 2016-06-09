@@ -1,0 +1,54 @@
+ {% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+        
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <h1 class="heading-large">
+      Do you receive pension credit?
+  </h1>
+
+  <form action="pencred-handler" method="get" class="form">
+    <div class="form-item-wrapper">
+      <div class="form-group">
+        <input type="radio" id="ib" name="prencred" value="ib">
+        <label class="form-control-radio" for="ib">
+          Yes, guarantee credit
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="radio" id="ssp" name="prencred">
+        <label class="form-control-radio" for="ssp">
+          Yes, savings credit
+        </label>
+      </div>
+      <p class="form-block">or</p>
+      <div class="form-group">
+        <input type="radio" id="none" name="prencred" value="none">
+        <label class="form-control-radio" for="none">
+          No, I don't receive pension credit
+        </label>
+      </div>
+    </div>
+    {{
+      form_macros.button({
+        label: 'Next'
+      })  
+    }}
+    
+    <p class="navigation"><a class="cancel" href="../../lis-home">Back to application home</a></p>
+
+  </form>
+    </div>
+    </div>
+</main>
+
+{% endblock %}

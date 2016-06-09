@@ -1,0 +1,119 @@
+ {% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <div class="text">
+
+    <h1 class="heading-large">
+      Check your details
+    </h1>
+
+    <table class="data-table you-summary">
+      <tr>
+        <td>Your name</td>
+        <td>Miriam Smith</td>
+        <td><a href="registration">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Date of birth</td>
+        <td>24 March 1955</td>
+        <td><a href="registration">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Email address</td>
+        <td>m.smith@inter.net</td>
+        <td><a href="contact">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Telephone number</td>
+        <td>0191 123 1234</td>
+        <td><a href="contact">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Are you living permanently in a care home?</td>
+        <td>No</td>
+        <td><a href="care-home">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Are you currently in hospital?</td>
+        <td>No</td>
+        <td><a href="hospital">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do you have a job?</td>
+        <td>{{myWork}}</td>
+        <td><a href="work">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Are you in full time education?</td>
+        <td>No</td>
+        <td><a href="education">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do you receive a pension?</td>
+        <td>Yes</td>
+        <td><a href="pension/pension">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do you receive pension credit?</td>
+        <td>No</td>
+        <td><a href="pension/pension-credit">Change this</a></td>
+      </tr>
+      <tr>
+        <td>
+          Which pensions do you receive?
+        </td>
+        <td>
+          Private pension
+        </td>
+        <td><a href="pension/pension-type">Change this</a></td>
+      </tr>
+      <tr>
+        <td>How much do you receive for your private pension?</td>
+        <td>£123 per week</td>
+        <td><a href="pension/private-pension-amount">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do you receive any social security benefits?</td>
+        <td>No</td>
+        <td><a href="benefits/benefit7">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Are you looking after someone but can’t get carers allowance because of another benefit?</td>
+        <td>No</td>
+        <td><a href="benefits/benefit4">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Does anyone receive carers allowance for looking after you?</td>
+        <td>No</td>
+        <td><a href="benefits/benefit5">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do you receive any other money?</td>
+        <td>No</td>
+        <td><a href="benefits/other-money">Change this</a></td>
+      </tr>
+
+    </table>
+    
+    <p>
+      <a class="button" href="../lis-home2">Save and continue</a>
+    </p>
+
+  </div>
+  </div>
+  </div>
+  
+</main>
+
+{% endblock %}

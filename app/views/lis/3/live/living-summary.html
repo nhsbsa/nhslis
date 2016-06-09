@@ -1,0 +1,150 @@
+ {% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <div class="text">
+
+    <h1 class="heading-large">
+      Check your details
+    </h1>
+
+    <table class="data-table living-summary">
+      <tr>
+        <td>Where do you live?</td>
+        <td>In a property<br>I own</td>
+        <td><a href="home">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Are you a joint owner?</td>
+        <td>No</td>
+        <td><a href="joint">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Your address</td>
+        <td>1 Street, Place, County, NE1234 </td>
+        <td><a href="address">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do you have a mortgage or loan secured on your home?</td>
+        <td>Yes</td>
+        <td><a href="mortgaged/mortgage">Change this</a></td>
+      </tr>
+      <tr>
+        <td>How often do you pay your mortgage or secured loan?</td>
+        <td>Monthly</td>
+        <td><a href="mortgaged/mortgage-amount">Change this</a></td>
+      </tr>  
+      <tr>
+        <td>Payment per month</td>
+        <td>£175</td>
+        <td><a href="mortgaged/mortgage-amount">Change this</a></td>
+      </tr>  
+      <tr>
+        <td>Do you pay for any of the following where you live?</td>
+        <td>No</td>
+        <td><a href="services">Change this</a></td>
+      </tr>  
+      <tr>
+        <td>Do you pay Council Tax?</td>
+        <td>Yes</td>
+        <td><a href="council-tax">Change this</a></td>
+      </tr>
+      <tr>
+        <td>How often do you pay your council tax?</td>
+        <td>Monthly</td>
+        <td><a href="tax-amount">Change this</a></td>
+      </tr>  
+      <tr>
+        <td>Do you pay ground rent?</td>
+        <td>No</td>
+        <td><a href="ground-rent">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do you have a loan to adapt your home for the special needs of a disabled person?</td>
+        <td>No</td>
+        <td><a href="adapted">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Does anyone else live in your home with you?</td>
+        <td>Yes</td>
+        <td><a href="people">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td>Thomas Smith</td>
+        <td><a href="others/name">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Date of birth</td>
+        <td>2 June 1986</td>
+        <td><a href="others/name">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Relationship to you</td>
+        <td>Son</td>
+        <td><a href="others/relationship">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do they have a job?</td>
+        <td>Yes</td>
+        <td><a href="others/work">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do they work for 16 hours or more per week?</td>
+        <td>Yes</td>
+        <td><a href="others/hours">Change this</a></td>
+      </tr>
+      <tr>
+        <td>How often do they get paid?</td>
+        <td>weekly</td>
+        <td><a href="others/amount">Change this</a></td>
+      </tr>
+      <tr>
+        <td>How much do they receive before tax and national insurance are taken off?</td>
+        <td>£200</td>
+        <td><a href="others/amount">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Are they in full time education?</td>
+        <td>No</td>
+        <td><a href="others/education">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do they receive any of the following?</td>
+        <td>No</td>
+        <td><a href="others/benefits">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Are they registered blind?</td>
+        <td>No</td>
+        <td><a href="others/blind">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Does anyone else live in your home with you?</td>
+        <td>No</td>
+        <td><a href="others/people">Change this</a></td>
+      </tr>
+
+    </table>
+    
+    <p>
+      <a class="button" href="../lis-home-updated">Save and continue</a>
+    </p>
+
+  </div>
+  </div>
+  </div>
+  
+</main>
+
+{% endblock %}
