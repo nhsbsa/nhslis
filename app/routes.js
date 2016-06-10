@@ -2,6 +2,7 @@ var partner = false;
 var partnerText = "you";
 var stateP = false;
 var privateP = false;
+var livingSituation = null; //tennant || owner ||
 
 
 var partnerCheck = function (partnerStatus) {
@@ -30,6 +31,27 @@ module.exports = {
     
     //LIS sprint 3
     
+    //others > relationship
+    app.get('/lis/3/live/others/relationship', function(req, res) {
+        res.render('lis/3/live/others/relationship', {
+        'livingSituation' : livingSituation
+      });
+    });
+    
+    //others > relationship-handler
+    app.get('/lis/3/live/others/relationship-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.relationship === 'none' && livingSituation === 'tennant' ) {
+        res.render('lis/3/live/others/subtenant', {
+        'livingSituation' : livingSituation
+      });
+      } else if (req.query.relationship === 'none' && livingSituation === 'owner') {
+        res.render('lis/3/live/others/border');
+      } else {
+        res.render('lis/3/live/others/work');
+      }
+    });
+    
     //other people living in your home
     app.get('/lis/3/live/others/people-handler', function(req, res) {
       console.log(req.query);
@@ -44,7 +66,13 @@ module.exports = {
     app.get('/lis/3/live/home-handler', function(req, res) {
       console.log(req.query);
       if (req.query.home === 'own') {
+        livingSituation = 'owner';
+        console.log('living situation = ' + livingSituation);
         res.redirect('/lis/3/live/mortgaged/joint');
+      } else if (req.query.home === 'rented') {
+        res.redirect('/lis/3/live/joint');
+        livingSituation = 'tennant';
+        console.log('living situation = ' + livingSituation);
       } else {
         res.redirect('/lis/3/live/joint');
       }

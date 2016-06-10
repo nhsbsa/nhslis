@@ -16,36 +16,42 @@
     What is their relationship to you?
   </h1>
     
-  <form action="" method="get" class="form">
+  <form action="relationship-handler" method="get" class="form">
 
     <div class="form-item-wrapper">
       <div class="form-group">
-        <input type="radio" id="son" name="relationship">
+        <input type="radio" id="son" value="son" name="relationship">
         <label class="form-control-radio" for="son">
           My son or daughter
         </label>
       </div>
       <div class="form-group">
-        <input type="radio" id="foster" name="relationship">
+        <input type="radio" id="foster" value="foster" name="relationship">
         <label class="form-control-radio" for="foster">
           My foster child
         </label>
       </div>
       <div class="form-group">
-        <input type="radio" id="family" name="relationship">
+        <input type="radio" id="guardian" value="guardian" name="relationship">
+        <label class="form-control-radio" for="guardian">
+          I am their legal guardian
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="radio" id="family" value="family" name="relationship">
         <label class="form-control-radio" for="family">
           A family relation
         </label>
       </div>
-      <div class="form-group">
+      <!--div class="form-group">
         <input type="radio" id="lodger" name="relationship">
         <label class="form-control-radio" for="lodger">
          A lodger or boarder
         </label>
-      </div>
+      </div-->
       <p class="form-block">or</p>
       <div class="form-group">
-        <input type="radio" id="none" name="relationship">
+        <input type="radio" id="none" value="none" name="relationship">
         <label class="form-control-radio" for="none">
           None of the above
         </label>
@@ -53,7 +59,6 @@
       
     {{
       form_macros.button({
-        href: 'work',
         label: 'Next'
       })
     }}
