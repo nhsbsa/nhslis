@@ -1874,6 +1874,11 @@ label, .form-label, .form-label-bold {
     padding: 2rem 0 1rem;
     border-top: 2px solid #bfdbf0; }
 
+.back-link {
+  margin-top: 20px;
+  display: block;
+  font-size: 19px; }
+
 .data-table {
   margin-bottom: 30px; }
   .data-table th {
