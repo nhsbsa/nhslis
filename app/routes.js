@@ -1,9 +1,23 @@
-var partner = false;
-var partnerText = "you";
-var stateP = false;
-var privateP = false;
-var livingSituation = null; //tennant || owner ||
+  var partner;
+  var partnerText;
+  var stateP;
+  var privateP;
+  var livingSituation;
+  //benefits
+  var dlaBen;
 
+function resetVars() {
+    partner = false;
+    partnerText = "you";
+    stateP = false;
+    privateP = false;
+    livingSituation = null; //tennant || owner ||
+    //benefits
+    dlaBen = false;
+    console.log('reset');
+}
+ 
+resetVars();
 
 var partnerCheck = function (partnerStatus) {
   if (partnerStatus == true) {
@@ -25,11 +39,33 @@ module.exports = {
 
     app.get('/', function (req, res) {
       res.render('index');
+      resetVars();
     });
     
     // add your routes here
     
     //LIS sprint 3
+    
+    //benefit handler
+    app.get('/lis/3/you/benefits/benefit-group2-handler', function(req, res) {
+      var benefitsg2 = req.query.bgroup2;
+      console.log(benefitsg2);
+      if (benefitsg2 == 'dla') {
+        dlaBen = true;
+      }
+      console.log(dlaBen);
+      res.render('lis/3/you/benefits/benefit-group3');
+    });
+    
+    app.get('/lis/3/you/benefits/benefit-group3-handler', function(req, res) {
+      var benefitsg3 = req.query.bgroup3;
+      console.log(benefitsg3);
+      if (dlaBen === true) {
+        res.render('lis/3/you/benefits/dla');
+      } else {
+        res.render('lis/3/you/benefits/benefit7');
+      }
+    });
     
     //others > relationship
     app.get('/lis/3/live/others/relationship', function(req, res) {

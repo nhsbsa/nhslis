@@ -17,60 +17,59 @@
   </h1>
   <p>Tick all that apply</p>
 
-  <form action="" method="get" class="form">
+  <form action="benefit-group2-handler" method="get" class="form">
     <div class="form-item-wrapper">
       <div class="form-group">
-        <input type="checkbox" id="af" name="bgroup2">
+        <input type="checkbox" id="af" value="af" name="bgroup2">
         <label class="form-control-checkbox" for="af">
           Armed forces independence payment 
         </label>
       </div>
       <div class="form-group">
-        <input type="checkbox" id="dla" name="bgroup2">
+        <input type="checkbox" id="dla" value="dla" name="bgroup2">
         <label class="form-control-checkbox" for="dla">
           Disability living allowance
         </label>
       </div>
       <div class="form-group">
-        <input type="checkbox" id="ib" name="bgroup2">
+        <input type="checkbox" id="ib" value="ib" name="bgroup2">
         <label class="form-control-checkbox" for="ib">
           Incapacity benefit
         </label>
       </div>
       <div class="form-group">
-        <input type="checkbox" id="iid" name="bgroup2">
+        <input type="checkbox" id="iid" value="iid" name="bgroup2">
         <label class="form-control-checkbox" for="iid">
           Industrial injuries disablement benefit
         </label>
       </div>
       <div class="form-group">
-        <input type="checkbox" id="pip" name="bgroup2">
+        <input type="checkbox" id="pip" value="pip" name="bgroup2">
         <label class="form-control-checkbox" for="pip">
           Personal independence payment
         </label>
       </div>
       <div class="form-group">
-        <input type="checkbox" id="sda" name="bgroup2">
+        <input type="checkbox" id="sda" value="sda" name="bgroup2">
         <label class="form-control-checkbox" for="sda">
           Severe disablement allowance
         </label>
       </div>
       <div class="form-group">
-        <input type="checkbox" id="ssp" name="bgroup2">
+        <input type="checkbox" id="ssp" value="ssp" name="bgroup2">
         <label class="form-control-checkbox" for="ssp">
           Statutory sick pay 
         </label>
       </div>
       <p class="form-block">or</p>
       <div class="form-group">
-        <input type="checkbox" id="none" name="bgroup2">
+        <input type="checkbox" id="none" value="none" name="bgroup2">
         <label class="form-control-checkbox" for="none">
           I don't receive any of these
         </label>
       </div>
     {{
       form_macros.button({
-        href: 'benefit-group3',
         label: 'Next'
       })
     }}
