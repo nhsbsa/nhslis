@@ -1,10 +1,23 @@
-  var partner;
-  var partnerText;
-  var stateP;
-  var privateP;
-  var livingSituation;
-  //benefits
-  var dlaBen;
+var applicant = {
+  name: null,
+  partner: false,
+  privatePension: false,
+  statePension: false,
+  savings: false,
+  premiumBonds: false,
+  disabilityLivingAllowance: false,
+  ownHome: false,
+  tennant: false,
+  othersAtHome: false
+ }
+
+var partner;
+var partnerText;
+var stateP;
+var privateP;
+var livingSituation;
+//benefits
+var dlaBen;
 
 function resetVars() {
     partner = false;
@@ -20,8 +33,8 @@ function resetVars() {
 resetVars();
 
 var partnerCheck = function (partnerStatus) {
-  if (partnerStatus == true) {
-    var partnerText = "you or your partner";
+  if (applicant.partner === true) {
+    partnerText = "you or your partner";
   }
 }
 
