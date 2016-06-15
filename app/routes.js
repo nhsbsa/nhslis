@@ -1,5 +1,6 @@
 var applicant = {
-  name: null,
+  firstName: null,
+  lastName: null,
   partner: false,
   privatePension: false,
   statePension: false,
@@ -9,9 +10,11 @@ var applicant = {
   ownHome: false,
   tennant: false,
   othersAtHome: false
+  //fullName : function getFullName() {
+  //  this.firstName + this.lastName;
+  //}
  }
 
-var partner;
 var partnerText;
 var stateP;
 var privateP;
@@ -19,7 +22,6 @@ var livingSituation;
 //benefits
 
 function resetVars() {
-    partner = false;
     partnerText = "you";
     stateP = false;
     privateP = false;
@@ -28,13 +30,13 @@ function resetVars() {
     console.log('reset');
 }
  
-resetVars();
-
 var partnerCheck = function (partnerStatus) {
   if (applicant.partner === true) {
     partnerText = "you or your partner";
   }
 }
+
+resetVars();
 
 var querystring = require('querystring');
 
@@ -56,6 +58,21 @@ module.exports = {
     // add your routes here
     
     //LIS sprint 3
+    
+    //about you summary
+    app.get('/lis/3/you/about-you-summary', function (req, res) {
+      res.render('lis/3/you/about-you-summary', {
+        'myWork' : myWork,
+        'applicantFullName' : applicant.firstName
+      });
+    });
+
+    app.get('/lis/3/you/registration-handler', function(req, res) {
+      applicant.firstName = req.query.firstname;
+      res.render('lis/3/you/contact', {
+        'applicantFirstName' : applicant.firstName
+      });
+    });
     
     //benefit handler
     app.get('/lis/3/you/benefits/benefit-group2-handler', function(req, res) {
@@ -150,34 +167,36 @@ module.exports = {
       var pensions = req.query.pensiontype;
       console.log(pensions);
       if (pensions == 'state') {
-        stateP = true;
+        applicant.statePension = true;
         res.render('lis/3/you/pension/pension-amount');
       } else if(pensions == 'private') {
-        privateP = true;
+        applicant.privatePension = true;
         res.render('lis/3/you/pension/private-pension-amount');
       } else {
         for (pension in pensions) {
           console.log(pensions[pension]); 
             if(pensions[pension] == 'state') {
-              stateP = true;
+              applicant.statePension = true;
             } else if(pensions[pension] == 'private') {
-              privateP = true;
+              applicant.privatePension = true;
             }
         };
-        if(stateP == true) {
+        if(applicant.statePension === true) {
           res.render('lis/3/you/pension/pension-amount');
-        } else if(privateP == true) {
+        } else if(applicant.privatePension === true) {
           res.render('lis/3/you/pension/private-pension-amount');
+        } else {
+          res.render('lis/3/you/benefits/benefit-group1');
         }
       }
     });
     
     //state-pension
     app.get('/lis/3/you/pension/state-pension-handler', function(req, res) {
-      if (privateP == true) {
-        res.render('lis/3/you/pension/private-pension-amount', {'privateP' : privateP });
-      } else if (privateP == false) {
-        res.render('lis/3/you/benefits/benefit-group1', {'privateP' : privateP });
+      if (applicant.privatePension == true) {
+        res.render('lis/3/you/pension/private-pension-amount');
+      } else if (applicant.privatePension == false) {
+        res.render('lis/3/you/benefits/benefit-group1');
       }
     });
 
@@ -195,13 +214,6 @@ module.exports = {
     app.get('/lis/3/assets/property', function (req, res) {
       res.render('lis/3/assets/property', {
         'partnerText' : partnerText
-      });
-    });
-    
-    //about you summary
-    app.get('/lis/3/you/about-you-summary', function (req, res) {
-      res.render('lis/3/you/about-you-summary', {
-        'myWork' : myWork
       });
     });
     

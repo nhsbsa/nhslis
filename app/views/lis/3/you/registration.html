@@ -18,11 +18,11 @@
     About you
   </h1>
 
-  <form action="" method="get" class="form">
+  <form action="registration-handler" method="get" class="form">
 
     {{
       form_macros.text_field({
-        id: 'first-name',
+        id: 'firstname',
         label: 'First name'
       })
     }}
@@ -44,7 +44,6 @@
 
     {{
       form_macros.button({
-        href: 'contact',
         label: 'Next'
       })
     }}
