@@ -17,7 +17,6 @@ var stateP;
 var privateP;
 var livingSituation;
 //benefits
-var dlaBen;
 
 function resetVars() {
     partner = false;
@@ -26,7 +25,6 @@ function resetVars() {
     privateP = false;
     livingSituation = null; //tennant || owner ||
     //benefits
-    dlaBen = false;
     console.log('reset');
 }
  
@@ -64,16 +62,16 @@ module.exports = {
       var benefitsg2 = req.query.bgroup2;
       console.log(benefitsg2);
       if (benefitsg2 == 'dla') {
-        dlaBen = true;
+        applicant.disabilityLivingAllowance = true;
       }
-      console.log(dlaBen);
+      console.log(applicant.disabilityLivingAllowance);
       res.render('lis/3/you/benefits/benefit-group3');
     });
     
     app.get('/lis/3/you/benefits/benefit-group3-handler', function(req, res) {
       var benefitsg3 = req.query.bgroup3;
       console.log(benefitsg3);
-      if (dlaBen === true) {
+      if (applicant.disabilityLivingAllowance === true) {
         res.render('lis/3/you/benefits/dla');
       } else {
         res.render('lis/3/you/benefits/benefit7');
