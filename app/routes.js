@@ -9,10 +9,10 @@ var applicant = {
   disabilityLivingAllowance: false,
   ownHome: false,
   tennant: false,
-  othersAtHome: false
-  //fullName : function getFullName() {
-  //  this.firstName + this.lastName;
-  //}
+  othersAtHome: false,
+  fullName : function() {
+    return this.firstName + " " + this.lastName;
+  }
  }
 
 var partnerText;
@@ -93,26 +93,27 @@ module.exports = {
     app.get('/lis/3/you/about-you-summary', function (req, res) {
       res.render('lis/3/you/about-you-summary', {
         'myWork' : myWork,
-        'applicantFullName' : applicant.firstName,
+        'applicantFullName' : applicant.fullName(),
       });
     });
 
     app.get('/lis/3/you/registration-handler', function(req, res) {
       applicant.firstName = req.query.firstname;
+      applicant.lastName = req.query.lastname;
       res.render('lis/3/you/contact', {
         'applicantFirstName' : applicant.firstName
       });
     });
     
-    //benefit handler
-    app.get('/lis/3/you/benefits/benefit-group2-handler', function(req, res) {
-      var benefitsg2 = req.query.bgroup2;
-      console.log(benefitsg2);
-      if (benefitsg2 == 'dla') {
+    //sprint 3 benefit handler
+    app.get('/lis/3/you/benefits/sprint3-benefit-handler', function(req, res) {
+      if (req.query.bgroup2 == 'dla') {
         applicant.disabilityLivingAllowance = true;
+        res.render('lis/3/you/benefits/dla');
+      } else {
+        applicant.disabilityLivingAllowance = true;
+        res.render('lis/3/you/benefits/benefit7');
       }
-      console.log(applicant.disabilityLivingAllowance);
-      res.render('lis/3/you/benefits/benefit-group3');
     });
     
     app.get('/lis/3/you/benefits/benefit-group3-handler', function(req, res) {
@@ -186,7 +187,7 @@ module.exports = {
     app.get('/lis/3/you/pension/pension-handler', function(req, res) {
       console.log(req.query);
       if (req.query.pension === 'no') {
-        res.redirect('/lis/3/you/benefits/benefit-group2');
+        res.redirect('/lis/3/you/benefits/benefit-sprint3');
       } else {
         res.redirect('/lis/3/you/pension/pension-credit');
       }
@@ -216,7 +217,7 @@ module.exports = {
         } else if(applicant.privatePension === true) {
           res.render('lis/3/you/pension/private-pension-amount');
         } else {
-          res.render('lis/3/you/benefits/benefit-group2');
+          res.render('lis/3/you/benefits/benefit-sprint3');
         }
       }
     });
@@ -226,7 +227,7 @@ module.exports = {
       if (applicant.privatePension == true) {
         res.render('lis/3/you/pension/private-pension-amount');
       } else if (applicant.privatePension == false) {
-        res.render('lis/3/you/benefits/benefit-group2');
+        res.render('lis/3/you/benefits/benefit-sprint3');
       }
     });
 
@@ -268,17 +269,7 @@ module.exports = {
         res.redirect('/lis/3/you/education');
       }
     });
-        
-    //benefits
-    app.get('/lis/3/you/benefits/benefit-handler', function(req, res) {
-      console.log(req.query);
-      if (req.query.benefit === 'no') {
-        res.redirect('/lis/3/you/benefits/other-money');
-      } else {
-        res.redirect('/lis/3/you/benefits/benefit-group2');
-      }
-    });
-    
+            
     //bank accounts
     app.get('/lis/3/assets/account-type-handler', function(req, res) {
       console.log(req.query);
