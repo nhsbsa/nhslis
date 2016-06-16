@@ -16,6 +16,7 @@ var applicant = {
  }
 
 var partnerText;
+var applicantPartner;
 var stateP;
 var privateP;
 var livingSituation;
@@ -30,7 +31,7 @@ function resetVars() {
     console.log('reset');
 }
  
-var partnerCheck = function (partnerStatus) {
+var partnerCheck = function () {
   if (applicant.partner === true) {
     partnerText = "you or your partner";
   }
@@ -59,11 +60,30 @@ module.exports = {
     
     //LIS sprint 3
     
+    app.get('/lis/3/partner/partner-handler', function (req, res) {
+      if(req.query.partner === 'yes') {
+        applicant.partner = true;
+        applicantPartner = 'Yes';
+      } else if(req.query.partner === 'no') {
+        applicant.partner = false;
+        applicantPartner = 'No';
+      }
+      res.render('lis/3/partner/summary', {
+        'applicantPartner' : applicantPartner
+      });
+    });
+
+    app.get('/lis/3/partner/summary', function (req, res) {
+      res.render('lis/3/partner/summary', {
+        'applicantPartner' : applicantPartner
+      });
+    });
+
     //about you summary
     app.get('/lis/3/you/about-you-summary', function (req, res) {
       res.render('lis/3/you/about-you-summary', {
         'myWork' : myWork,
-        'applicantFullName' : applicant.firstName
+        'applicantFullName' : applicant.firstName,
       });
     });
 
@@ -156,7 +176,7 @@ module.exports = {
     app.get('/lis/3/you/pension/pension-handler', function(req, res) {
       console.log(req.query);
       if (req.query.pension === 'no') {
-        res.redirect('/lis/3/you/benefits/benefit-group1');
+        res.redirect('/lis/3/you/benefits/benefit-group2');
       } else {
         res.redirect('/lis/3/you/pension/pension-credit');
       }
@@ -186,7 +206,7 @@ module.exports = {
         } else if(applicant.privatePension === true) {
           res.render('lis/3/you/pension/private-pension-amount');
         } else {
-          res.render('lis/3/you/benefits/benefit-group1');
+          res.render('lis/3/you/benefits/benefit-group2');
         }
       }
     });
@@ -196,7 +216,7 @@ module.exports = {
       if (applicant.privatePension == true) {
         res.render('lis/3/you/pension/private-pension-amount');
       } else if (applicant.privatePension == false) {
-        res.render('lis/3/you/benefits/benefit-group1');
+        res.render('lis/3/you/benefits/benefit-group2');
       }
     });
 
@@ -216,19 +236,7 @@ module.exports = {
         'partnerText' : partnerText
       });
     });
-    
-    //partner
-    app.get('/lis/3/partner/partner-handler', function(req, res) {
-      console.log(req.query);
-      if (req.query.partner === 'yes') {
-        partnerCheck(true);
-        res.render('lis/3/partner/summary');
-      } else {
-        partnerCheck(false);
-        res.render('lis/3/partner/summary');
-      }
-    });
-    
+        
     //education
     app.get('/lis/3/you/education-handler', function(req, res) {
       console.log(req.query);
@@ -257,7 +265,7 @@ module.exports = {
       if (req.query.benefit === 'no') {
         res.redirect('/lis/3/you/benefits/other-money');
       } else {
-        res.redirect('/lis/3/you/benefits/benefit-group1');
+        res.redirect('/lis/3/you/benefits/benefit-group2');
       }
     });
     
