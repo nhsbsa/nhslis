@@ -13,11 +13,11 @@
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-      Do you receive any of the following?
+      Does your partner receive any of the following?
   </h1>
   <p>Tick all that apply</p>
 
-  <form action="benefit-group2-handler" method="get" class="form">
+  <form action="pbenefit-group2-handler" method="get" class="form">
     <div class="form-item-wrapper">
       <div class="form-group">
         <input type="checkbox" id="af" value="af" name="bgroup2">
@@ -32,12 +32,17 @@
         </label>
       </div>
       <div class="form-group">
+        <input type="checkbox" id="ib" value="ib" name="bgroup2">
+        <label class="form-control-checkbox" for="ib">
+          Incapacity benefit
+        </label>
+      </div>
+      <div class="form-group">
         <input type="checkbox" id="iid" value="iid" name="bgroup2">
         <label class="form-control-checkbox" for="iid">
           Industrial injuries disablement benefit
         </label>
       </div>
-      <!--
       <div class="form-group">
         <input type="checkbox" id="pip" value="pip" name="bgroup2">
         <label class="form-control-checkbox" for="pip">
@@ -50,19 +55,17 @@
           Severe disablement allowance
         </label>
       </div>
-      
       <div class="form-group">
         <input type="checkbox" id="ssp" value="ssp" name="bgroup2">
         <label class="form-control-checkbox" for="ssp">
           Statutory sick pay 
         </label>
       </div>
-      -->
       <p class="form-block">or</p>
       <div class="form-group">
         <input type="checkbox" id="none" value="none" name="bgroup2">
         <label class="form-control-checkbox" for="none">
-          I don't receive any of these
+          They don't receive any of these
         </label>
       </div>
     {{
