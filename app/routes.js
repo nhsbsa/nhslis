@@ -199,7 +199,7 @@ module.exports = {
       console.log(req.query);
       if (req.query.partner === 'yes') {
         partnerCheck(true);
-        res.render('lis/3/partner/summary');
+        res.render('lis/3/partner/basic');
       } else {
         partnerCheck(false);
         res.render('lis/3/partner/summary');
@@ -247,7 +247,109 @@ module.exports = {
         res.redirect('/lis/3/assets/other');
       }
     });
+
+    //partner handlers
+
+    //partner-work
+    app.get('/lis/3/partner/pwork-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.work === 'yes') {
+        myWork = 'Yes';
+        res.redirect('/lis/3/partner/education');
+      } else {
+        myWork = 'No';
+        res.redirect('/lis/3/partner/education');
+      }
+    });
+
+    //partner-education
+    app.get('/lis/3/partner/peducation-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.education === 'yes') {
+        res.redirect('/lis/3/partner/pension/pension');
+      } else {
+        res.redirect('/lis/3/partner/pension/pension');
+      }
+    });
+
+    //partner-pension
+    app.get('/lis/3/partner/pension/ppension-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.pension === 'no') {
+        res.redirect('/lis/3/partner/benefits/benefit-group1');
+      } else {
+        res.redirect('/lis/3/partner/pension/pension-credit');
+      }
+    });
+
+    //partner-pension-type
+    app.get('/lis/3/partner/pension/ppension-type-handler', function(req, res) {
+      var pensions = req.query.pensiontype;
+      console.log(pensions);
+      if (pensions == 'state') {
+        stateP = true;
+        res.render('lis/3/partner/pension/pension-amount');
+      } else if(pensions == 'private') {
+        privateP = true;
+        res.render('lis/3/partner/pension/private-pension-amount');
+      } else {
+        for (pension in pensions) {
+          console.log(pensions[pension]); 
+            if(pensions[pension] == 'state') {
+              stateP = true;
+            } else if(pensions[pension] == 'private') {
+              privateP = true;
+            }
+        };
+        if(stateP == true) {
+          res.render('lis/3/partner/pension/pension-amount');
+        } else if(privateP == true) {
+          res.render('lis/3/partner/pension/private-pension-amount');
+        }
+      }
+    });
+
+    //partner-pension-credit
+    app.get('/lis/3/partner/pension/ppencred-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.prencred === 'ib') {
+        res.redirect('/lis/3/kickout');
+      } else {
+        res.redirect('/lis/3/partner/pension/pension-type');
+      }
+    });
+
+    //partner-state-pension
+    app.get('/lis/3/partner/pension/pstate-pension-handler', function(req, res) {
+      if (privateP == true) {
+        res.render('lis/3/partner/pension/private-pension-amount', {'privateP' : privateP });
+      } else if (privateP == false) {
+        res.render('lis/3/partner/benefits/benefit-group1', {'privateP' : privateP });
+      }
+    });
    
+    //partner-benefit handler
+    app.get('/lis/3/partner/benefits/pbenefit-group2-handler', function(req, res) {
+      var benefitsg2 = req.query.bgroup2;
+      console.log(benefitsg2);
+      if (benefitsg2 == 'dla') {
+        dlaBen = true;
+      }
+      console.log(dlaBen);
+      res.render('lis/3/partner/benefits/benefit-group3');
+    });
+    
+    app.get('/lis/3/partner/benefits/pbenefit-group3-handler', function(req, res) {
+      var benefitsg3 = req.query.bgroup3;
+      console.log(benefitsg3);
+      if (dlaBen === true) {
+        res.render('lis/3/partner/benefits/dla');
+      } else {
+        res.render('lis/3/partner/benefits/benefit7');
+      }
+    });
+
+
     //LIS sprint 2
     
     //other people living in your home
