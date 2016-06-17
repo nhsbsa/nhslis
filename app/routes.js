@@ -202,7 +202,7 @@ module.exports = {
         res.render('lis/3/partner/basic');
       } else {
         partnerCheck(false);
-        res.render('lis/3/partner/summary');
+        res.render('lis/3/partner/summary-no');
       }
     });
     
