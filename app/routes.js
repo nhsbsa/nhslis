@@ -7,6 +7,7 @@ var applicant = {
   savings: false,
   premiumBonds: false,
   disabilityLivingAllowance: false,
+  attendanceAllowance : false,
   ownHome: false,
   tennant: false,
   othersAtHome: false,
@@ -23,10 +24,20 @@ var partner = {
   savings: false,
   premiumBonds: false,
   disabilityLivingAllowance: false,
+  attendanceAllowance : false,
   fullName : function() {
     return this.firstName + " " + this.lastName;
   }
  }
+
+function printApplicant() {
+console.log(
+  "applicant.privatePension = " + applicant.privatePension + " " +
+  "applicant.statePension = " + applicant.statePension + " " +
+  "applicant.disabilityLivingAllowance = " + applicant.disabilityLivingAllowance + " " +
+  "applicant.attendanceAllowance = " + applicant.attendanceAllowance + " "
+  );
+}
 
 var partnerText;
 var applicantPartner;
@@ -67,6 +78,7 @@ module.exports = {
     app.get('/', function (req, res) {
       res.render('index');
       resetVars();
+      printApplicant();
     });
     
     // add your routes here
@@ -124,17 +136,49 @@ module.exports = {
     });
     
     //3) benefit handler
-    app.get('/lis/3/you/benefits/sprint3-benefit-handler', function(req, res) {
-      console.log(req.query);
-      if (req.query.sprint3benefits == 'dla') {
-        applicant.disabilityLivingAllowance = true;
+    app.get('/lis/3/you/benefits/sprint3-benefit-handler', function (req, res) {
+      var benefits = req.query.sprint3benefits;
+      console.log(typeof benefits);
+      if(typeof benefits == "string") {
+        if(benefits === "aa") {
+          applicant.attendanceAllowance = true;
+          res.render('lis/3/you/benefits/aa');
+        } else if (benefits === "dla") {
+          applicant.disabilityLivingAllowance = true;
+          res.render('lis/3/you/benefits/dla');
+        } else {
+          res.render('lis/3/you/benefits/benefit7');
+        }
+      } else if(typeof benefits == "object") {
+        console.log('its an object');
+        for (benefit in benefits) {
+          if(benefits[benefit] === 'aa') {
+            console.log('its AA');
+            applicant.attendanceAllowance = true;
+          } else if(benefits[benefit] === 'dla') {
+            console.log('its DLA');
+            applicant.disabilityLivingAllowance = true;
+          }
+        }
+        if(applicant.attendanceAllowance === true){
+          res.render('lis/3/you/benefits/aa');
+        } else if(applicant.disabilityLivingAllowance === true) {
+          res.render('lis/3/you/benefits/dla');
+        } else {
+          res.render('lis/3/you/benefits/benefit7');
+        }
+      }
+    });
+    
+    //3 attendance allowance 
+    app.get('/lis/3/you/benefits/attendance-allowance-handler', function(req, res) {
+      if(applicant.disabilityLivingAllowance === true){
         res.render('lis/3/you/benefits/dla');
       } else {
-        applicant.disabilityLivingAllowance = false;
         res.render('lis/3/you/benefits/benefit7');
       }
     });
-
+    
     //3 relationship
     app.get('/lis/3/live/others/relationship', function(req, res) {
         res.render('lis/3/live/others/relationship', {
@@ -194,11 +238,12 @@ module.exports = {
 
     //3) pension-handler
     app.get('/lis/3/you/pension/pension-handler', function(req, res) {
+      printApplicant();
       console.log(req.query);
       if (req.query.pension === 'yes') {
-        res.redirect('/lis/3/you/pension/pension-credit');
+        res.render('lis/3/you/pension/pension-credit');
       } else {
-        res.redirect('/lis/3/you/benefits/benefit-sprint3');
+        res.render('lis/3/you/benefits/benefit-sprint3');
       }
     });
 
@@ -231,12 +276,12 @@ module.exports = {
       }
     });
     
-    //3)state-pension-handler
+    //3) state-pension-handler
     app.get('/lis/3/you/pension/state-pension-handler', function(req, res) {
       if (applicant.privatePension == true) {
-        res.render('lis/3/you/pension/private-pension-amount');
+        res.redirect('/lis/3/you/pension/private-pension-amount');
       } else if (applicant.privatePension == false) {
-        res.render('lis/3/you/benefits/benefit-sprint3');
+        res.redirect('/lis/3/you/benefits/benefit-sprint3');
       }
     });
 
@@ -346,22 +391,52 @@ module.exports = {
     //3) partner-state-pension
     app.get('/lis/3/partner/pension/pstate-pension-handler', function(req, res) {
       if (partner.privatePension == true) {
-        res.render('lis/3/partner/pension/private-pension-amount', {'privateP' : privateP });
-      } else if (partner.premiumBonds == false) {
-        res.render('lis/3/partner/benefits/benefit-sprint3', {'privateP' : privateP });
+        res.redirect('/lis/3/partner/pension/private-pension-amount');
+      } else if (partner.privatePension == false) {
+        res.redirect('/lis/3/partner/benefits/benefit-sprint3');
       }
     });
-   
-    //3) benefit handler
-    app.get('/lis/3/partner/benefits/sprint3-benefit-handler', function(req, res) {
-      if (req.query.sprint3partnerbenefits == 'dla') {
-        partner.disabilityLivingAllowance = true;
+       
+    //3) partner benefit handler
+    app.get('/lis/3/partner/benefits/sprint3-partner-benefit-handler', function (req, res) {
+      var partnerBenefits = req.query.sprint3benefits;
+      if(typeof partnerBenefits == "string") {
+        if(partnerBenefits === "aa") {
+          partner.attendanceAllowance = true;
+          res.render('lis/3/partner/benefits/aa');
+        } else if (partnerBenefits === "dla") {
+          partner.disabilityLivingAllowance = true;
+          res.render('lis/3/partner/benefits/dla');
+        } else {
+          res.render('lis/3/partner/benefits/benefit7');
+        }
+      } else if(typeof partnerBenefits == "object") {
+        for (benefit in partnerBenefits) {
+          if(partnerBenefits[benefit] == 'aa') {
+            partner.attendanceAllowance = true;
+          } else if(partnerBenefits[benefit] == 'dla') {
+            partner.disabilityLivingAllowance = true;
+          }
+        }
+        if(partner.attendanceAllowance === true){
+          res.render('lis/3/partner/benefits/aa');
+        } else if(partner.disabilityLivingAllowance === true) {
+          res.render('lis/3/partner/benefits/dla');
+        } else {
+          res.render('lis/3/partner/benefits/benefit7');
+        }
+      }
+    });
+    
+    //3 attendance allowance 
+    app.get('/lis/3/partner/benefits/attendance-allowance-handler', function(req, res) {
+      if(partner.disabilityLivingAllowance === true){
         res.render('lis/3/partner/benefits/dla');
       } else {
-        partner.disabilityLivingAllowance = true;
-        res.render('lis/3/partner/benefits/benefit7');
+        res.render('lis/3/partner/benefits/benefit4');
       }
     });
+
 
     
     //*************
