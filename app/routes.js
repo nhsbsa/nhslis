@@ -1,7 +1,7 @@
 function Person(
-  firstName, 
-  lastName, 
-  partner, 
+  firstName,
+  lastName,
+  partner,
   privatePension,
   statePension,
   savings,
@@ -11,43 +11,24 @@ function Person(
   ownHome,
   tennant,
   othersAtHome,
-  fullName) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.partner = partner;
-    this.privatePension = privatePension;
-    this.statePension = statePension;
-    this.savings = savings;
-    this.premiumBonds = premiumBonds;
-    this.disabilityLivingAllowance = disabilityLivingAllowance;
-    this.attendanceAllowance = attendanceAllowance;
-    this.ownHome = ownHome;
-    this.tennant = tennant;
-    this.othersAtHome = othersAtHome;
-    this.fullName = function() {
-      return this.firstName + " " + this.lastName;
-    }
-
-var applicant = {
-  firstName: null,
-  lastName: null,
-  partner: false,
-  privatePension: false,
-  statePension: false,
-  savings: false,
-  premiumBonds: false,
-  //benefits
-  disabilityLivingAllowance: false,
-  attendanceAllowance : false,
-  personalIndependence : false,
-  childTaxCredits : false,
-  ownHome: false,
-  tennant: false,
-  othersAtHome: false,
-  fullName : function() {
+  fullName
+) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.partner = partner;
+  this.privatePension = privatePension;
+  this.statePension = statePension;
+  this.savings = savings;
+  this.premiumBonds = premiumBonds;
+  this.disabilityLivingAllowance = disabilityLivingAllowance;
+  this.attendanceAllowance = attendanceAllowance;
+  this.ownHome = ownHome;
+  this.tennant = tennant;
+  this.othersAtHome = othersAtHome;
+  this.fullName = function() {
     return this.firstName + " " + this.lastName;
   }
- }
+}
 
 function applicantBenefitReset() {
   applicant.disabilityLivingAllowance = false;
@@ -301,9 +282,9 @@ module.exports = {
       printApplicant();
       console.log(req.query);
       if (req.query.pension === 'yes') {
-        res.render('lis/3/you/pension/pension-credit');
+        res.redirect('/lis/3/you/pension/pension-credit');
       } else {
-        res.render('lis/3/you/benefits/benefit-sprint3');
+        res.redirect('/lis/3/you/benefits/benefit-sprint3');
       }
     });
 
