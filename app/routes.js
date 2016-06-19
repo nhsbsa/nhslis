@@ -1,23 +1,40 @@
-var applicant = {
-  firstName: null,
-  lastName: null,
-  partner: false,
-  privatePension: false,
-  statePension: false,
-  savings: false,
-  premiumBonds: false,
-  //benefits
-  disabilityLivingAllowance: false,
-  attendanceAllowance : false,
-  personalIndependence : false,
-  childTaxCredits : false,
-  ownHome: false,
-  tennant: false,
-  othersAtHome: false,
-  fullName : function() {
-    return this.firstName + " " + this.lastName;
+function Person(
+  firstName,
+  lastName,
+  partner,
+  privatePension,
+  statePension,
+  savings,
+  premiumBonds,
+  disabilityLivingAllowance,
+  attendanceAllowance,
+  ownHome,
+  tennant,
+  othersAtHome,
+  fullName) { 
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.partner = partner;
+    this.privatePension = privatePension;
+    this.statePension = statePension;
+    this.savings = savings;
+    this.premiumBonds = premiumBonds;
+    this.disabilityLivingAllowance = disabilityLivingAllowance;
+    this.attendanceAllowance = attendanceAllowance;
+    this.ownHome = ownHome;
+    this.tennant = tennant;
+    this.othersAtHome = othersAtHome;
+    this.fullName = function() {
+      return this.firstName + " " + this.lastName;
+  },
+  this.resetBenefits = function() {
+    this.disabilityLivingAllowance = false;
+    this.attendanceAllowance = false;
+    this.personalIndependence = false;
+    this.childTaxCredits = false;
+    console.log('resetting benefits...');
   }
- }
+}
 
 function applicantBenefitReset() {
   applicant.disabilityLivingAllowance = false;
@@ -27,19 +44,35 @@ function applicantBenefitReset() {
   printApplicant();
 }
 
-var partner = {
-  firstName: null,
-  lastName: null,
-  privatePension: false,
-  statePension: false,
-  savings: false,
-  premiumBonds: false,
-  disabilityLivingAllowance: false,
-  attendanceAllowance : false,
-  fullName : function() {
-    return this.firstName + " " + this.lastName;
-  }
- }
+var applicant = new Person(
+  firstName = null,
+  lastName = null,
+  partner = false,
+  privatePension = false,
+  statePension = false,
+  savings = false,
+  premiumBonds = false,
+  disabilityLivingAllowance = false,
+  attendanceAllowance = false,
+  ownHome = false,
+  tennant = false,
+  othersAtHome = false
+);
+
+var partner = new Person(
+  firstName = null,
+  lastName = null,
+  partner = false,
+  privatePension = false,
+  statePension = false,
+  savings = false,
+  premiumBonds = false,
+  disabilityLivingAllowance = false,
+  attendanceAllowance = false,
+  ownHome = false,
+  tennant = false,
+  othersAtHome = false
+);
 
 function printApplicant() {
 console.log(
@@ -90,6 +123,7 @@ module.exports = {
       res.render('index');
       resetVars();
       printApplicant();
+      applicant.resetBenefits;
     });
     
     // add your routes here
@@ -148,13 +182,13 @@ module.exports = {
     
     //3)
     app.get('/lis/3/benefits/benefits-sprint3', function (req, res) {
-      applicantBenefitReset();
+      applicant.resetBenefits();
       res.render('lis/3/benefits/benefits-sprint3');
     });
 
     //3) benefit handler
     app.get('/lis/3/you/benefits/sprint3-benefit-handler', function (req, res) {
-      applicantBenefitReset();
+      applicant.resetBenefits();
       var benefits = req.query.sprint3benefits;
       console.log(typeof benefits);
       if(typeof benefits == "string") {
@@ -200,7 +234,6 @@ module.exports = {
       }
     });
     
-    
     //3 Armed forces independence payment = single amount 
     
     //3 attendance allowance 
@@ -239,6 +272,7 @@ module.exports = {
     });
     
     //3 Industrial injuries disablement benefit
+    
     //3 Maintenance payments
         
     //3 relationship
