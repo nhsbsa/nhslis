@@ -13,43 +13,31 @@
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-    About your partner's state pension
+    About your child tax credits
   </h1>
   
-  <h2 class="heading-medium">How often does your partner receive their state pension payments?</h2>
+  <h2 class="heading-medium">How often do you receive your child tax credit payments?</h2>
   
-  <form action="state-pension-handler" method="get" class="form">
+  <form action="ctc-handler" method="get" class="form">
 
     <div class="form-item-wrapper">
       <div class="form-group">
-        <input type="radio" id="week" name="minor">
+        <input type="radio" id="week" name="ctc">
         <label class="form-control-radio" for="week">
           Weekly
         </label>
       </div>
       <div class="form-group">
-        <input type="radio" id="fortnight" name="minor">
-        <label class="form-control-radio" for="fortnight">
-          Fortnightly
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="radio" id="month" name="minor">
+        <input type="radio" id="month" name="ctc">
         <label class="form-control-radio" for="month">
-         Monthly
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="radio" id="year" name="minor">
-        <label class="form-control-radio" for="year">
-          Annually
+         Every four weeks
         </label>
       </div>
       
     {{
       form_macros.amount_field({
         id: 'money-amount',
-        label: 'How much does your partner receive?'
+        label: 'How much do you receive?'
       })
     }}
 
