@@ -116,7 +116,7 @@ module.exports = {
       } else if(req.query.partner == 'no') {
         applicant.partner = false;
         applicantPartner = 'No';
-        res.render('lis/3/partner/summary', {
+        res.render('lis/3/partner/summary-no', {
         'applicantPartner' : applicantPartner
       });
       }
@@ -362,7 +362,6 @@ module.exports = {
       });
     });
 
-    //3) education-handler
     app.get('/lis/3/you/education-handler', function(req, res) {
       console.log(req.query);
       if (req.query.education == 'yes') {
