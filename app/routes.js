@@ -27,6 +27,34 @@ function Person(
     this.fullName = function() {
       return this.firstName + " " + this.lastName;
     }
+
+var applicant = {
+  firstName: null,
+  lastName: null,
+  partner: false,
+  privatePension: false,
+  statePension: false,
+  savings: false,
+  premiumBonds: false,
+  //benefits
+  disabilityLivingAllowance: false,
+  attendanceAllowance : false,
+  personalIndependence : false,
+  childTaxCredits : false,
+  ownHome: false,
+  tennant: false,
+  othersAtHome: false,
+  fullName : function() {
+    return this.firstName + " " + this.lastName;
+  }
+ }
+
+function applicantBenefitReset() {
+  applicant.disabilityLivingAllowance = false;
+  applicant.attendanceAllowance = false;
+  applicant.personalIndependence = false;
+  applicant.childTaxCredits = false;
+  printApplicant();
 }
 
 var person3 = new Person();
