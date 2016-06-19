@@ -6,8 +6,11 @@ var applicant = {
   statePension: false,
   savings: false,
   premiumBonds: false,
+  //benefits
   disabilityLivingAllowance: false,
   attendanceAllowance : false,
+  personalIndependence : false,
+  childTaxCredits : false,
   ownHome: false,
   tennant: false,
   othersAtHome: false,
@@ -15,6 +18,14 @@ var applicant = {
     return this.firstName + " " + this.lastName;
   }
  }
+
+function applicantBenefitReset() {
+  applicant.disabilityLivingAllowance = false;
+  applicant.attendanceAllowance = false;
+  applicant.personalIndependence = false;
+  applicant.childTaxCredits = false;
+  printApplicant();
+}
 
 var partner = {
   firstName: null,
@@ -135,17 +146,30 @@ module.exports = {
       });
     });
     
+    //3)
+    app.get('/lis/3/benefits/benefits-sprint3', function (req, res) {
+      applicantBenefitReset();
+      res.render('lis/3/benefits/benefits-sprint3');
+    });
+
     //3) benefit handler
     app.get('/lis/3/you/benefits/sprint3-benefit-handler', function (req, res) {
+      applicantBenefitReset();
       var benefits = req.query.sprint3benefits;
       console.log(typeof benefits);
       if(typeof benefits == "string") {
         if(benefits === "aa") {
           applicant.attendanceAllowance = true;
           res.render('lis/3/you/benefits/aa');
+        } else if(benefits === "ctc") {
+          applicant.childTaxCredits = true;
+          res.render('lis/3/you/benefits/ctc');
         } else if (benefits === "dla") {
           applicant.disabilityLivingAllowance = true;
           res.render('lis/3/you/benefits/dla');
+        } else if(benefits === "pip") {
+          applicant.personalIndependence = true;
+          res.render('lis/3/you/benefits/pip');
         } else {
           res.render('lis/3/you/benefits/benefit7');
         }
@@ -153,32 +177,69 @@ module.exports = {
         console.log('its an object');
         for (benefit in benefits) {
           if(benefits[benefit] === 'aa') {
-            console.log('its AA');
             applicant.attendanceAllowance = true;
           } else if(benefits[benefit] === 'dla') {
-            console.log('its DLA');
             applicant.disabilityLivingAllowance = true;
+          } else if(benefits[benefit] === 'pip') {
+            applicant.personalIndependence = true;
+          } else if(benefits[benefit] === 'ctc') {
+            applicant.childTaxCredits = true;
           }
         }
         if(applicant.attendanceAllowance === true){
           res.render('lis/3/you/benefits/aa');
+        } else if(applicant.childTaxCredits === true) {
+          res.render('lis/3/you/benefits/ctc');
         } else if(applicant.disabilityLivingAllowance === true) {
           res.render('lis/3/you/benefits/dla');
+        } else if(applicant.personalIndependence === true) {
+          res.render('lis/3/you/benefits/pip');
         } else {
           res.render('lis/3/you/benefits/benefit7');
         }
       }
     });
     
+    //3 Armed forces independence payment = single amount 
+    
     //3 attendance allowance 
     app.get('/lis/3/you/benefits/attendance-allowance-handler', function(req, res) {
-      if(applicant.disabilityLivingAllowance === true){
+      if(applicant.childTaxCredits === true){
+        res.render('lis/3/you/benefits/ctc');
+      } else if(applicant.disabilityLivingAllowance === true){
         res.render('lis/3/you/benefits/dla');
+      } else if(applicant.personalIndependence === true){
+        res.render('lis/3/you/benefits/pip');
       } else {
         res.render('lis/3/you/benefits/benefit7');
       }
     });
     
+    //3 Carers allowance = single amount 
+    
+    //3 child tax credit 
+    app.get('/lis/3/you/benefits/ctc-handler', function(req, res) {
+      if(applicant.disabilityLivingAllowance === true){
+        res.render('lis/3/you/benefits/dla');
+      } else if(applicant.personalIndependence === true){
+        res.render('lis/3/you/benefits/pip');
+      } else {
+        res.render('lis/3/you/benefits/benefit7');
+      }
+    });
+
+    //3 disability living allowance
+    app.get('/lis/3/you/benefits/dla-handler', function(req, res) {
+      if(applicant.personalIndependence === true){
+        res.render('lis/3/you/benefits/pip');
+      } else {
+        res.render('lis/3/you/benefits/benefit7');
+      }
+    });
+    
+    //3 Industrial injuries disablement benefit
+    //3 Maintenance payments
+        
     //3 relationship
     app.get('/lis/3/live/others/relationship', function(req, res) {
         res.render('lis/3/live/others/relationship', {
@@ -238,12 +299,11 @@ module.exports = {
 
     //3) pension-handler
     app.get('/lis/3/you/pension/pension-handler', function(req, res) {
-      printApplicant();
       console.log(req.query);
       if (req.query.pension === 'yes') {
-        res.render('lis/3/you/pension/pension-credit');
+        res.redirect('/lis/3/you/pension/pension-credit');
       } else {
-        res.render('lis/3/you/benefits/benefit-sprint3');
+        res.redirect('/lis/3/you/benefits/benefit-sprint3');
       }
     });
 
