@@ -19,8 +19,6 @@ var applicant = {
   }
  }
 
-
-
 function applicantBenefitReset() {
   applicant.disabilityLivingAllowance = false;
   applicant.attendanceAllowance = false;
