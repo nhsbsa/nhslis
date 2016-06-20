@@ -41,6 +41,11 @@ function Person(
     this.tennant = false;
     console.log('resetting living situation...');
   },
+    this.resetAccounts = function() {
+    this.savings = false;
+    this.premiumBonds = false;
+    console.log('resetting bank accounts...');
+  },
   this.printPerson = function() {
     console.log (
       this.firstName + "\n" +
@@ -402,17 +407,50 @@ module.exports = {
         res.redirect('/lis/3/kickout');
       }
     });
-    
+
+    //3) accounts
+    app.get('/lis/3/assets/money', function(req, res) {
+        applicant.resetAccounts;
+        res.render('lis/3/assets/money');
+    });
+
     //3) bank account handler
     app.get('/lis/3/assets/account-type-handler', function(req, res) {
-      console.log(req.query);
-      if (req.query.banktype == 'bank') {
-        res.redirect('/lis/3/assets/accounts');
+      var accounts = req.query.banktype;
+      console.log(accounts);
+      if (accounts == 'bank') {
+        applicant.savings = true;
+        res.render('lis/3/assets/accounts');
+      } else if(accounts == 'pb') {
+        applicant.premiumBonds = true;
+        res.render('lis/3/assets/premium-bonds');
+      } else {
+        for (account in accounts) {
+          console.log(accounts[account]); 
+            if(accounts[account] == 'bank') {
+              applicant.savings = true;
+            } else if(accounts[account] == 'pb') {
+              applicant.premiumBonds = true;
+            }
+        };
+        if(applicant.savings == true) {
+          res.render('lis/3/assets/accounts');
+        } else if(applicant.premiumBonds == true) {
+          res.render('lis/3/assets/premium-bonds');
+        } else {
+          res.render('lis/3/assets/other');
+        }
+      }
+    });
+
+    //3) bank-savings-handler
+    app.get('/lis/3/assets/bank-savings-handler', function(req, res) {
+      if (applicant.premiumBonds == true) {
+        res.redirect('/lis/3/assets/premium-bonds');
       } else {
         res.redirect('/lis/3/assets/other');
       }
     });
-
         
     //education
     app.get('/lis/1/you/education-handler', function(req, res) {

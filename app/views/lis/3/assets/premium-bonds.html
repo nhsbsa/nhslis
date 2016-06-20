@@ -15,17 +15,17 @@
   <!-- <p class="navigation"><a class="back-to-previous">Back</a></p> -->
 
   <h1 class="heading-large">
-    What is the total amount you have in bank, building society or savings accounts?
-    <span class="form-hint">Please tell us the combined amount from all of the accounts you have</span>
+    What is the total face value of your Premium Bonds?
+    <!--<span class="form-hint">Please tell us the combined face value of all of the premium bonds you have</span>-->
   </h1>
 
-  <form action="bank-savings-handler" method="get" class="form">
+  <form action="" method="get" class="form">
 
 <div class="form-item-wrapper">
 
     {{
       form_macros.amount_field({
-        id: 'money-amount'
+        id: 'prembond-amount'
       })
     }}
 
@@ -33,6 +33,7 @@
 
     {{
       form_macros.button({
+        href: 'other',
         label: 'Next'
       })
     }}
