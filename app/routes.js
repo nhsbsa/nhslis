@@ -397,7 +397,7 @@ module.exports = {
     app.get('/lis/3/kickout-handler', function(req, res) {
       console.log(req.query);
       if (req.query.kickout == 'continue') {
-        res.redirect('/lis/3/lis-home');
+        res.redirect('/lis/3/account/create-account');
       } else {
         res.redirect('/lis/3/kickout');
       }

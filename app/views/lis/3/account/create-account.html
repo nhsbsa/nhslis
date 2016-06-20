@@ -1,0 +1,45 @@
+{% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <h1 class="heading-large">
+    Create an account
+  </h1>
+  <ul class="list list-bullet lead-list">  
+    <li class="lead-list">Creating an account will allow you to:</li>
+    <li>save your information and come back later if you leave the service</li>
+    <li>quickly renew your certificate in the future</li>
+  </ul>
+
+      <form action="" method="get" class="form">
+    {{
+      form_macros.text_field({
+        id: 'email',
+      label : 'Enter your email address'
+      })
+    }}
+
+    {{
+      form_macros.button({
+        label: 'Next',
+        href: 'password'
+      })
+    }}
+    <p class="navigation"><a class="cancel" href="">I don't want to create an account</a></p>
+    
+  </form>
+    </div>
+    </div>
+</main>
+
+{% endblock %}

@@ -1,4 +1,4 @@
- {% extends 'templates/nhs_transaction_layout.html' %}
+{% extends 'templates/nhs_transaction_layout.html' %}
 {% import 'includes/form_macros.html' as form_macros %}
 
 {% block afterHeader %}
@@ -13,34 +13,24 @@
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-      Your course
+    Your email address
   </h1>
-
   <form action="" method="get" class="form">
 
     {{
       form_macros.text_field({
-        id: 'address',
-        label: 'University'
+        id: 'email'
       })
     }}
-    
-    {{
-      form_macros.text_field({
-        id: 'address',
-        label: 'Course name'
-      })
-    }}
-    
+
     {{
       form_macros.button({
-        href: 'term-start',
-        label: 'Save and continue'
+        label: 'Next',
+        href: 'account-password'
       })
     }}
+    <p class="navigation"><a class="cancel" href="">I don't have an email address</a></p>
     
-    <p class="navigation"><a class="cancel" href="../lis-home">Save and come back later</a></p>
-
   </form>
     </div>
     </div>

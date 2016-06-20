@@ -1,4 +1,4 @@
- {% extends 'templates/nhs_transaction_layout.html' %}
+{% extends 'templates/nhs_transaction_layout.html' %}
 {% import 'includes/form_macros.html' as form_macros %}
 
 {% block afterHeader %}
@@ -46,22 +46,22 @@
         </label>
       </div>
       
-    {{
-      form_macros.amount_field({
-        id: 'money-amount',
-      label: 'How much do you pay? <span class="form-hint">Take off housing benefit or local housing allowance if you get it.<br>Dont include water rates, council tax or any arrears.</span>'
-      })
-    }}
+      {{
+        form_macros.amount_field({
+          id: 'money-amount',
+        label: 'How much do you pay? <span class="form-hint">Take off housing benefit or local housing allowance if you get it.<br>Dont include water rates, council tax or any arrears.</span>'
+        })
+      }}
 
     </div>  
         
     {{
       form_macros.button({
         href: 'rent-includes',
-        label: 'Next'
+        label: 'Save and continue'
       })
     }}
-    <p class="navigation"><a class="cancel" href="../lis-home4">Back to application home</a></p>
+    <p class="navigation"><a class="cancel" href="../lis-home4">Save and come back later</a></p>
   </form>
     </div>
     </div>
