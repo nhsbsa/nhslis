@@ -1,0 +1,49 @@
+ {% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <h1 class="heading-large">
+        Which is your prefered method of contact?
+      </h1>
+  <form action="" method="get" class="form">
+
+    <div class="form-group">
+      <input type="radio" id="bank" name="banktype" value="bank">
+      <label class="form-control-radio minor-radio" for="bank">
+        vinay.mattu@inter.net
+      </label>
+    </div>
+    <div class="form-group">
+      <input type="radio" id="bank" name="banktype" value="bank">
+      <label class="form-control-radio minor-radio" for="bank">
+        0191 123 456
+      </label>
+    </div>
+    <div class="form-group">
+      <input type="radio" id="bank" name="banktype" value="bank">
+      <label class="form-control-radio minor-radio" for="bank">
+        07123 456 789
+      </label>
+    </div>
+    {{
+      form_macros.button({
+        href: 'user-id',
+        label: 'Next'
+      })
+    }}
+  </form>
+    </div>
+    </div>
+</main>
+
+{% endblock %}

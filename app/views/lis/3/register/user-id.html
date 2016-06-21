@@ -1,0 +1,60 @@
+{% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <h1 class="heading-large">
+    Would you like to use your email address as your username?
+  </h1>
+  
+
+      <form action="" method="get" class="form">
+        <div class="form-item-wrapper">
+          <fieldset>
+              <div class="form-group">
+                <input type="radio" id="mobile" name="contact">
+                <label class="form-control-radio js-toggle" for="mobile" data-hide="#contact-email-address">
+                  Yes, use vinay.mattu@inter.net
+                </label>
+              </div>
+              <div class="form-group">
+                <input type="radio" id="email" name="contact">
+                <label class="form-control-radio js-toggle" for="email" data-show="#contact-email-address" data-hide="#contact-mobile-number">
+                  No, create a username
+                </label>
+              </div>
+
+            <div class="js-hidden panel-indent" id="contact-email-address">
+                <ul class="list list-bullet">
+                  <li>Your username must not contain spaces</li>    
+                  <li>You'll need this to sign in again so make it memorable</li>    
+                </ul>
+              
+              <label class="form-label-bold" for="email-address">
+                Enter a username
+              </label>
+              <input type="text" id="email-address" class="form-control">
+            </div>
+          </fieldset>
+        </div>
+            {{
+              form_macros.button({
+                label: 'Next',
+                href: 'password'
+              })
+            }}
+  </form>
+    </div>
+    </div>
+</main>
+
+{% endblock %}

@@ -402,7 +402,7 @@ module.exports = {
     app.get('/lis/3/kickout-handler', function(req, res) {
       console.log(req.query);
       if (req.query.kickout == 'continue') {
-        res.redirect('/lis/3/account/create-account');
+        res.redirect('/lis/3/register/need-to-know');
       } else {
         res.redirect('/lis/3/kickout');
       }
