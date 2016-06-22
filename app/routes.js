@@ -112,6 +112,24 @@ module.exports = {
     //LIS sprint 3
     // ***********
     
+    app.get('/lis/3/care-home-handler', function (req, res) {
+      console.log(req.query)
+      if(req.query.carehome === 'yes') {
+        res.redirect('/lis/3/carehome-kickout');
+      } else {
+        res.redirect('/lis/3/savings');
+      }
+    });
+    
+    app.get('/lis/3/savings-kickout-handler', function (req, res) {
+      console.log(req.query)
+      if(req.query.savings === 'yes') {
+        res.redirect('/lis/3/savings-kickout');
+      } else {
+        res.redirect('/lis/3/register/need-to-know');
+      }
+    });
+    
     //3) about you summary
     app.get('/lis/3/partner/summary', function (req, res) {
       res.render('lis/3/partner/summary');
