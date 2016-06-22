@@ -8,6 +8,7 @@ function Person(
   premiumBonds,
   disabilityLivingAllowance,
   attendanceAllowance,
+  childTaxCredits,
   homeOwner,
   tennant,
   othersAtHome,
@@ -21,6 +22,7 @@ function Person(
     this.premiumBonds = premiumBonds;
     this.disabilityLivingAllowance = disabilityLivingAllowance;
     this.attendanceAllowance = attendanceAllowance;
+    this.childTaxCredits = childTaxCredits;
     this.homeOwner = homeOwner;
     this.tennant = tennant;
     this.othersAtHome = othersAtHome;
@@ -50,6 +52,7 @@ function Person(
       "privatePension = " + this.privatePension + " \n" +
       "statePension = " + this.statePension + " \n" +
       "disabilityLivingAllowance = " + this.disabilityLivingAllowance + " \n" +
+      "child tax credits = " + this.childTaxCredits + " \n" +
       "attendanceAllowance = " + this.attendanceAllowance + "\n"
     );
   }, 
@@ -169,8 +172,12 @@ module.exports = {
     app.get('/', function (req, res) {
       res.render('index');
       resetVars();
-      applicant.printPerson();
       applicant.resetBenefits;
+      console.log('applicant =');
+      applicant.printPerson();
+      partner.resetBenefits;
+      console.log('person =');
+      partner.printPerson();
     });
     
     // add your routes here
