@@ -1,5 +1,3 @@
-var sprint = 3;
-
 function Person(
   firstName,
   lastName,
@@ -10,6 +8,7 @@ function Person(
   premiumBonds,
   disabilityLivingAllowance,
   attendanceAllowance,
+  childTaxCredits,
   homeOwner,
   tennant,
   othersAtHome,
@@ -23,6 +22,7 @@ function Person(
     this.premiumBonds = premiumBonds;
     this.disabilityLivingAllowance = disabilityLivingAllowance;
     this.attendanceAllowance = attendanceAllowance;
+    this.childTaxCredits = childTaxCredits;
     this.homeOwner = homeOwner;
     this.tennant = tennant;
     this.othersAtHome = othersAtHome;
@@ -52,9 +52,79 @@ function Person(
       "privatePension = " + this.privatePension + " \n" +
       "statePension = " + this.statePension + " \n" +
       "disabilityLivingAllowance = " + this.disabilityLivingAllowance + " \n" +
+      "child tax credits = " + this.childTaxCredits + " \n" +
       "attendanceAllowance = " + this.attendanceAllowance + "\n"
     );
+  }, 
+  this.benefitChecker = function(benefits) {
+    if(typeof benefits == "string") {
+      if(benefits === "aa") {
+        this.attendanceAllowance = true;
+        console.log( "aa");
+        return "aa";
+      } else if(benefits === "ctc") {
+        this.childTaxCredits = true;
+        console.log( "ctc");
+        return "ctc";
+      } else if (benefits === "dla") {
+        this.disabilityLivingAllowance = true;
+        console.log( "dla");
+        return "dla";
+      } else if(benefits === "pip") {
+        this.personalIndependence = true;
+        console.log( "pip");
+        return "pip";
+      } else {
+        console.log( "none");
+        return "none";
+      }
+    } else if(typeof benefits == "object") {
+      var firstBenefit = null;
+      for (benefit in benefits) {
+        if(benefits[benefit] === 'aa') {
+          this.attendanceAllowance = true;
+          console.log( "aa");
+          if (firstBenefit === null) {
+            firstBenefit = "aa";
+          }
+        } else if(benefits[benefit] === 'ctc') {
+          this.childTaxCredits = true;
+          console.log( "ctc");
+          if (firstBenefit === null) {
+            firstBenefit =  "ctc";
+          }
+        } else if(benefits[benefit] === 'dla') {
+          this.disabilityLivingAllowance = true;
+          console.log( "dla");
+          if (firstBenefit === null) {
+            firstBenefit =  "dla";
+          }
+        } else if(benefits[benefit] === 'pip') {
+          this.personalIndependence = true;
+          console.log( "pip");
+          if (firstBenefit === null) {
+            firstBenefit = "pip";
+          }
+        } else if(benefits[benefit] === 'none') {
+          console.log( "none");
+          if (firstBenefit === null) {
+            firstBenefit = "none";
+          }
+        }
+      }
+      return firstBenefit;
+    }
   }
+}
+
+//Person.prototype.printperson...
+
+function Household() {
+  this.people = [];
+}
+
+Household.prototype.add = function(person) {
+  this.people.push(person);
 }
 
 var applicant = new Person(
@@ -102,8 +172,12 @@ module.exports = {
     app.get('/', function (req, res) {
       res.render('index');
       resetVars();
-      applicant.printPerson();
       applicant.resetBenefits;
+      console.log('applicant =');
+      applicant.printPerson();
+      partner.resetBenefits;
+      console.log('person =');
+      partner.printPerson();
     });
     
     // add your routes here
@@ -167,107 +241,24 @@ module.exports = {
         'applicantFirstName' : applicant.firstName
       });
     });
-    
-    //3)
-    app.get('/lis/3/benefits/benefits-sprint3', function (req, res) {
-      applicant.resetBenefits();
-      res.render('lis/3/benefits/benefits-sprint3');
-    });
-    
-    var benefitHandler = function() {
-      this.resetBenefits();
-      if (this === applicant) {
-        var urlFix = 'you';
-      } else if (this === partner) {
-        var urlFix = 'partner';
-      }
-      
-      if(typeof benefits == "string") {
-        if(benefits === "aa") {
-          this.attendanceAllowance = true;
-          res.render('lis/3/' + urlFix + '/benefits/aa');
-        } else if(benefits === "ctc") {
-          this.childTaxCredits = true;
-          res.render('lis/3/' + urlFix + '/benefits/ctc');
-        } else if (benefits === "dla") {
-          this.disabilityLivingAllowance = true;
-          res.render('lis/3/' + urlFix + '/benefits/dla');
-        } else if(benefits === "pip") {
-          this.personalIndependence = true;
-          res.render('lis/3/' + urlFix + '/benefits/pip');
-        } else {
-          res.render('lis/3/' + urlFix + '/benefits/benefit7');
-        }
-      } else if(typeof benefits == "object") {
-        for (benefit in benefits) {
-          if(benefits[benefit] === 'aa') {
-            this.attendanceAllowance = true;
-          } else if(benefits[benefit] === 'dla') {
-            this.disabilityLivingAllowance = true;
-          } else if(benefits[benefit] === 'pip') {
-            this.personalIndependence = true;
-          } else if(benefits[benefit] === 'ctc') {
-            this.childTaxCredits = true;
-          }
-        }
-        if(this.attendanceAllowance === true){
-          res.render('lis/3/' + urlFix + '/benefits/aa');
-        } else if(this.childTaxCredits === true) {
-          res.render('lis/3/' + urlFix + '/benefits/ctc');
-        } else if(this.disabilityLivingAllowance === true) {
-          res.render('lis/3/' + urlFix + '/benefits/dla');
-        } else if(this.personalIndependence === true) {
-          res.render('lis/3/' + urlFix + '/benefits/pip');
-        } else {
-          res.render('lis/3/' + urlFix + '/benefits/benefit7');
-        }
-      }
-    };
-    
+        
+
     //3) benefit handler
     app.get('/lis/3/you/benefits/sprint3-benefit-handler', function (req, res) {
+      applicant.resetBenefits();
       var benefits = req.query.sprint3benefits;
       console.log(typeof benefits);
-      if(typeof benefits == "string") {
-        if(benefits === "aa") {
-          applicant.attendanceAllowance = true;
-          res.render('lis/3/you/benefits/aa');
-        } else if(benefits === "ctc") {
-          applicant.childTaxCredits = true;
-          res.render('lis/3/you/benefits/ctc');
-        } else if (benefits === "dla") {
-          applicant.disabilityLivingAllowance = true;
-          res.render('lis/3/you/benefits/dla');
-        } else if(benefits === "pip") {
-          applicant.personalIndependence = true;
-          res.render('lis/3/you/benefits/pip');
-        } else {
-          res.render('lis/3/you/benefits/benefit7');
-        }
-      } else if(typeof benefits == "object") {
-        console.log('its an object');
-        for (benefit in benefits) {
-          if(benefits[benefit] === 'aa') {
-            applicant.attendanceAllowance = true;
-          } else if(benefits[benefit] === 'dla') {
-            applicant.disabilityLivingAllowance = true;
-          } else if(benefits[benefit] === 'pip') {
-            applicant.personalIndependence = true;
-          } else if(benefits[benefit] === 'ctc') {
-            applicant.childTaxCredits = true;
-          }
-        }
-        if(applicant.attendanceAllowance === true){
-          res.render('lis/3/you/benefits/aa');
-        } else if(applicant.childTaxCredits === true) {
-          res.render('lis/3/you/benefits/ctc');
-        } else if(applicant.disabilityLivingAllowance === true) {
-          res.render('lis/3/you/benefits/dla');
-        } else if(applicant.personalIndependence === true) {
-          res.render('lis/3/you/benefits/pip');
-        } else {
-          res.render('lis/3/you/benefits/benefit7');
-        }
+      var firstBenefit = applicant.benefitChecker(benefits);
+      if(firstBenefit === "aa") {
+        res.render('lis/3/you/benefits/aa');
+      } else if(firstBenefit === "ctc") {
+        res.render('lis/3/you/benefits/ctc');
+      } else if (firstBenefit === "dla") {
+        res.render('lis/3/you/benefits/dla');
+      } else if(firstBenefit === "pip") {
+        res.render('lis/3/you/benefits/pip');
+      } else if (firstBenefit === "none") {
+        res.render('lis/3/you/benefits/benefit7');
       }
     });
     
@@ -576,49 +567,23 @@ module.exports = {
       }
     });
 
+    
     //3) partner benefit handler
     app.get('/lis/3/partner/benefits/sprint3-benefit-handler', function (req, res) {
       partner.resetBenefits();
-      var benefits = req.query.sprint3benefits;
-      if(typeof benefits == "string") {
-        if(benefits === "aa") {
-          partner.attendanceAllowance = true;
-          res.render('lis/3/partner/benefits/aa');
-        } else if(benefits === "ctc") {
-          partner.childTaxCredits = true;
-          res.render('lis/3/partner/benefits/ctc');
-        } else if (benefits === "dla") {
-          partner.disabilityLivingAllowance = true;
-          res.render('lis/3/partner/benefits/dla');
-        } else if(benefits === "pip") {
-          partner.personalIndependence = true;
-          res.render('lis/3/partner/benefits/pip');
-        } else {
-          res.render('lis/3/partner/benefits/benefit7');
-        }
-      } else if(typeof benefits == "object") {
-        for (benefit in benefits) {
-          if(benefits[benefit] === 'aa') {
-            partner.attendanceAllowance = true;
-          } else if(benefits[benefit] === 'dla') {
-            partner.disabilityLivingAllowance = true;
-          } else if(benefits[benefit] === 'pip') {
-            partner.personalIndependence = true;
-          } else if(benefits[benefit] === 'ctc') {
-            partner.childTaxCredits = true;
-          }
-        }
-        if(partner.attendanceAllowance === true){
-          res.render('lis/3/partner/benefits/aa');
-        } else if(partner.childTaxCredits === true) {
-          res.render('lis/3/partner/benefits/ctc');
-        } else if(partner.disabilityLivingAllowance === true) {
-          res.render('lis/3/partner/benefits/dla');
-        } else if(partner.personalIndependence === true) {
-          res.render('lis/3/partner/benefits/pip');
-        } else {
-          res.render('lis/3/partner/benefits/benefit7');
-        }
+      var partnerBenefits = req.query.sprint3benefits;
+      console.log(typeof partnerBenefits);
+      var firstPartnerBenefit = partner.benefitChecker(partnerBenefits);
+      if(firstPartnerBenefit === "aa") {
+        res.render('lis/3/partner/benefits/aa');
+      } else if(firstPartnerBenefit === "ctc") {
+        res.render('lis/3/partner/benefits/ctc');
+      } else if (firstPartnerBenefit === "dla") {
+        res.render('lis/3/partner/benefits/dla');
+      } else if(firstPartnerBenefit === "pip") {
+        res.render('lis/3/partner/benefits/pip');
+      } else if (firstPartnerBenefit === "none") {
+        res.render('lis/3/partner/benefits/benefit7');
       }
     });
 
