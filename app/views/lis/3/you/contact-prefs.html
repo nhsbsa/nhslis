@@ -13,21 +13,35 @@
     <div class="column-two-thirds">
 
       <h1 class="heading-large">
-        How do you prefer to be contacted?
+        Which is your prefered method of contact?
       </h1>
-      
-    <form action="" method="get" class="form">
+  <form action="" method="get" class="form">
 
-
-      {{
-        form_macros.button({
-          href: 'care-home',
-          label: 'Save and continue'
-        })
-      }}
-      <p class="navigation"><a class="cancel" href="../lis-home">Save and come back later</a></p>
-    </form>
-      
+    <div class="form-group">
+      <input type="radio" id="email" name="contact" value="email">
+      <label class="form-control-radio minor-radio" for="email">
+        vinay.mattu@inter.net
+      </label>
+    </div>
+    <div class="form-group">
+      <input type="radio" id="landline" name="contact" value="landline">
+      <label class="form-control-radio minor-radio" for="landline">
+        0191 123 456
+      </label>
+    </div>
+    <div class="form-group">
+      <input type="radio" id="mobile" name="contact" value="mobile">
+      <label class="form-control-radio minor-radio" for="mobile">
+        07123 456 789
+      </label>
+    </div>
+    {{
+      form_macros.button({
+        href: 'work',
+        label: 'Next'
+      })
+    }}
+  </form>
     </div>
     </div>
 </main>
