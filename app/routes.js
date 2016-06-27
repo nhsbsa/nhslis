@@ -200,7 +200,7 @@ module.exports = {
       if(req.query.savings === 'yes') {
         res.redirect('/lis/3/savings-kickout');
       } else {
-        res.redirect('/lis/3/register/need-to-know');
+        res.redirect('/lis/3/need-to-know');
       }
     });
     
