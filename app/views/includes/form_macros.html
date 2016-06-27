@@ -138,9 +138,9 @@
   <div class="form-item-wrapper">
     <div class="form-group">
       {% if i.href %}
-        <a href="{{ i.href }}" class="button {{ i.classes }}">{{ i.label }}</a>
+        <a href="{{ i.href }}" class="button {{ i.classes }}" id="next">{{ i.label }}</a>
       {% else %}
-        <button type="submit" class="button {{ i.classes }}">{{ i.label }}</button>
+        <button type="submit" class="button {{ i.classes }}" id="next">{{ i.label }}</button>
       {% endif %}
     </div>
   </div>
