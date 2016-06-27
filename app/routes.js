@@ -1,3 +1,17 @@
+// Create a partnerOrText variable for 'you'
+var partnerOrText = 'you';
+var partnerAndText = 'you';
+// include the variable on the relevant pages
+// Check for the answer to 'do you have a partner?'
+// if there is a partner, change the text to include 'or your partner'
+
+function setPartnerText() {
+  if (applicant.partner === true) {
+    partnerOrText = 'you or your partner';
+    partnerAndText = 'you and your partner';
+  }  
+}
+
 function Person(
   firstName,
   lastName,
@@ -12,7 +26,9 @@ function Person(
   homeOwner,
   tennant,
   othersAtHome,
-  fullName) { 
+  fullName,
+  bankAccount,
+  premiumBonds) { 
     this.firstName = firstName;
     this.lastName = lastName;
     this.partner = partner;
@@ -26,6 +42,8 @@ function Person(
     this.homeOwner = homeOwner;
     this.tennant = tennant;
     this.othersAtHome = othersAtHome;
+    this.bankAccount = bankAccount;
+    this.premiumBonds = premiumBonds;
     this.fullName = function() {
       return this.firstName + " " + this.lastName;
   },
@@ -41,10 +59,13 @@ function Person(
     this.tennant = false;
     console.log('resetting living situation...');
   },
-    this.resetAccounts = function() {
+  this.resetAccounts = function() {
     this.savings = false;
     this.premiumBonds = false;
     console.log('resetting bank accounts...');
+  },
+  this.resetPartner = function() {
+    this.partner = false;
   },
   this.printPerson = function() {
     console.log (
@@ -114,6 +135,39 @@ function Person(
       }
       return firstBenefit;
     }
+  },  
+  this.savingChecker = function(savings) {
+    if(typeof savings == "string") {
+      if(savings === "bank") {
+        this.bankAccount = true;
+        return "bank";
+      } else if(savings === "pb") {
+        this.premiumBonds = true;
+        return "pb";
+      } else {
+        return "none";
+      }
+    } else if(typeof savings == "object") {
+      var firstSaving = null;
+      for (savingsType in savings) {
+        if(savings[savingsType] === 'bank') {
+          this.bankAccount = true;
+          if (firstSaving === null) {
+            firstSaving = "bank";
+          }
+        } else if(savings[savingsType] === 'pb') {
+          this.premiumBonds = true;
+          if (firstSaving === null) {
+            firstSaving =  "pb";
+          }
+        } else if(savings[savingsType] === 'none') {
+          if (firstSaving === null) {
+            firstSaving = "none";
+          }
+        }
+      }
+      return firstSaving;
+    }
   }
 }
 
@@ -139,7 +193,9 @@ var applicant = new Person(
   attendanceAllowance = false,
   homeOwner = false,
   tennant = false,
-  othersAtHome = false
+  othersAtHome = false,
+  bankAccount = false,
+  premiumBonds = false
 );
 
 var partner = new Person(
@@ -195,6 +251,36 @@ module.exports = {
       }
     });
     
+    app.get('/lis/3/assets/property', function (req, res) {
+        console.log(partnerOrText);
+        res.render('lis/3/assets/property', {
+        'partnerortext' : partnerOrText,
+        'partnerandext' : partnerAndText
+        });
+    });
+        
+    app.get('/lis/3/assets/other', function (req, res) {
+        console.log(partnerOrText);
+        res.render('lis/3/assets/money', {
+        'partnerortext' : partnerOrText,
+        'partnerandtext' : partnerAndText
+        });
+    });
+    
+    app.get('/lis/3/assets/money', function (req, res) {
+        res.render('lis/3/assets/money', {
+        'partnerortext' : partnerOrText,
+        'partnerandText' : partnerAndText
+        });
+    });
+    
+    app.get('/lis/3/assets/accounts', function (req, res) {
+        res.render('lis/3/assets/accounts', {
+        'partnerortext' : partnerOrText,
+        'partnerandText' : partnerAndText
+        });
+    });
+    
     app.get('/lis/3/savings-kickout-handler', function (req, res) {
       console.log(req.query)
       if(req.query.savings === 'yes') {
@@ -213,6 +299,7 @@ module.exports = {
     app.get('/lis/3/partner/partner-handler', function (req, res) {
       if(req.query.partner == 'yes') {
         applicant.partner = true;
+        setPartnerText();
         res.render('lis/3/partner/basic');
       } else if(req.query.partner == 'no') {
         applicant.partner = false;
@@ -241,7 +328,6 @@ module.exports = {
         'applicantFirstName' : applicant.firstName
       });
     });
-        
 
     //3) benefit handler
     app.get('/lis/3/you/benefits/sprint3-benefit-handler', function (req, res) {
@@ -416,51 +502,39 @@ module.exports = {
         res.redirect('/lis/3/kickout');
       }
     });
-
-    //3) accounts
-    app.get('/lis/3/assets/money', function(req, res) {
-        applicant.resetAccounts;
-        res.render('lis/3/assets/money');
-    });
-
+    
     //3) bank account handler
     app.get('/lis/3/assets/account-type-handler', function(req, res) {
+      applicant.resetAccounts();
       var accounts = req.query.banktype;
-      console.log(accounts);
-      if (accounts == 'bank') {
-        applicant.savings = true;
-        res.render('lis/3/assets/accounts');
-      } else if(accounts == 'pb') {
-        applicant.premiumBonds = true;
-        res.render('lis/3/assets/premium-bonds');
-      } else {
-        for (account in accounts) {
-          console.log(accounts[account]); 
-            if(accounts[account] == 'bank') {
-              applicant.savings = true;
-            } else if(accounts[account] == 'pb') {
-              applicant.premiumBonds = true;
-            }
-        };
-        if(applicant.savings == true) {
-          res.render('lis/3/assets/accounts');
-        } else if(applicant.premiumBonds == true) {
-          res.render('lis/3/assets/premium-bonds');
-        } else {
-          res.render('lis/3/assets/other');
-        }
-      }
-    });
-
-    //3) bank-savings-handler
-    app.get('/lis/3/assets/bank-savings-handler', function(req, res) {
-      if (applicant.premiumBonds == true) {
-        res.redirect('/lis/3/assets/premium-bonds');
-      } else {
-        res.redirect('/lis/3/assets/other');
+      var firstSavingsAcc = applicant.savingChecker(accounts);
+      if (firstSavingsAcc == 'bank') {
+        res.render('lis/3/assets/accounts', {
+          'partnerortext' : partnerOrText,
+          'partnerandtext' : partnerAndText
+        });
+      } else if(firstSavingsAcc == 'pb') {
+        res.render('lis/3/assets/premium-bonds', {
+          'partnerortext' : partnerOrText,
+          'partnerandrext' : partnerAndText
+        });
       }
     });
         
+    //3)
+    app.get('/lis/3/assets/bank-savings-handler', function(req, res) {
+      if (applicant.premiumBonds == true) {
+        res.render('lis/3/assets/premium-bonds');
+      } else {
+        res.render('lis/3/assets/other');
+      }
+    });
+        
+    //3)
+    app.get('/lis/3/assets/premium-bond-handler', function(req, res) {
+        res.render('lis/3/assets/other');
+    });
+                
     //education
     app.get('/lis/1/you/education-handler', function(req, res) {
       console.log(req.query);
@@ -574,7 +648,7 @@ module.exports = {
       var partnerBenefits = req.query.sprint3benefits;
       console.log(typeof partnerBenefits);
       var firstPartnerBenefit = partner.benefitChecker(partnerBenefits);
-      if(firstPartnerBenefit === "aa") {
+      if(firstPartnerBenefit === "aaaa") {
         res.render('lis/3/partner/benefits/aa');
       } else if(firstPartnerBenefit === "ctc") {
         res.render('lis/3/partner/benefits/ctc');

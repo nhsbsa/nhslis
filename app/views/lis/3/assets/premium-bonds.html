@@ -19,21 +19,20 @@
     <!--<span class="form-hint">Please tell us the combined face value of all of the premium bonds you have</span>-->
   </h1>
 
-  <form action="" method="get" class="form">
+  <form action="premium-bond-handler" method="get" class="form">
 
-<div class="form-item-wrapper">
+    <div class="form-item-wrapper">
 
-    {{
-      form_macros.amount_field({
-        id: 'prembond-amount'
-      })
-    }}
+      {{
+        form_macros.amount_field({
+          id: 'prembond-amount'
+        })
+      }}
 
-</div>
+    </div>
 
     {{
       form_macros.button({
-        href: 'other',
         label: 'Next'
       })
     }}
