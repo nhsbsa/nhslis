@@ -2020,3 +2020,43 @@ hr {
 
 #global-header a.header-logo {
   float: left; }
+
+.exemption-header {
+  background-color: #0072C6;
+  color: white;
+  padding: 10px;
+  margin: 10px 0 30px; }
+  .exemption-header h1 {
+    padding-top: 0;
+    margin-bottom: 10px; }
+  .exemption-header h4 {
+    padding-top: 0; }
+  .exemption-header h2 {
+    padding-top: 0; }
+
+.certcode {
+  font-size: 3.6rem; }
+
+hr {
+  padding-bottom: 1rem;
+  padding-top: 2rem; }
+
+.cert-description li {
+  padding-left: 15px;
+  list-style-position: inside; }
+.cert-description li:nth-child(1) {
+  list-style: none;
+  padding-left: 0px;
+  list-style-position: inside; }
+.cert-description .large, .cert-description .cost {
+  font-size: 24px;
+  clear: both; }
+.cert-description .cost {
+  margin-bottom: 5px; }
+
+.lead-list:first-child {
+  list-style: none;
+  margin-left: -1.5rem; }
+
+#global-header a.header-logo {
+  float: left; }
