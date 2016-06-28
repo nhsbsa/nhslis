@@ -402,7 +402,17 @@ module.exports = {
       } else if (req.query.relationship == 'none' && applicant.homeOwner === true) {
         res.render('lis/4/live/others/border');
       } else {
-        res.render('lis/4/live/others/work');
+        res.render('lis/4/live/others/education');
+      }
+    });
+    
+    //4) relationship-handler
+    app.get('/lis/4/live/others/others-work-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.work === 'yes') {
+        res.render('lis/4/live/others/hours');
+      } else {
+        res.render('lis/4/live/others/benefits');
       }
     });
     
