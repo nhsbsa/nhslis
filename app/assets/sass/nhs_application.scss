@@ -303,10 +303,15 @@ hr {
     padding-top: 2rem;
 }
 
-.cert-description {
+.ex-div {
+    width: device-width;
+}
+
+.cert-des {
   li {
-    padding-left: 15px;
+
     list-style-position: inside;
+    display: inline-block;
   }
   li:nth-child(1) {
     list-style: none;
@@ -319,6 +324,15 @@ hr {
   }
   .cost {
     margin-bottom: 5px;
+    float: right;
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+    font-size: 3rem;
+    font-weight:bold;
+  }
+  .ex-type {
+    display: block;
   }
 }
 

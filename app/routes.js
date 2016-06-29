@@ -1257,19 +1257,7 @@ module.exports = {
         'myWork' : myWork
       });
     });
-    
-    //2) partner
-    app.get('/lis/2/partner/partner-handler', function(req, res) {
-      console.log(req.query);
-      if (req.query.partner === 'yes') {
-        partnerCheck(true);
-        res.render('lis/2/partner/summary');
-      } else {
-        partnerCheck(false);
-        res.render('lis/2/partner/summary');
-      }
-    });
-    
+        
     //2) education
     app.get('/lis/2/you/education-handler', function(req, res) {
       console.log(req.query);
