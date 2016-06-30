@@ -239,6 +239,18 @@ module.exports = {
     // add your routes here
     
     // ***********
+    //LIS exemption
+    // ***********
+
+
+    app.get('/lis/exemption/hc2certificate', function (req, res) {
+        res.render('lis/exemption/hc2certificate', {
+        'cert-title' : 'HC2'
+        });
+    });
+
+
+    // ***********
     //LIS sprint 4
     // ***********
     

@@ -17,31 +17,12 @@
   <body class="{% block bodyClasses %}{% endblock %}">
     <script type="text/javascript">document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
-
-
     <div id="skiplink-container">
       <div>
         <a href="#content" class="skiplink">Skip to main content</a>
       </div>
     </div>
-
-<!--
-    <header role="banner" id="global-header">
-      <div class="header-container">
-
-        <a href="{% block logotypeLink %}/{% endblock %}" class="header-logo" title="{% block logotypeTitle %}Go to the NHS.UK homepage{% endblock %}">
-          <img src="{{assetPath}}images/nhs-rev-logotype.svg" alt="">
-        </a>
-
-        {% block header-controls %}{% endblock %}
-
-      </div>
-    </header>
--->
-
-    <!--end header-->
-
-
+    
     {% block afterHeader %}{% endblock %}
 
     {% block content %}{% endblock %}

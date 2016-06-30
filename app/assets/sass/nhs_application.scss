@@ -210,6 +210,32 @@ p.intro-to-list {
   font-weight: bold;
 }
 
+//progress-indicators
+
+  .complete-text {
+    border: solid green 2px;
+    border-radius: 5px;
+    color: green;
+    padding: 3px 6px;
+    margin-right:15px;
+  }
+
+  .incomplete-text{
+    border: solid darkorange 2px;
+    border-radius: 5px;
+    color: darkorange;
+    padding: 3px 6px;
+    margin-right:15px;
+  }
+
+  .notstarted-text{
+    border: solid gray 2px;
+    border-radius: 5px;
+    color: gray;
+    padding: 3px 6px;
+    margin-right:15px;
+  }
+
 //done-page
 
 .done-panel {
@@ -277,21 +303,42 @@ hr {
 
 //exemption-page
 
+.ex-header {
+  color:white;
+  margin-left:105px;
+}
+
 .exemption-header {
   background-color: $nhs-blue;
+  text-align: center;
   color: white;
-  padding: 10px;
-  margin: 10px 0 30px;
+  padding: 20px 10px;
+  margin: 30px 0;
   h1 {
     padding-top: 0;
     margin-bottom: 10px;
   }
-  h4 {
-    padding-top: 0;
-  }
   h2 {
     padding-top: 0;
   }
+  h4 {
+    padding-top: 0;
+  }
+}
+
+.ex-notes {
+    position: relative;
+    border-bottom: 3px solid #dedede;
+    background: #ededed;
+    padding: 10px 20px 20px 20px;
+}
+
+.detail-block {
+  float: left;
+  border-top: 5px solid $nhs-blue;
+  padding: 10px 20px; 
+  background: #ededed;
+  width:92%;
 }
 
 .certcode {
@@ -303,13 +350,8 @@ hr {
     padding-top: 2rem;
 }
 
-.ex-div {
-    width: device-width;
-}
-
 .cert-des {
   li {
-
     list-style-position: inside;
     display: inline-block;
   }
@@ -326,7 +368,7 @@ hr {
     margin-bottom: 5px;
     float: right;
     display: inline-block;
-    width: 20%;
+    width: 29%;
     text-align: center;
     font-size: 3rem;
     font-weight:bold;
