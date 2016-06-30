@@ -13,34 +13,28 @@
     <div class="column-two-thirds">
 
       <h1 class="heading-large">
-        Are they on one of the following training schemes?
+        Do you financially support this person?
       </h1>
-      
-      <ul class="list list-bullet">
-        <li>England - Entry to Employment or Programme Led Apprenticeships</li>
-        <li>Scotland - Get Ready for Work, Skillseekers or Modern Apprenticeships</li>
-        <li>Wales - foundation modern Apprenticeships, Skillbuild or Skillbuild+</li>
-      </ul>
-        
-      <form action="others-training-handler" method="get" class="form">
-        <div class="form-item-wrapper">
-          <fieldset>
-            <div class="inline-form-groups">
-              <div class="form-group">
-                <input type="radio" id="yes" name="training" value="yes">
+  
+      <form action="finacial-support-handler" method="get" class="form">
+          <div class="form-item-wrapper">
+            <fieldset>
+              <div class="inline-form-groups">
+                <div class="form-group">
+                  <input type="radio" id="yes" name="work" value="yes">
                   <label class="form-control-radio" for="yes">
                     Yes
                   </label>
                 </div>
                 <div class="form-group">
-                  <input type="radio" id="no" name="training" value="no">
+                  <input type="radio" id="no" name="work" value="no">
                   <label class="form-control-radio" for="no">
                     No
                   </label>
                 </div>
               </div>
             </fieldset>
-        </div>
+          </div>
 
         {{
           form_macros.button({

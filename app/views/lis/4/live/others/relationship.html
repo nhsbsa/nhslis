@@ -20,8 +20,8 @@
 
     <div class="form-item-wrapper">
       <div class="form-group">
-        <input type="radio" id="son" value="son" name="relationship">
-        <label class="form-control-radio" for="son">
+        <input type="radio" id="child" value="child" name="relationship">
+        <label class="form-control-radio" for="child">
           My son or daughter
         </label>
       </div>
@@ -37,13 +37,13 @@
           I am their legal guardian
         </label>
       </div>
-      <div class="form-group">
+      <!--div class="form-group">
         <input type="radio" id="family" value="family" name="relationship">
         <label class="form-control-radio" for="family">
           A family relation
         </label>
       </div>
-      <!--div class="form-group">
+      <div class="form-group">
         <input type="radio" id="lodger" name="relationship">
         <label class="form-control-radio" for="lodger">
          A lodger or boarder
@@ -59,7 +59,7 @@
       
     {{
       form_macros.button({
-        label: 'Save and continue'
+        label: 'Save and continue',
       })
     }}
 

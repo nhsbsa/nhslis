@@ -213,6 +213,38 @@ var partner = new Person(
   othersAtHome = false
 );
 
+var householder = {
+  firstName : null,
+  lastName : null,
+  age : 0,
+  relationship : null,	
+  financialSupport : null,
+  underFifteen : false,
+  sixteenToNineteen : false,
+  overNineteen : false,
+  work : false,
+  benefits : false,
+  ageRange : function() {
+    if (householder.age <= 15) {
+      householder.underFifteen = true;
+    } else if (householder.age >= 16 && householder.age <= 19) {
+      householder.sixteenToNineteen = true;
+    } else if (householder.age >= 20) {
+      householder.overNineteen = true;
+    }
+  },
+  resetHouseHolder : function() {
+    householder.relationship = null;
+    householder.financialSupport = null;
+    householder.underFifteen = false;
+    householder.sixteenToNineteen = false;
+    householder.overNineteen = false;
+    householder.work = false;
+    householder.benefits = false;
+    console.log('resetting householder...');
+  }
+};
+
 var querystring = require('querystring');
 
 module.exports = {
@@ -389,42 +421,6 @@ module.exports = {
     
     //4 Maintenance payments
         
-    //4 relationship
-    app.get('/lis/4/live/others/relationship', function(req, res) {
-        res.render('lis/4/live/others/relationship');
-    });
-    
-    //4) relationship-handler
-    app.get('/lis/4/live/others/relationship-handler', function(req, res) {
-      console.log(req.query);
-      if (req.query.relationship == 'none' && applicant.tennant === true) {
-        res.render('lis/4/live/others/subtenant');
-      } else if (req.query.relationship == 'none' && applicant.homeOwner === true) {
-        res.render('lis/4/live/others/border');
-      } else {
-        res.render('lis/4/live/others/education');
-      }
-    });
-    
-    //4) relationship-handler
-    app.get('/lis/4/live/others/others-work-handler', function(req, res) {
-      console.log(req.query);
-      if (req.query.work === 'yes') {
-        res.render('lis/4/live/others/hours');
-      } else {
-        res.render('lis/4/live/others/benefits');
-      }
-    });
-    
-    //4) people-handler
-    app.get('/lis/4/live/others/people-handler', function(req, res) {
-      if (req.query.people == 'yes') {
-        res.redirect('/lis/4/live/others/name');
-      } else {
-        res.redirect('/lis/4/live/living-summary');
-      }
-    });
-
     //4) home
     app.get('/lis/4/live/home', function(req, res) {
         applicant.resetLivingSituation;
@@ -587,12 +583,11 @@ module.exports = {
       }
     });
  
-
     // *******************
     // 4) partner handlers
     // *******************
 
-    
+  
     //4) partner-pension-credit kickout
     app.get('/lis/4/partner/pension/pencred-handler', function(req, res) {
       console.log(req.query);
@@ -650,7 +645,6 @@ module.exports = {
         res.redirect('/lis/4/partner/benefits/benefit-sprint3');
       }
     });
-
     
     //4) partner benefit handler
     app.get('/lis/4/partner/benefits/sprint3-benefit-handler', function (req, res) {
@@ -703,8 +697,102 @@ module.exports = {
         res.render('lis/4/partner/benefits/benefit7');
       }
     });
-
+ 
+    // ***************
+    // 4) householder
+    // ***************
     
+    //2001 = 15 - could have left school
+    //1998 = 18
+        
+    //4) people-handler
+    app.get('/lis/4/live/others/people', function(req, res) {
+      res.render('lis/4/live/others/people');
+    });
+    
+    //4) persons details
+    app.get('/lis/4/live/others/name', function(req, res) {
+      householder.resetHouseHolder();
+      res.render('lis/4/live/others/name');
+    });
+    
+    //4) people-handler
+    app.get('/lis/4/live/others/people-handler', function(req, res) {
+      if (req.query.people == 'yes') {
+        res.redirect('/lis/4/live/others/name');
+      } else {
+        res.redirect('/lis/4/live/living-summary');
+      }
+    });
+    
+    //4 others details
+    app.get('/lis/4/live/others/others-details', function(req, res) {
+      householder.age = (2016 - req.query.dob);
+      console.log(householder.age);
+      householder.ageRange();
+      if (householder.overNineteen === true) {
+        res.render('lis/4/live/others/boarder');
+      } else {
+        res.render('lis/4/live/others/relationship');
+      }
+    });
+    
+    //4) relationship-handler
+    app.get('/lis/4/live/others/relationship-handler', function(req, res) {
+      householder.relationship = req.query.relationship;
+      console.log(householder.relationship);
+      //child || none underFifteen = people
+      //child sixteenToNineteen = education
+      //none sixteenToNineteen = boarder
+      //child || none overNineteen = boarder
+      if (householder.underFifteen == true) {
+        res.render('lis/4/live/others/people');
+      } else if (householder.relationship === 'child' && householder.sixteenToNineteen === true) {
+        res.render('lis/4/live/others/education');
+      } else if (householder.relationship === 'none' && householder.sixteenToNineteen === true) {
+        res.render('lis/4/live/others/boarder');
+      } else if (householder.overNineteen === true) {
+        res.render('lis/4/live/others/boarder');
+      }
+    });
+    
+    //4) relationship-handler
+    app.get('/lis/4/live/others/others-work-handler', function(req, res) {
+      console.log(req.query);
+      if (req.query.work === 'yes') {
+        res.render('lis/4/live/others/hours');
+      } else {
+        res.render('lis/4/live/others/benefits');
+      }
+    });
+    
+    //4) others-education-handler
+    app.get('/lis/4/live/others/others-education-handler', function(req, res) {
+      if (req.query.education == 'yes') {
+        res.redirect('/lis/4/live/others/people');
+      } else {
+        res.redirect('/lis/4/live/others/training');
+      }
+    });
+    
+    //4) others-training-handler
+    app.get('/lis/4/live/others/others-training-handler', function(req, res) {
+      if (req.query.training == 'yes') {
+        res.redirect('/lis/4/live/others/people');
+      } else {
+        res.redirect('/lis/4/live/others/he-student');
+      }
+    });
+    
+    //4) lodger-handler
+    app.get('/lis/4/live/others/boarder-handler', function(req, res) {
+      if (req.query.boarder == 'yes') {
+        res.redirect('/lis/4/live/others/boarder-detail');
+      } else {
+        res.redirect('/lis/4/live/others/he-student');
+      }
+    });
+
     // ***********
     //LIS sprint 3
     // ***********
@@ -867,7 +955,7 @@ module.exports = {
       if (req.query.relationship == 'none' && applicant.tennant === true) {
         res.render('lis/3/live/others/subtenant');
       } else if (req.query.relationship == 'none' && applicant.homeOwner === true) {
-        res.render('lis/3/live/others/border');
+        res.render('lis/3/live/others/boarder');
       } else {
         res.render('lis/3/live/others/work');
       }
