@@ -1973,6 +1973,27 @@ p.intro-to-list {
   margin: 0.3rem 0.8rem 0 0;
   font-weight: bold; }
 
+.complete-text {
+  border: solid green 2px;
+  border-radius: 5px;
+  color: green;
+  padding: 3px 6px;
+  margin-right: 15px; }
+
+.incomplete-text {
+  border: solid darkorange 2px;
+  border-radius: 5px;
+  color: darkorange;
+  padding: 3px 6px;
+  margin-right: 15px; }
+
+.notstarted-text {
+  border: solid gray 2px;
+  border-radius: 5px;
+  color: gray;
+  padding: 3px 6px;
+  margin-right: 15px; }
+
 .done-panel {
   background-color: #0072C6;
   text-align: center;
@@ -2013,6 +2034,72 @@ hr {
   clear: both; }
 .cert-description .cost {
   margin-bottom: 5px; }
+
+.lead-list:first-child {
+  list-style: none;
+  margin-left: -1.5rem; }
+
+#global-header a.header-logo {
+  float: left; }
+
+.ex-header {
+  color: white;
+  margin-left: 105px; }
+
+.exemption-header {
+  background-color: #0072C6;
+  text-align: center;
+  color: white;
+  padding: 20px 10px;
+  margin: 30px 0; }
+  .exemption-header h1 {
+    padding-top: 0;
+    margin-bottom: 10px; }
+  .exemption-header h2 {
+    padding-top: 0; }
+  .exemption-header h4 {
+    padding-top: 0; }
+
+.ex-notes {
+  position: relative;
+  border-bottom: 3px solid #dedede;
+  background: #ededed;
+  padding: 10px 20px 20px 20px; }
+
+.detail-block {
+  float: left;
+  border-top: 5px solid #0072C6;
+  padding: 10px 20px;
+  background: #ededed;
+  width: 92%; }
+
+.certcode {
+  font-size: 3.6rem; }
+
+hr {
+  padding-bottom: 1rem;
+  padding-top: 2rem; }
+
+.cert-des li {
+  list-style-position: inside;
+  display: inline-block; }
+.cert-des li:nth-child(1) {
+  list-style: none;
+  padding-left: 0px;
+  list-style-position: inside; }
+.cert-des .large, .cert-des .cost {
+  font-size: 24px;
+  clear: both; }
+.cert-des .cost {
+  margin-bottom: 5px;
+  float: right;
+  display: inline-block;
+  width: 29%;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold; }
+.cert-des .ex-type {
+  display: block; }
 
 .lead-list:first-child {
   list-style: none;

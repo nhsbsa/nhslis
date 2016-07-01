@@ -1,15 +1,18 @@
 // Create a partnerOrText variable for 'you'
-var partnerOrText = 'you';
-var partnerAndText = 'you';
+var partnerOrText = 'you or your partner';
+var partnerAndText = 'you and your partner';
 // include the variable on the relevant pages
 // Check for the answer to 'do you have a partner?'
 // if there is a partner, change the text to include 'or your partner'
 
 function setPartnerText() {
-  if (applicant.partner === true) {
+  if (applicant.partner === false) {
+    partnerOrText = 'you';
+    partnerAndText = 'you';
+  } else {
     partnerOrText = 'you or your partner';
     partnerAndText = 'you and your partner';
-  }  
+  } 
 }
 
 function Person(
@@ -65,7 +68,8 @@ function Person(
     console.log('resetting bank accounts...');
   },
   this.resetPartner = function() {
-    this.partner = false;
+    this.partner = true;
+    console.log('resetting partner...');
   },
   this.printPerson = function() {
     console.log (
@@ -74,7 +78,8 @@ function Person(
       "statePension = " + this.statePension + " \n" +
       "disabilityLivingAllowance = " + this.disabilityLivingAllowance + " \n" +
       "child tax credits = " + this.childTaxCredits + " \n" +
-      "attendanceAllowance = " + this.attendanceAllowance + "\n"
+      "attendanceAllowance = " + this.attendanceAllowance + "\n" +
+      "partner = " + this.partner + "\n"
     );
   }, 
   this.benefitChecker = function(benefits) {
@@ -184,7 +189,7 @@ Household.prototype.add = function(person) {
 var applicant = new Person(
   firstName = null,
   lastName = null,
-  partner = false,
+  partner = true,
   privatePension = false,
   statePension = false,
   savings = false,
@@ -266,10 +271,23 @@ module.exports = {
       partner.resetBenefits;
       console.log('person =');
       partner.printPerson();
+      applicant.resetPartner();
     });
     
     // add your routes here
     
+    // ***********
+    //LIS exemption
+    // ***********
+
+
+    app.get('/lis/exemption/hc2certificate', function (req, res) {
+        res.render('lis/exemption/hc2certificate', {
+        'cert-title' : 'HC2'
+        });
+    });
+
+
     // ***********
     //LIS sprint 4
     // ***********
@@ -335,6 +353,8 @@ module.exports = {
         res.render('lis/4/partner/basic');
       } else if(req.query.partner == 'no') {
         applicant.partner = false;
+        setPartnerText();
+        console.log(applicant.partner)
         res.render('lis/4/partner/summary-no');
       }
     });
@@ -375,7 +395,7 @@ module.exports = {
         res.render('lis/4/you/benefits/dla');
       } else if(firstBenefit === "pip") {
         res.render('lis/4/you/benefits/pip');
-      } else if (firstBenefit === "none") {
+      } else {
         res.render('lis/4/you/benefits/benefit7');
       }
     });
@@ -524,7 +544,12 @@ module.exports = {
           'partnerortext' : partnerOrText,
           'partnerandrext' : partnerAndText
         });
-      }
+      } else {
+        res.render('lis/4/assets/other', {
+          'partnerortext' : partnerOrText,
+          'partnerandrext' : partnerAndText
+        });
+      } 
     });
         
     //4)
@@ -730,28 +755,27 @@ module.exports = {
       householder.age = (2016 - req.query.dob);
       console.log(householder.age);
       householder.ageRange();
-      if (householder.overNineteen === true) {
-        res.render('lis/4/live/others/boarder');
-      } else {
-        res.render('lis/4/live/others/relationship');
-      }
+      res.render('lis/4/live/others/relationship');
     });
     
     //4) relationship-handler
     app.get('/lis/4/live/others/relationship-handler', function(req, res) {
       householder.relationship = req.query.relationship;
       console.log(householder.relationship);
-      //child || none underFifteen = people
-      //child sixteenToNineteen = education
-      //none sixteenToNineteen = boarder
-      //child || none overNineteen = boarder
       if (householder.underFifteen == true) {
+        //child || none underFifteen = people
         res.render('lis/4/live/others/people');
       } else if (householder.relationship === 'child' && householder.sixteenToNineteen === true) {
+        //child sixteenToNineteen = education
         res.render('lis/4/live/others/education');
       } else if (householder.relationship === 'none' && householder.sixteenToNineteen === true) {
+        //none sixteenToNineteen = boarder
         res.render('lis/4/live/others/boarder');
-      } else if (householder.overNineteen === true) {
+      } else if (householder.relationship === 'child' && householder.overNineteen === true) {
+        //child overNineteen = he-education
+        res.render('lis/4/live/others/he-student');
+      } else if (householder.relationship === 'none' && householder.overNineteen === true) {
+        //none overNineteen = boarder
         res.render('lis/4/live/others/boarder');
       }
     });
@@ -1073,7 +1097,12 @@ module.exports = {
           'partnerortext' : partnerOrText,
           'partnerandrext' : partnerAndText
         });
-      }
+      } else {
+        res.render('lis/4/assets/other', {
+          'partnerortext' : partnerOrText,
+          'partnerandrext' : partnerAndText
+        });
+      } 
     });
         
     //3)
@@ -1355,19 +1384,7 @@ module.exports = {
         'myWork' : myWork
       });
     });
-    
-    //2) partner
-    app.get('/lis/2/partner/partner-handler', function(req, res) {
-      console.log(req.query);
-      if (req.query.partner === 'yes') {
-        partnerCheck(true);
-        res.render('lis/2/partner/summary');
-      } else {
-        partnerCheck(false);
-        res.render('lis/2/partner/summary');
-      }
-    });
-    
+        
     //2) education
     app.get('/lis/2/you/education-handler', function(req, res) {
       console.log(req.query);
