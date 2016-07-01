@@ -1881,6 +1881,8 @@ label, .form-label, .form-label-bold {
 
 .data-table {
   margin-bottom: 30px; }
+  .data-table a {
+    float: right; }
   .data-table th {
     font-weight: 700;
     font-size: 19px;

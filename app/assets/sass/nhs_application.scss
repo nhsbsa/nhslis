@@ -84,6 +84,9 @@ $nhs-blue: #0072C6;
 
 .data-table {
   margin-bottom: 30px;
+  a {
+    float: right;
+  }
   th {
     font-weight: 700;
     font-size: 19px;
