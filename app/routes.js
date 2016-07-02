@@ -1,20 +1,34 @@
 //import the person constructor
 var person = require("./person.js");
 
-// change the text if the applicant has a partner
 var partnerOrText = 'you or your partner';
 var partnerAndText = 'you and your partner';
 
-function setPartnerText() {
-  if (applicant.partner === false) {
-    partnerOrText = 'you';
-    partnerAndText = 'you';
-  } else {
-    partnerOrText = 'you or your partner';
-    partnerAndText = 'you and your partner';
-  } 
-}
-
+//create an application
+var application = {
+  aboutYouStatus : "Not started",
+  aboutPartnerStatus : "Not started",
+  propertyStatus : "Not started",
+  whereYouLiveStatus : "Not started",	
+  resetApplication : function() {
+    this.aboutYouStatus = "Not started";
+    this.aboutPartnerStatus = "Not started";
+    this.propertyStatus = "Not started";
+    this.whereYouLiveStatus = "Not started";
+    console.log('Resetting application...');
+  },
+  allComplete : function(){
+    if (application.aboutYouStatus === "Completed" &&
+      application.aboutPartnerStatus === "Completed" &&
+      application.propertyStatus === "Completed" &&
+      application.whereYouLiveStatus === "Completed") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+};
+  
 //create an applicant
 var applicant = person.createPerson(
   firstName = null,
@@ -82,6 +96,17 @@ var householder = {
   }
 };
 
+// change the text if the applicant has a partner
+function setPartnerText() {
+  if (applicant.partner === false) {
+    partnerOrText = 'you';
+    partnerAndText = 'you';
+  } else {
+    partnerOrText = 'you or your partner';
+    partnerAndText = 'you and your partner';
+  } 
+}
+
 var querystring = require('querystring');
 
 module.exports = {
@@ -104,6 +129,7 @@ module.exports = {
       console.log('partner =');
       partner.printPerson();
       applicant.resetPartner();
+      application.resetApplication();
     });
     
     // add your routes here
@@ -118,10 +144,81 @@ module.exports = {
         });
     });
 
-
     // ***********
     //LIS sprint 4
     // ***********
+    
+    app.get('/lis/4/you/you-done', function (req, res) {
+      application.aboutYouStatus = "Completed";
+      if (application.allComplete() === true) {
+        res.redirect('/lis/4/lis-home-updated');
+      } else {
+        res.redirect('/lis/4/lis-home');
+      }
+    });
+    
+    app.get('/lis/4/partner/partner-done', function (req, res) {
+      application.aboutPartnerStatus = "Completed";
+      if (application.allComplete() === true) {
+        res.redirect('/lis/4/lis-home-updated');
+      } else {
+        res.redirect('/lis/4/lis-home');
+      }
+    });
+    
+    app.get('/lis/4/assets/assets-done', function (req, res) {
+      application.propertyStatus = "Completed";
+      if (application.allComplete() === true) {
+        res.redirect('/lis/4/lis-home-updated');
+      } else {
+        res.redirect('/lis/4/lis-home');
+      }
+    });
+
+    app.get('/lis/4/live/live-done', function (req, res) {
+      application.whereYouLiveStatus = "Completed";
+      if (application.allComplete() === true) {
+        res.redirect('/lis/4/lis-home-updated');
+      } else {
+        res.redirect('/lis/4/lis-home');
+      }
+    });
+    
+    app.get('/lis/4/lis-home', function (req, res) {
+      res.render('lis/4/lis-home', {
+        'aboutYouStatus' : application.aboutYouStatus,
+        'aboutPartnerStatus' : application.aboutPartnerStatus,
+        'propertyStatus' : application.propertyStatus,
+        'whereYouLiveStatus' : application.whereYouLiveStatus
+      });
+    });
+    
+    app.get('/lis/4/lis-home-updated', function (req, res) {
+      res.render('lis/4/lis-home-updated', {
+        'aboutYouStatus' : application.aboutYouStatus,
+        'aboutPartnerStatus' : application.aboutPartnerStatus,
+        'propertyStatus' : application.propertyStatus,
+        'whereYouLiveStatus' : application.whereYouLiveStatus
+      });
+    });
+    
+    app.get('/lis/4/assets/property-handler', function (req, res) {
+      application.propertyStatus = "Started"
+      if (req.query.property === "yes") {
+        res.render('lis/4/assets/property-details');
+      } else {
+        res.render('lis/4/assets/money');
+      }
+    });
+    
+    app.get('/lis/4/live/hospital-handler', function (req, res) {
+      application.whereYouLiveStatus = "Started"
+      if (req.query.hospital === "yes") {
+        res.render('lis/4/live/hospital');
+      } else {
+        res.render('lis/4/live/home');
+      }
+    });
     
     app.get('/lis/4/care-home-handler', function (req, res) {
       console.log(req.query)
@@ -178,6 +275,7 @@ module.exports = {
     
     //4) partner handler
     app.get('/lis/4/partner/partner-handler', function (req, res) {
+      application.aboutPartnerStatus = "Started";
       if(req.query.partner == 'yes') {
         applicant.partner = true;
         setPartnerText();
@@ -205,6 +303,7 @@ module.exports = {
     
     //4) registration-handler
     app.get('/lis/4/you/registration-handler', function(req, res) {
+      application.aboutYouStatus = "Started";
       applicant.firstName = req.query.firstname;
       applicant.lastName = req.query.lastname;
       res.render('lis/4/you/contact', {

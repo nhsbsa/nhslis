@@ -71,9 +71,14 @@
       </tr>
     </table>
     
-   <p>
-      <a class="button" href="../lis-home4" id="next">Save and continue</a>
-    </p>
+    <form action="assets-done" method="get" class="form">
+      {{
+        form_macros.button({
+          label: 'Save and continue',
+          id : 'next'
+        })  
+      }}
+    </form>
 
   </div>
   </div>

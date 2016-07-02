@@ -137,9 +137,14 @@
 
     </table>
     
-    <p>
-      <a class="button" href="../lis-home-updated" id="next">Save and continue</a>
-    </p>
+    <form action="live-done" method="get" class="form">
+      {{
+        form_macros.button({
+          label: 'Save and continue',
+          id : 'next'
+        })  
+      }}
+    </form>
 
   </div>
   </div>
