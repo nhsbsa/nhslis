@@ -413,6 +413,7 @@ module.exports = {
 
     //4) pension-type-handler
     app.get('/lis/4/you/pension/pension-type-handler', function(req, res) {
+      applicant.resetPension();
       var pensions = req.query.pensiontype;
       console.log(pensions);
       if(pensions === 'state') {
@@ -422,14 +423,14 @@ module.exports = {
         applicant.privatePension = true;
         res.render('lis/4/you/pension/private-pension-amount');
       } else {
-        for (pension in pensions) {
+        for (var pension in pensions) {
           console.log(pensions[pension]); 
             if(pensions[pension] === 'state') {
               applicant.statePension = true;
             } else if(pensions[pension] === 'private') {
               applicant.privatePension = true;
             }
-        };
+        }
         if(applicant.statePension === true) {
           res.render('lis/4/you/pension/pension-amount');
         } else if(applicant.privatePension === true) {
@@ -565,6 +566,7 @@ module.exports = {
 
     //4) partner pension-type-handler
     app.get('/lis/4/partner/pension/pension-type-handler', function(req, res) {
+      partner.resetPension();
       var pensions = req.query.pensiontype;
       console.log(pensions);
       if(pensions === 'state') {
@@ -574,14 +576,14 @@ module.exports = {
         partner.privatePension = true;
         res.render('lis/4/partner/pension/private-pension-amount');
       } else {
-        for (pension in pensions) {
+        for (var pension in pensions) {
           console.log(pensions[pension]); 
             if(pensions[pension] === 'state') {
               partner.statePension = true;
             } else if(pensions[pension] === 'private') {
               partner.privatePension = true;
             }
-        };
+        }
         if(partner.statePension === true) {
           res.render('lis/4/partner/pension/pension-amount');
         } else if(partner.privatePension === true) {
@@ -752,7 +754,7 @@ module.exports = {
     // ***********
     
     app.get('/lis/3/care-home-handler', function(req, res) {
-      console.log(req.query)
+      console.log(req.query);
       if(req.query.carehome === 'yes') {
         res.redirect('/lis/3/carehome-kickout');
       } else {
@@ -791,7 +793,7 @@ module.exports = {
     });
     
     app.get('/lis/3/savings-kickout-handler', function(req, res) {
-      console.log(req.query)
+      console.log(req.query);
       if(req.query.savings === 'yes') {
         res.redirect('/lis/3/savings-kickout');
       } else {
@@ -926,7 +928,7 @@ module.exports = {
 
     //3) home
     app.get('/lis/3/live/home', function(req, res) {
-        applicant.resetLivingSituation;
+        applicant.resetLivingSituation();
         res.render('lis/3/live/home');
     });
 
@@ -975,14 +977,14 @@ module.exports = {
         applicant.privatePension = true;
         res.render('lis/3/you/pension/private-pension-amount');
       } else {
-        for (pension in pensions) {
+        for (var pension in pensions) {
           console.log(pensions[pension]); 
             if(pensions[pension] === 'state') {
               applicant.statePension = true;
             } else if(pensions[pension] === 'private') {
               applicant.privatePension = true;
             }
-        };
+        }
         if(applicant.statePension === true) {
           res.render('lis/3/you/pension/pension-amount');
         } else if(applicant.privatePension === true) {
@@ -1128,14 +1130,14 @@ module.exports = {
         partner.privatePension = true;
         res.render('lis/3/partner/pension/private-pension-amount');
       } else {
-        for (pension in pensions) {
+        for (var pension in pensions) {
           console.log(pensions[pension]); 
             if(pensions[pension] === 'state') {
               partner.statePension = true;
             } else if(pensions[pension] === 'private') {
               partner.privatePension = true;
             }
-        };
+        }
         if(partner.statePension === true) {
           res.render('lis/3/partner/pension/pension-amount');
         } else if(partner.privatePension === true) {
@@ -1273,14 +1275,14 @@ module.exports = {
         privateP = true;
         res.render('lis/2/you/pension/private-pension-amount');
       } else {
-        for (pension in pensions) {
+        for (var pension in pensions) {
           console.log(pensions[pension]); 
             if(pensions[pension] === 'state') {
               stateP = true;
             } else if(pensions[pension] === 'private') {
               privateP = true;
             }
-        };
+        }
         if(stateP === true) {
           res.render('lis/2/you/pension/pension-amount');
         } else if(privateP === true) {

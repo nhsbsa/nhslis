@@ -72,6 +72,12 @@ Person.prototype.resetPartner = function () {
   console.log('resetting partner status...');
 };
 
+Person.prototype.resetPension = function () {
+  this.privatePension = false;
+  this.statePension = false;
+  console.log('resetting pension...');
+};
+
 Person.prototype.benefitChecker = function (benefits) {
   if (typeof benefits === "string") {
     if (benefits === "aa") {
