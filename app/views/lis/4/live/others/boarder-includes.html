@@ -13,18 +13,12 @@
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-      Does your rent include any of the following?
+      Does it include any of the following?
   </h1>
       <p>Tick all that apply</p>
 
   <form action="" method="get" class="form">
     <div class="form-item-wrapper">
-      <div class="form-group">
-        <input type="checkbox" id="cbsa" name="bgroup1">
-        <label class="form-control-checkbox" for="cbsa">
-          Meals
-        </label>
-      </div>
       <div class="form-group">
         <input type="checkbox" id="cbj" name="bgroup1">
         <label class="form-control-checkbox" for="cbj">
@@ -32,21 +26,9 @@
         </label>
       </div>
       <div class="form-group">
-        <input type="checkbox" id="sa" name="bgroup1">
-        <label class="form-control-checkbox" for="sa">
-          Cooking
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="checkbox" id="jsa" name="bgroup1">
-        <label class="form-control-checkbox" for="jsa">
-          Lighting
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="checkbox" id="hw" name="bgroup1">
-        <label class="form-control-checkbox" for="hw">
-          Hot water
+        <input type="checkbox" id="cbsa" name="bgroup1">
+        <label class="form-control-checkbox" for="cbsa">
+          Meals
         </label>
       </div>
       <p class="form-block">or</p>
@@ -58,8 +40,8 @@
       </div>
     {{
       form_macros.button({
-        href: 'services',
-        label: 'Save and continue'
+        label: 'Save and continue',
+        href : 'people'
       })  
     }}
           </div>

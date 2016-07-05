@@ -16,19 +16,19 @@
         Do they have a job?
       </h1>
   
-      <form action="" method="get" class="form">
+      <form action="others-work-handler" method="get" class="form">
           <div class="form-item-wrapper">
             <fieldset>
               <div class="inline-form-groups">
                 <div class="form-group">
-                  <input type="radio" id="binary-yes" name="work" value="yes">
-                  <label class="form-control-radio" for="binary-yes">
+                  <input type="radio" id="yes" name="work" value="yes">
+                  <label class="form-control-radio" for="yes">
                     Yes
                   </label>
                 </div>
                 <div class="form-group">
-                  <input type="radio" id="binary-no" name="work" value="no">
-                  <label class="form-control-radio" for="binary-no">
+                  <input type="radio" id="no" name="work" value="no">
+                  <label class="form-control-radio" for="no">
                     No
                   </label>
                 </div>
@@ -38,7 +38,6 @@
 
         {{
           form_macros.button({
-            href: 'hours',
             label: 'Save and continue'
           })
         }}

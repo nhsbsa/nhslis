@@ -14,12 +14,10 @@
     <div class="column-two-thirds">
 
       <h1 class="heading-large">
-        Are they studying a course no higher than A Level, Scottish highers or equivalent?
+        Are they a full time student studying a course higher than A Level, Scottish highers or equivalent?
       </h1> 
-      
-      <p>Do not include work received through an employer</p>
 
-      <form action="others-education-handler" method="get" class="form">
+      <form action="" method="get" class="form">
         <div class="form-item-wrapper">
           <fieldset>
             <div class="inline-form-groups">
@@ -41,7 +39,8 @@
 
           {{
             form_macros.button({
-              label: 'Save and continue'
+              label: 'Save and continue',
+              href : 'work'
             })
           }}
 
