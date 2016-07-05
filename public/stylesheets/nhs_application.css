@@ -2109,3 +2109,14 @@ hr {
 
 #global-header a.header-logo {
   float: left; }
+
+.email-ex {
+  background-image: url("/public/images/email-screen.gif");
+  background-repeat: no-repeat;
+  width: 873px;
+  height: 778px;
+  margin-top: 20px; }
+  .email-ex .email-text {
+    padding-top: 220px;
+    padding-left: 30px;
+    width: 95%; }
