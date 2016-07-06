@@ -1,12 +1,10 @@
-
-//view or change
-//continue
-
 //import the person constructor
 var person = require("./person.js");
 
 var partnerOrText = 'you or your partner';
 var partnerAndText = 'you and your partner';
+var continueText = 'Continue';
+var changeText = 'View or change';
 
 //create an application
 var application = {
@@ -14,11 +12,19 @@ var application = {
   aboutPartnerStatus : "Not started",
   propertyStatus : "Not started",
   whereYouLiveStatus : "Not started",
+  aboutYouLink : "Start",
+  aboutPartnerLink : "Start",
+  propertyLink : "Start",
+  whereYouLiveLink : "Start",
   resetApplication : function() {
     this.aboutYouStatus = "Not started";
     this.aboutPartnerStatus = "Not started";
     this.propertyStatus = "Not started";
     this.whereYouLiveStatus = "Not started";
+    this.aboutYouLink = "Start";
+    this.aboutPartnerLink = "Start";
+    this.propertyLink = "Start";
+    this.whereYouLiveLink = "Start";
     console.log('Resetting application...');
   },
   allComplete : function(){
@@ -154,6 +160,7 @@ module.exports = {
     
     app.get('/lis/4/you/you-done', function(req, res) {
       application.aboutYouStatus = "Completed";
+      application.aboutYouLink = changeText;
       if(application.allComplete() === true) {
         res.redirect('/lis/4/lis-home-updated');
       } else {
@@ -171,6 +178,7 @@ module.exports = {
     
     app.get('/lis/4/partner/partner-done', function(req, res) {
       application.aboutPartnerStatus = "Completed";
+      application.aboutPartnerLink = changeText;
       if(application.allComplete() === true) {
         res.redirect('/lis/4/lis-home-updated');
       } else {
@@ -180,6 +188,7 @@ module.exports = {
     
     app.get('/lis/4/assets/assets-done', function(req, res) {
       application.propertyStatus = "Completed";
+      application.propertyLink = changeText;
       if(application.allComplete() === true) {
         res.redirect('/lis/4/lis-home-updated');
       } else {
@@ -189,6 +198,7 @@ module.exports = {
 
     app.get('/lis/4/live/live-done', function(req, res) {
       application.whereYouLiveStatus = "Completed";
+      application.whereYouLiveLink = changeText;
       if(application.allComplete() === true) {
         res.redirect('/lis/4/lis-home-updated');
       } else {
@@ -201,7 +211,11 @@ module.exports = {
         'aboutYouStatus' : application.aboutYouStatus,
         'aboutPartnerStatus' : application.aboutPartnerStatus,
         'propertyStatus' : application.propertyStatus,
-        'whereYouLiveStatus' : application.whereYouLiveStatus
+        'whereYouLiveStatus' : application.whereYouLiveStatus,
+        'aboutYouLink' : application.aboutYouLink,
+        'aboutPartnerLink' : application.aboutPartnerLink,
+        'propertyLink' : application.propertyLink,
+        'whereYouLiveLink' : application.whereYouLiveLink
       });
     });
     
@@ -210,12 +224,17 @@ module.exports = {
         'aboutYouStatus' : application.aboutYouStatus,
         'aboutPartnerStatus' : application.aboutPartnerStatus,
         'propertyStatus' : application.propertyStatus,
-        'whereYouLiveStatus' : application.whereYouLiveStatus
+        'whereYouLiveStatus' : application.whereYouLiveStatus,
+        'aboutYouLink' : application.aboutYouLink,
+        'aboutPartnerLink' : application.aboutPartnerLink,
+        'propertyLink' : application.propertyLink,
+        'whereYouLiveLink' : application.whereYouLiveLink
       });
     });
     
     app.get('/lis/4/assets/property-handler', function(req, res) {
       application.propertyStatus = "Started";
+      application.propertyLink = continueText;
       if(req.query.property === "yes") {
         res.render('lis/4/assets/second-address');
       } else {
@@ -225,6 +244,7 @@ module.exports = {
     
     app.get('/lis/4/live/hospital-handler', function(req, res) {
       application.whereYouLiveStatus = "Started";
+      application.whereYouLiveStatus = continueText;
       if(req.query.hospital === "yes") {
         res.render('lis/4/live/hospital');
       } else {
@@ -288,6 +308,7 @@ module.exports = {
     //4) partner handler
     app.get('/lis/4/partner/partner-handler', function(req, res) {
       application.aboutPartnerStatus = "Started";
+      application.aboutPartnerLink = continueText;
       if(req.query.partner === 'yes') {
         applicant.partner = true;
         setPartnerText();
@@ -316,6 +337,7 @@ module.exports = {
     //4) registration-handler
     app.get('/lis/4/you/registration-handler', function(req, res) {
       application.aboutYouStatus = "Started";
+      application.aboutYouLink = continueText;
       applicant.firstName = req.query.firstname;
       applicant.lastName = req.query.lastname;
       res.render('lis/4/you/contact', {
