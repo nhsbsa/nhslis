@@ -1,3 +1,7 @@
+
+//view or change
+//continue
+
 //import the person constructor
 var person = require("./person.js");
 
@@ -213,7 +217,7 @@ module.exports = {
     app.get('/lis/4/assets/property-handler', function(req, res) {
       application.propertyStatus = "Started";
       if(req.query.property === "yes") {
-        res.render('lis/4/assets/property-details');
+        res.render('lis/4/assets/second-address');
       } else {
         res.render('lis/4/assets/money');
       }
