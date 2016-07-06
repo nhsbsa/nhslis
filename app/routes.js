@@ -157,6 +157,14 @@ module.exports = {
       }
     });
     
+    app.get('/lis/4/live/mortgaged/mortgage-handler', function(req, res) {
+      if(req.query.mortgaged === 'yes') {
+        res.redirect('/lis/4/live/mortgaged/mortgage-amount');
+      } else {
+        res.redirect('/lis/4/live/services');
+      }
+    });
+    
     app.get('/lis/4/partner/partner-done', function(req, res) {
       application.aboutPartnerStatus = "Completed";
       if(application.allComplete() === true) {
