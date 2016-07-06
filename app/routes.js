@@ -377,6 +377,20 @@ module.exports = {
         res.render('lis/4/live/home');
     });
 
+    //4) mortgaged/joint
+    app.get('/lis/4/live/mortgaged/joint', function(req, res) {
+        res.render('lis/4/live/mortgaged/joint', {
+          'partnerortext' : partnerOrText
+        });
+    });
+    
+    //4) tenant/joint
+    app.get('/lis/4/live/mortgaged/joint', function(req, res) {
+        res.render('lis/4/live/mortgaged/joint', {
+          'partnerortext' : partnerOrText
+        });
+    });
+
     //4) where you live
     app.get('/lis/4/live/home-handler', function(req, res) {
       console.log(req.query);
@@ -689,7 +703,18 @@ module.exports = {
       householder.ageRange();
       res.render('lis/4/live/others/relationship');
     });
-    
+        
+    //child || none underFifteen = people
+    //child sixteenToNineteen = education
+    //none sixteenToNineteen = boarder
+    //child overNineteen = he-education
+    //none overNineteen = boarder
+
+    //family underFifteen > are you financially responsable > done
+    //family sixteenToNineteen > are you financially responsable > education...
+    //family overNineteen > he-education
+
+
     //4) relationship-handler
     app.get('/lis/4/live/others/relationship-handler', function(req, res) {
       householder.relationship = req.query.relationship;
@@ -718,7 +743,11 @@ module.exports = {
       if(req.query.work === 'yes') {
         res.render('lis/4/live/others/hours');
       } else {
-        res.render('lis/4/live/others/benefits');
+        if(householder.sixteenToNineteen) {
+          res.render('lis/4/live/others/benefits-reduced');
+        } else {
+          res.render('lis/4/live/others/benefits');
+        }
       }
     });
     

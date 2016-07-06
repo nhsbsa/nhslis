@@ -2109,3 +2109,20 @@ hr {
 
 #global-header a.header-logo {
   float: left; }
+
+.claim-ref {
+  margin: 30px 0; }
+  .claim-ref h1 {
+    padding: 0;
+    margin-bottom: 15px; }
+
+/* temp styles for printing
+
+#global-header, #footer {
+    display: none;
+}
+
+html, #footer {
+    background-color: white;
+}
+ */
