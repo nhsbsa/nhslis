@@ -12,48 +12,53 @@
   <div class="grid-row">
     <div class="column-two-thirds">
 
-  <h1 class="heading-large">
-    Saving your details
-  </h1>
-  <div class="panel panel-border-wide claim-ref">
-    <p>Your claim number</p> 
-    <h1 class="heading-xlarge">123 456 789</h1> 
-  </div>
+      <h1 class="heading-large">
+        Your application number
+      </h1>
       
-  <p>You can save your claim and return to it at any time. You will need your claim number (above), and memorable word, which you create below.</p>
-
+      <div class="panel panel-border-wide claim-ref">
+        <p>You should keep this for your reference</p>
+        <h1 class="heading-xlarge">1Q3 4T6 7K9</h1> 
+      </div>
+      
       <form action="" method="get" class="form">
-        <div class="form-item-wrapper">
-          <fieldset>
-              <div class="form-group">
-              <label class="form-label-bold" for="email-address">
-                Create your memorable word
-                <span class="form-hint">For example your mothers maiden name</span>
-              </label>
-              <input type="text" id="email-address" class="form-control">
+
+        <details>
+
+          <summary><span class="summary">Email this to me</span></summary>
+
+          <div class="panel panel-border-narrow">
+            <p>Enter your email address below if you would like your application number emailed to you.</p>
+
+            <div class="form-item-wrapper">
+              <fieldset>
+                <div class="form-group">
+                  <label class="form-label-bold" for="email-address">
+                    Email address (optional)
+                  </label>
+                  <input type="text" id="email-address" class="form-control">
+                </div>
+              </fieldset>
             </div>
-          </fieldset>
-          <fieldset>
-              <div class="form-group">
-              <label class="form-label-bold" for="email-address">
-                Enter your email address to receive your claim number (optional)
-              </label>
-              <input type="text" id="email-address" class="form-control">
-            </div>
-          </fieldset>
-        </div>
+          </div>
+
+        </details>
         
-        <p><a href="">Print this page</a> to have a copy of your claim number for reference</p>
-        
-            {{
-              form_macros.button({
-                label: 'Save and continue',
-                href: '2step'
-              })
-            }}
-  </form>
+        <p><a href="">Print this page</a></p>
+
+        {{
+          form_macros.button({
+            label: 'Next',
+            href: 'mem-word'
+          })
+        }}
+
+      </form>
+    
     </div>
-    </div>
+    
+  </div>
+  
 </main>
 
 {% endblock %}
