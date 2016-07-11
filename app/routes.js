@@ -476,8 +476,10 @@ module.exports = {
       console.log(req.query);
       if(req.query.prencred === 'ib') {
         res.redirect('/lis/5/kickout');
-      } else {
+      } else if (req.query.prencred === 'sc') {
         res.redirect('/lis/5/you/pension/credit-amount');
+      } else {
+        res.redirect('/lis/5/you/benefits/benefit-sprint3');
       }
     });
 
