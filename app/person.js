@@ -4,6 +4,7 @@ function Person(
   partner,
   privatePension,
   statePension,
+  employmentPension,
   savings,
   disabilityLivingAllowance,
   attendanceAllowance,
@@ -20,6 +21,7 @@ function Person(
   this.partner = partner;
   this.privatePension = privatePension;
   this.statePension = statePension;
+  this.employmentPension = employmentPension;
   this.savings = savings;
   this.disabilityLivingAllowance = disabilityLivingAllowance;
   this.attendanceAllowance = attendanceAllowance;
@@ -75,6 +77,7 @@ Person.prototype.resetPartner = function () {
 Person.prototype.resetPension = function () {
   this.privatePension = false;
   this.statePension = false;
+  this.employmentPension = false;
   console.log('resetting pension...');
 };
 

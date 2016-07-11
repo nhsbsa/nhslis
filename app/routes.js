@@ -477,6 +477,9 @@ module.exports = {
       } else if(pensions === 'private') {
         applicant.privatePension = true;
         res.render('lis/5/you/pension/private-pension-amount');
+      } else if(pensions === 'employment') {
+        applicant.employmentPension = true;
+        res.render('lis/5/you/pension/employment-pension-amount');
       } else {
         for (var pension in pensions) {
           console.log(pensions[pension]); 
@@ -484,12 +487,16 @@ module.exports = {
               applicant.statePension = true;
             } else if(pensions[pension] === 'private') {
               applicant.privatePension = true;
+            } else if(pensions[pension] === 'employment') {
+              applicant.employmentPension = true;
             }
         }
         if(applicant.statePension === true) {
           res.render('lis/5/you/pension/pension-amount');
         } else if(applicant.privatePension === true) {
           res.render('lis/5/you/pension/private-pension-amount');
+        }  else if(applicant.employmentPension === true) {
+          res.render('lis/5/you/pension/employment-pension-amount');
         } else {
           res.render('lis/5/you/benefits/benefit-sprint3');
         }
@@ -500,7 +507,18 @@ module.exports = {
     app.get('/lis/5/you/pension/state-pension-handler', function(req, res) {
       if(applicant.privatePension === true) {
         res.redirect('/lis/5/you/pension/private-pension-amount');
-      } else if(applicant.privatePension === false) {
+      } else if(applicant.employmentPension === true) {
+        res.redirect('/lis/5/you/pension/employment-pension-amount');
+      } else {
+        res.redirect('/lis/5/you/benefits/benefit-sprint3');
+      }
+    });    
+
+    //5) private-pension-handler
+    app.get('/lis/5/you/pension/private-pension-handler', function(req, res) {
+      if(applicant.employmentPension === true) {
+        res.redirect('/lis/5/you/pension/employment-pension-amount');
+      } else if(applicant.employmentPension === false) {
         res.redirect('/lis/5/you/benefits/benefit-sprint3');
       }
     });
