@@ -8,37 +8,33 @@
 {% block content %}
 
 <main id="content" role="main">
-    
+  
   <div class="grid-row">
     <div class="column-two-thirds">
 
-  <!-- <p class="navigation"><a class="back-to-previous">Back</a></p> -->
-
   <h1 class="heading-large">
-    What is the total face value of your Premium Bonds?
-    <!--<span class="form-hint">Please tell us the combined face value of all of the premium bonds you have</span>-->
+    How much Pension Credit (Saving Credit) do you receive per week?
   </h1>
-
-  <form action="premium-bond-handler" method="get" class="form">
+    
+  <form action="state-pension-handler" method="get" class="form">
 
     <div class="form-item-wrapper">
+      
+    {{
+      form_macros.amount_field({
+        id: 'money-amount',
+        label: ''
+      })
+    }}
 
-      {{
-        form_macros.amount_field({
-          id: 'prembond-amount'
-        })
-      }}
-
-    </div>
-
+    </div>  
+        
     {{
       form_macros.button({
         label: 'Save and continue'
       })
     }}
-    
-    <p class="navigation"><a class="cancel" href="../lis-home">Back to application home</a></p>
-
+    <p class="navigation"><a class="cancel" href="../../lis-home">Save and come back later</a></p>
   </form>
     </div>
     </div>

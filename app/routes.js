@@ -249,9 +249,16 @@ module.exports = {
       }
     });
     
+    app.get('/lis/5/assets/other-property', function(req, res) {
+      res.render('lis/5/assets/other-property', {
+        'partnerortext' : partnerOrText,
+        'partnerandext' : partnerAndText
+      });
+    });
+
     app.get('/lis/5/live/hospital-handler', function(req, res) {
       application.whereYouLiveStatus = "Started";
-      application.whereYouLiveStatus = continueText;
+      application.whereYouLiveLink = continueText;
       if(req.query.hospital === "yes") {
         res.render('lis/5/live/hospital');
       } else {
@@ -278,7 +285,7 @@ module.exports = {
         
     app.get('/lis/5/assets/other', function(req, res) {
         console.log(partnerOrText);
-        res.render('lis/5/assets/money', {
+        res.render('lis/5/assets/other', {
         'partnerortext' : partnerOrText,
         'partnerandtext' : partnerAndText
         });
@@ -452,7 +459,7 @@ module.exports = {
       if(req.query.prencred === 'ib') {
         res.redirect('/lis/5/kickout');
       } else {
-        res.redirect('/lis/5/you/pension/pension-type');
+        res.redirect('/lis/5/you/pension/credit-amount');
       }
     });
 
@@ -561,13 +568,19 @@ module.exports = {
       if(applicant.premiumBonds === true) {
         res.render('lis/5/assets/premium-bonds');
       } else {
-        res.render('lis/5/assets/other');
+        res.render('lis/5/assets/other', {
+          'partnerortext' : partnerOrText,
+          'partnerandrext' : partnerAndText
+        });
       }
     });
         
     //5)
     app.get('/lis/5/assets/premium-bond-handler', function(req, res) {
-        res.render('lis/5/assets/other');
+        res.render('lis/5/assets/other', {
+          'partnerortext' : partnerOrText,
+          'partnerandrext' : partnerAndText
+        });
     });
                 
     //education
