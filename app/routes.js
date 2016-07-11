@@ -1,6 +1,7 @@
 //import the person constructor
 var person = require("./person.js");
 
+var partnerLiveText = 'Does anyone else live in your home with you other than your partner?';
 var partnerOrText = 'you or your partner';
 var partnerAndText = 'you and your partner';
 var continueText = 'Continue';
@@ -111,9 +112,11 @@ function setPartnerText() {
   if(applicant.partner === false) {
     partnerOrText = 'you';
     partnerAndText = 'you';
+    partnerLiveText = 'Does anyone else live in your home with you?';
   } else {
     partnerOrText = 'you or your partner';
     partnerAndText = 'you and your partner';
+    partnerLiveText = 'Does anyone else live in your home with you other than your partner?';
   } 
 }
 
@@ -752,7 +755,9 @@ module.exports = {
         
     //5) people-handler
     app.get('/lis/5/live/others/people', function(req, res) {
-      res.render('lis/5/live/others/people');
+      res.render('lis/5/live/others/people', {
+        'partnerlivetext' : partnerLiveText
+      });
     });
     
     //5) persons details
