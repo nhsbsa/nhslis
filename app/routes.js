@@ -239,7 +239,10 @@ module.exports = {
       if(req.query.property === "yes") {
         res.render('lis/5/assets/second-address');
       } else {
-        res.render('lis/5/assets/money');
+        res.render('lis/5/assets/money', {
+        'partnerortext' : partnerOrText,
+        'partnerandext' : partnerAndText
+        });
       }
     });
     
@@ -922,7 +925,6 @@ module.exports = {
     });
     
     app.get('/lis/4/assets/property', function(req, res) {
-        console.log(partnerOrText);
         res.render('lis/4/assets/property', {
         'partnerortext' : partnerOrText,
         'partnerandext' : partnerAndText
