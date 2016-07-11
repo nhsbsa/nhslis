@@ -259,9 +259,27 @@ module.exports = {
     app.get('/lis/5/care-home-handler', function(req, res) {
       console.log(req.query);
       if(req.query.carehome === 'yes') {
-        res.redirect('/lis/5/carehome-kickout');
+        res.redirect('/lis/5/sc/authority-assessed');
       } else {
         res.redirect('/lis/5/savings');
+      }
+    });
+
+    app.get('/lis/5/sc/authority-assessed-handler', function(req, res) {
+      console.log(req.query);
+      if(req.query.authority === 'yes') {
+        res.redirect('/lis/5/sc/about-you');
+      } else {
+        res.redirect('/lis/5/sc/savings');
+      }
+    });
+
+    app.get('/lis/5/sc/savings-sc-kickout-handler', function(req, res) {
+      console.log(req.query);
+      if(req.query.savings === 'yes') {
+        res.redirect('/lis/5/savings-kickout');
+      } else {
+        res.redirect('/lis/5/need-to-know');
       }
     });
     
