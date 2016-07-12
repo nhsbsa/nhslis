@@ -13,12 +13,12 @@
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-    About your partner's private pension
+    About your partner's employment pension
   </h1>
   
-  <h2 class="heading-medium">How often does your partner receive their private pension payments?</h2>
+  <h2 class="heading-medium">How often does your partner receive employment pension payments?</h2>
   
-  <form action="private-pension-handler" method="get" class="form">
+  <form action="" method="get" class="form">
 
     <div class="form-item-wrapper">
       <div class="form-group">
@@ -55,7 +55,7 @@
     {{
       form_macros.amount_field({
         id: 'money-amount',
-        label: 'How much does your partner receive?'
+        label: 'How much do they receive?'
       })
     }}
 
@@ -63,7 +63,7 @@
     
  <div class="form-item-wrapper">
             <fieldset>
-                <h2 class="heading-medium">Does your partner have another private pension?</h2>
+                <h2 class="heading-medium">Do they have another employment pension?</h2>
 
               <div class="inline-form-groups">
                 <div class="form-group">
@@ -84,6 +84,7 @@
     
     {{
       form_macros.button({
+        href: 'pension-credit',
         label: 'Save and continue'
       })
     }}

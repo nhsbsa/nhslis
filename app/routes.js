@@ -328,6 +328,15 @@ module.exports = {
       if(req.query.savings === 'yes') {
         res.redirect('/lis/5/savings-kickout');
       } else {
+        res.redirect('/lis/5/guarentee-credit');
+      }
+    });
+
+    app.get('/lis/5/guacredit-kickout-handler', function(req, res) {
+      console.log(req.query);
+      if(req.query.guacredit === 'yes') {
+        res.redirect('/lis/5/kickout');
+      } else {
         res.redirect('/lis/5/need-to-know');
       }
     });
@@ -474,10 +483,10 @@ module.exports = {
     //5) pension credit kick out
     app.get('/lis/5/you/pension/pencred-handler', function(req, res) {
       console.log(req.query);
-      if(req.query.prencred === 'ib') {
-        res.redirect('/lis/5/kickout');
-      } else {
+      if(req.query.prencred === 'ssp') {
         res.redirect('/lis/5/you/pension/credit-amount');
+      } else {
+        res.redirect('/lis/5/you/benefits/benefit-sprint3');
       }
     });
 
@@ -485,7 +494,7 @@ module.exports = {
     app.get('/lis/5/you/pension/pension-handler', function(req, res) {
       console.log(req.query);
       if(req.query.pension === 'yes') {
-        res.redirect('/lis/5/you/pension/pension-credit');
+        res.redirect('/lis/5/you/pension/pension-type');
       } else {
         res.redirect('/lis/5/you/benefits/benefit-sprint3');
       }
@@ -523,7 +532,7 @@ module.exports = {
         }  else if(applicant.employmentPension === true) {
           res.render('lis/5/you/pension/employment-pension-amount');
         } else {
-          res.render('lis/5/you/benefits/benefit-sprint3');
+          res.render('lis/5/you/pension/pension-credit');
         }
       }
     });
@@ -535,7 +544,7 @@ module.exports = {
       } else if(applicant.employmentPension === true) {
         res.redirect('/lis/5/you/pension/employment-pension-amount');
       } else {
-        res.redirect('/lis/5/you/benefits/benefit-sprint3');
+        res.redirect('/lis/5/you/pension/pension-credit');
       }
     });    
 
@@ -544,7 +553,7 @@ module.exports = {
       if(applicant.employmentPension === true) {
         res.redirect('/lis/5/you/pension/employment-pension-amount');
       } else if(applicant.employmentPension === false) {
-        res.redirect('/lis/5/you/benefits/benefit-sprint3');
+        res.redirect('/lis/5/you/pension/pension-credit');
       }
     });
 
@@ -644,17 +653,17 @@ module.exports = {
     });
  
     // *******************
-    // 4) partner handlers
+    // 5) partner handlers
     // *******************
 
   
     //5) partner-pension-credit kickout
     app.get('/lis/5/partner/pension/pencred-handler', function(req, res) {
       console.log(req.query);
-      if(req.query.prencred === 'ib') {
-        res.redirect('/lis/5/kickout');
+      if(req.query.prencred === 'ssp') {
+        res.redirect('/lis/5/partner/pension/credit-amount');
       } else {
-        res.redirect('/lis/5/partner/pension/pension-type');
+        res.redirect('/lis/5/partner/benefits/benefit-sprint3');
       }
     });
     
@@ -662,7 +671,7 @@ module.exports = {
     app.get('/lis/5/partner/pension/pension-handler', function(req, res) {
       console.log(req.query);
       if(req.query.pension === 'yes') {
-        res.redirect('/lis/5/partner/pension/pension-credit');
+        res.redirect('/lis/5/partner/pension/pension-type');
       } else {
         res.redirect('/lis/5/partner/benefits/benefit-sprint3');
       }
@@ -670,40 +679,58 @@ module.exports = {
 
     //5) partner pension-type-handler
     app.get('/lis/5/partner/pension/pension-type-handler', function(req, res) {
-      partner.resetPension();
+      applicant.resetPension();
       var pensions = req.query.pensiontype;
       console.log(pensions);
       if(pensions === 'state') {
-        partner.statePension = true;
+        applicant.statePension = true;
         res.render('lis/5/partner/pension/pension-amount');
       } else if(pensions === 'private') {
-        partner.privatePension = true;
+        applicant.privatePension = true;
         res.render('lis/5/partner/pension/private-pension-amount');
+      } else if(pensions === 'employment') {
+        applicant.employmentPension = true;
+        res.render('lis/5/partner/pension/employment-pension-amount');
       } else {
         for (var pension in pensions) {
           console.log(pensions[pension]); 
             if(pensions[pension] === 'state') {
-              partner.statePension = true;
+              applicant.statePension = true;
             } else if(pensions[pension] === 'private') {
-              partner.privatePension = true;
+              applicant.privatePension = true;
+            } else if(pensions[pension] === 'employment') {
+              applicant.employmentPension = true;
             }
         }
-        if(partner.statePension === true) {
+        if(applicant.statePension === true) {
           res.render('lis/5/partner/pension/pension-amount');
-        } else if(partner.privatePension === true) {
+        } else if(applicant.privatePension === true) {
           res.render('lis/5/partner/pension/private-pension-amount');
+        }  else if(applicant.employmentPension === true) {
+          res.render('lis/5/partner/pension/employment-pension-amount');
         } else {
-          res.render('lis/5/partner/benefits/benefit-sprint3');
+          res.render('lis/5/partner/pension/pension-credit');
         }
       }
     });
-
-    //5) partner-state-pension
+    
+    //5) partner state-pension-handler
     app.get('/lis/5/partner/pension/state-pension-handler', function(req, res) {
-      if(partner.privatePension === true) {
+      if(applicant.privatePension === true) {
         res.redirect('/lis/5/partner/pension/private-pension-amount');
-      } else if(partner.privatePension === false) {
-        res.redirect('/lis/5/partner/benefits/benefit-sprint3');
+      } else if(applicant.employmentPension === true) {
+        res.redirect('/lis/5/partner/pension/employment-pension-amount');
+      } else {
+        res.redirect('/lis/5/partner/pension/pension-credit');
+      }
+    });    
+
+    //5) partner private-pension-handler
+    app.get('/lis/5/partner/pension/private-pension-handler', function(req, res) {
+      if(applicant.employmentPension === true) {
+        res.redirect('/lis/5/partner/pension/employment-pension-amount');
+      } else if(applicant.employmentPension === false) {
+        res.redirect('/lis/5/partner/pension/pension-credit');
       }
     });
     
