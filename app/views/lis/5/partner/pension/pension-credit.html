@@ -13,30 +13,27 @@
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-      Does your partner receive pension credit?
+      Does your partner receive Pension Credit Savings Credit?
   </h1>
 
   <form action="pencred-handler" method="get" class="form">
     <div class="form-item-wrapper">
-      <div class="form-group">
-        <input type="radio" id="ib" name="prencred" value="ib">
-        <label class="form-control-radio" for="ib">
-          Yes, guarantee credit
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="radio" id="ssp" name="prencred">
+      <fieldset>
+      <div class="inline-form-groups">
+        <div class="form-group">
+        <input type="radio" id="ssp" name="prencred" value="ssp">
         <label class="form-control-radio" for="ssp">
-          Yes, savings credit
+          Yes
         </label>
       </div>
-      <p class="form-block">or</p>
       <div class="form-group">
         <input type="radio" id="none" name="prencred" value="none">
         <label class="form-control-radio" for="none">
-          No, they don't receive pension credit
+          No
         </label>
       </div>
+      </div>
+      </fieldset>
     </div>
     {{
       form_macros.button({
