@@ -8,6 +8,7 @@ var continueText = 'Continue';
 var changeText = 'View or change';
 var jointTennantText;
 var jointOwnerText;
+var completedText = "Completed";
 
 //create an application
 var application = {
@@ -31,10 +32,10 @@ var application = {
     console.log('Resetting application...');
   },
   allComplete : function(){
-    if(application.aboutYouStatus === "Completed" &&
-      application.aboutPartnerStatus === "Completed" &&
-      application.propertyStatus === "Completed" &&
-      application.whereYouLiveStatus === "Completed") {
+    if(application.aboutYouStatus === completedText &&
+      application.aboutPartnerStatus === completedText &&
+      application.propertyStatus === completedText &&
+      application.whereYouLiveStatus === completedText) {
       return true;
     } else {
       return false;
@@ -171,7 +172,7 @@ module.exports = {
     // ***********
     
     app.get('/lis/5/you/you-done', function(req, res) {
-      application.aboutYouStatus = "Completed";
+      application.aboutYouStatus = completedText;
       application.aboutYouLink = changeText;
       if(application.allComplete() === true) {
         res.redirect('/lis/5/lis-home-updated');
@@ -189,7 +190,7 @@ module.exports = {
     });
     
     app.get('/lis/5/partner/partner-done', function(req, res) {
-      application.aboutPartnerStatus = "Completed";
+      application.aboutPartnerStatus = completedText;
       application.aboutPartnerLink = changeText;
       if(application.allComplete() === true) {
         res.redirect('/lis/5/lis-home-updated');
@@ -199,7 +200,7 @@ module.exports = {
     });
     
     app.get('/lis/5/assets/assets-done', function(req, res) {
-      application.propertyStatus = "Completed";
+      application.propertyStatus = completedText;
       application.propertyLink = changeText;
       if(application.allComplete() === true) {
         res.redirect('/lis/5/lis-home-updated');
@@ -209,7 +210,7 @@ module.exports = {
     });
 
     app.get('/lis/5/live/live-done', function(req, res) {
-      application.whereYouLiveStatus = "Completed";
+      application.whereYouLiveStatus = completedText;
       application.whereYouLiveLink = changeText;
       if(application.allComplete() === true) {
         res.redirect('/lis/5/lis-home-updated');
@@ -918,7 +919,7 @@ module.exports = {
     // ***********
     
     app.get('/lis/4/you/you-done', function(req, res) {
-      application.aboutYouStatus = "Completed";
+      application.aboutYouStatus = completedText;
       application.aboutYouLink = changeText;
       if(application.allComplete() === true) {
         res.redirect('/lis/4/lis-home-updated');
@@ -936,7 +937,7 @@ module.exports = {
     });
     
     app.get('/lis/4/partner/partner-done', function(req, res) {
-      application.aboutPartnerStatus = "Completed";
+      application.aboutPartnerStatus = completedText;
       application.aboutPartnerLink = changeText;
       if(application.allComplete() === true) {
         res.redirect('/lis/4/lis-home-updated');
@@ -946,7 +947,7 @@ module.exports = {
     });
     
     app.get('/lis/4/assets/assets-done', function(req, res) {
-      application.propertyStatus = "Completed";
+      application.propertyStatus = completedText;
       application.propertyLink = changeText;
       if(application.allComplete() === true) {
         res.redirect('/lis/4/lis-home-updated');
@@ -956,7 +957,7 @@ module.exports = {
     });
 
     app.get('/lis/4/live/live-done', function(req, res) {
-      application.whereYouLiveStatus = "Completed";
+      application.whereYouLiveStatus = completedText;
       application.whereYouLiveLink = changeText;
       if(application.allComplete() === true) {
         res.redirect('/lis/4/lis-home-updated');
