@@ -16,7 +16,7 @@
     How much Pension Credit (Saving Credit) do you receive per week?
   </h1>
     
-  <form action="state-pension-handler" method="get" class="form">
+  <form action="" method="get" class="form">
 
     <div class="form-item-wrapper">
       
@@ -31,7 +31,8 @@
         
     {{
       form_macros.button({
-        label: 'Save and continue'
+        label: 'Save and continue',
+        href : 'pension-type'
       })
     }}
     <p class="navigation"><a class="cancel" href="../../lis-home">Save and come back later</a></p>

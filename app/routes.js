@@ -479,7 +479,7 @@ module.exports = {
       } else if (req.query.prencred === 'sc') {
         res.redirect('/lis/5/you/pension/credit-amount');
       } else {
-        res.redirect('/lis/5/you/benefits/benefit-sprint3');
+        res.redirect('/lis/5/you/pension/pension-type');
       }
     });
 
