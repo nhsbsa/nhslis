@@ -1,11 +1,13 @@
 //import the person constructor
 var person = require("./person.js");
 
-var partnerLiveText = 'Does anyone else live in your home with you other than your partner?';
-var partnerOrText = 'you or your partner';
-var partnerAndText = 'you and your partner';
+var partnerLiveText;
+var partnerOrText;
+var partnerAndText;
 var continueText = 'Continue';
 var changeText = 'View or change';
+var jointTennantText;
+var jointOwnerText;
 
 //create an application
 var application = {
@@ -113,14 +115,20 @@ function setPartnerText() {
     partnerOrText = 'you';
     partnerAndText = 'you';
     partnerLiveText = 'Does anyone else live in your home with you?';
+    jointTennantText = 'Is anyone else a joint tenant of the place you live';
+    jointOwnerText = 'Is anyone else a joint owner of the place you live';
   } else {
     partnerOrText = 'you or your partner';
     partnerAndText = 'you and your partner';
     partnerLiveText = 'Does anyone else live in your home with you other than your partner?';
+    jointTennantText = 'Is anyone else other than your partner a joint tenant of the place you live';
+    jointOwnerText = 'Is anyone else other than your partner a joint owner of the place you live';
   } 
 }
 
 var querystring = require('querystring');
+
+setPartnerText()
 
 module.exports = {
   bind : function(app) {
@@ -455,7 +463,7 @@ module.exports = {
     //5) mortgaged/joint
     app.get('/lis/5/live/mortgaged/joint', function(req, res) {
         res.render('lis/5/live/mortgaged/joint', {
-          'partnerortext' : partnerOrText
+          'jointownertext' : jointOwnerText
         });
     });
     
@@ -463,6 +471,13 @@ module.exports = {
     app.get('/lis/5/live/mortgaged/joint', function(req, res) {
         res.render('lis/5/live/mortgaged/joint', {
           'partnerortext' : partnerOrText
+        });
+    });
+    
+    //5) tenant/joint
+    app.get('/lis/5/live/joint', function(req, res) {
+        res.render('lis/5/live/joint', {
+          'jointtennanttext' : jointTennantText
         });
     });
 
