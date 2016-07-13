@@ -2136,3 +2136,7 @@ html, #footer {
     padding-top: 220px;
     padding-left: 30px;
     width: 95%; }
+
+.quote {
+  font-style: italic;
+  color: dimgray; }

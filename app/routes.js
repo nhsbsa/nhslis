@@ -121,7 +121,7 @@ function setPartnerText() {
   } else {
     partnerOrText = 'you or your partner';
     partnerAndText = 'you and your partner';
-    partnerLiveText = 'Does anyone else live in your home with you other than your partner?';
+    partnerLiveText = 'Does anyone else other than your partner live in your home with you?';
     jointTennantText = 'Is anyone else other than your partner a joint tenant of the place you live';
     jointOwnerText = 'Is anyone else other than your partner a joint owner of the place you live';
   } 
