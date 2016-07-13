@@ -337,7 +337,7 @@ module.exports = {
       if(req.query.savings === 'yes') {
         res.redirect('/lis/5/savings-kickout');
       } else {
-        res.redirect('/lis/5/guarentee-credit');
+        res.redirect('/lis/5/guarantee-credit');
       }
     });
 
