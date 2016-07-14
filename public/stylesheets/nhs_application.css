@@ -2148,3 +2148,6 @@ html, #footer {
 .quote {
   font-style: italic;
   color: dimgray; }
+
+tr.clickable-row {
+  cursor: pointer; }
