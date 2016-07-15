@@ -2151,3 +2151,49 @@ html, #footer {
 
 tr.clickable-row {
   cursor: pointer; }
+
+/* New certificate page styles */
+.detail-block-cert p {
+  padding: 0;
+  margin: 0; }
+
+.cert-col {
+  padding: 0; }
+
+.cert-notes {
+  position: relative;
+  border-bottom: 3px solid #dedede;
+  background: #ededed;
+  padding: 10px 20px 20px 20px;
+  margin: 25px 0; }
+
+.cost-amount {
+  margin-bottom: 5px;
+  float: right;
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: bold; }
+
+.smaller-text {
+  font-size: 0.8em; }
+
+.larger-text {
+  font-size: 1.6em;
+  font-weight: bold; }
+
+.date-text {
+  display: inline-block;
+  width: 35px; }
+
+.detail-block-cert {
+  padding-top: 2rem;
+  float: left;
+  margin-left: 40px; }
+
+.second-cert-block {
+  float: left;
+  border-top: 10px solid #0072C6;
+  margin-left: 40px;
+  margin-top: 20px; }
+  .second-cert-block p {
+    font-size: 0.8em; }
