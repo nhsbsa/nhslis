@@ -2177,6 +2177,10 @@ tr.clickable-row {
 .smaller-text {
   font-size: 0.8em; }
 
+.small-text {
+  font-size: 0.8em;
+  line-height: 0.8; }
+
 .larger-text {
   font-size: 1.6em;
   font-weight: bold;
