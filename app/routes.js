@@ -856,7 +856,9 @@ module.exports = {
       console.log(householder.relationship);
       if(householder.underFifteen === true) {
         //child || none underFifteen = people
-        res.render('lis/5/live/others/people');
+        res.render('lis/5/live/others/people', {
+          'partnerlivetext' : partnerLiveText
+        });
       } else if(householder.relationship === 'child' && householder.sixteenToNineteen === true) {
         //child sixteenToNineteen = education
         res.render('lis/5/live/others/education');
@@ -889,9 +891,11 @@ module.exports = {
     //5) others-education-handler
     app.get('/lis/5/live/others/others-education-handler', function(req, res) {
       if(req.query.education === 'yes') {
-        res.redirect('/lis/5/live/others/people');
+        res.render('lis/5/live/others/people', {
+          'partnerlivetext' : partnerLiveText
+        });
       } else {
-        res.redirect('/lis/5/live/others/training');
+        res.render('lis/5/live/others/training');
       }
     });
     
