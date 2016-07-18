@@ -473,6 +473,7 @@ tr.clickable-row { cursor: pointer; }
 .larger-text {
   font-size:1.6em;
   font-weight: bold;
+  line-height: 1.5;
 }
 
 .date-text{
@@ -483,15 +484,15 @@ tr.clickable-row { cursor: pointer; }
 .detail-block-cert {
   padding-top: 2rem;
   float: left;
-  margin-left: 40px;
+  margin-left: 20px;
   //padding: 10px 20px;
 }
 
 .second-cert-block {
   float: left;
   border-top: 10px solid $nhs-blue;
+  margin-left: 20px;
   //padding: 10px 20px;
-  margin-left: 40px; 
   margin-top:20px;
   p {font-size:0.8em}
 }

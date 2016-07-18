@@ -2179,7 +2179,8 @@ tr.clickable-row {
 
 .larger-text {
   font-size: 1.6em;
-  font-weight: bold; }
+  font-weight: bold;
+  line-height: 1.5; }
 
 .date-text {
   display: inline-block;
@@ -2188,12 +2189,12 @@ tr.clickable-row {
 .detail-block-cert {
   padding-top: 2rem;
   float: left;
-  margin-left: 40px; }
+  margin-left: 20px; }
 
 .second-cert-block {
   float: left;
   border-top: 10px solid #0072C6;
-  margin-left: 40px;
+  margin-left: 20px;
   margin-top: 20px; }
   .second-cert-block p {
     font-size: 0.8em; }
