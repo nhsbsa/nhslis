@@ -171,6 +171,16 @@ module.exports = {
     //LIS sprint 5
     // ***********
     
+    
+    //5) council-tax-handler
+    app.get('/lis/5/live/council-tax-handler', function(req, res) {
+      if(req.query.counciltax === 'yes') {
+        res.redirect('/lis/5/live/tax-amount');
+      } else {
+        res.redirect('/lis/5/live/ground-rent');
+      }
+    });
+    
     app.get('/lis/5/you/you-done', function(req, res) {
       application.aboutYouStatus = completedText;
       application.aboutYouLink = changeText;
