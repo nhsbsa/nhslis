@@ -1,3 +1,8 @@
+//set up student page
+// link up route so that if the person is over 19 are they a full time student
+// and if the person is not a dependent are they a full time student
+
+
 //import the person constructor
 var person = require("./person.js");
 
@@ -178,6 +183,15 @@ module.exports = {
         res.redirect('/lis/5/live/tax-amount');
       } else {
         res.redirect('/lis/5/live/ground-rent');
+      }
+    });
+    
+    //5) hours-handler
+    app.get('/lis/5/live/others/hours-handler', function(req, res) {
+      if(req.query.hours === 'yes') {
+        res.redirect('/lis/5/live/others/amount');
+      } else {
+        res.redirect('/lis/5/live/others/benefits');
       }
     });
     
