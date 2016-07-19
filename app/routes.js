@@ -1,4 +1,4 @@
-//set up student page
+// set up student page
 // link up route so that if the person is over 19 are they a full time student
 // and if the person is not a dependent are they a full time student
 
@@ -885,20 +885,20 @@ module.exports = {
         });
       } else if(householder.relationship === 'child' && householder.sixteenToNineteen === true) {
         //child sixteenToNineteen = education
-        res.render('lis/5/live/others/education');
+        res.render('lis/5/live/others/alevel');
       } else if(householder.relationship === 'none' && householder.sixteenToNineteen === true) {
         //none sixteenToNineteen = boarder
         res.render('lis/5/live/others/boarder');
       } else if(householder.relationship === 'child' && householder.overNineteen === true) {
-        //child overNineteen = he-education
-        res.render('lis/5/live/others/he-student');
+        //child overNineteen = full time-education
+        res.render('lis/5/live/others/ft-student');
       } else if(householder.relationship === 'none' && householder.overNineteen === true) {
         //none overNineteen = boarder
         res.render('lis/5/live/others/boarder');
       }
     });
     
-    //5) relationship-handler
+    //5) others-work-handler
     app.get('/lis/5/live/others/others-work-handler', function(req, res) {
       console.log(req.query);
       if(req.query.work === 'yes') {
@@ -932,12 +932,12 @@ module.exports = {
       }
     });
     
-    //5) lodger-handler
+    //5) boarder-handler
     app.get('/lis/5/live/others/boarder-handler', function(req, res) {
       if(req.query.boarder === 'yes') {
         res.redirect('/lis/5/live/others/boarder-detail');
       } else {
-        res.redirect('/lis/5/live/others/he-student');
+        res.redirect('/lis/5/live/others/ft-student');
       }
     });
     
