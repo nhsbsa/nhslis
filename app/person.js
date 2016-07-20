@@ -2,9 +2,11 @@ function Person(
   firstName,
   lastName,
   partner,
-  privatePension,
   statePension,
+  privatePension,
   employmentPension,
+  warPension,
+  warWidowPension,
   savings,
   disabilityLivingAllowance,
   attendanceAllowance,
@@ -19,9 +21,11 @@ function Person(
   this.firstName = firstName;
   this.lastName = lastName;
   this.partner = partner;
-  this.privatePension = privatePension;
   this.statePension = statePension;
+  this.privatePension = privatePension;
   this.employmentPension = employmentPension;
+  this.warPension = warPension;
+  this.warWidowPension = warWidowPension;
   this.savings = savings;
   this.disabilityLivingAllowance = disabilityLivingAllowance;
   this.attendanceAllowance = attendanceAllowance;
@@ -40,8 +44,11 @@ Person.prototype.fullName = function () {
 Person.prototype.printPerson = function () {
   console.log(
     this.firstName + "\n" +
-      "privatePension = " + this.privatePension + " \n" +
       "statePension = " + this.statePension + " \n" +
+      "privatePension = " + this.privatePension + " \n" +
+      "employmentPension = " + this.employmentPension + " \n" +
+      "warPension = " + this.warPension + " \n" +
+      "warWidowPension = " + this.warWidowPension + " \n" +
       "disabilityLivingAllowance = " + this.disabilityLivingAllowance + " \n" +
       "child tax credits = " + this.childTaxCredits + " \n" +
       "attendanceAllowance = " + this.attendanceAllowance + "\n" +
@@ -75,9 +82,11 @@ Person.prototype.resetPartner = function () {
 };
 
 Person.prototype.resetPension = function () {
-  this.privatePension = false;
   this.statePension = false;
+  this.privatePension = false;
   this.employmentPension = false;
+  this.warPension = false;
+  this.warWidowPension = false;
   console.log('resetting pension...');
 };
 

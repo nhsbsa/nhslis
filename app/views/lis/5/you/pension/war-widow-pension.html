@@ -14,12 +14,12 @@
     <div class="column-two-thirds">
 
       <h1 class="heading-large">
-        About your state pension
+        About your war widow pension
       </h1>
   
-      <h2 class="heading-medium">How often do you receive your state pension payments?</h2>
+      <h2 class="heading-medium">How often do you receive your payments?</h2>
   
-      <form action="state-pension-handler" method="get" class="form">
+      <form action="war-pension-handler" method="get" class="form">
 
       <div class="form-item-wrapper">
         <div class="form-group">
@@ -28,30 +28,30 @@
             Every week
           </label>
         </div>
-        <!--div class="form-group">
+        <div class="form-group">
           <input type="radio" id="fortnight" name="minor">
           <label class="form-control-radio" for="fortnight">
             Every two weeks
           </label>
-        </div-->
+        </div>
         <div class="form-group">
           <input type="radio" id="fourweekly" name="minor">
           <label class="form-control-radio" for="fourweekly">
             Every four weeks
           </label>
         </div>
-        <!--div class="form-group">
+        <div class="form-group">
           <input type="radio" id="month" name="minor">
           <label class="form-control-radio" for="month">
            Every month
           </label>
-        </div-->
-        <!--div class="form-group">
+        </div>
+        <div class="form-group">
           <input type="radio" id="year" name="minor">
           <label class="form-control-radio" for="year">
             Annually
           </label>
-        </div-->
+        </div>
       </div> 
     {{
       form_macros.amount_field({
@@ -62,7 +62,8 @@
 
     {{
       form_macros.button({
-        label: 'Save and continue'
+        label: 'Save and continue',
+        href: 'pension-credit'
       })
     }}
     
@@ -72,7 +73,7 @@
 
   </div>
     
-</div>
+  </div>
   
 </main>
 

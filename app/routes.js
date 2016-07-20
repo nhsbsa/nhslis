@@ -53,8 +53,10 @@ var applicant = person.createPerson(
   firstName = null,
   lastName = null,
   partner = true,
-  privatePension = false,
   statePension = false,
+  privatePension = false,
+  employmentPension = false,
+  warPension = false,
   savings = false,
   premiumBonds = false,
   disabilityLivingAllowance = false,
@@ -73,6 +75,7 @@ var partner = person.createPerson(
   partner = false,
   privatePension = false,
   statePension = false,
+  warPension = false,
   savings = false,
   premiumBonds = false,
   disabilityLivingAllowance = false,
@@ -554,23 +557,37 @@ module.exports = {
       } else if(pensions === 'employment') {
         applicant.employmentPension = true;
         res.render('lis/5/you/pension/employment-pension-amount');
+      } else if(pensions === 'wardisablement') {
+        applicant.warPension = true;
+        res.render('lis/5/you/pension/war-pension');
+      } else if(pensions === 'warwidow') {
+        applicant.warWidowPension = true;
+        res.render('lis/5/you/pension/war-widow-pension');
       } else {
         for (var pension in pensions) {
           console.log(pensions[pension]); 
-            if(pensions[pension] === 'state') {
-              applicant.statePension = true;
-            } else if(pensions[pension] === 'private') {
-              applicant.privatePension = true;
-            } else if(pensions[pension] === 'employment') {
-              applicant.employmentPension = true;
-            }
+          if(pensions[pension] === 'state') {
+            applicant.statePension = true;
+          } else if(pensions[pension] === 'private') {
+            applicant.privatePension = true;
+          } else if(pensions[pension] === 'employment') {
+            applicant.employmentPension = true;
+          } else if(pensions[pension] === 'wardisablement') {
+            applicant.warPension = true;
+          } else if(pensions[pension] === 'warwidow') {
+            applicant.warWidowPension = true;
+          }
         }
         if(applicant.statePension === true) {
           res.render('lis/5/you/pension/pension-amount');
         } else if(applicant.privatePension === true) {
           res.render('lis/5/you/pension/private-pension-amount');
-        }  else if(applicant.employmentPension === true) {
+        } else if(applicant.employmentPension === true) {
           res.render('lis/5/you/pension/employment-pension-amount');
+        } else if(applicant.warPension === true) {
+          res.render('lis/5/you/pension/war-pension');
+        } else if(applicant.warWidowPension === true) {
+          res.render('lis/5/you/pension/war-widow-pension');
         } else {
           res.render('lis/5/you/pension/pension-credit');
         }
@@ -593,6 +610,24 @@ module.exports = {
       if(applicant.employmentPension === true) {
         res.redirect('/lis/5/you/pension/employment-pension-amount');
       } else if(applicant.employmentPension === false) {
+        res.redirect('/lis/5/you/pension/pension-credit');
+      }
+    });
+
+    //5) employment-pension-handler
+    app.get('/lis/5/you/pension/employment-pension-handler', function(req, res) {
+      if(applicant.warPension === true) {
+        res.redirect('/lis/5/you/pension/war-pension');
+      } else if(applicant.warPension === false) {
+        res.redirect('/lis/5/you/pension/pension-credit');
+      }
+    });
+
+    //5) war-pension-handler
+    app.get('/lis/5/you/pension/war-pension-handler', function(req, res) {
+      if(applicant.warWidowPension === true) {
+        res.redirect('/lis/5/you/pension/war-widow-pension');
+      } else if(applicant.warWidowPension === false) {
         res.redirect('/lis/5/you/pension/pension-credit');
       }
     });

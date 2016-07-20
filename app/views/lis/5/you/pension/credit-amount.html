@@ -10,35 +10,70 @@
 <main id="content" role="main">
   
   <div class="grid-row">
-    <div class="column-two-thirds">
-
-  <h1 class="heading-large">
-    How much Pension Credit Savings Credit do you receive per week?
-  </h1>
     
-  <form action="" method="get" class="form">
-
-    <div class="form-item-wrapper">
+    <div class="column-two-thirds">  
       
-    {{
-      form_macros.amount_field({
-        id: 'money-amount',
-        label: ''
-      })
-    }}
+      <h1 class="heading-large">
+        About your Pension Credit Savings Credit
+      </h1>
+  
+      <h2 class="heading-medium">How often do you receive your payments?</h2>
+  
+      <form action="" method="get" class="form">
 
-    </div>  
+        <div class="form-item-wrapper">
+          <div class="form-group">
+            <input type="radio" id="week" name="minor">
+            <label class="form-control-radio" for="week">
+              Every week
+            </label>
+          </div>
+          <!--div class="form-group">
+            <input type="radio" id="fortnight" name="minor">
+            <label class="form-control-radio" for="fortnight">
+              Every two weeks
+            </label>
+          </div-->
+          <div class="form-group">
+            <input type="radio" id="fourweekly" name="minor">
+              <label class="form-control-radio" for="fourweekly">
+                Every four weeks
+              </label>
+          </div>
+          <!--div class="form-group">
+            <input type="radio" id="month" name="minor">
+            <label class="form-control-radio" for="month">
+              Every month
+            </label>
+          </div>
+          <div class="form-group">
+          <input type="radio" id="year" name="minor">
+          <label class="form-control-radio" for="year">
+            Annually
+          </label-->
+        </div>
+      
+        {{
+          form_macros.amount_field({
+            id: 'money-amount',
+            label: 'How much do you receive?'
+          })
+        }}
+      
+        {{
+          form_macros.button({
+            label: 'Save and continue',
+            href: '../benefits/benefit-sprint3'
+          })
+        }}
         
-    {{
-      form_macros.button({
-        label: 'Save and continue',
-        href: '../benefits/benefit-sprint3'
-      })
-    }}
-    <p class="navigation"><a class="cancel" href="../../lis-home">Save and come back later</a></p>
-  </form>
+        <p class="navigation"><a class="cancel" href="../../lis-home">Save and come back later</a></p>
+      
+      </form>
     </div>
-    </div>
+    
+  </div>
+
 </main>
 
 {% endblock %}
