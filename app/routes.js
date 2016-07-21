@@ -297,7 +297,7 @@ module.exports = {
       application.whereYouLiveStatus = "Started";
       application.whereYouLiveLink = continueText;
       if(req.query.hospital === "yes") {
-        res.render('lis/5/live/hospital');
+        res.render('lis/5/live/home');
       } else {
         res.render('lis/5/live/home');
       }
