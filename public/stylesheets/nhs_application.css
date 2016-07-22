@@ -2202,3 +2202,61 @@ tr.clickable-row {
   margin-top: 20px; }
   .second-cert-block p {
     font-size: 0.8em; }
+
+.entitlement {
+  margin-bottom: 30px; }
+  .entitlement:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .entitlement .headding-small {
+    padding-bottom: 0;
+    margin-bottom: 0; }
+  .entitlement .description {
+    width: 80%;
+    float: left; }
+  .entitlement p.heading-medium {
+    width: 20%;
+    float: left;
+    margin: -8px 0 0 0;
+    padding: 0; }
+  .entitlement a {
+    width: 100%;
+    float: left; }
+
+.details {
+  background-color: rgba(0, 114, 198, 0.1);
+  padding: 0 15px 15px 15px;
+  margin-bottom: 30px; }
+  .details p {
+    margin: 0;
+    padding: 0; }
+  .details h2 span {
+    font-size: 19px;
+    font-weight: normal;
+    width: 55px;
+    display: inline-block; }
+  .details .valid {
+    margin-top: 15px; }
+
+.bignumbers {
+  margin: 2px 0 0 0;
+  padding: 0; }
+
+.description {
+  margin: 0;
+  padding: 0; }
+
+.right-col-details {
+  width: 95%;
+  float: right;
+  margin-top: 21px; }
+  .right-col-details:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .right-col-details div {
+    margin-bottom: 15px; }
+    .right-col-details div:first-child {
+      border-bottom: 7px solid #0072C6;
+      padding-bottom: 15px; }
