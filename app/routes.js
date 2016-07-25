@@ -1,7 +1,7 @@
-// set up student page
-// link up route so that if the person is over 19 are they a full time student
-// and if the person is not a dependent are they a full time student
-
+// create a flag for hc3 or hc2
+// update URL's to match the selection
+// check language is correct for option chosen
+// if APPLICANT HELP LEVEL === 2 url else
 
 //import the person constructor
 var person = require("./person.js");
@@ -14,6 +14,8 @@ var changeText = 'View or change';
 var jointTennantText;
 var jointOwnerText;
 var completedText = "Completed";
+
+var helpLevel = 3;
 
 //create an application
 var application = {
@@ -64,8 +66,7 @@ var applicant = person.createPerson(
   homeOwner = false,
   tennant = false,
   othersAtHome = false,
-  bankAccount = false,
-  premiumBonds = false
+  bankAccount = false
 );
 
 //create a partner
@@ -83,7 +84,8 @@ var partner = person.createPerson(
   attendanceAllowance = false,
   homeOwner = false,
   tennant = false,
-  othersAtHome = false
+  othersAtHome = false,
+  bankAccount = false
 );
 
 //create someone else in the household
@@ -160,6 +162,7 @@ module.exports = {
       console.log('partner =');
       partner.printPerson();
       applicant.resetPartner();
+      applicant.resetHelpLevel();
       application.resetApplication();
     });
     
@@ -181,7 +184,39 @@ module.exports = {
     // ***********
     
     
-    //6) council-tax-handler
+    //6) email-me
+    app.get('/lis/6/exemption/email-me', function(req, res) {
+      helpLevel = req.query.helplevel;
+      console.log(helpLevel);
+      res.render('lis/6/exemption/email-me', {
+        'helplevel' : helpLevel
+      });
+    });
+    
+    //6) email-confirm
+    app.get('/lis/6/exemption/email-confirm', function(req, res) {
+      res.render('lis/6/exemption/email-confirm', {
+        'helplevel' : helpLevel
+      });
+    });
+    
+    //6) post
+    app.get('/lis/6/exemption/post', function(req, res) {
+      helpLevel = req.query.helplevel;
+      console.log(helpLevel);
+      res.render('lis/6/exemption/post', {
+        'helplevel' : helpLevel
+      });
+    });
+    
+    //6) post-confirm
+    app.get('/lis/6/exemption/post-confirm', function(req, res) {
+      res.render('lis/6/exemption/post-confirm', {
+        'helplevel' : helpLevel
+      });
+    });
+    
+     //6) council-tax-handler
     app.get('/lis/6/live/council-tax-handler', function(req, res) {
       if(req.query.counciltax === 'yes') {
         res.redirect('/lis/6/live/tax-amount');
