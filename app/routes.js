@@ -162,11 +162,8 @@ module.exports = {
       console.log('partner =');
       partner.printPerson();
       applicant.resetPartner();
-      applicant.resetHelpLevel();
       application.resetApplication();
     });
-    
-    // add your routes here
     
     // ***********
     //LIS exemption
@@ -178,7 +175,6 @@ module.exports = {
         });
     });
 
-    
     // ***********
     //LIS sprint 6
     // ***********
