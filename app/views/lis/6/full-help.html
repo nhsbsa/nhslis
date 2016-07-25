@@ -1,0 +1,55 @@
+{% extends 'templates/nhs_transaction_layout.html' %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  
+  <div class="done-panel">
+    <h2 class="heading-large"><span id="done-tick"> </span>Application complete</h2>
+    <h1 class="heading-xlarge">You can get full help with help costs</h1>
+    <h4 class="heading-small">Your reference number is</h4>
+    <h2 class="heading-large">123 456 789</h2>
+    <h4 class="heading-small">Your certificate expires on 01 June 2018</h4>
+  </div>
+  
+  <ul>
+    <li>A copy of your certificate has been emailed to bill.smith@inter.net</li>
+    <li><a href=#>Print my certificate</a></li>
+    <li><a href=#>Download my certificate</a></li>
+    <li>You can access a copy of your certificate at any time by signing into this service.<br>
+      If you have no access to a printer or this is not your own computer we can <a href=#>send a copy in the post</a>.</li>
+  </ul>
+  
+  <hr>
+  
+  <p class="lede">Your certificate will allow you to claim:</p>
+
+  <ul class="list list-bullet">
+    <li>free NHS prescriptions</li>
+    <li>free NHS dental treatment</li>
+    <li>free NHS sight tests</li>
+    <li>free NHS wigs and fabric supports</li>
+    <li>the full value of a voucher towards the cost of glasses and contact lenses</li>
+    <li>refund of necessary travel costs to receive NHS treatment</li>
+  </ul>
+  
+  <p>You will need to show a copy of your certificate if you want to claim any of the above.</p>
+  
+  <p class="lede intro">Your certificate covers:</p>
+  
+  <ul class="list list-bullet">
+    <li>Bill Smith</li>
+  </ul>
+  
+  <p>
+    <a class="button" href="#">Finished</a>
+  </p>
+  
+</main>
+
+{% endblock %}
+
