@@ -2273,3 +2273,6 @@ tr.clickable-row {
 @media print {
   body {
     font-family: sans-serif; } }
+
+#people-list {
+  color: #667078; }

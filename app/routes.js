@@ -106,6 +106,9 @@ var householder = {
       householder.overNineteen = true;
     }
   },
+  fullName : function() {
+    return firstName + " " + lastName;
+  },
   resetHouseHolder : function() {
     householder.relationship = null;
     householder.financialSupport = null;
@@ -915,7 +918,23 @@ module.exports = {
     
     //2001 = 15 - could have left school
     //1998 = 18
-        
+    
+    //add people to the array
+    
+    //create a person when the user tells us about them in the app
+    //push the person's full name into the people list 
+    //can I remove a person?
+    
+    var peopleList = [];
+            
+    //6) people-handler
+    app.get('/lis/6/live/others/people-list', function(req, res) {
+      res.render('lis/6/live/others/people-list', {
+        'partnerlivetext' : partnerLiveText,
+        'peoplelist' : peopleList
+      });
+    });
+    
     //6) people-handler
     app.get('/lis/6/live/others/people', function(req, res) {
       res.render('lis/6/live/others/people', {
@@ -940,6 +959,11 @@ module.exports = {
     
     //6 others details
     app.get('/lis/6/live/others/others-details', function(req, res) {
+      householder.firstName = (req.query.firstname);
+      console.log(householder.firstName);
+      householder.lastName = (req.query.lastname);
+      var bigname = householder.firstName + " " +householder.lastName;
+      peopleList.push(bigname);
       householder.age = (2016 - req.query.dob);
       console.log(householder.age);
       householder.ageRange();
@@ -967,8 +991,9 @@ module.exports = {
       console.log(householder.relationship);
       if(householder.underFifteen === true) {
         //child || none underFifteen = people
-        res.render('lis/6/live/others/people', {
-          'partnerlivetext' : partnerLiveText
+        res.render('lis/6/live/others/people-list', {
+          'partnerlivetext' : partnerLiveText,
+          'peoplelist' : peopleList
         });
       } else if(householder.relationship === 'child' && householder.sixteenToNineteen === true) {
         //child sixteenToNineteen = education
