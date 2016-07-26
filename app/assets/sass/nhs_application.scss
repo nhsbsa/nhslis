@@ -576,3 +576,26 @@ tr.clickable-row { cursor: pointer; }
     }
   }
 }
+
+.breakdown {
+  font-size: 1.5rem;
+  tr {
+    &.bold {
+      td {
+        font-weight: bold;
+      }
+    }
+    td {
+      padding: 4px 0;
+      &:first-child {
+        width: 80%;
+      }
+    }
+  }
+}
+
+@media print {
+  body {
+    font-family: sans-serif;
+  }
+}

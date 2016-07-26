@@ -2260,3 +2260,16 @@ tr.clickable-row {
     .right-col-details div:first-child {
       border-bottom: 7px solid #0072C6;
       padding-bottom: 15px; }
+
+.breakdown {
+  font-size: 1.5rem; }
+  .breakdown tr.bold td {
+    font-weight: bold; }
+  .breakdown tr td {
+    padding: 4px 0; }
+    .breakdown tr td:first-child {
+      width: 80%; }
+
+@media print {
+  body {
+    font-family: sans-serif; } }
