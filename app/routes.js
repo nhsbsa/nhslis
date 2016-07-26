@@ -485,7 +485,7 @@ module.exports = {
       } else if(firstBenefit === "pip") {
         res.render('lis/6/you/benefits/pip');
       } else {
-        res.render('lis/6/you/benefits/benefit7');
+        res.render('lis/6/you/benefits/benefit4');
       }
     });
     
@@ -500,7 +500,7 @@ module.exports = {
       } else if(applicant.personalIndependence === true){
         res.render('lis/6/you/benefits/pip');
       } else {
-        res.render('lis/6/you/benefits/benefit7');
+        res.render('lis/6/you/benefits/benefit4');
       }
     });
     
@@ -513,7 +513,7 @@ module.exports = {
       } else if(applicant.personalIndependence === true){
         res.render('lis/6/you/benefits/pip');
       } else {
-        res.render('lis/6/you/benefits/benefit7');
+        res.render('lis/6/you/benefits/benefit4');
       }
     });
 
@@ -522,7 +522,7 @@ module.exports = {
       if(applicant.personalIndependence === true){
         res.render('lis/6/you/benefits/pip');
       } else {
-        res.render('lis/6/you/benefits/benefit7');
+        res.render('lis/6/you/benefits/benefit4');
       }
     });
     
@@ -577,7 +577,7 @@ module.exports = {
       if(req.query.prencred === 'ssp') {
         res.redirect('/lis/6/you/pension/credit-amount');
       } else {
-        res.redirect('/lis/6/you/benefits/benefit-sprint3');
+        res.redirect('/lis/6/you/pension/pension-type');
       }
     });
 
@@ -585,7 +585,7 @@ module.exports = {
     app.get('/lis/6/you/pension/pension-handler', function(req, res) {
       console.log(req.query);
       if(req.query.pension === 'yes') {
-        res.redirect('/lis/6/you/pension/pension-type');
+        res.redirect('/lis/6/you/pension/pension-credit');
       } else {
         res.redirect('/lis/6/you/benefits/benefit-sprint3');
       }
@@ -637,7 +637,7 @@ module.exports = {
         } else if(applicant.warWidowPension === true) {
           res.render('lis/6/you/pension/war-widow-pension');
         } else {
-          res.render('lis/6/you/pension/pension-credit');
+          res.redirect('/lis/6/you/benefits/benefit-sprint3');
         }
       }
     });
@@ -649,7 +649,7 @@ module.exports = {
       } else if(applicant.employmentPension === true) {
         res.redirect('/lis/6/you/pension/employment-pension-amount');
       } else {
-        res.redirect('/lis/6/you/pension/pension-credit');
+        res.redirect('/lis/6/you/benefits/benefit-sprint3');
       }
     });    
 
@@ -658,7 +658,7 @@ module.exports = {
       if(applicant.employmentPension === true) {
         res.redirect('/lis/6/you/pension/employment-pension-amount');
       } else if(applicant.employmentPension === false) {
-        res.redirect('/lis/6/you/pension/pension-credit');
+        res.redirect('/lis/6/you/benefits/benefit-sprint3');
       }
     });
 
@@ -667,7 +667,7 @@ module.exports = {
       if(applicant.warPension === true) {
         res.redirect('/lis/6/you/pension/war-pension');
       } else if(applicant.warPension === false) {
-        res.redirect('/lis/6/you/pension/pension-credit');
+        res.redirect('/lis/6/you/benefits/benefit-sprint3');
       }
     });
 
@@ -676,7 +676,7 @@ module.exports = {
       if(applicant.warWidowPension === true) {
         res.redirect('/lis/6/you/pension/war-widow-pension');
       } else if(applicant.warWidowPension === false) {
-        res.redirect('/lis/6/you/pension/pension-credit');
+        res.redirect('/lis/6/you/benefits/benefit-sprint3');
       }
     });
 
@@ -786,7 +786,7 @@ module.exports = {
       if(req.query.prencred === 'ssp') {
         res.redirect('/lis/6/partner/pension/credit-amount');
       } else {
-        res.redirect('/lis/6/partner/benefits/benefit-sprint3');
+        res.redirect('/lis/6/partner/pension/pension-type');
       }
     });
     
@@ -794,9 +794,9 @@ module.exports = {
     app.get('/lis/6/partner/pension/pension-handler', function(req, res) {
       console.log(req.query);
       if(req.query.pension === 'yes') {
-        res.redirect('/lis/6/partner/pension/pension-type');
+        res.redirect('/lis/6/partner/pension/pension-credit');
       } else {
-        res.redirect('/lis/6/partner/benefits/benefit-sprint3');
+        res.redirect('/lis/6/partner/pension/pension-type');
       }
     });
 
@@ -832,7 +832,7 @@ module.exports = {
         }  else if(applicant.employmentPension === true) {
           res.render('lis/6/partner/pension/employment-pension-amount');
         } else {
-          res.render('lis/6/partner/pension/pension-credit');
+          res.redirect('/lis/6/partner/benefits/benefit-sprint3');
         }
       }
     });
@@ -844,7 +844,7 @@ module.exports = {
       } else if(applicant.employmentPension === true) {
         res.redirect('/lis/6/partner/pension/employment-pension-amount');
       } else {
-        res.redirect('/lis/6/partner/pension/pension-credit');
+        res.redirect('/lis/6/partner/benefits/benefit-sprint3');
       }
     });    
 
@@ -853,7 +853,7 @@ module.exports = {
       if(applicant.employmentPension === true) {
         res.redirect('/lis/6/partner/pension/employment-pension-amount');
       } else if(applicant.employmentPension === false) {
-        res.redirect('/lis/6/partner/pension/pension-credit');
+        res.redirect('/lis/6/partner/benefits/benefit-sprint3');
       }
     });
     
@@ -871,8 +871,8 @@ module.exports = {
         res.render('lis/6/partner/benefits/dla');
       } else if(firstPartnerBenefit === "pip") {
         res.render('lis/6/partner/benefits/pip');
-      } else if(firstPartnerBenefit === "none") {
-        res.render('lis/6/partner/benefits/benefit7');
+      } else {
+        res.render('lis/6/partner/benefits/benefit4');
       }
     });
 
@@ -885,7 +885,7 @@ module.exports = {
       } else if(partner.personalIndependence === true){
         res.render('lis/6/partner/benefits/pip');
       } else {
-        res.render('lis/6/partner/benefits/benefit7');
+        res.render('lis/6/partner/benefits/benefit4');
       }
     });
     
@@ -896,7 +896,7 @@ module.exports = {
       } else if(partner.personalIndependence === true){
         res.render('lis/6/partner/benefits/pip');
       } else {
-        res.render('lis/6/partner/benefits/benefit7');
+        res.render('lis/6/partner/benefits/benefit4');
       }
     });
 
@@ -905,7 +905,7 @@ module.exports = {
       if(partner.personalIndependence === true){
         res.render('lis/6/partner/benefits/pip');
       } else {
-        res.render('lis/6/partner/benefits/benefit7');
+        res.render('lis/6/partner/benefits/benefit4');
       }
     });
  
