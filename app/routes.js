@@ -1,7 +1,4 @@
-// create a flag for hc3 or hc2
-// update URL's to match the selection
-// check language is correct for option chosen
-// if APPLICANT HELP LEVEL === 2 url else
+// if householder 0ver 19 go to boarder question
 
 //import the person constructor
 var person = require("./person.js");
@@ -946,7 +943,11 @@ module.exports = {
       householder.age = (2016 - req.query.dob);
       console.log(householder.age);
       householder.ageRange();
-      res.render('lis/6/live/others/relationship');
+      if (householder.overNineteen) {
+        res.render('lis/6/live/others/boarder');
+      } else {
+        res.render('lis/6/live/others/relationship');
+      }
     });
         
     //child || none underFifteen = people
