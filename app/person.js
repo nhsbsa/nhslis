@@ -2,9 +2,17 @@ function Person(
   firstName,
   lastName,
   partner,
+<<<<<<< HEAD
   privatePension,
   statePension,
   employmentPension,
+=======
+  statePension,
+  privatePension,
+  employmentPension,
+  warPension,
+  warWidowPension,
+>>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
   savings,
   disabilityLivingAllowance,
   attendanceAllowance,
@@ -19,9 +27,17 @@ function Person(
   this.firstName = firstName;
   this.lastName = lastName;
   this.partner = partner;
+<<<<<<< HEAD
   this.privatePension = privatePension;
   this.statePension = statePension;
   this.employmentPension = employmentPension;
+=======
+  this.statePension = statePension;
+  this.privatePension = privatePension;
+  this.employmentPension = employmentPension;
+  this.warPension = warPension;
+  this.warWidowPension = warWidowPension;
+>>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
   this.savings = savings;
   this.disabilityLivingAllowance = disabilityLivingAllowance;
   this.attendanceAllowance = attendanceAllowance;
@@ -40,8 +56,16 @@ Person.prototype.fullName = function () {
 Person.prototype.printPerson = function () {
   console.log(
     this.firstName + "\n" +
+<<<<<<< HEAD
       "privatePension = " + this.privatePension + " \n" +
       "statePension = " + this.statePension + " \n" +
+=======
+      "statePension = " + this.statePension + " \n" +
+      "privatePension = " + this.privatePension + " \n" +
+      "employmentPension = " + this.employmentPension + " \n" +
+      "warPension = " + this.warPension + " \n" +
+      "warWidowPension = " + this.warWidowPension + " \n" +
+>>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
       "disabilityLivingAllowance = " + this.disabilityLivingAllowance + " \n" +
       "child tax credits = " + this.childTaxCredits + " \n" +
       "attendanceAllowance = " + this.attendanceAllowance + "\n" +
@@ -75,9 +99,17 @@ Person.prototype.resetPartner = function () {
 };
 
 Person.prototype.resetPension = function () {
+<<<<<<< HEAD
   this.privatePension = false;
   this.statePension = false;
   this.employmentPension = false;
+=======
+  this.statePension = false;
+  this.privatePension = false;
+  this.employmentPension = false;
+  this.warPension = false;
+  this.warWidowPension = false;
+>>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
   console.log('resetting pension...');
 };
 
