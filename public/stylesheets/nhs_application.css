@@ -2202,8 +2202,6 @@ tr.clickable-row {
   margin-top: 20px; }
   .second-cert-block p {
     font-size: 0.8em; }
-<<<<<<< HEAD
-=======
 
 .entitlement {
   margin-bottom: 30px; }
@@ -2275,4 +2273,3 @@ tr.clickable-row {
 @media print {
   body {
     font-family: sans-serif; } }
->>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c

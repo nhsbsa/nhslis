@@ -1,11 +1,8 @@
-<<<<<<< HEAD
-=======
 // create a flag for hc3 or hc2
 // update URL's to match the selection
 // check language is correct for option chosen
 // if APPLICANT HELP LEVEL === 2 url else
 
->>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
 //import the person constructor
 var person = require("./person.js");
 
@@ -18,11 +15,8 @@ var jointTennantText;
 var jointOwnerText;
 var completedText = "Completed";
 
-<<<<<<< HEAD
-=======
 var helpLevel = 3;
 
->>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
 //create an application
 var application = {
   aboutYouStatus : "Not started",
@@ -61,10 +55,6 @@ var applicant = person.createPerson(
   firstName = null,
   lastName = null,
   partner = true,
-<<<<<<< HEAD
-  privatePension = false,
-  statePension = false,
-=======
   statePension = false,
   privatePension = false,
   employmentPension = false,
@@ -88,7 +78,6 @@ var partner = person.createPerson(
   privatePension = false,
   employmentPension = false,
   warPension = false,
->>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
   savings = false,
   premiumBonds = false,
   disabilityLivingAllowance = false,
@@ -96,118 +85,6 @@ var partner = person.createPerson(
   homeOwner = false,
   tennant = false,
   othersAtHome = false,
-<<<<<<< HEAD
-  bankAccount = false,
-  premiumBonds = false
-);
-
-//create a partner
-var partner = person.createPerson(
-  firstName = null,
-  lastName = null,
-  partner = false,
-  privatePension = false,
-  statePension = false,
-  savings = false,
-  premiumBonds = false,
-  disabilityLivingAllowance = false,
-  attendanceAllowance = false,
-  homeOwner = false,
-  tennant = false,
-  othersAtHome = false
-);
-
-//create someone else in the household
-var householder = {
-  firstName : null,
-  lastName : null,
-  age : 0,
-  relationship : null,	
-  financialSupport : null,
-  underFifteen : false,
-  sixteenToNineteen : false,
-  overNineteen : false,
-  work : false,
-  benefits : false,
-  ageRange : function() {
-    if(householder.age <= 15) {
-      householder.underFifteen = true;
-    } else if(householder.age >= 16 && householder.age <= 19) {
-      householder.sixteenToNineteen = true;
-    } else if(householder.age >= 20) {
-      householder.overNineteen = true;
-    }
-  },
-  resetHouseHolder : function() {
-    householder.relationship = null;
-    householder.financialSupport = null;
-    householder.underFifteen = false;
-    householder.sixteenToNineteen = false;
-    householder.overNineteen = false;
-    householder.work = false;
-    householder.benefits = false;
-    console.log('resetting householder...');
-  }
-};
-
-// change the text if the applicant has a partner
-function setPartnerText() {
-  if(applicant.partner === false) {
-    partnerOrText = 'you';
-    partnerAndText = 'you';
-    partnerLiveText = 'Does anyone else live in your home with you?';
-    jointTennantText = 'Is anyone else a joint tenant of the place you live';
-    jointOwnerText = 'Is anyone else a joint owner of the place you live';
-  } else {
-    partnerOrText = 'you or your partner';
-    partnerAndText = 'you and your partner';
-    partnerLiveText = 'Does anyone else other than your partner live in your home with you?';
-    jointTennantText = 'Is anyone else other than your partner a joint tenant of the place you live';
-    jointOwnerText = 'Is anyone else other than your partner a joint owner of the place you live';
-  } 
-}
-
-var querystring = require('querystring');
-
-setPartnerText()
-
-module.exports = {
-  bind : function(app) {
-    function find_gp_practice(slug) {
-      return app.locals.gp_practices.filter(
-        function(p) {
-          return p.slug === slug;
-        }
-      )[0];
-    }
-
-    app.get('/', function(req, res) {
-      res.render('index');
-      resetVars();
-      applicant.resetBenefits();
-      console.log('applicant =');
-      applicant.printPerson();
-      partner.resetBenefits();
-      console.log('partner =');
-      partner.printPerson();
-      applicant.resetPartner();
-      application.resetApplication();
-    });
-    
-    // add your routes here
-    
-    // ***********
-    //LIS exemption
-    // ***********
-
-    app.get('/lis/exemption/hc2certificate', function(req, res) {
-        res.render('lis/exemption/hc2certificate', {
-        'cert-title' : 'HC2'
-        });
-    });
-
-    
-=======
   bankAccount = false
 );
 
@@ -1149,13 +1026,10 @@ module.exports = {
         res.redirect('/lis/6/live/others/ft-student');
       }
     });    
->>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
     // ***********
     //LIS sprint 5
     // ***********
     
-<<<<<<< HEAD
-=======
     
     //5) council-tax-handler
     app.get('/lis/5/live/council-tax-handler', function(req, res) {
@@ -1175,7 +1049,6 @@ module.exports = {
       }
     });
     
->>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
     app.get('/lis/5/you/you-done', function(req, res) {
       application.aboutYouStatus = completedText;
       application.aboutYouLink = changeText;
@@ -1274,11 +1147,7 @@ module.exports = {
       application.whereYouLiveStatus = "Started";
       application.whereYouLiveLink = continueText;
       if(req.query.hospital === "yes") {
-<<<<<<< HEAD
-        res.render('lis/5/live/hospital');
-=======
         res.render('lis/5/live/home');
->>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
       } else {
         res.render('lis/5/live/home');
       }
@@ -1539,18 +1408,6 @@ module.exports = {
       } else if(pensions === 'employment') {
         applicant.employmentPension = true;
         res.render('lis/5/you/pension/employment-pension-amount');
-<<<<<<< HEAD
-      } else {
-        for (var pension in pensions) {
-          console.log(pensions[pension]); 
-            if(pensions[pension] === 'state') {
-              applicant.statePension = true;
-            } else if(pensions[pension] === 'private') {
-              applicant.privatePension = true;
-            } else if(pensions[pension] === 'employment') {
-              applicant.employmentPension = true;
-            }
-=======
       } else if(pensions === 'wardisablement') {
         applicant.warPension = true;
         res.render('lis/5/you/pension/war-pension');
@@ -1571,23 +1428,17 @@ module.exports = {
           } else if(pensions[pension] === 'warwidow') {
             applicant.warWidowPension = true;
           }
->>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
         }
         if(applicant.statePension === true) {
           res.render('lis/5/you/pension/pension-amount');
         } else if(applicant.privatePension === true) {
           res.render('lis/5/you/pension/private-pension-amount');
-<<<<<<< HEAD
-        }  else if(applicant.employmentPension === true) {
-          res.render('lis/5/you/pension/employment-pension-amount');
-=======
         } else if(applicant.employmentPension === true) {
           res.render('lis/5/you/pension/employment-pension-amount');
         } else if(applicant.warPension === true) {
           res.render('lis/5/you/pension/war-pension');
         } else if(applicant.warWidowPension === true) {
           res.render('lis/5/you/pension/war-widow-pension');
->>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
         } else {
           res.render('lis/5/you/pension/pension-credit');
         }
@@ -1614,8 +1465,6 @@ module.exports = {
       }
     });
 
-<<<<<<< HEAD
-=======
     //5) employment-pension-handler
     app.get('/lis/5/you/pension/employment-pension-handler', function(req, res) {
       if(applicant.warPension === true) {
@@ -1634,7 +1483,6 @@ module.exports = {
       }
     });
 
->>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
     //5) kickout-handler
     app.get('/lis/5/kickout-handler', function(req, res) {
       console.log(req.query);
@@ -1923,33 +1771,20 @@ module.exports = {
         });
       } else if(householder.relationship === 'child' && householder.sixteenToNineteen === true) {
         //child sixteenToNineteen = education
-<<<<<<< HEAD
-        res.render('lis/5/live/others/education');
-=======
         res.render('lis/5/live/others/alevel');
->>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
       } else if(householder.relationship === 'none' && householder.sixteenToNineteen === true) {
         //none sixteenToNineteen = boarder
         res.render('lis/5/live/others/boarder');
       } else if(householder.relationship === 'child' && householder.overNineteen === true) {
-<<<<<<< HEAD
-        //child overNineteen = he-education
-        res.render('lis/5/live/others/he-student');
-=======
         //child overNineteen = full time-education
         res.render('lis/5/live/others/ft-student');
->>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
       } else if(householder.relationship === 'none' && householder.overNineteen === true) {
         //none overNineteen = boarder
         res.render('lis/5/live/others/boarder');
       }
     });
     
-<<<<<<< HEAD
-    //5) relationship-handler
-=======
     //5) others-work-handler
->>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
     app.get('/lis/5/live/others/others-work-handler', function(req, res) {
       console.log(req.query);
       if(req.query.work === 'yes') {
@@ -1983,20 +1818,12 @@ module.exports = {
       }
     });
     
-<<<<<<< HEAD
-    //5) lodger-handler
-=======
     //5) boarder-handler
->>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
     app.get('/lis/5/live/others/boarder-handler', function(req, res) {
       if(req.query.boarder === 'yes') {
         res.redirect('/lis/5/live/others/boarder-detail');
       } else {
-<<<<<<< HEAD
-        res.redirect('/lis/5/live/others/he-student');
-=======
         res.redirect('/lis/5/live/others/ft-student');
->>>>>>> 04340d62443999a74b466fc845391a9f6ba55e8c
       }
     });
     
