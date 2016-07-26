@@ -1,0 +1,99 @@
+ {% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <div class="text">
+
+    <h1 class="heading-large">
+      Check your details
+    </h1>
+
+    <table class="data-table living-summary">
+      <tr>
+        <td>Where do you live?</td>
+        <td>In a property<br>I own</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Are you a joint tenant?</td>
+        <td>No</td>
+        <td><a href="registration">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Your address</td>
+        <td>1 Street, Place, County, NE1234 </td>
+        <td><a href="registration">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do you pay rent?</td>
+        <td>Yes</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>How often do you pay your rent?</td>
+        <td>Weekly</td>
+        <td><a href="#">Change this</a></td>
+      </tr>  
+      <tr>
+        <td>Rent per week</td>
+        <td>£90</td>
+        <td><a href="#">Change this</a></td>
+      </tr>  
+      <tr>
+        <td>Does your rent include any of the following?</td>
+        <td>No</td>
+        <td><a href="#">Change this</a></td>
+      </tr>  
+      <tr>
+        <td>Do you pay for any of the following where you live?</td>
+        <td>No</td>
+        <td><a href="#">Change this</a></td>
+      </tr>  
+      <tr>
+        <td>Do you pay Council Tax?</td>
+        <td>Yes</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>How often do you pay your council tax?</td>
+        <td>Monthly</td>
+        <td><a href="#">Change this</a></td>
+      </tr>  
+      <tr>
+        <td>Do you pay ground rent?</td>
+        <td>No</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do you have a loan to adapt your home for the special needs of a disabled person?</td>
+        <td>No</td>
+        <td><a href="registration">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Does anyone else live in your home with you?</td>
+        <td>No</td>
+        <td><a href="registration">Change this</a></td>
+      </tr>
+    </table>
+    
+    <p>
+      <a class="button" href="../lis-home-updated" id="next">Save - continue to my low income scheme home</a>
+    </p>
+
+  </div>
+  </div>
+  </div>
+  
+</main>
+
+{% endblock %}

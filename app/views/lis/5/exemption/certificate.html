@@ -1,0 +1,90 @@
+ {% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income-new.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  <div class="grid-row">
+  <div class="cert-notes"><strong>Your certificate is about to expire. <a href="#">Renew it now.</a></strong></div>
+    <div class="column-two-thirds">
+      <h2 class="heading-large">Entitlement to help with health costs (HC3 Certificate)</h2>
+
+      <p>You will need to show a copy of this information whenever you want to use it.</p>
+      <ul>
+        <li><a href="#">Print this</a></li>
+        <li><a href="/public/images/hc3.pdf" target="blank">Download a PDF (98kb)</a></li>
+        <li><a href="hc3email">Email me a copy</a></li>
+      </ul>
+      <br>
+  <div class="column-two-thirds cert-col">
+  <ul class="cert-des">
+    <li class="medium strong ex-type">Prescriptions</li>
+    <li><strong><p class="smaller-text">This certificate does not entitle you to free prescriptions</p></strong></li>
+  </ul>
+
+  <ul class="cert-des">
+    <li class="medium strong ex-type">Sight tests</li>
+    <li><p class="small-text">Towards a private sight test, you pay a maximum of:</p></li>
+    <li class="cost-amount">£5.10</li>
+  </ul>
+
+  <ul class="cert-des">
+    <li class="medium strong ex-type">Glasses or contact lenses</li>
+    <li><p class="small-text">Towards an optical voucher, you pay:</p></li>
+    <li class="cost-amount">£10.20</li> 
+  </ul>
+
+  <ul class="cert-des">
+    <li class="medium strong ex-type">Travel to receive NHS treatment</li>
+    <li><p class="small-text">Towards travel, in one week you pay:</p></li>
+    <li class="cost-amount">£5.10</li> 
+  </ul>
+
+  <ul class="cert-des">
+    <li class="medium strong ex-type">NHS dental treatment</li>
+    <li><p class="small-text">Per course of treatment, you pay a maximum of:</p></li>
+    <li class="cost-amount">£15.30</li> 
+  </ul>
+
+  <ul class="cert-des">
+    <li class="medium strong ex-type">NHS wigs or NHS fabric supports</li>
+    <li><p class="small-text">Per prescribed item, you pay a maximum of:</p></li>
+    <li class="cost-amount">15.30</li> 
+  </ul>
+  <br>
+
+  </div>
+  <div class="panel panel-border-wide"><p class="smaller-text">This does not affect ny entitlement you already have,
+  <br>for example if you already get help because of your age or a medical condition</p></div>
+  </div>
+
+    <div class="column-third">
+      <div class="detail-block-cert">
+      <p>Entitlement for</p>
+      <h3 class="heading-medium">Priya Mattu
+      <br>Vinay Mattu</h3>
+
+      <p class="smaller-text">Certificate number<br></p>
+      <span class="larger-text">123 456 789</span><br>
+      
+      <br><p class="smaller-text">Valid dates</p>
+      <p><span class="smaller-text date-text"">from:</span> <span class="larger-text">14 July 2015</span>
+      <br><span class="smaller-text date-text">to:</span> <span class="larger-text">14 August 2016</span></p>
+      <br>
+      <p class="smaller-text"><a href="#">Update your details or tell us your circumstances have changed</a></p>
+      </div>
+
+      <div class="second-cert-block">
+      <h3 class="heading-medium">Get help with this</h3>
+      <p><a href="#">How do I use this certificate?</a>
+      <br><a href="/public/images/breakdown.pdf" target="blank">How has this been worked out?</a>
+      <br><a href="#">I can't print or download my certificate</a></p>
+      </div>
+
+  </div>
+  </div>
+</main>

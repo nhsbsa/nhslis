@@ -1,0 +1,68 @@
+{% extends 'templates/bsa_transaction_layout.html' %}
+
+{% block content %} 
+
+    <header role="banner" id="global-header">
+      <div class="header-container">
+
+        <a href="{% block logotypeLink %}/{% endblock %}" class="header-logo" title="{% block logotypeTitle %}Go to the NHS.UK homepage{% endblock %}">
+          <img src="{{assetPath}}images/nhs-rev-logotype.svg" alt="">
+        </a>
+
+        <h2 class="heading-large ex-header">HC3 Certificate for partial help with health costs</h2>
+
+        {% block header-controls %}{% endblock %}
+
+      </div>
+    </header>
+
+    <!--end header-->
+
+<main id="content" role="main">
+  <div class="grid-row">
+    <h2 class="heading-xlarge">Priya and Vinay Mattu</h2>
+    <div class="column-two-thirds">
+
+      <div class="ex-notes"><p>This certificate does not affect any entitlement you have for other reasons such as age or medical condition. For example, if you are 60 or over you still get a free NHS sight test and NHS prescriptions.</p></div>
+      <h2 class="heading-medium">Your entitlement</h2>
+
+  <ul class="cert-des">
+    <li class="medium strong ex-type">Prescriptions</li>
+    <li>You are <strong>not</strong> entitled to free NHS prescriptions</li>
+  </ul>
+  <hr>
+  <ul class="cert-des">
+    <li class="medium strong ex-type">Sight tests</li>
+    <li>You pay a maximum of: <br><br><a href="hc3-sight-notes">How to use this</a></li>
+    <li class="cost">£35.72</li>
+  </ul>
+  <hr>
+  <ul class="cert-des">
+    <li class="medium strong ex-type">Glasses or contact lenses</li>
+    <li>Towards an optical voucher, you pay: <br><br><a href="#">How to use this</a></li>
+    <li class="cost">£71.44</li> 
+  </ul>
+  <hr>
+  <ul class="cert-des">
+    <li class="medium strong ex-type">Travel to receive NHS treatment</li>
+    <li>In any one week, you pay: <br><br><a href="#">How to use this</a></li>
+    <li class="cost">£35.72</li> 
+  </ul>
+  <hr>
+  <ul class="cert-des">
+    <li class="medium strong ex-type">NHS dental treatment, wigs, or fabric supports</li>
+    <li>Per course of treatment or prescribed item,<br> you pay a maximum of: <br><br><a href="#">How to use this</a></li>
+    <li class="cost">£107.16</li> 
+  </ul>
+  </div>
+    <div class="column-third">
+      <div class="detail-block">
+      <h3 class="heading-medium">Your details</h3>
+      <p>Certificate number: <strong>123 456 789</strong></p>
+      <p>Valid from: <strong>01 June 2016</strong></p>
+      <p>Valid until: <strong>31 May 2017</strong></p>
+      </div>
+  </div>
+  </div>
+</main>
+

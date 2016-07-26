@@ -1,0 +1,63 @@
+{% extends 'templates/nhs_transaction_layout.html' %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    
+  <div class="grid-row">
+   
+    <div class="column-two-thirds">
+
+      <div class="text">
+        
+        <h1 class="heading-xlarge">You can get full help with heath costs</h1>
+        
+        <h3 class="heading-medium">
+          Your reference number is:  123 456 789<br>
+          This is valid until 01 June 2016
+        </h3>
+    
+        <p>This means you do not need to pay for:</p>
+
+        <lu>
+          <li>Prescriptions</li>
+          <li>Dental treatment</li>
+          <li>Glasses or contact lenses up to £x</li>
+          <li>Travel to hospital appointments</li>
+          <li>Wigs and fabric supports</li>
+        </lu>
+
+        <p>You will need to give your reference number if you need to purchase any of these.</p>
+        
+        <p>A copy of this information has been emailed to jane.doe@inter.net</p>
+        
+        <p><a href="#">Print this page</a></p>
+        
+        <p><a href="#">Text me my reference number</a></p>
+        
+        <p>
+          You can access this information at any time from the 
+          <a href="#">low income scheme homepage</a>
+        </p>
+
+        <p>We will send you a renew reminder around 01 May 2016.</p>
+        
+        <h2 class="heading-large">Claim a refund</h2>
+        
+        <p>If you have had to pay for any of the items listed above in the last x months you may be able to claim a refund.</p>
+        
+        <p><a href="#">Claim a refund</a></p>
+      
+      </div>
+    
+    </div>
+  
+  </div>
+  
+</main>
+
+{% endblock %}

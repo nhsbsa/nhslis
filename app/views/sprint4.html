@@ -1,0 +1,53 @@
+{% extends 'templates/nhs_transaction_layout.html' %}
+
+{% block pageTitle %}NHS.UK prototyping kit{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+      <a class="back-link" href="index">Back </a>
+      <h1 class="heading-xlarge">Low Income Scheme prototype</h1>
+      
+      <!--p>Have some feedback let us know! If you have a comment or suggestion for this prototype please email: <>mark.dobson@nhs.net</p-->
+
+      <h2 class="heading-large">Alpha sprint 4</h2>
+      <p>Created 28 June 2016</p>
+      <ul>
+        <li><a href="/lis/4/index">Start page</a></li>
+        <li><a href="/lis/4/lis-home">My lis home page</a></li>
+        <li><a href="/lis/4/part-help">Part help outcome</a></li>
+        <li><a href="/lis/4/live/others/people">Does anyone else live in your home?</a></li>
+        <li><a href="/lis/4/register/user-id">Save and restore version A</a></li>
+      </ul>
+
+      <h2 class="heading-large">Exemption prototypes</h2>
+      <ul>
+        <li><a href="/lis/4/exemption/hc2certificate">HC2 Certificate</a></li>  
+        <li><a href="/lis/4/exemption/hc3certificate">HC3 Certificate</a></li>
+        <li><a href="/lis/4/exemption/email">Email Certificate</a></li>
+      </ul>
+      
+      <ul>
+        <li><span class="strong">What we plan to test:</span> </li>
+        <li>Full end to end journey for a single person or couple.</li>
+        <li>They may receive benefits.</li>
+        <li>They may live in their own home or rent.</li>
+        <li>We will test savings, children living at home, a friend living at home.</li>
+      </ul>
+
+      <ul>
+        <li><span class="strong">What we're improving this sprint:</span> </li>
+        <li>Questions have been improved about others in the home.</li>
+      </ul>
+      
+      <p><span class="strong">What we found:</span></p>
+      <ul class="list list-bullet">
+        <li>Users we tested with (low digital skills) found the sign in confusing. They seemed to be more inclined to use a memorable word.</li>
+        <li>They were overwhelmed by the <a href="/lis/4/save-continue/ref">sign in pages</a>, there is too much being asked for at once.</li>
+        <li>The page that tells users <a href="/lis/4/need-to-know">what they will need to apply</a> is not direct enough. One of our users was confused by the title Low Income Scheme, <span class="quote">'I'm not on the low income scheme'</span> - she thought it was a type of benefit. Many of the users don't know what the low income scheme is.</li>
+        <li>Several users tried to select the whole row on the <a href="/lis/4/lis-home">LIS home screen</a>.</li>
+      </ul>
+  
+</main>
+
+{% endblock %}

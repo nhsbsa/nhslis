@@ -1,0 +1,58 @@
+{% extends 'templates/nhs_transaction_layout.html' %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    
+  <div class="grid-row">
+    
+    <div class="column-two-thirds">
+
+      <div class="text">
+        
+        <h1 class="heading-xlarge">My low income scheme application</h1>
+        
+        <p class="lede">
+          Complete the following sections.
+        </p>
+    
+        <p>
+          If you need to leave the service your information will be saved.
+        </p>
+    
+        <table class="data-table">
+          <tr>
+            <td>About you</td>
+            <td><a href="you/education">Start</a></td>
+          </tr>
+          <tr>
+            <td>About your partner</td>
+            <td><a href="partner/work">Start</a></td>
+          </tr>
+          <tr>
+            <td>Property, savings &amp; money</td>
+            <td><a href="assets/money">Start</a></td>
+          </tr>
+          <tr>
+            <td>About where you live</td>
+            <td><a href="live/hospital">Start</a></td>
+          </tr>
+        </table>
+      <!--
+        <p>
+          <a class="button" href="full-help">Submit</a>
+        </p>
+        -->
+      </div>
+      
+    </div>
+    
+  </div>
+  
+</main>
+
+{% endblock %}

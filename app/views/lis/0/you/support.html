@@ -1,0 +1,74 @@
+ {% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+      
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <h1 class="heading-large">
+     Do you receive any of the following?
+  </h1>
+
+  <form action="" method="get" class="form">
+
+    <div class="form-item-wrapper">
+      <div class="form-group">
+        <input type="checkbox" id="one" name="minor">
+        <label class="form-control-checkbox" for="one">
+          Support from the student loans company
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="two" name="minor">
+        <label class="form-control-checkbox" for="two">
+          NHS Bursary
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="three" name="minor">
+        <label class="form-control-checkbox" for="three">
+          Bursary from your higher education institution
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="four" name="minor">
+        <label class="form-control-checkbox" for="four">
+          Other scholarship sponsorship award or bursary
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="five" name="minor">
+        <label class="form-control-checkbox" for="five">
+          Grant or loan from overseas
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="six" name="minor">
+        <label class="form-control-checkbox" for="six">
+          Money from parents or anyone else
+        </label>
+      </div>
+    </div>  
+    
+    {{
+      form_macros.button({
+        href: 'work',
+        label: 'Save and continue'
+      })
+    }}
+    
+    <!-- <p class="navigation"><a class="cancel" href="../lis-home">             Cancel - back to my low income scheme home</a>           </p> Cancel - back to my low income scheme home</a></p>
+
+  </form>
+    </div>
+    </div>
+</main>
+
+{% endblock %}

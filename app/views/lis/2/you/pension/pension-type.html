@@ -1,0 +1,66 @@
+ {% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+        
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <h1 class="heading-large">
+      Which of the following pensions do you receive?
+  </h1>
+  <p>Tick all that apply</p>
+
+  <form action="pension-type-handler" method="get" class="form">
+
+    <div class="form-item-wrapper">
+      <div class="form-group">
+        <input type="checkbox" id="state" value="state" name="pensiontype">
+        <label class="form-control-checkbox" for="state">
+          State pension
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="private" value="private" name="pensiontype">
+        <label class="form-control-checkbox" for="private">
+          Private pension
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="employment" value="employment" name="pensiontype">
+        <label class="form-control-checkbox" for="employment">
+          Pension from employment
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="war-disablement" value="war-disablement" name="pensiontype">
+        <label class="form-control-checkbox" for="war-disablement">
+          War disablement pension 
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="war-widow" value="war-widow" name="pensiontype">
+        <label class="form-control-checkbox" for="war-widow">
+          War widow’s pension
+        </label>
+      </div>
+    </div>  
+        
+    {{
+      form_macros.button({
+        label: 'Next'
+      })
+    }}
+    <p class="navigation"><a class="cancel" href="../../lis-home">Back to application home</a></p>
+  </form>
+    </div>
+    </div>
+</main>
+
+{% endblock %}

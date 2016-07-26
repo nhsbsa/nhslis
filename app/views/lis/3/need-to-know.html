@@ -1,0 +1,53 @@
+{% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <h1 class="heading-large">
+    Low Income Scheme
+  </h1>
+      
+  <p>To apply we need to ask you about the following:</p>
+  <ul class="list list-bullet">
+    <li>income you receive, including work, pensions or benefits</li>
+    <li>income your partner receives</li>
+    <li>mortgages, rent or your council tax you pay</li>
+    <li>property, land, bank or savings accounts you have</li>
+    <li>other people who live in your household</li>
+  </ul>
+      
+  <p>You should have this information ready before continuing.</p>
+  
+  <h2 class="heading-medium">Create an account</h2>
+  
+  <ul class="list list-bullet lead-list">  
+    <li class="lead-list">Creating an account allows you to:</li>
+    <li>save your information and come back later if you need to leave this service</li>
+    <li>renew your certificate more quickly in the future</li>
+  </ul>
+
+  <form action="" method="get" class="form">
+    {{
+      form_macros.button({
+        label: 'Next',
+        href: 'register/user-id'
+      })
+    }}
+    
+    <!--<p class="navigation"><a class="cancel" href="../lis-home">Save and come back later</a></p>-->
+    
+  </form>
+    </div>
+    </div>
+</main>
+
+{% endblock %}

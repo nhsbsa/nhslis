@@ -1,0 +1,40 @@
+ {% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <div class="text">
+  
+
+    <h1 class="heading-large">
+      Check your details
+    </h1>
+
+    <table class="data-table">
+      <tr>
+        <td>Do you have a partner?</td>
+        <td>No</td>
+        <td><a href="partner">Change this</a></td>
+      </tr>
+    </table>
+    
+    <p>
+      <a class="button" href="../lis-home3" id="next">Save and continue</a>
+    </p>
+
+  </div>
+  </div>
+  </div>
+  
+</main>
+
+{% endblock %}

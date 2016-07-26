@@ -1,0 +1,503 @@
+// Add "tint" and "shade" mixins
+
+// Add percentage of white to a color
+@function tint($color, $percent){
+  @return mix(white, $color, $percent);
+}
+
+// Add percentage of black to a color
+@function shade($color, $percent){
+  @return mix(black, $color, $percent);
+}
+
+// Import GOV.UK frontend toolkit
+@import "colours";
+@import "device-pixels";
+@import "measurements";
+@import "conditionals";
+@import "shims";
+//@import "typography";
+@import "grid_layout";
+@import "css3";
+@import "design-patterns/buttons";
+
+// Import GOV.UK elements
+
+@import "elements/helpers";
+@import "elements/reset";
+//@import "elements/typography";
+@import "elements/layout";
+@import "elements/forms";
+@import "elements/tables";
+@import "elements/buttons";
+@import "elements/details";
+//@import "elements/lists";
+@import "elements/panels";
+@import "elements/icons";
+@import "elements/utilities";
+@import "elements/cards";
+
+
+// Import modules
+
+@import "modules/shame";
+@import "modules/for-elements";
+@import "modules/form-navigation";
+@import "modules/other-specify";
+@import "modules/radios-and-checkboxes";
+//@import "modules/auto-suggest";
+@import "modules/select-boxes";
+@import "modules/guide_navigation";
+@import "modules/page_meta";
+@import "modules/breadcrumbs";
+
+// NHS.UK Template
+
+@import "modules/nhs-template";
+
+// NHS "Sassline" based typography
+@import "typography/variables";
+@import "typography/modular-scale";
+@import "typography/mixins";
+@import "typography/typography";
+
+// Default content stuff
+
+.markdown-content {
+  h1 { @extend .heading-large; }
+  h2 { @extend .heading-medium; }
+  h3 { @extend .heading-small; }
+
+  ul { @extend .list-bullet; }
+  ol { @extend .list-number; }
+}
+
+// LIS
+
+.back-link {
+  margin-top: 20px;
+  display: block;
+  font-size: 19px;
+}
+
+$nhs-blue: #0072C6;
+
+.data-table {
+  margin-bottom: 30px;
+  a {
+    float: right;
+  }
+  th {
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 1.3157894737;
+  }
+  td {
+    display: table-cell;
+    line-height: 1.25;
+    border-bottom: 1px solid #bfc1c3;
+    padding: 15px 0;
+  } &.you-summary {
+    tr {
+      td:first-child {
+        width: 60%;
+        padding-right: 4%;
+      }
+    }
+  } &.living-summary {
+    tr {
+      td:first-child {
+          width: 65%;
+          padding-right: 2.5%;
+      }
+      td:nth-child(2) {
+          width: 20%;
+          padding-right: 2.5%;
+      }
+    }
+  } &.cert-table {
+    margin-top :30px;
+    tr {
+      td:nth-child(2) {
+        padding-right: 4%;
+      }
+    }
+  } &.assets-summary {
+    tr {
+      td:first-child {
+          width: 75%;
+          padding-right: 2.5%;
+      }
+      td:nth-child(2) {
+          width: 10%;
+          padding-right: 2.5%;
+      }
+    }
+  }
+}
+
+.column-two-thirds {
+  padding:  0 11px;
+}
+
+.navigation {
+  text-decoration: underline;
+}
+
+#address-line-one, #address-line-two {
+  width :100%;
+}
+
+li {
+  list-style: none inside disc;
+}
+
+p.intro-to-list {
+  padding-bottom: 0;
+  margin-bottom: 0.5rem;
+}
+
+.panel {
+    clear: both;
+    border-left-style: solid;
+    border-color: #bfc1c3;
+    padding: 0.7894736842em;
+    margin-bottom: 0.7894736842em;
+}
+.panel-border-wide {
+    border-left-width: 10px;
+  }
+
+
+.notice {
+    position: relative;
+    .icon {
+      position: absolute;
+      left: 0;
+      top: 30%;
+      margin-top: -17px;
+  } strong {
+      display: block;
+      padding-left: 65px;
+      margin-left: -15px;
+  }
+}
+
+.important-info {
+  font-weight: bold;
+  font-size: 140%;
+  padding-bottom: 15px;
+}
+
+.highlight-block {
+  float: left;
+  border-top: 5px solid $nhs-blue;
+  margin-top: 20px;
+  padding-top: 10px;
+}
+
+.strong {
+  font-weight: bold;
+}
+
+.section-tick {
+  width:10%;
+  vertical-align:text-top;
+  padding-left:1em;
+}
+
+.amount {
+  font-size: 2.121rem;
+  float: left;
+  margin: 0.3rem 0.8rem 0 0;
+  font-weight: bold;
+}
+
+//progress-indicators
+
+  .complete-text {
+    border: solid green 2px;
+    border-radius: 5px;
+    color: green;
+    padding: 3px 6px;
+    margin-right:15px;
+  }
+
+  .incomplete-text{
+    border: solid darkorange 2px;
+    border-radius: 5px;
+    color: darkorange;
+    padding: 3px 6px;
+    margin-right:15px;
+  }
+
+  .notstarted-text{
+    border: solid gray 2px;
+    border-radius: 5px;
+    color: gray;
+    padding: 3px 6px;
+    margin-right:15px;
+  }
+
+//done-page
+
+.done-panel {
+  background-color: $nhs-blue;
+  text-align: center;
+  color: white;
+  padding: 20px 0;
+  margin: 30px 0;
+  h1 {
+    padding-top: 0;
+    margin-bottom: 10px;
+  }
+  h4 {
+    padding-top: 0;
+  }
+  h2 {
+    padding-top: 0;
+  }
+}
+
+#done-tick {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding: 4px 12px 4px 4px;;
+  background-color: $nhs-blue;
+  background-image: url("/public/images/done-tick.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+hr {
+    padding-bottom: 1rem;
+    padding-top: 2rem;
+}
+
+.cert-description {
+  li {
+    padding-left: 15px;
+    list-style-position: inside;
+  }
+  li:nth-child(1) {
+    list-style: disc;
+    padding-left: 0px;
+    list-style-position: inside;
+  }
+  .large, .cost {
+    font-size: 24px;
+    clear: both;
+  }
+  .cost {
+    margin-bottom: 5px;
+  }
+}
+
+.lead-list:first-child {
+  list-style: none;
+  margin-left: -1.5rem;
+}
+
+#global-header a.header-logo {
+    float: left;
+}
+
+
+//exemption-page
+
+.ex-header {
+  color:white;
+  margin-left:105px;
+}
+
+.exemption-header {
+  background-color: $nhs-blue;
+  text-align: center;
+  color: white;
+  padding: 20px 10px;
+  margin: 30px 0;
+  h1 {
+    padding-top: 0;
+    margin-bottom: 10px;
+  }
+  h2 {
+    padding-top: 0;
+  }
+  h4 {
+    padding-top: 0;
+  }
+}
+
+.ex-notes {
+    position: relative;
+    border-bottom: 3px solid #dedede;
+    background: #ededed;
+    padding: 10px 20px 20px 20px;
+}
+
+.detail-block {
+  float: left;
+  border-top: 5px solid $nhs-blue;
+  padding: 10px 20px; 
+  background: #ededed;
+  width:92%;
+}
+
+.second-detail-block {
+  float: left;
+  border-top: 5px solid $nhs-blue;
+  padding: 10px 20px; 
+  background: #ededed;
+  width:92%;
+  margin-top:20px;
+}
+
+.certcode {
+  font-size: 3.6rem;
+}
+
+hr {
+    padding-bottom: 1rem;
+    padding-top: 2rem;
+}
+
+.cert-des {
+  li {
+    list-style-position: inside;
+    display: inline-block;
+  }
+  li:nth-child(1) {
+    list-style: none;
+    padding-left: 0px;
+    list-style-position: inside;
+  }
+  .large, .cost {
+    font-size: 24px;
+    clear: both;
+  }
+  .cost {
+    margin-bottom: 5px;
+    float: right;
+    display: inline-block;
+    width: 29%;
+    text-align: center;
+    font-size: 3rem;
+    font-weight:bold;
+  }
+  .ex-type {
+    display: block;
+  }
+}
+
+.lead-list:first-child {
+  list-style: none;
+  margin-left: -1.5rem;
+}
+
+#global-header a.header-logo {
+    float: left;
+}
+
+.claim-ref {
+  margin: 30px 0;
+  h1 {
+    padding: 0;
+    margin-bottom: 15px;
+  }
+}
+
+
+/* temp styles for printing
+
+#global-header, #footer {
+    display: none;
+}
+
+html, #footer {
+    background-color: white;
+}
+ */
+
+.email-ex {
+  background-image: url("/public/images/email-screen.gif");
+  background-repeat: no-repeat;
+  width:873px;
+  height:778px;
+  margin-top: 20px;
+  .email-text {
+    padding-top:220px;
+    padding-left:30px;
+    width: 95%;
+  }
+}
+
+.quote {
+font-style: italic;
+  color: dimgray;
+}
+
+tr.clickable-row { cursor: pointer; }
+
+
+/* New certificate page styles */
+
+.detail-block-cert p {
+  padding: 0;
+  margin: 0;
+}
+
+.cert-col {
+  padding: 0;
+}
+
+.cert-notes {
+    position: relative;
+    border-bottom: 3px solid #dedede;
+    background: #ededed;
+    padding: 10px 20px 20px 20px;
+    margin: 25px 0;
+}
+.cost-amount {
+    margin-bottom: 5px;
+    float: right;
+    display: inline-block;
+    font-size: 2rem;
+    font-weight:bold;
+  }
+
+.smaller-text {
+  font-size:0.8em;
+}
+
+.small-text {
+  font-size:0.8em;
+  line-height: 0.8;
+}
+
+.larger-text {
+  font-size:1.6em;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.date-text{
+  display: inline-block;
+  width: 35px;
+}
+
+.detail-block-cert {
+  padding-top: 2rem;
+  float: left;
+  margin-left: 20px;
+  //padding: 10px 20px;
+}
+
+.second-cert-block {
+  float: left;
+  border-top: 10px solid $nhs-blue;
+  margin-left: 20px;
+  //padding: 10px 20px;
+  margin-top:20px;
+  p {font-size:0.8em}
+}

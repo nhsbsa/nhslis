@@ -1,0 +1,135 @@
+{% extends 'templates/nhs_transaction_layout.html' %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  
+  <div class="done-panel">
+    <h2 class="heading-large"><span id="done-tick"> </span>Application complete</h2>
+    <h1 class="heading-xlarge">You can get some help with<br>health costs</h1>
+    <h4 class="heading-small">Your reference number is</h4>
+    <h2 class="heading-large">123 456 789</h2>
+    <h4 class="heading-small">Your certificate expires on 01 June 2018</h4>
+  </div>
+  
+  <ul>
+    <li>A copy of your certificate has been emailed to <a href="exemption/email">m.smith@inter.net</a></li>
+    <li><a href="exemption/hc3certificate">View my certificate</a></li>
+    <li><a href="/public/images/hc3.pdf" target="blank">Download my certificate</a></li>
+    <li>You can download or print a copy of your certificate at any time by signing into this service.</li>
+    <li>      
+      <details>
+        <summary><span class="summary">I can't access my certificate</span></summary>
+        <div class="panel panel-border-narrow">
+          <p>
+            If you don't have access to a printer or this is not your own computer we can <a href=#>send a copy in the post</a>
+          </p>
+        </div>
+      </details>
+    </li>
+
+  </ul>
+  <hr>
+  
+  <h2 class="heading-medium">Your entitlement</h2>
+  <ul>
+    <li>We have worked out that you will need to pay the following towards your health costs:</li>
+  </ul>
+  <!--
+  <table class="data-table cert-table">
+    <tr>
+      <th>Item</th>
+      <th>You pay</th>
+      <th>Towards</th>
+    </tr>
+    <tr>
+      <td>Sight tests</td>
+      <td>up to £35.72</td>
+      <td>a private sight test</td>
+    </tr>
+    <tr>
+      <td>Glasses</td>
+      <td>£71.44</td>
+      <td>the cost of a voucher</td>
+    </tr>
+    <tr>
+      <td>Travel to receive NHS treatment</td>
+      <td>£35.72</td>
+      <td>travel costs in any one week</td>
+    </tr>
+    <tr>
+      <td>NHS dental treatment, wigs, or fabric supports</td>
+      <td>up to £107.16</td>
+      <td>each course of treatment or prescribed item</td>
+    </tr>
+  </table>
+   -->
+
+  <ul class="cert-description">
+    <li class="large">Prescriptions</li>
+    <li>You are not entitled to free NHS prescriptions</li>
+  </ul>
+  <ul class="cert-description">
+    <li class="large">Sight tests</li>
+    <li>you pay a maximum of:</li>
+    <li class="cost">£5</li>
+  </ul>
+  <ul class="cert-description">
+    <li class="large">Glasses or contact lenses</li>
+    <li>you pay: </li>
+    <li class="cost">£10</li> 
+    <li>
+      towards an optical voucher
+      <details>
+        <summary><span class="summary">What is an optical voucher?</span></summary>
+        <div class="panel panel-border-narrow">
+          <p>
+            Help towards the cost of glasses or contact lenses is provided through optical vouchers.<br>
+            The value of your voucher depends on your prescription.</p>
+          <p>
+            Ask the person who tests your sight what the value of the voucher is for your prescription.
+            <br>Your voucher will be reduced by £10.
+          </p>
+          <p>
+            For example:<br>
+            Cost of glasses = £100<br>
+            Value of voucher = £59.30<br>
+            You would pay £50.70.
+          </p>
+        </div>
+      </details>
+    </li>
+  </ul>
+  <ul class="cert-description">
+    <li class="large">Travel to receive NHS treatment</li>
+    <li>you pay: </li>
+    <li class="cost">£5</li> 
+    <li>in any one week</li>
+  </ul>
+  <ul class="cert-description">
+    <li class="large">NHS dental treatment, wigs, or fabric supports</li>
+    <li>you pay a maximum of:</li>
+    <li class="cost">£15</li> 
+    <li>per course of treatment or prescribed item</li>
+  </ul>
+ 
+  <p>You will need to show a copy of your certificate if you want to claim any of the above.</p>
+  
+  <p class="lede intro">Your certificate covers:</p>
+  
+  <ul class="list list-bullet">
+    <li>Miriam Smith</li>
+  </ul>
+  
+  <p>
+    <a class="button" href="#">Finished</a>
+  </p>
+  
+</main>
+
+{% endblock %}
+

@@ -1,0 +1,111 @@
+ {% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <div class="text">
+    <h1 class="heading-large">
+      Check your details
+    </h1>
+
+    <table class="data-table you-summary">
+      <td>Do you have a partner?</td>
+        <td>Yes</td>
+        <td><a href="partner">Change this</a></td>
+      <tr>
+        <td>Your partner's name</td>
+        <td>Priya Mattu</td>
+        <td><a href="registration">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Your partner's date of birth</td>
+        <td>24 March 1955</td>
+        <td><a href="registration">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Is your partner living permanently in a care home?</td>
+        <td>No</td>
+        <td><a href="care-home">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Is your partner currently in hospital?</td>
+        <td>No</td>
+        <td><a href="hospital">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Does your partner have a job?</td>
+        <td>{{myWork}}</td>
+        <td><a href="work">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Is your partner in full time education?</td>
+        <td>No</td>
+        <td><a href="education">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Does your partner receive a pension?</td>
+        <td>Yes</td>
+        <td><a href="pension/pension">Change this</a></td>
+      </tr>
+      <tr>
+        <td>
+          Which pensions does your partner receive?
+        </td>
+        <td>
+          Private pension
+        </td>
+        <td><a href="pension/pension-type">Change this</a></td>
+      </tr>
+      <tr>
+        <td>How much does your partner receive for their private pension?</td>
+        <td>£123 per week</td>
+        <td><a href="pension/private-pension-amount">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Does your partner receive any social security benefits?</td>
+        <td>No</td>
+        <td><a href="benefits/benefit7">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Is your partner looking after someone but can’t get carers allowance because of another benefit?</td>
+        <td>No</td>
+        <td><a href="benefits/benefit4">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Does anyone receive carers allowance for looking after your partner?</td>
+        <td>No</td>
+        <td><a href="benefits/benefit5">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Does your partner receive any other money?</td>
+        <td>No</td>
+        <td><a href="benefits/other-money">Change this</a></td>
+      </tr>
+
+    </table>
+    
+    <form action="partner-done" method="get" class="form">
+      {{
+        form_macros.button({
+          label: 'Save and continue',
+          id : 'next'
+        })  
+      }}
+    </form>
+
+  </div>
+  </div>
+  </div>
+  
+</main>
+
+{% endblock %}

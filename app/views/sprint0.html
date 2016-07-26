@@ -1,0 +1,112 @@
+{% extends 'templates/nhs_transaction_layout.html' %}
+
+{% block pageTitle %}NHS.UK prototyping kit{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+      <h1 class="heading-xlarge">Low Income Scheme prototype</h1>
+      
+      <!--p>Have some feedback let us know! If you have a comment or suggestion for this prototype please email: <>mark.dobson@nhs.net</p-->
+
+      <h2 class="heading-large">Alpha sprint 3</h2>
+      <p>Created 9 June 2016</p>
+      <ul>
+        <li><a href="/lis/3/index">Start page</a></li>
+        <li><a href="/lis/3/lis-home">My lis home page</a></li>
+        <li><a href="/lis/3/part-help">Part help outcome</a></li>
+      </ul>
+      <ul>
+        <li><span class="strong">What we plan to test:</span> </li>
+        <li>Full end to end journey for a couple who have a state pension and a private pension.</li>
+        <li>They receive benefits.</li>
+        <li>They live in their own home and have no mortgage. They pay council tax.</li>
+        <li>This couple would have part entitlement.</li>
+      </ul>
+
+      <ul>
+        <li><span class="strong">What we changed:</span> </li>
+        <li>- not yet updated</li>
+      </ul>
+  
+      <ul>
+        <li><span class="strong">What we found:</span> </li>
+        <li>- not yet tested</li>
+      </ul>
+  
+      <h2 class="heading-large">Alpha sprint 2</h2>
+      <p>Created end May 2016</p>
+      <ul>
+        <li><a href="/lis/2/index">Start page</a></li>
+        <li><a href="/lis/2/lis-home">My lis home page</a></li>
+        <li><a href="/lis/2/lis-home-updated">My lis home page updated</a></li>
+        <li><a href="/lis/2/part-help">Part help outcome</a></li>
+      </ul>
+      <ul>
+        <li><span class="strong">What we plan to test: </span> </li>
+        <li>Full end to end journey for a pensioner who has a state, private pension or both.</li>
+        <li>Lives in their own home and pays council tax. </li>
+        <li>This pensioner has some entitlement and has a working, non-dependant son living in the household, no benefits.</li>
+      </ul>
+  
+    
+      <ul>
+        <li><span class="strong">What we found:</span> </li>
+        <li>- not yet tested</li>
+      </ul>
+  
+        <ul>
+          <li><span class="strong">What we changed:<br> </span></li>
+          <li>Updated the <a href="lis/2/full-help">end screen</a> because users didn't feel they were 'done'.</li>
+          <li>Added visual feedback on the <a href="lis/2/lis-home4">hub screen</a> to show a section was complete.</li>
+          <li>Added <a href="lis/2/assets/accounts">savings accounts</a> and amended the text so that the <a href="lis/2/assets/money">savings options</a> were hopefully clearer.</li>
+          <li>Added ability to <a href="lis/2/live/others/people">tell us that someone else lives in your home</a> and their circumstances.</li>
+          <li>Enabled the prototype to allow the user to select <a href="lis/2/live/home">in a home I own</a> and tailored the questions based on this choice.</li>
+          <li>Enabled the prototype to handle a users' choice of <a href="lis/2/you/pension/pension-type">pensions</a> and only ask the relevant question based on their choice.</li>
+          <li>Added a <a href="lis/2/part-help">partial help screen</a></li>
+          <li>Added text to the <a href="lis/2/live/rent">rent amount screen</a> to explain the amount a user should enter.</li>
+        </ul>
+
+      <h2 class="heading-large">Alpha sprint 1</h2>
+      <p>Created mid May 2016</p>
+      <ul>
+        <li><a href="/lis/1/index">Start page</a></li>
+        <li><a href="/lis/1/lis-home">My lis home page</a></li>
+        <li><a href="/lis/1/lis-home-updated">My lis home page updated</a></li>
+        <li><a href="/lis/1/full-help">Full help outcome</a></li>
+      </ul>
+      <ul>
+        <li><span class="strong">What we tested: </span> </li>
+        <li>Full end to end journey for a pensioner who has a state and a private pension, rents their home and pays council tax. </li>
+        <li>This pensioner has full entitlement and there are no others in household, no benefits.</li>
+      </ul>
+      <ul>
+        <li><span class="strong">What we found: </span></li> 
+        <li>Overall, users found this easy to use.</li> 
+        <li>Biggest issues were around:</li> 
+        <li>1) known issues below</li>
+        <li>2) didn’t feel like they had finished at the end,</li>
+        <li>3) language, 
+        <li>4) benefit questions</li> 
+        <li>Users want clearer info around what part of their rent they need to tell us about, if they get help towards it.</li>
+        <li>They need clearer feedback that the application has been submitted and what the next steps are. </li>
+        <li>Users who are low on the digital inclusion scale could use this, but require the correct language to understand it.</li>
+      </ul>
+      <ul>
+        <li><span class="strong">Known issues: </span></li>
+        <li>No error messages in the prototype.</li>
+        <li>No feedback when sections are done.</li>
+        <li>Uses dummy data on summary screens.</li>
+        <li>Users don't understand benefits and use different names for them. </li>
+        <li>We need to understand how often people pay for things like rent and be more explicit about monthly, four weekly vs calendar month.</li>
+      </ul>
+      <h2 class="heading-large">Sprint 0</h2>
+      <p>Created end March 2016</p>
+      <ul>
+        <li><a href="/lis/0/index">Start page</a></li>
+        <li><a href="/lis/0/lis-home">My lis home page</a></li>
+      </ul>
+
+</main>
+
+{% endblock %}

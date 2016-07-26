@@ -1,0 +1,89 @@
+ {% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+  <div class="text">
+
+    <h1 class="heading-large">
+      Check your details
+    </h1>
+
+    <table class="data-table living-summary">
+      <tr>
+        <td>Are you or your partner currently in hospital?</td>
+        <td>No</td>
+        <td><a href="registration">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Are you or your partner living permanently in a care home?</td>
+        <td>No</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Where do you and your partner live?</td>
+        <td>In a property we own</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do you or your partner have to pay Council Tax?</td>
+        <td>Yes</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Council tax per month</td>
+        <td>£100</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do you or your partner have a mortgage or loan secured on your home?</td>
+        <td>Yes</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Mortgage or loan payment per month</td>
+        <td>£300</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do you or your partner pay ground rent?</td>
+        <td>No</td>
+        <td><a href="registration">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do you or your partner have to pay any service charges?</td>
+        <td>No</td>
+        <td><a href="registration">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Do you or your partner have a loan to adapt your home for the special needs of a disabled person?</td>
+        <td>No</td>
+        <td><a href="registration">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Does anyone else live in your home with you and your partner?</td>
+        <td>No</td>
+        <td><a href="registration">Change this</a></td>
+      </tr>
+    </table>
+    
+    <p>
+      <a class="button" href="../lis-home">Save - continue to my low income scheme home</a>
+    </p>
+
+  </div>
+  </div>
+  </div>
+  
+</main>
+
+{% endblock %}

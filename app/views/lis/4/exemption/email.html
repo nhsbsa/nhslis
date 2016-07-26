@@ -1,0 +1,42 @@
+{% extends 'templates/bsa_transaction_layout.html' %}
+
+{% block content %} 
+
+    <header role="banner" id="global-header">
+      <div class="header-container">
+
+        <a href="{% block logotypeLink %}/{% endblock %}" class="header-logo" title="{% block logotypeTitle %}Go to the NHS.UK homepage{% endblock %}">
+          <img src="{{assetPath}}images/nhs-rev-logotype.svg" alt="">
+        </a>
+
+        <h1 class="heading-large ex-header">HC3 Certificate for help with health costs</h1>
+
+        {% block header-controls %}{% endblock %}
+
+      </div>
+    </header>
+
+    <!--end header-->
+
+<main id="content" role="main">
+  <div class="email-ex">
+    <div class="email-text">
+      <p>
+      <h2 class="heading-medium">Bill Smith</h2>
+        <strong>Certificate number:</strong> 123 456 789<br>
+
+        <strong>Valid from:</strong> 01 June 2016<br>
+
+        <strong>Valid until:</strong> 31 May 2017</p> 
+        <p>
+        You are entitled to <strong>free NHS prescriptions</strong><br><br>
+        You are entitled to <strong>free NHS dental treatment</strong><br><br>
+        You are entitled to <strong>free NHS sight tests</strong><br><br>
+        You are entitled to the <strong>full value of a voucher towards the cost of glasses and contact lenses</strong><br><br>
+        You are entitled to a <strong>refund of necessary costs of travel to receive NHS treatment</strong><br><br>
+        You are titled to <strong>free NHS wig and fabric supports</strong>
+      </p>
+    </div>
+  </div>
+</main>
+
