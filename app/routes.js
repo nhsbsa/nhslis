@@ -75,6 +75,7 @@ var applicant = person.createPerson(
   this.attendanceAllowance = false,
   this.homeOwner = false,
   this.tennant = false,
+  this.guest = false,
   this.othersAtHome = false,
   this.bankAccount = false
 );
@@ -94,6 +95,7 @@ var partner = person.createPerson(
   this.attendanceAllowance = false,
   this.homeOwner = false,
   this.tennant = false,
+  this.guest = false,
   this.othersAtHome = false,
   this.bankAccount = false
 );
@@ -159,7 +161,6 @@ function resetVars() {
 }
 resetVars();
 
-
 module.exports = {
   bind : function (app) {
     function find_gp_practice(slug) {
@@ -184,10 +185,8 @@ module.exports = {
       applicant.resetPartner();
       application.resetApplication();
     });
-    
-    // ***********
-    //LIS exemption
-    // ***********
+
+//LIS exemption
 
     app.get('/lis/exemption/hc2certificate', function (req, res) {
       res.render('lis/exemption/hc2certificate', {
@@ -586,6 +585,9 @@ module.exports = {
       } else if (req.query.home === 'rented') {
         applicant.tennant = true;
         res.redirect('/lis/6/live/joint');
+      } else if (req.query.home === 'guest') {
+        applicant.guest = true;
+        res.redirect('/lis/6/live/guest/address');
       } else {
         res.redirect('/lis/6/live/joint');
       }
@@ -632,20 +634,7 @@ module.exports = {
         applicant.warWidowPension = true;
         res.render('lis/6/you/pension/war-widow-pension');
       } else {
-        for (i = 0; i < pensions.length; i += 1) {
-          console.log(pensions[i]);
-          if (pensions[i] === 'state') {
-            applicant.statePension = true;
-          } else if (pensions[i] === 'private') {
-            applicant.privatePension = true;
-          } else if (pensions[i] === 'employment') {
-            applicant.employmentPension = true;
-          } else if (pensions[i] === 'wardisablement') {
-            applicant.warPension = true;
-          } else if (pensions[i] === 'warwidow') {
-            applicant.warWidowPension = true;
-          }
-        }
+        applicant.pensionChecker(pensions);
         if (applicant.statePension === true) {
           res.render('lis/6/you/pension/pension-amount');
         } else if (applicant.privatePension === true) {
@@ -790,20 +779,7 @@ module.exports = {
         partner.employmentPension = true;
         res.render('lis/6/partner/pension/employment-pension-amount');
       } else {
-        for (i = 0; i < pensions.length; i += 1) {
-          console.log(pensions[i]);
-          if (pensions[i] === 'state') {
-            partner.statePension = true;
-          } else if (pensions[i] === 'private') {
-            partner.privatePension = true;
-          } else if (pensions[i] === 'employment') {
-            partner.employmentPension = true;
-          } else if (pensions[i] === 'wardisablement') {
-            partner.warPension = true;
-          } else if (pensions[i] === 'warwidow') {
-            partner.warWidowPension = true;
-          }
-        }
+        partner.pensionChecker(pensions);
         if (partner.statePension === true) {
           res.render('lis/6/partner/pension/pension-amount');
         } else if (partner.privatePension === true) {
@@ -1384,19 +1360,7 @@ module.exports = {
         applicant.warWidowPension = true;
         res.render('lis/5/you/pension/war-widow-pension');
       } else {
-        for (i = 0; i < pensions.length; i += 1) {
-          if (pensions[i] === 'state') {
-            applicant.statePension = true;
-          } else if (pensions[i] === 'private') {
-            applicant.privatePension = true;
-          } else if (pensions[i] === 'employment') {
-            applicant.employmentPension = true;
-          } else if (pensions[i] === 'wardisablement') {
-            applicant.warPension = true;
-          } else if (pensions[i] === 'warwidow') {
-            applicant.warWidowPension = true;
-          }
-        }
+        applicant.pensionChecker(pensions);
         if (applicant.statePension === true) {
           res.render('lis/5/you/pension/pension-amount');
         } else if (applicant.privatePension === true) {
@@ -1557,15 +1521,7 @@ module.exports = {
         partner.employmentPension = true;
         res.render('lis/5/partner/pension/employment-pension-amount');
       } else {
-        for (i = 0; i < pensions.length; i += 1) {
-          if (pensions[i] === 'state') {
-            partner.statePension = true;
-          } else if (pensions[i] === 'private') {
-            partner.privatePension = true;
-          } else if (pensions[i] === 'employment') {
-            partner.employmentPension = true;
-          }
-        }
+        partner.pensionChecker(pensions);
         if (partner.statePension === true) {
           res.render('lis/5/partner/pension/pension-amount');
         } else if (partner.privatePension === true) {
@@ -2044,13 +2000,7 @@ module.exports = {
         applicant.privatePension = true;
         res.render('lis/4/you/pension/private-pension-amount');
       } else {
-        for (i = 0; i < pensions.length; i += 1) {
-          if (pensions[i] === 'state') {
-            applicant.statePension = true;
-          } else if (pensions[i] === 'private') {
-            applicant.privatePension = true;
-          }
-        }
+        applicant.pensionChecker(pensions);
         if (applicant.statePension === true) {
           res.render('lis/4/you/pension/pension-amount');
         } else if (applicant.privatePension === true) {
@@ -2169,13 +2119,7 @@ module.exports = {
         partner.privatePension = true;
         res.render('lis/4/partner/pension/private-pension-amount');
       } else {
-        for (i = 0; i < pensions.length; i += 1) {
-          if (pensions[i] === 'state') {
-            partner.statePension = true;
-          } else if (pensions[i] === 'private') {
-            partner.privatePension = true;
-          }
-        }
+        partner.pensionChecker(pensions);
         if (partner.statePension === true) {
           res.render('lis/4/partner/pension/pension-amount');
         } else if (partner.privatePension === true) {
@@ -2548,13 +2492,7 @@ module.exports = {
         applicant.privatePension = true;
         res.render('lis/3/you/pension/private-pension-amount');
       } else {
-        for (i = 0; i < pensions.length; i += 1) {
-          if (pensions[i] === 'state') {
-            applicant.statePension = true;
-          } else if (pensions[i] === 'private') {
-            applicant.privatePension = true;
-          }
-        }
+        applicant.pensionChecker(pensions);
         if (applicant.statePension === true) {
           res.render('lis/3/you/pension/pension-amount');
         } else if (applicant.privatePension === true) {
@@ -2668,13 +2606,7 @@ module.exports = {
         partner.privatePension = true;
         res.render('lis/3/partner/pension/private-pension-amount');
       } else {
-        for (i = 0; i < pensions.length; i += 1) {
-          if (pensions[i] === 'state') {
-            partner.statePension = true;
-          } else if (pensions[i] === 'private') {
-            partner.privatePension = true;
-          }
-        }
+        partner.pensionChecker(pensions);
         if (partner.statePension === true) {
           res.render('lis/3/partner/pension/pension-amount');
         } else if (partner.privatePension === true) {

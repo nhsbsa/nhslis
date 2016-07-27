@@ -13,6 +13,7 @@ function Person(
   childTaxCredits,
   homeOwner,
   tennant,
+  guest,
   othersAtHome,
   fullName,
   bankAccount,
@@ -32,10 +33,33 @@ function Person(
   this.childTaxCredits = childTaxCredits;
   this.homeOwner = homeOwner;
   this.tennant = tennant;
+  this.guest = guest;
   this.othersAtHome = othersAtHome;
   this.bankAccount = bankAccount;
   this.premiumBonds = premiumBonds;
 }
+
+var i,
+  benefit,
+  firstBenefit,
+  savingsType;
+
+Person.prototype.pensionChecker = function (pensionsList) {
+  for (i = 0; i < pensionsList.length; i += 1) {
+    console.log(pensionsList[i]);
+    if (pensionsList[i] === 'state') {
+      this.statePension = true;
+    } else if (pensionsList[i] === 'private') {
+      this.privatePension = true;
+    } else if (pensionsList[i] === 'employment') {
+      this.employmentPension = true;
+    } else if (pensionsList[i] === 'wardisablement') {
+      this.warPension = true;
+    } else if (pensionsList[i] === 'warwidow') {
+      this.warWidowPension = true;
+    }
+  }
+};
 
 Person.prototype.fullName = function () {
   return this.firstName + " " + this.lastName;
@@ -67,6 +91,7 @@ Person.prototype.resetBenefits = function () {
 Person.prototype.resetLivingSituation = function () {
   this.homeOwner = false;
   this.tennant = false;
+  this.guest = false;
   console.log('resetting living situation...');
 };
 
@@ -113,33 +138,33 @@ Person.prototype.benefitChecker = function (benefits) {
       return "none";
     }
   } else if (typeof benefits === "object") {
-    var firstBenefit = null;
-    for (var benefit in benefits) {
-      if (benefits[benefit] === 'aa') {
+    firstBenefit = null;
+    for (i = 0; i < benefits.length; i += 1) {
+      if (benefits[i] === 'aa') {
         this.attendanceAllowance = true;
         console.log("aa");
         if (firstBenefit === null) {
           firstBenefit = "aa";
         }
-      } else if (benefits[benefit] === 'ctc') {
+      } else if (benefits[i] === 'ctc') {
         this.childTaxCredits = true;
         console.log("ctc");
         if (firstBenefit === null) {
           firstBenefit =  "ctc";
         }
-      } else if (benefits[benefit] === 'dla') {
+      } else if (benefits[i] === 'dla') {
         this.disabilityLivingAllowance = true;
         console.log("dla");
         if (firstBenefit === null) {
           firstBenefit =  "dla";
         }
-      } else if (benefits[benefit] === 'pip') {
+      } else if (benefits[i] === 'pip') {
         this.personalIndependence = true;
         console.log("pip");
         if (firstBenefit === null) {
           firstBenefit = "pip";
         }
-      } else if (benefits[benefit] === 'none') {
+      } else if (benefits[i] === 'none') {
         console.log("none");
         if (firstBenefit === null) {
           firstBenefit = "none";
@@ -150,7 +175,7 @@ Person.prototype.benefitChecker = function (benefits) {
   }
 };
 
-Person.prototype.savingChecker = function(savings) {
+Person.prototype.savingChecker = function (savings) {
   if (typeof savings === "string") {
     if (savings === "bank") {
       this.bankAccount = true;
@@ -161,20 +186,20 @@ Person.prototype.savingChecker = function(savings) {
     } else {
       return "none";
     }
-  } else if (typeof savings == "object") {
+  } else if (typeof savings === "object") {
     var firstSaving = null;
-    for (var savingsType in savings) {
-      if (savings[savingsType] === 'bank') {
+    for (i = 0; i < savings.length; i += 1) {
+      if (savings[i] === 'bank') {
         this.bankAccount = true;
         if (firstSaving === null) {
           firstSaving = "bank";
         }
-      } else if (savings[savingsType] === 'pb') {
+      } else if (savings[i] === 'pb') {
         this.premiumBonds = true;
         if (firstSaving === null) {
           firstSaving =  "pb";
         }
-      } else if (savings[savingsType] === 'none') {
+      } else if (savings[i] === 'none') {
         if (firstSaving === null) {
           firstSaving = "none";
         }
