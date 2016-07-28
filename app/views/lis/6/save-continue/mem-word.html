@@ -17,7 +17,7 @@
         Create a memorable word
       </h1>
       
-      <p>You can save your application and return to it at any time. You will need your reference number from the previous page and a memorable word.</p>
+      <p>You can save your application and return to it at any time. You will need your reference number from the <a href="ref">previous page</a> and a memorable word.</p>
       
       <form action="" method="get" class="form">
         <div class="form-item-wrapper">
@@ -25,7 +25,6 @@
             <div class="form-group">
               <label class="form-label-bold" for="email-address">
                 Memorable word
-                <span class="form-hint">For example your mothers maiden name</span>
               </label>
               <input type="text" id="email-address" class="form-control">
             </div>
@@ -35,7 +34,7 @@
         {{
           form_macros.button({
             label: 'Next',
-            href: '2step'
+            href: 'phone'
           })
         }}
         

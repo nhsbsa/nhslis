@@ -1,8 +1,8 @@
- {% extends 'templates/nhs_transaction_layout.html' %}
+{% extends 'templates/nhs_transaction_layout.html' %}
 {% import 'includes/form_macros.html' as form_macros %}
 
 {% block afterHeader %}
-  {% include "includes/service-headers/low-income.html" %}
+{% include "includes/service-headers/low-income.html" %}
 {% endblock %}
 
 {% block content %}
@@ -10,41 +10,55 @@
 <main id="content" role="main">
   
   <div class="grid-row">
+    
     <div class="column-two-thirds">
 
       <h1 class="heading-large">
-        Which is your prefered method of contact?
+        How would you like us to contact you?
       </h1>
-  <form action="" method="get" class="form">
+      
+      <form action="contact-handler" method="get" class="form">
 
-    <div class="form-group">
-      <input type="radio" id="email" name="contact" value="email">
-      <label class="form-control-radio minor-radio" for="email">
-        vinay.mattu@inter.net
-      </label>
+        <div class="form-group">
+          <input type="radio" id="email" name="contact" value="email">
+          <label class="form-control-radio minor-radio" for="email">
+            Email
+          </label>
+        </div>
+        <div class="form-group">
+          <input type="radio" id="landline" name="contact" value="landline">
+          <label class="form-control-radio minor-radio" for="landline">
+            Telephone
+          </label>
+        </div>
+        <div class="form-group">
+          <input type="radio" id="both" name="contact" value="both">
+          <label class="form-control-radio minor-radio" for="both">
+            Both email and telephone
+          </label>
+        </div>
+        <div class="form-group">
+          <input type="radio" id="none" name="contact" value="none">
+          <label class="form-control-radio minor-radio" for="none">
+            I dont have access to an email address or a telephone
+          </label>
+        </div>
+        <div class="form-group">
+          {{
+            form_macros.button({
+              label: 'Save and continue'
+            })
+          }}
+        </div>
+        
+        <p class="navigation"><a class="cancel" href="../../lis-home">Save and come back later</a></p>
+  
+      </form>
+      
     </div>
-    <div class="form-group">
-      <input type="radio" id="landline" name="contact" value="landline">
-      <label class="form-control-radio minor-radio" for="landline">
-        0191 123 456
-      </label>
-    </div>
-    <div class="form-group">
-      <input type="radio" id="mobile" name="contact" value="mobile">
-      <label class="form-control-radio minor-radio" for="mobile">
-        07123 456 789
-      </label>
-    </div>
-    {{
-      form_macros.button({
-        href: 'work',
-        label: 'Save and continue'
-      })
-    }}
-    <p class="navigation"><a class="cancel" href="../../lis-home">Save and come back later</a></p>
-  </form>
-    </div>
-    </div>
+    
+  </div>
+  
 </main>
 
 {% endblock %}
