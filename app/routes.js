@@ -12,7 +12,14 @@ var completedText = "Completed";
 
 var helpLevel = 3;
 
-var peopleList = [];
+var peopleList;
+
+var resetPeople = function () {
+  peopleList = [];
+  console.log('resetting people')
+}
+
+resetPeople();
 
 var i,
   pension,
@@ -175,6 +182,7 @@ module.exports = {
 
     app.get('/', function (req, res) {
       res.render('index');
+      resetPeople();
       resetVars();
       applicant.resetBenefits();
       console.log('applicant =');
@@ -976,7 +984,7 @@ module.exports = {
     //6) others-education-handler
     app.get('/lis/6/live/others/others-education-handler', function (req, res) {
       if (req.query.education === 'yes') {
-        res.render('lis/6/live/others/people', {
+        res.render('lis/6/live/others/people-list', {
           'partnerlivetext' : partnerLiveText
         });
       } else {
@@ -987,7 +995,7 @@ module.exports = {
     //6) others-training-handler
     app.get('/lis/6/live/others/others-training-handler', function (req, res) {
       if (req.query.training === 'yes') {
-        res.redirect('/lis/6/live/others/people');
+        res.redirect('/lis/6/live/others/people-list');
       } else {
         res.redirect('/lis/6/live/others/he-student');
       }
