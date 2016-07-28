@@ -46,6 +46,17 @@ $(document).ready(function () {
   }
   updateStatus();
   
+  //formatting for the list added in routes.js
+  function updateList() {
+    if(document.getElementById("people-list")) {
+      var peopleList = document.getElementById("people-list").innerHTML;
+      console.log(document.getElementById("people-list").innerHTML);
+      peopleList = peopleList.replace(/\,/g, "</li> <li>");
+      document.getElementById("people-list").innerHTML = peopleList;
+    }
+  }
+  updateList();
+
 });
 
 jQuery(document).ready(function($) {

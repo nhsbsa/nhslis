@@ -13,22 +13,26 @@
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-    Do you or your partner receive Pension Credit Guarantee Credit?
-    <span class="form-hint">This is a pension top up payment of up to £155.60 (for single people) or £237.55 (for couples).</span>
-  </h1>  
-      
-  <form action="guacredit-kickout-handler" method="get" class="form">
+    {{partnerlivetext}}
+  </h1>
+    
+  <p class="form-hint">People you have already told us about:</p>
+      <ul class="list" id="people-list">
+        <li>{{peoplelist}}</li>
+      </ul>
+    
+  <form action="people-handler" method="get" class="form">
       <div class="form-item-wrapper">
         <fieldset>
           <div class="inline-form-groups">
             <div class="form-group">
-              <input type="radio" id="yes" name="guacredit" value="yes">
+              <input type="radio" id="yes" value="yes" name="people">
               <label class="form-control-radio" for="yes">
                 Yes
               </label>
             </div>
             <div class="form-group">
-              <input type="radio" id="no" name="guacredit" value="no">
+              <input type="radio" id="no" value="no" name="people">
               <label class="form-control-radio" for="no">
                 No
               </label>
@@ -37,11 +41,13 @@
         </fieldset>
       </div>
     
-    {{
+        {{
       form_macros.button({
-        label: 'Next'
+        label: 'Save and continue'
       })
     }}
+        
+    <p class="navigation"><a class="cancel" href="../lis-home">Save and come back later</a></p>
 
   </form>
     </div>
