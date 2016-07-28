@@ -196,6 +196,15 @@ module.exports = {
 
 //LIS sprint 6
     
+    //6) contact-handler
+    app.get('/lis/6/you/contact-handler', function (req, res) {
+      if (req.query.contact === "email") {
+        res.render('lis/6/you/email');
+      } else {
+        res.render('lis/6/you/email');
+      }
+    });
+
     //6) email-me
     app.get('/lis/6/exemption/email-me', function (req, res) {
       helpLevel = req.query.helplevel;
@@ -484,7 +493,7 @@ module.exports = {
       application.aboutYouLink = continueText;
       applicant.firstName = req.query.firstname;
       applicant.lastName = req.query.lastname;
-      res.render('lis/6/you/contact', {
+      res.render('lis/6/you/nino', {
         'applicantFirstName' : applicant.firstName
       });
     });
