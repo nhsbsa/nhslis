@@ -1,0 +1,37 @@
+{% extends 'templates/nhs_transaction_layout.html' %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    
+    <h2 class="heading-medium">Application Submitted</h2>
+    
+     <p>You can download or print a copy of your certificate at any time by signing into this service, using your application number and memorable word.</p>
+    
+      <p>
+    <a class="button" href="exemption/hc3-entitlement">View your entitlement</a>
+  </p>
+    
+  
+  <div class="done-panel">
+    <h2 class="heading-large"><span id="done-tick"> </span>Application submitted</h2>
+    <h1 class="heading-large">You can get some help with<br>health costs</h1>
+    <h4 class="heading-small">Your application number is</h4>
+    <h2 class="heading-large">1Q3 4T6 7K9</h2>
+  </div>
+  
+  <div class="grid-row">
+    
+    <div class="column-two-thirds">
+      
+    </div>
+    
+  </div>
+
+</main>
+
+{% endblock %}
