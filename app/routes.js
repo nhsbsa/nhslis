@@ -84,7 +84,8 @@ var applicant = person.createPerson(
   this.tennant = false,
   this.guest = false,
   this.othersAtHome = false,
-  this.bankAccount = false
+  this.bankAccount = false,
+  this.contactPref = null
 );
 
 //create a partner
@@ -207,8 +208,16 @@ module.exports = {
     //6) contact-handler
     app.get('/lis/6/you/contact-handler', function (req, res) {
       if (req.query.contact === "email") {
+        applicant.contactPref ='email';
+        res.render('lis/6/you/email');
+      } else if (req.query.contact === "telephone") {
+        applicant.contactPref ='telephone';
+        res.render('lis/6/you/telephone');
+      } else if (req.query.contact === "both") {
+        applicant.contactPref ='both';
         res.render('lis/6/you/email');
       } else {
+        applicant.contactPref ='none';
         res.render('lis/6/you/email');
       }
     });
@@ -501,7 +510,7 @@ module.exports = {
       application.aboutYouLink = continueText;
       applicant.firstName = req.query.firstname;
       applicant.lastName = req.query.lastname;
-      res.render('lis/6/you/nino', {
+      res.render('lis/6/you/contact-prefs', {
         'applicantFirstName' : applicant.firstName
       });
     });
