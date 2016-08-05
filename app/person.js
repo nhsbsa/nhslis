@@ -17,7 +17,8 @@ function Person(
   othersAtHome,
   fullName,
   bankAccount,
-  premiumBonds
+  premiumBonds,
+  contactPref
 ) {
   this.firstName = firstName;
   this.lastName = lastName;
@@ -37,6 +38,7 @@ function Person(
   this.othersAtHome = othersAtHome;
   this.bankAccount = bankAccount;
   this.premiumBonds = premiumBonds;
+  this.contactPref = contactPref;
 }
 
 var i,
@@ -86,6 +88,11 @@ Person.prototype.resetBenefits = function () {
   this.personalIndependence = false;
   this.childTaxCredits = false;
   console.log('resetting benefits...');
+};
+
+Person.prototype.resetContactPref = function () {
+  this.contactPref = null;
+  console.log('resetting contact preferences...');
 };
 
 Person.prototype.resetLivingSituation = function () {

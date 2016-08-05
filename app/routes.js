@@ -12,7 +12,14 @@ var completedText = "Completed";
 
 var helpLevel = 3;
 
-var peopleList = [];
+var peopleList;
+
+var resetPeople = function () {
+  peopleList = [];
+  console.log('resetting people')
+}
+
+resetPeople();
 
 var i,
   pension,
@@ -77,7 +84,8 @@ var applicant = person.createPerson(
   this.tennant = false,
   this.guest = false,
   this.othersAtHome = false,
-  this.bankAccount = false
+  this.bankAccount = false,
+  this.contactPref = null
 );
 
 //create a partner
@@ -175,6 +183,7 @@ module.exports = {
 
     app.get('/', function (req, res) {
       res.render('index');
+      resetPeople();
       resetVars();
       applicant.resetBenefits();
       console.log('applicant =');
@@ -199,12 +208,27 @@ module.exports = {
     //6) contact-handler
     app.get('/lis/6/you/contact-handler', function (req, res) {
       if (req.query.contact === "email") {
+        applicant.contactPref ='email';
+        res.render('lis/6/you/email');
+      } else if (req.query.contact === "telephone") {
+        applicant.contactPref ='telephone';
+        res.render('lis/6/you/telephone');
+      } else if (req.query.contact === "both") {
+        applicant.contactPref ='both';
         res.render('lis/6/you/email');
       } else {
+        applicant.contactPref ='none';
         res.render('lis/6/you/email');
       }
     });
-
+    
+    /*6) email handler
+    app.get('/lis/6/you/email-handler', function (req, res) {
+      if() {
+      
+      }
+    });
+    */
     //6) email-me
     app.get('/lis/6/exemption/email-me', function (req, res) {
       helpLevel = req.query.helplevel;
@@ -493,7 +517,7 @@ module.exports = {
       application.aboutYouLink = continueText;
       applicant.firstName = req.query.firstname;
       applicant.lastName = req.query.lastname;
-      res.render('lis/6/you/nino', {
+      res.render('lis/6/you/contact-prefs', {
         'applicantFirstName' : applicant.firstName
       });
     });
@@ -642,6 +666,8 @@ module.exports = {
       } else if (pensions === 'warwidow') {
         applicant.warWidowPension = true;
         res.render('lis/6/you/pension/war-widow-pension');
+      } else if (pensions === undefined) {
+          res.redirect('/lis/6/you/pension/pension-type');
       } else {
         applicant.pensionChecker(pensions);
         if (applicant.statePension === true) {
@@ -769,9 +795,10 @@ module.exports = {
       if (req.query.pension === 'yes') {
         res.redirect('/lis/6/partner/pension/pension-credit');
       } else {
-        res.redirect('/lis/6/partner/pension/pension-type');
+        res.redirect('/lis/6/you/benefits/benefit-sprint3');
       }
     });
+    
 
     //6) partner pension-type-handler
     app.get('/lis/6/partner/pension/pension-type-handler', function (req, res) {
@@ -787,6 +814,8 @@ module.exports = {
       } else if (pensions === 'employment') {
         partner.employmentPension = true;
         res.render('lis/6/partner/pension/employment-pension-amount');
+      } else if (pensions === undefined) {
+          res.redirect('/lis/6/partner/pension/pension-type');
       } else {
         partner.pensionChecker(pensions);
         if (partner.statePension === true) {
@@ -976,7 +1005,7 @@ module.exports = {
     //6) others-education-handler
     app.get('/lis/6/live/others/others-education-handler', function (req, res) {
       if (req.query.education === 'yes') {
-        res.render('lis/6/live/others/people', {
+        res.render('lis/6/live/others/people-list', {
           'partnerlivetext' : partnerLiveText
         });
       } else {
@@ -987,7 +1016,7 @@ module.exports = {
     //6) others-training-handler
     app.get('/lis/6/live/others/others-training-handler', function (req, res) {
       if (req.query.training === 'yes') {
-        res.redirect('/lis/6/live/others/people');
+        res.redirect('/lis/6/live/others/people-list');
       } else {
         res.redirect('/lis/6/live/others/he-student');
       }

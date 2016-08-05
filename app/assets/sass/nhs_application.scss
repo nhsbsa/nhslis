@@ -595,11 +595,10 @@ tr.clickable-row { cursor: pointer; }
 }
 
 @media print {
-  body {
-    font-family: sans-serif;
+  h1 {
+    font-family: sans-serif !important;
   }
 }
-
 
 #people-list {
   color :#667078;

@@ -16,11 +16,12 @@
         Contact details
       </h1>
       <p>Please supply at least one of the following</p>
-  <form action="" method="get" class="form">
+  <form action="contact-handler" method="get" class="form">
 
     {{
       form_macros.text_field({
         id: 'email',
+        value: 'email',
         label: 'Email address'
       })
     }}
@@ -28,6 +29,7 @@
     {{
       form_macros.text_field({
         id: 'telephone',
+        value: 'telephone',
         label: 'Landline telephone number'
       })
     }}
@@ -35,6 +37,7 @@
     {{
       form_macros.text_field({
         id: 'mobile',
+        value: 'mobile',
         label: 'Mobile telephone number'
       })
     }}
