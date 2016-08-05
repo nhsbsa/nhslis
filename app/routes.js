@@ -222,13 +222,15 @@ module.exports = {
       }
     });
     
-    /*6) email handler
+    //6) email handler
     app.get('/lis/6/you/email-handler', function (req, res) {
-      if() {
-      
+      if(applicant.contactPref === 'both') {
+        res.render('lis/6/you/telephone');
+      } else {
+        res.render('lis/6/you/work');
       }
     });
-    */
+    
     //6) email-me
     app.get('/lis/6/exemption/email-me', function (req, res) {
       helpLevel = req.query.helplevel;
