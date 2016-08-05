@@ -1,55 +1,43 @@
 {% extends 'templates/nhs_transaction_layout.html' %}
 
-{% block afterHeader %}
-  {% include "includes/service-headers/low-income-new.html" %}
-{% endblock %}
-
 {% block content %}
 
 <main id="content" role="main">
     
   
-    
+
     <div class="text">
         
-        <h1 class="heading-large">Apply for help with health costs</h1>
+        <h1 class="heading-xlarge">Low Income Scheme</h1>
           
-          <p>Use this service to apply for help towards:</p>
+          <p class="lede">Find out if you can get help towards the cost of:</p>
         
         <ul class="list list-bullet">
           <li style="margin-bottom: 3px">prescriptions</li>
-          <li style="margin-bottom: 3px">sight tests, glasses and contact lenses</li>
+          <li style="margin-bottom: 3px">sight tests</li>
+          <li style="margin-bottom: 3px">glasses and contact lenses</li>
           <li style="margin-bottom: 3px">NHS Dental treatment</li>
           <li style="margin-bottom: 3px">NHS treatment travel costs</li>
           <li style="margin-bottom: 3px">NHS wigs and fabric supports</li>
         </ul>
     </div>
-    
-    <div class="grid-row">
-        <hr>
-    <div class="column-half">
-        <h3 class="heading-medium">I want to start a new application</h3>
-    
-        <p>You can apply any time (not just when you need treatment) for yourself, partner or children.</p>
-      </div>
-        
-         <div class="column-half">
-            <a class="button button-get-started" href="ko" id="next" style="margin-top:20px;">Start a new application</a>
-             
-        </div>
-          
-          </div>
         
      <div class="grid-row">
         <hr>
     <div class="column-half">
-        <h3 class="heading-medium">I have used this service before</h3>
-       <p>Sign in to finish an application you have already started, tell us about a change or to re-apply. </p>
+          <h3 class="heading-medium">I want to start a new application</h3>
+        
+        <p>Apply any time (not just when you need treatment) for yourself, partner or children</p>
+        
+            <a class="button button-get-started" href="ko" id="next">Start a new application</a>
               
       </div>
         
          <div class="column-half">
-            <a class="button button-secondary" href="ko" id="next" style="margin-top:20px;">Sign in</a>
+             <h3 class="heading-medium">Return to existing application</h3>
+             <p>Sign in to finish an application, tell us about a change or re-apply</p>
+             
+            <a class="button button-secondary" href="ko" id="next">Sign in</a>
 
              
         </div>
@@ -60,7 +48,7 @@
           
               <h3 class="heading-medium">Before you start</h3>
 
-        <p><strong>You're not eligible for help if you or your partner (or both) have more than:</strong></p>
+        <p>You're not eligible for help if you or your partner (or both) have more than:</p>
         
         <ul class="list list-bullet">
             <li>£16,000 in savings, investments and properties <br><p class="form-hint">(not including where you live)</p></li>
@@ -68,7 +56,7 @@
             <li>£23,250 in savings, investments and properties <br><p class="form-hint">(if you permanently live in a care home)</p></li>
         </ul>
     
-     <p><strong>You're already entitled to help (and don't need to complete this application) if you recieve:</strong></p>
+     <p>You're already entitled to help (and don't need to complete this application) if you recieve:</p>
             
         <ul class="list list-bullet">
           <li style="margin-bottom: 3px">income support</li>
@@ -77,6 +65,13 @@
             <p>or</p>
           <li>if you are named on or entitled to an NHS Tax Credit Exemption certificate</li>
         </ul>
+          
+        
+      </div>
+      
+    </div>
+      
+  </div>
   
 </main>
 
