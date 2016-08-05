@@ -221,7 +221,14 @@ module.exports = {
         res.render('lis/6/you/email');
       }
     });
-
+    
+    /*6) email handler
+    app.get('/lis/6/you/email-handler', function (req, res) {
+      if() {
+      
+      }
+    });
+    */
     //6) email-me
     app.get('/lis/6/exemption/email-me', function (req, res) {
       helpLevel = req.query.helplevel;
@@ -659,6 +666,8 @@ module.exports = {
       } else if (pensions === 'warwidow') {
         applicant.warWidowPension = true;
         res.render('lis/6/you/pension/war-widow-pension');
+      } else if (pensions === undefined) {
+          res.redirect('/lis/6/you/pension/pension-type');
       } else {
         applicant.pensionChecker(pensions);
         if (applicant.statePension === true) {
@@ -786,9 +795,10 @@ module.exports = {
       if (req.query.pension === 'yes') {
         res.redirect('/lis/6/partner/pension/pension-credit');
       } else {
-        res.redirect('/lis/6/partner/pension/pension-type');
+        res.redirect('/lis/6/you/benefits/benefit-sprint3');
       }
     });
+    
 
     //6) partner pension-type-handler
     app.get('/lis/6/partner/pension/pension-type-handler', function (req, res) {
@@ -804,6 +814,8 @@ module.exports = {
       } else if (pensions === 'employment') {
         partner.employmentPension = true;
         res.render('lis/6/partner/pension/employment-pension-amount');
+      } else if (pensions === undefined) {
+          res.redirect('/lis/6/partner/pension/pension-type');
       } else {
         partner.pensionChecker(pensions);
         if (partner.statePension === true) {
