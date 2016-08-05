@@ -202,7 +202,839 @@ module.exports = {
         'cert-title' : 'HC2'
       });
     });
+//LIS sprint 6
+    
+    //7) contact-handler
+    app.get('/lis/7/you/contact-handler', function (req, res) {
+      if (req.query.contact === "email") {
+        applicant.contactPref ='email';
+        res.render('lis/7/you/email');
+      } else if (req.query.contact === "telephone") {
+        applicant.contactPref ='telephone';
+        res.render('lis/7/you/telephone');
+      } else if (req.query.contact === "both") {
+        applicant.contactPref ='both';
+        res.render('lis/7/you/email');
+      } else {
+        applicant.contactPref ='none';
+        res.render('lis/7/you/email');
+      }
+    });
+    
+    //7) email handler
+    app.get('/lis/7/you/email-handler', function (req, res) {
+      if(applicant.contactPref === 'both') {
+        res.render('lis/7/you/telephone');
+      } else {
+        res.render('lis/7/you/work');
+      }
+    });
+    
+    //7) email-me
+    app.get('/lis/7/exemption/email-me', function (req, res) {
+      helpLevel = req.query.helplevel;
+      console.log(helpLevel);
+      res.render('lis/7/exemption/email-me', {
+        'helplevel' : helpLevel
+      });
+    });
+    
+    //7) email-confirm
+    app.get('/lis/7/exemption/email-confirm', function (req, res) {
+      res.render('lis/7/exemption/email-confirm', {
+        'helplevel' : helpLevel
+      });
+    });
+    
+    //7) post
+    app.get('/lis/7/exemption/post', function (req, res) {
+      helpLevel = req.query.helplevel;
+      console.log(helpLevel);
+      res.render('lis/7/exemption/post', {
+        'helplevel' : helpLevel
+      });
+    });
+    
+    //7) post-confirm
+    app.get('/lis/7/exemption/post-confirm', function (req, res) {
+      res.render('lis/7/exemption/post-confirm', {
+        'helplevel' : helpLevel
+      });
+    });
+    
+     //7) council-tax-handler
+    app.get('/lis/7/live/council-tax-handler', function (req, res) {
+      if (req.query.counciltax === 'yes') {
+        res.redirect('/lis/7/live/tax-amount');
+      } else {
+        res.redirect('/lis/7/live/ground-rent');
+      }
+    });
+    
+    //7) hours-handler
+    app.get('/lis/7/live/others/hours-handler', function (req, res) {
+      if (req.query.hours === 'yes') {
+        res.redirect('/lis/7/live/others/amount');
+      } else {
+        res.redirect('/lis/7/live/others/benefits');
+      }
+    });
+    
+    //7)
+    app.get('/lis/7/you/you-done', function (req, res) {
+      application.aboutYouStatus = completedText;
+      application.aboutYouLink = changeText;
+      if (application.allComplete() === true) {
+        res.redirect('/lis/7/lis-home-updated');
+      } else {
+        res.redirect('/lis/7/lis-home');
+      }
+    });
+    
+    //7)
+    app.get('/lis/7/live/mortgaged/mortgage-handler', function (req, res) {
+      if (req.query.mortgaged === 'yes') {
+        res.redirect('/lis/7/live/mortgaged/mortgage-amount');
+      } else {
+        res.redirect('/lis/7/live/services');
+      }
+    });
+    
+    //7)
+    app.get('/lis/7/partner/partner-done', function (req, res) {
+      application.aboutPartnerStatus = completedText;
+      application.aboutPartnerLink = changeText;
+      if (application.allComplete() === true) {
+        res.redirect('/lis/7/lis-home-updated');
+      } else {
+        res.redirect('/lis/7/lis-home');
+      }
+    });
+    
+    //7)
+    app.get('/lis/7/assets/assets-done', function (req, res) {
+      application.propertyStatus = completedText;
+      application.propertyLink = changeText;
+      if (application.allComplete() === true) {
+        res.redirect('/lis/7/lis-home-updated');
+      } else {
+        res.redirect('/lis/7/lis-home');
+      }
+    });
+    
+    //7)
+    app.get('/lis/7/live/live-done', function (req, res) {
+      application.whereYouLiveStatus = completedText;
+      application.whereYouLiveLink = changeText;
+      if (application.allComplete() === true) {
+        res.redirect('/lis/7/lis-home-updated');
+      } else {
+        res.redirect('/lis/7/lis-home');
+      }
+    });
+    
+    //7)
+    app.get('/lis/7/lis-home', function (req, res) {
+      res.render('lis/7/lis-home', {
+        'aboutYouStatus' : application.aboutYouStatus,
+        'aboutPartnerStatus' : application.aboutPartnerStatus,
+        'propertyStatus' : application.propertyStatus,
+        'whereYouLiveStatus' : application.whereYouLiveStatus,
+        'aboutYouLink' : application.aboutYouLink,
+        'aboutPartnerLink' : application.aboutPartnerLink,
+        'propertyLink' : application.propertyLink,
+        'whereYouLiveLink' : application.whereYouLiveLink
+      });
+    });
+    
+    //7)
+    app.get('/lis/7/lis-home-updated', function (req, res) {
+      res.render('lis/7/lis-home-updated', {
+        'aboutYouStatus' : application.aboutYouStatus,
+        'aboutPartnerStatus' : application.aboutPartnerStatus,
+        'propertyStatus' : application.propertyStatus,
+        'whereYouLiveStatus' : application.whereYouLiveStatus,
+        'aboutYouLink' : application.aboutYouLink,
+        'aboutPartnerLink' : application.aboutPartnerLink,
+        'propertyLink' : application.propertyLink,
+        'whereYouLiveLink' : application.whereYouLiveLink
+      });
+    });
+    
+    //7)
+    app.get('/lis/7/assets/property-handler', function (req, res) {
+      application.propertyStatus = "Started";
+      application.propertyLink = continueText;
+      if (req.query.property === "yes") {
+        res.render('lis/7/assets/second-address');
+      } else {
+        res.render('lis/7/assets/money', {
+          'partnerortext' : partnerOrText,
+          'partnerandext' : partnerAndText
+        });
+      }
+    });
+    
+    //7)
+    app.get('/lis/7/assets/other-property', function (req, res) {
+      res.render('lis/7/assets/other-property', {
+        'partnerortext' : partnerOrText,
+        'partnerandext' : partnerAndText
+      });
+    });
+    
+    //7)
+    app.get('/lis/7/live/hospital-handler', function (req, res) {
+      application.whereYouLiveStatus = "Started";
+      application.whereYouLiveLink = continueText;
+      if (req.query.hospital === "yes") {
+        res.render('lis/7/live/home');
+      } else {
+        res.render('lis/7/live/home');
+      }
+    });
+    
+    //7)
+    app.get('/lis/7/care-home-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.carehome === 'yes') {
+        res.redirect('/lis/7/sc/authority-assessed');
+      } else {
+        res.redirect('/lis/7/savings');
+      }
+    });
+    
+    //7)
+    app.get('/lis/7/sc/authority-assessed-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.authority === 'yes') {
+        res.redirect('/lis/7/sc/about-you');
+      } else {
+        res.redirect('/lis/7/sc/savings');
+      }
+    });
+    
+    //7)
+    app.get('/lis/7/sc/savings-sc-kickout-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.savings === 'yes') {
+        res.redirect('/lis/7/savings-kickout');
+      } else {
+        res.redirect('/lis/7/need-to-know');
+      }
+    });
+    
+    //7)
+    app.get('/lis/7/assets/property', function (req, res) {
+      console.log(partnerOrText);
+      res.render('lis/7/assets/property', {
+        'partnerortext' : partnerOrText,
+        'partnerandext' : partnerAndText
+      });
+    });
+    
+    //7)
+    app.get('/lis/7/assets/other', function (req, res) {
+      console.log(partnerOrText);
+      res.render('lis/7/assets/other', {
+        'partnerortext' : partnerOrText,
+        'partnerandtext' : partnerAndText
+      });
+    });
+    
+    //7)
+    app.get('/lis/7/assets/money', function (req, res) {
+      res.render('lis/7/assets/money', {
+        'partnerortext' : partnerOrText,
+        'partnerandText' : partnerAndText
+      });
+    });
+    
+    //7)
+    app.get('/lis/7/assets/accounts', function (req, res) {
+      res.render('lis/7/assets/accounts', {
+        'partnerortext' : partnerOrText,
+        'partnerandText' : partnerAndText
+      });
+    });
+    
+    //7)
+    app.get('/lis/7/savings-kickout-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.savings === 'yes') {
+        res.redirect('/lis/7/savings-kickout');
+      } else {
+        res.redirect('/lis/7/guarantee-credit');
+      }
+    });
+    
+    //7)
+    app.get('/lis/7/guacredit-kickout-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.guacredit === 'yes') {
+        res.redirect('/lis/7/kickout');
+      } else {
+        res.redirect('/lis/7/need-to-know');
+      }
+    });
+    
+    //7) about you summary
+    app.get('/lis/7/partner/summary', function (req, res) {
+      res.render('lis/7/partner/summary');
+    });
+    
+    //7) partner handler
+    app.get('/lis/7/partner/partner-handler', function (req, res) {
+      application.aboutPartnerStatus = "Started";
+      application.aboutPartnerLink = continueText;
+      if (req.query.partner === 'yes') {
+        applicant.partner = true;
+        setPartnerText();
+        res.render('lis/7/partner/basic');
+      } else if (req.query.partner === 'no') {
+        applicant.partner = false;
+        setPartnerText();
+        console.log(applicant.partner);
+        res.render('lis/7/partner/summary-no');
+      }
+    });
+    
+    //7) partner summary
+    app.get('/lis/7/partner/summary', function (req, res) {
+      res.render('lis/7/partner/summary');
+    });
 
+    //7) about you summary
+    app.get('/lis/7/you/about-you-summary', function (req, res) {
+      res.render('lis/7/you/about-you-summary', {
+        'mywork' : myWork,
+        'applicantFullName' : applicant.fullName()
+      });
+    });
+    
+    //7) registration-handler
+    app.get('/lis/7/you/registration-handler', function (req, res) {
+      application.aboutYouStatus = "Started";
+      application.aboutYouLink = continueText;
+      applicant.firstName = req.query.firstname;
+      applicant.lastName = req.query.lastname;
+      res.render('lis/7/you/contact-prefs', {
+        'applicantFirstName' : applicant.firstName
+      });
+    });
+
+    //7) benefit handler
+    app.get('/lis/7/you/benefits/sprint3-benefit-handler', function (req, res) {
+      applicant.resetBenefits();
+      benefits = req.query.sprint3benefits;
+      console.log(typeof benefits);
+      firstBenefit = applicant.benefitChecker(benefits);
+      //if (firstBenefit === "aa") {
+      //  res.render('lis/7/you/benefits/aa');
+      //} else
+      //if (firstBenefit === "ctc") {
+      //  res.render('lis/7/you/benefits/ctc');
+      //} else 
+      if (firstBenefit === "dla") {
+        res.render('lis/7/you/benefits/dla');
+      } else if (firstBenefit === "pip") {
+        res.render('lis/7/you/benefits/pip');
+      } else {
+        res.render('lis/7/you/benefits/benefit4');
+      }
+    });
+    
+    //7 Armed forces independence payment = single amount 
+    
+    //7 attendance allowance 
+    app.get('/lis/7/you/benefits/attendance-allowance-handler', function (req, res) {
+      if (applicant.childTaxCredits === true) {
+        res.render('lis/7/you/benefits/ctc');
+      } else if (applicant.disabilityLivingAllowance === true) {
+        res.render('lis/7/you/benefits/dla');
+      } else if (applicant.personalIndependence === true) {
+        res.render('lis/7/you/benefits/pip');
+      } else {
+        res.render('lis/7/you/benefits/benefit4');
+      }
+    });
+    
+    //7 Carers allowance = single amount 
+    
+    //7 child tax credit 
+    app.get('/lis/7/you/benefits/ctc-handler', function (req, res) {
+      if (applicant.disabilityLivingAllowance === true) {
+        res.render('lis/7/you/benefits/dla');
+      } else if (applicant.personalIndependence === true) {
+        res.render('lis/7/you/benefits/pip');
+      } else {
+        res.render('lis/7/you/benefits/benefit4');
+      }
+    });
+
+    //7 disability living allowance
+    app.get('/lis/7/you/benefits/dla-handler', function (req, res) {
+      if (applicant.personalIndependence === true) {
+        res.render('lis/7/you/benefits/pip');
+      } else {
+        res.render('lis/7/you/benefits/benefit4');
+      }
+    });
+    
+    //7 Industrial injuries disablement benefit
+    
+    //7 Maintenance payments
+        
+    //7) home
+    app.get('/lis/7/live/home', function (req, res) {
+      applicant.resetLivingSituation();
+      res.render('lis/7/live/home');
+    });
+
+    //7) mortgaged/joint
+    app.get('/lis/7/live/mortgaged/joint', function (req, res) {
+      res.render('lis/7/live/mortgaged/joint', {
+        'jointownertext' : jointOwnerText
+      });
+    });
+    
+    //7) tenant/joint
+    app.get('/lis/7/live/mortgaged/joint', function (req, res) {
+      res.render('lis/7/live/mortgaged/joint', {
+        'partnerortext' : partnerOrText
+      });
+    });
+    
+    //7) tenant/joint
+    app.get('/lis/7/live/joint', function (req, res) {
+      res.render('lis/7/live/joint', {
+        'jointtennanttext' : jointTennantText
+      });
+    });
+
+    //7) where you live
+    app.get('/lis/7/live/home-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.home === 'own') {
+        applicant.homeOwner = true;
+        res.redirect('/lis/7/live/mortgaged/joint');
+      } else if (req.query.home === 'rented') {
+        applicant.tennant = true;
+        res.redirect('/lis/7/live/joint');
+      } else if (req.query.home === 'guest') {
+        applicant.guest = true;
+        res.redirect('/lis/7/live/guest/address');
+      } else {
+        res.redirect('/lis/7/live/joint');
+      }
+    });
+
+    //7) pension credit kick out
+    app.get('/lis/7/you/pension/pencred-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.prencred === 'ssp') {
+        res.redirect('/lis/7/you/pension/credit-amount');
+      } else {
+        res.redirect('/lis/7/you/pension/pension-type');
+      }
+    });
+
+    //7) pension-handler
+    app.get('/lis/7/you/pension/pension-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.pension === 'yes') {
+        res.redirect('/lis/7/you/pension/pension-credit');
+      } else {
+        res.redirect('/lis/7/you/benefits/benefit-sprint3');
+      }
+    });
+
+    //7) pension-type-handler
+    app.get('/lis/7/you/pension/pension-type-handler', function (req, res) {
+      applicant.resetPension();
+      pensions = req.query.pensiontype;
+      console.log(pensions);
+      if (pensions === 'state') {
+        applicant.statePension = true;
+        res.render('lis/7/you/pension/pension-amount');
+      } else if (pensions === 'private') {
+        applicant.privatePension = true;
+        res.render('lis/7/you/pension/private-pension-amount');
+      } else if (pensions === 'employment') {
+        applicant.employmentPension = true;
+        res.render('lis/7/you/pension/employment-pension-amount');
+      } else if (pensions === 'wardisablement') {
+        applicant.warPension = true;
+        res.render('lis/7/you/pension/war-pension');
+      } else if (pensions === 'warwidow') {
+        applicant.warWidowPension = true;
+        res.render('lis/7/you/pension/war-widow-pension');
+      } else if (pensions === undefined) {
+          res.redirect('/lis/7/you/pension/pension-type');
+      } else {
+        applicant.pensionChecker(pensions);
+        if (applicant.statePension === true) {
+          res.render('lis/7/you/pension/pension-amount');
+        } else if (applicant.privatePension === true) {
+          res.render('lis/7/you/pension/private-pension-amount');
+        } else if (applicant.employmentPension === true) {
+          res.render('lis/7/you/pension/employment-pension-amount');
+        } else if (applicant.warPension === true) {
+          res.render('lis/7/you/pension/war-pension');
+        } else if (applicant.warWidowPension === true) {
+          res.render('lis/7/you/pension/war-widow-pension');
+        } else {
+          res.redirect('/lis/7/you/benefits/benefit-sprint3');
+        }
+      }
+    });
+    
+    //7) state-pension-handler
+    app.get('/lis/7/you/pension/state-pension-handler', function (req, res) {
+      if (applicant.privatePension === true) {
+        res.redirect('/lis/7/you/pension/private-pension-amount');
+      } else if (applicant.employmentPension === true) {
+        res.redirect('/lis/7/you/pension/employment-pension-amount');
+      } else {
+        res.redirect('/lis/7/you/benefits/benefit-sprint3');
+      }
+    });
+
+    //7) private-pension-handler
+    app.get('/lis/7/you/pension/private-pension-handler', function (req, res) {
+      if (applicant.employmentPension === true) {
+        res.redirect('/lis/7/you/pension/employment-pension-amount');
+      } else if (applicant.employmentPension === false) {
+        res.redirect('/lis/7/you/benefits/benefit-sprint3');
+      }
+    });
+
+    //7) employment-pension-handler
+    app.get('/lis/7/you/pension/employment-pension-handler', function (req, res) {
+      if (applicant.warPension === true) {
+        res.redirect('/lis/7/you/pension/war-pension');
+      } else if (applicant.warPension === false) {
+        res.redirect('/lis/7/you/benefits/benefit-sprint3');
+      }
+    });
+
+    //7) war-pension-handler
+    app.get('/lis/7/you/pension/war-pension-handler', function (req, res) {
+      if (applicant.warWidowPension === true) {
+        res.redirect('/lis/7/you/pension/war-widow-pension');
+      } else if (applicant.warWidowPension === false) {
+        res.redirect('/lis/7/you/benefits/benefit-sprint3');
+      }
+    });
+
+    //7) kickout-handler
+    app.get('/lis/7/kickout-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.kickout === 'continue') {
+        res.redirect('/lis/7/care-home');
+      } else {
+        res.redirect('/lis/7/kickout');
+      }
+    });
+    
+    //7) bank account handler
+    app.get('/lis/7/assets/account-type-handler', function (req, res) {
+      applicant.resetAccounts();
+      accounts = req.query.banktype;
+      firstSavingsAcc = applicant.savingChecker(accounts);
+      if (firstSavingsAcc === 'bank') {
+        res.render('lis/7/assets/accounts', {
+          'partnerortext' : partnerOrText,
+          'partnerandtext' : partnerAndText
+        });
+      } else if (firstSavingsAcc === 'pb') {
+        res.render('lis/7/assets/premium-bonds', {
+          'partnerortext' : partnerOrText,
+          'partnerandrext' : partnerAndText
+        });
+      } else {
+        res.render('lis/7/assets/other', {
+          'partnerortext' : partnerOrText,
+          'partnerandrext' : partnerAndText
+        });
+      }
+    });
+        
+    //7)
+    app.get('/lis/7/assets/bank-savings-handler', function (req, res) {
+      if (applicant.premiumBonds === true) {
+        res.render('lis/7/assets/premium-bonds');
+      } else {
+        res.render('lis/7/assets/other', {
+          'partnerortext' : partnerOrText,
+          'partnerandrext' : partnerAndText
+        });
+      }
+    });
+        
+    //7)
+    app.get('/lis/7/assets/premium-bond-handler', function (req, res) {
+      res.render('lis/7/assets/other', {
+        'partnerortext' : partnerOrText,
+        'partnerandrext' : partnerAndText
+      });
+    });
+ 
+// 6) partner handlers
+  
+    //7) partner-pension-credit kickout
+    app.get('/lis/7/partner/pension/pencred-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.prencred === 'ssp') {
+        res.redirect('/lis/7/partner/pension/credit-amount');
+      } else {
+        res.redirect('/lis/7/partner/pension/pension-type');
+      }
+    });
+    
+    //7) partner pension-handler
+    app.get('/lis/7/partner/pension/pension-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.pension === 'yes') {
+        res.redirect('/lis/7/partner/pension/pension-credit');
+      } else {
+        res.redirect('/lis/7/you/benefits/benefit-sprint3');
+      }
+    });
+    
+
+    //7) partner pension-type-handler
+    app.get('/lis/7/partner/pension/pension-type-handler', function (req, res) {
+      partner.resetPension();
+      pensions = req.query.pensiontype;
+      console.log(pensions);
+      if (pensions === 'state') {
+        partner.statePension = true;
+        res.render('lis/7/partner/pension/pension-amount');
+      } else if (pensions === 'private') {
+        partner.privatePension = true;
+        res.render('lis/7/partner/pension/private-pension-amount');
+      } else if (pensions === 'employment') {
+        partner.employmentPension = true;
+        res.render('lis/7/partner/pension/employment-pension-amount');
+      } else if (pensions === undefined) {
+          res.redirect('/lis/7/partner/pension/pension-type');
+      } else {
+        partner.pensionChecker(pensions);
+        if (partner.statePension === true) {
+          res.render('lis/7/partner/pension/pension-amount');
+        } else if (partner.privatePension === true) {
+          res.render('lis/7/partner/pension/private-pension-amount');
+        } else if (partner.employmentPension === true) {
+          res.render('lis/7/partner/pension/employment-pension-amount');
+        } else {
+          res.redirect('/lis/7/partner/benefits/benefit-sprint3');
+        }
+      }
+    });
+    
+    //7) partner state-pension-handler
+    app.get('/lis/7/partner/pension/state-pension-handler', function (req, res) {
+      if (partner.privatePension === true) {
+        res.redirect('/lis/7/partner/pension/private-pension-amount');
+      } else if (applicant.employmentPension === true) {
+        res.redirect('/lis/7/partner/pension/employment-pension-amount');
+      } else {
+        res.redirect('/lis/7/partner/benefits/benefit-sprint3');
+      }
+    });
+
+    //7) partner private-pension-handler
+    app.get('/lis/7/partner/pension/private-pension-handler', function (req, res) {
+      if (partner.employmentPension === true) {
+        res.redirect('/lis/7/partner/pension/employment-pension-amount');
+      } else if (applicant.employmentPension === false) {
+        res.redirect('/lis/7/partner/benefits/benefit-sprint3');
+      }
+    });
+
+    //7) partner benefit handler
+    app.get('/lis/7/partner/benefits/sprint3-benefit-handler', function (req, res) {
+      partner.resetBenefits();
+      partnerBenefits = req.query.sprint3benefits;
+      console.log(typeof partnerBenefits);
+      firstPartnerBenefit = partner.benefitChecker(partnerBenefits);
+      console.log(firstPartnerBenefit);
+      //if (firstPartnerBenefit === "aa") {
+      //  res.render('lis/7/partner/benefits/aa');
+      //} else if (firstPartnerBenefit === "ctc") {
+      //  res.render('lis/7/partner/benefits/ctc');
+      //} else 
+      if (firstPartnerBenefit === "dla") {
+        res.render('lis/7/partner/benefits/dla');
+      } else if (firstPartnerBenefit === "pip") {
+        res.render('lis/7/partner/benefits/pip');
+      } else {
+        res.render('lis/7/partner/benefits/benefit4');
+      }
+    });
+
+    //7 attendance allowance 
+    app.get('/lis/7/partner/benefits/attendance-allowance-handler', function (req, res) {
+      if (partner.childTaxCredits === true) {
+        res.render('lis/7/partner/benefits/ctc');
+      } else if (partner.disabilityLivingAllowance === true) {
+        res.render('lis/7/partner/benefits/dla');
+      } else if (partner.personalIndependence === true) {
+        res.render('lis/7/partner/benefits/pip');
+      } else {
+        res.render('lis/7/partner/benefits/benefit4');
+      }
+    });
+    
+    //7 partner child tax credit 
+    app.get('/lis/7/partner/benefits/ctc-handler', function (req, res) {
+      if (partner.disabilityLivingAllowance === true) {
+        res.render('lis/7/partner/benefits/dla');
+      } else if (partner.personalIndependence === true) {
+        res.render('lis/7/partner/benefits/pip');
+      } else {
+        res.render('lis/7/partner/benefits/benefit4');
+      }
+    });
+
+    //7 partner disability living allowance
+    app.get('/lis/7/partner/benefits/dla-handler', function (req, res) {
+      if (partner.personalIndependence === true) {
+        res.render('lis/7/partner/benefits/pip');
+      } else {
+        res.render('lis/7/partner/benefits/benefit4');
+      }
+    });
+ 
+    //7) householder
+                    
+    //7) people-handler
+    app.get('/lis/7/live/others/people-list', function (req, res) {
+      res.render('lis/7/live/others/people-list', {
+        'partnerlivetext' : partnerLiveText,
+        'peoplelist' : peopleList
+      });
+    });
+    
+    //7) people-handler
+    app.get('/lis/7/live/others/people', function (req, res) {
+      res.render('lis/7/live/others/people', {
+        'partnerlivetext' : partnerLiveText
+      });
+    });
+    
+    //7) persons details
+    app.get('/lis/7/live/others/name', function (req, res) {
+      householder.resetHouseHolder();
+      res.render('lis/7/live/others/name');
+    });
+    
+    //7) people-handler
+    app.get('/lis/7/live/others/people-handler', function (req, res) {
+      if (req.query.people === 'yes') {
+        res.redirect('/lis/7/live/others/name');
+      } else {
+        res.redirect('/lis/7/live/living-summary');
+      }
+    });
+    
+    //7 others details
+    app.get('/lis/7/live/others/others-details', function (req, res) {
+      householder.firstName = (req.query.firstname);
+      console.log(householder.firstName);
+      householder.lastName = (req.query.lastname);
+      var bigname = householder.firstName + " " + householder.lastName;
+      peopleList.push(bigname);
+      householder.age = (2016 - req.query.dob);
+      console.log(householder.age);
+      householder.ageRange();
+      if (householder.overNineteen) {
+        res.render('lis/7/live/others/boarder');
+      } else {
+        res.render('lis/7/live/others/relationship');
+      }
+    });
+        
+    //child || none underFifteen = people
+    //child sixteenToNineteen = education
+    //none sixteenToNineteen = boarder
+    //child overNineteen = he-education
+    //none overNineteen = boarder
+
+    //family underFifteen > are you financially responsable > done
+    //family sixteenToNineteen > are you financially responsable > education...
+    //family overNineteen > he-education
+
+
+    //7) relationship-handler
+    app.get('/lis/7/live/others/relationship-handler', function (req, res) {
+      householder.relationship = req.query.relationship;
+      console.log(householder.relationship);
+      if (householder.underFifteen === true) {
+        //child || none underFifteen = people
+        res.render('lis/7/live/others/people-list', {
+          'partnerlivetext' : partnerLiveText,
+          'peoplelist' : peopleList
+        });
+      } else if (householder.relationship === 'child' && householder.sixteenToNineteen === true) {
+        //child sixteenToNineteen = education
+        res.render('lis/7/live/others/alevel');
+      } else if (householder.relationship === 'none' && householder.sixteenToNineteen === true) {
+        //none sixteenToNineteen = boarder
+        res.render('lis/7/live/others/boarder');
+      } else if (householder.relationship === 'child' && householder.overNineteen === true) {
+        //child overNineteen = full time-education
+        res.render('lis/7/live/others/ft-student');
+      } else if (householder.relationship === 'none' && householder.overNineteen === true) {
+        //none overNineteen = boarder
+        res.render('lis/7/live/others/boarder');
+      }
+    });
+    
+    //7) others-work-handler
+    app.get('/lis/7/live/others/others-work-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.work === 'yes') {
+        res.render('lis/7/live/others/hours');
+      } else {
+        if (householder.sixteenToNineteen) {
+          res.render('lis/7/live/others/benefits-reduced');
+        } else {
+          res.render('lis/7/live/others/benefits');
+        }
+      }
+    });
+    
+    //7) others-education-handler
+    app.get('/lis/7/live/others/others-education-handler', function (req, res) {
+      if (req.query.education === 'yes') {
+        res.render('lis/7/live/others/people-list', {
+          'partnerlivetext' : partnerLiveText
+        });
+      } else {
+        res.render('lis/7/live/others/training');
+      }
+    });
+    
+    //7) others-training-handler
+    app.get('/lis/7/live/others/others-training-handler', function (req, res) {
+      if (req.query.training === 'yes') {
+        res.redirect('/lis/7/live/others/people-list');
+      } else {
+        res.redirect('/lis/7/live/others/he-student');
+      }
+    });
+    
+    //7) boarder-handler
+    app.get('/lis/7/live/others/boarder-handler', function (req, res) {
+      if (req.query.boarder === 'yes') {
+        res.redirect('/lis/7/live/others/boarder-detail');
+      } else {
+        res.redirect('/lis/7/live/others/ft-student');
+      }
+    });
+    
 //LIS sprint 6
     
     //6) contact-handler
@@ -234,7 +1066,6 @@ module.exports = {
     //6) email-me
     app.get('/lis/6/exemption/email-me', function (req, res) {
       helpLevel = req.query.helplevel;
-      console.log(helpLevel);
       res.render('lis/6/exemption/email-me', {
         'helplevel' : helpLevel
       });
@@ -250,7 +1081,6 @@ module.exports = {
     //6) post
     app.get('/lis/6/exemption/post', function (req, res) {
       helpLevel = req.query.helplevel;
-      console.log(helpLevel);
       res.render('lis/6/exemption/post', {
         'helplevel' : helpLevel
       });
@@ -397,7 +1227,6 @@ module.exports = {
     
     //6)
     app.get('/lis/6/care-home-handler', function (req, res) {
-      console.log(req.query);
       if (req.query.carehome === 'yes') {
         res.redirect('/lis/6/sc/authority-assessed');
       } else {
@@ -407,7 +1236,6 @@ module.exports = {
     
     //6)
     app.get('/lis/6/sc/authority-assessed-handler', function (req, res) {
-      console.log(req.query);
       if (req.query.authority === 'yes') {
         res.redirect('/lis/6/sc/about-you');
       } else {
@@ -417,7 +1245,6 @@ module.exports = {
     
     //6)
     app.get('/lis/6/sc/savings-sc-kickout-handler', function (req, res) {
-      console.log(req.query);
       if (req.query.savings === 'yes') {
         res.redirect('/lis/6/savings-kickout');
       } else {
@@ -427,7 +1254,6 @@ module.exports = {
     
     //6)
     app.get('/lis/6/assets/property', function (req, res) {
-      console.log(partnerOrText);
       res.render('lis/6/assets/property', {
         'partnerortext' : partnerOrText,
         'partnerandext' : partnerAndText
@@ -436,7 +1262,6 @@ module.exports = {
     
     //6)
     app.get('/lis/6/assets/other', function (req, res) {
-      console.log(partnerOrText);
       res.render('lis/6/assets/other', {
         'partnerortext' : partnerOrText,
         'partnerandtext' : partnerAndText
@@ -461,7 +1286,6 @@ module.exports = {
     
     //6)
     app.get('/lis/6/savings-kickout-handler', function (req, res) {
-      console.log(req.query);
       if (req.query.savings === 'yes') {
         res.redirect('/lis/6/savings-kickout');
       } else {
@@ -471,7 +1295,6 @@ module.exports = {
     
     //6)
     app.get('/lis/6/guacredit-kickout-handler', function (req, res) {
-      console.log(req.query);
       if (req.query.guacredit === 'yes') {
         res.redirect('/lis/6/kickout');
       } else {
@@ -495,7 +1318,6 @@ module.exports = {
       } else if (req.query.partner === 'no') {
         applicant.partner = false;
         setPartnerText();
-        console.log(applicant.partner);
         res.render('lis/6/partner/summary-no');
       }
     });
@@ -528,7 +1350,6 @@ module.exports = {
     app.get('/lis/6/you/benefits/sprint3-benefit-handler', function (req, res) {
       applicant.resetBenefits();
       benefits = req.query.sprint3benefits;
-      console.log(typeof benefits);
       firstBenefit = applicant.benefitChecker(benefits);
       //if (firstBenefit === "aa") {
       //  res.render('lis/6/you/benefits/aa');
@@ -615,7 +1436,6 @@ module.exports = {
 
     //6) where you live
     app.get('/lis/6/live/home-handler', function (req, res) {
-      console.log(req.query);
       if (req.query.home === 'own') {
         applicant.homeOwner = true;
         res.redirect('/lis/6/live/mortgaged/joint');
@@ -632,7 +1452,6 @@ module.exports = {
 
     //6) pension credit kick out
     app.get('/lis/6/you/pension/pencred-handler', function (req, res) {
-      console.log(req.query);
       if (req.query.prencred === 'ssp') {
         res.redirect('/lis/6/you/pension/credit-amount');
       } else {
@@ -642,7 +1461,6 @@ module.exports = {
 
     //6) pension-handler
     app.get('/lis/6/you/pension/pension-handler', function (req, res) {
-      console.log(req.query);
       if (req.query.pension === 'yes') {
         res.redirect('/lis/6/you/pension/pension-credit');
       } else {
@@ -654,7 +1472,6 @@ module.exports = {
     app.get('/lis/6/you/pension/pension-type-handler', function (req, res) {
       applicant.resetPension();
       pensions = req.query.pensiontype;
-      console.log(pensions);
       if (pensions === 'state') {
         applicant.statePension = true;
         res.render('lis/6/you/pension/pension-amount');
@@ -730,7 +1547,6 @@ module.exports = {
 
     //6) kickout-handler
     app.get('/lis/6/kickout-handler', function (req, res) {
-      console.log(req.query);
       if (req.query.kickout === 'continue') {
         res.redirect('/lis/6/care-home');
       } else {
@@ -785,7 +1601,6 @@ module.exports = {
   
     //6) partner-pension-credit kickout
     app.get('/lis/6/partner/pension/pencred-handler', function (req, res) {
-      console.log(req.query);
       if (req.query.prencred === 'ssp') {
         res.redirect('/lis/6/partner/pension/credit-amount');
       } else {
@@ -795,7 +1610,6 @@ module.exports = {
     
     //6) partner pension-handler
     app.get('/lis/6/partner/pension/pension-handler', function (req, res) {
-      console.log(req.query);
       if (req.query.pension === 'yes') {
         res.redirect('/lis/6/partner/pension/pension-credit');
       } else {
@@ -803,12 +1617,10 @@ module.exports = {
       }
     });
     
-
     //6) partner pension-type-handler
     app.get('/lis/6/partner/pension/pension-type-handler', function (req, res) {
       partner.resetPension();
       pensions = req.query.pensiontype;
-      console.log(pensions);
       if (pensions === 'state') {
         partner.statePension = true;
         res.render('lis/6/partner/pension/pension-amount');
@@ -858,9 +1670,7 @@ module.exports = {
     app.get('/lis/6/partner/benefits/sprint3-benefit-handler', function (req, res) {
       partner.resetBenefits();
       partnerBenefits = req.query.sprint3benefits;
-      console.log(typeof partnerBenefits);
       firstPartnerBenefit = partner.benefitChecker(partnerBenefits);
-      console.log(firstPartnerBenefit);
       //if (firstPartnerBenefit === "aa") {
       //  res.render('lis/6/partner/benefits/aa');
       //} else if (firstPartnerBenefit === "ctc") {
@@ -943,12 +1753,10 @@ module.exports = {
     //6 others details
     app.get('/lis/6/live/others/others-details', function (req, res) {
       householder.firstName = (req.query.firstname);
-      console.log(householder.firstName);
       householder.lastName = (req.query.lastname);
       var bigname = householder.firstName + " " + householder.lastName;
       peopleList.push(bigname);
       householder.age = (2016 - req.query.dob);
-      console.log(householder.age);
       householder.ageRange();
       if (householder.overNineteen) {
         res.render('lis/6/live/others/boarder');
@@ -956,22 +1764,10 @@ module.exports = {
         res.render('lis/6/live/others/relationship');
       }
     });
-        
-    //child || none underFifteen = people
-    //child sixteenToNineteen = education
-    //none sixteenToNineteen = boarder
-    //child overNineteen = he-education
-    //none overNineteen = boarder
-
-    //family underFifteen > are you financially responsable > done
-    //family sixteenToNineteen > are you financially responsable > education...
-    //family overNineteen > he-education
-
 
     //6) relationship-handler
     app.get('/lis/6/live/others/relationship-handler', function (req, res) {
       householder.relationship = req.query.relationship;
-      console.log(householder.relationship);
       if (householder.underFifteen === true) {
         //child || none underFifteen = people
         res.render('lis/6/live/others/people-list', {
@@ -995,7 +1791,6 @@ module.exports = {
     
     //6) others-work-handler
     app.get('/lis/6/live/others/others-work-handler', function (req, res) {
-      console.log(req.query);
       if (req.query.work === 'yes') {
         res.render('lis/6/live/others/hours');
       } else {
@@ -1035,7 +1830,6 @@ module.exports = {
         res.redirect('/lis/6/live/others/ft-student');
       }
     });
-    
     
     //LIS sprint 5    
     
