@@ -530,11 +530,13 @@ module.exports = {
       benefits = req.query.sprint3benefits;
       console.log(typeof benefits);
       firstBenefit = applicant.benefitChecker(benefits);
-      if (firstBenefit === "aa") {
-        res.render('lis/6/you/benefits/aa');
-      } else if (firstBenefit === "ctc") {
-        res.render('lis/6/you/benefits/ctc');
-      } else if (firstBenefit === "dla") {
+      //if (firstBenefit === "aa") {
+      //  res.render('lis/6/you/benefits/aa');
+      //} else
+      //if (firstBenefit === "ctc") {
+      //  res.render('lis/6/you/benefits/ctc');
+      //} else 
+      if (firstBenefit === "dla") {
         res.render('lis/6/you/benefits/dla');
       } else if (firstBenefit === "pip") {
         res.render('lis/6/you/benefits/pip');
@@ -859,11 +861,12 @@ module.exports = {
       console.log(typeof partnerBenefits);
       firstPartnerBenefit = partner.benefitChecker(partnerBenefits);
       console.log(firstPartnerBenefit);
-      if (firstPartnerBenefit === "aa") {
-        res.render('lis/6/partner/benefits/aa');
-      } else if (firstPartnerBenefit === "ctc") {
-        res.render('lis/6/partner/benefits/ctc');
-      } else if (firstPartnerBenefit === "dla") {
+      //if (firstPartnerBenefit === "aa") {
+      //  res.render('lis/6/partner/benefits/aa');
+      //} else if (firstPartnerBenefit === "ctc") {
+      //  res.render('lis/6/partner/benefits/ctc');
+      //} else 
+      if (firstPartnerBenefit === "dla") {
         res.render('lis/6/partner/benefits/dla');
       } else if (firstPartnerBenefit === "pip") {
         res.render('lis/6/partner/benefits/pip');

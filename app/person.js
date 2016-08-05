@@ -124,15 +124,16 @@ Person.prototype.resetPension = function () {
 
 Person.prototype.benefitChecker = function (benefits) {
   if (typeof benefits === "string") {
-    if (benefits === "aa") {
-      this.attendanceAllowance = true;
-      console.log("aa");
-      return "aa";
-    } else if (benefits === "ctc") {
-      this.childTaxCredits = true;
-      console.log("ctc");
-      return "ctc";
-    } else if (benefits === "dla") {
+    //if (benefits === "aa") {
+    //  this.attendanceAllowance = true;
+    //  console.log("aa");
+    //  return "aa";
+    //} else if (benefits === "ctc") {
+    //  this.childTaxCredits = true;
+    //  console.log("ctc");
+    //  return "ctc";
+    //} else 
+    if (benefits === "dla") {
       this.disabilityLivingAllowance = true;
       console.log("dla");
       return "dla";
@@ -147,19 +148,20 @@ Person.prototype.benefitChecker = function (benefits) {
   } else if (typeof benefits === "object") {
     firstBenefit = null;
     for (i = 0; i < benefits.length; i += 1) {
-      if (benefits[i] === 'aa') {
-        this.attendanceAllowance = true;
-        console.log("aa");
-        if (firstBenefit === null) {
-          firstBenefit = "aa";
-        }
-      } else if (benefits[i] === 'ctc') {
-        this.childTaxCredits = true;
-        console.log("ctc");
-        if (firstBenefit === null) {
-          firstBenefit =  "ctc";
-        }
-      } else if (benefits[i] === 'dla') {
+      //if (benefits[i] === 'aa') {
+      //  this.attendanceAllowance = true;
+      //  console.log("aa");
+      //  if (firstBenefit === null) {
+      //    firstBenefit = "aa";
+      // }
+      //} else if (benefits[i] === 'ctc') {
+      //  this.childTaxCredits = true;
+      //  console.log("ctc");
+      //  if (firstBenefit === null) {
+      //    firstBenefit =  "ctc";
+      //  }
+      //} else 
+      if (benefits[i] === 'dla') {
         this.disabilityLivingAllowance = true;
         console.log("dla");
         if (firstBenefit === null) {
