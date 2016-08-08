@@ -798,7 +798,7 @@ module.exports = {
       if (req.query.pension === 'yes') {
         res.redirect('/lis/7/partner/pension/pension-credit');
       } else {
-        res.redirect('/lis/7/you/benefits/benefit-sprint3');
+        res.redirect('/lis/7/partner/benefits/benefit-sprint3');
       }
     });
     
@@ -1613,7 +1613,7 @@ module.exports = {
       if (req.query.pension === 'yes') {
         res.redirect('/lis/6/partner/pension/pension-credit');
       } else {
-        res.redirect('/lis/6/you/benefits/benefit-sprint3');
+        res.redirect('/lis/6/partner/benefits/benefit-sprint3');
       }
     });
     
