@@ -2276,3 +2276,73 @@ tr.clickable-row {
 
 #people-list {
   color: #667078; }
+
+.heading-large .heading-secondary, .markdown-content h1 .heading-secondary {
+  font-family: "nta", Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1.1111111111;
+  font-weight: 400;
+  text-transform: none;
+  display: block;
+  padding-top: 8px;
+  padding-bottom: 7px;
+  display: block;
+  color: #6f777b; }
+
+@media (min-width: 641px) {
+  .heading-large .heading-secondary, .markdown-content h1 .heading-secondary {
+    font-size: 27px;
+    line-height: 1.1111111111; } }
+
+@media (min-width: 641px) {
+  .heading-large .heading-secondary, .markdown-content h1 .heading-secondary {
+    padding-top: 4px;
+    padding-bottom: 6px; } }
+
+#whitehall-wrapper .withdrawal-notice .govspeak p {
+  font-family: "nta", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 400;
+  text-transform: none;
+  padding-top: 7px;
+  padding-bottom: 3px; }
+
+@media (min-width: 641px) {
+  #whitehall-wrapper .withdrawal-notice .govspeak p {
+    font-size: 19px;
+    line-height: 1.31579; } }
+
+@media (max-width: 640px) {
+  #whitehall-wrapper .withdrawal-notice .govspeak p {
+    padding-top: 6px;
+    padding-bottom: 4px; } }
+
+.attachment {
+  position: relative;
+  padding: 15px 0 0 129px; }
+
+.attachment .attachment-thumb {
+  position: relative;
+  float: left;
+  margin-top: 5px;
+  margin-left: -124px;
+  padding-bottom: 15px; }
+
+.attachment .attachment-thumb img {
+  display: block;
+  width: 99px;
+  height: 140px;
+  background: white;
+  outline: 5px solid rgba(11, 12, 12, 0.1);
+  -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4); }
+
+.attachment-details .heading-medium, .attachment-details .markdown-content h2, .markdown-content .attachment-details h2 {
+  padding-top: 0px;
+  margin-top: 0px; }
+
+.links {
+  margin: 0px;
+  padding-bottom: 0.62501rem; }
