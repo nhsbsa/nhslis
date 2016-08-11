@@ -1,0 +1,54 @@
+{% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+
+		  	<h1 class="heading-large">
+		  		<span class="heading-secondary">Your tax credits annual review</span>
+		  		Make sure this is right
+		  	</h1>
+
+      <p>If your email address is wrong, change it below</p>
+
+      <form class="" id="new_signature" method="post">
+
+<div class="form-group">
+  <label class="form-label visuallyhidden" for="signature_email">Email address</label>
+
+  <input tabindex="5" class="form-control" value={{email-address}} name="{{email-address}}" id="signature_email" type="email">
+</div>
+
+
+ <a href="/renewals/sprint8/income_to_do" class="button">Yes – this is my email address</a>
+
+    
+    {{
+      form_macros.button({
+        label: 'Save and continue'
+      })
+    }}
+    <p class="navigation"><a class="cancel" href="../lis-home">Save and come back later</a></p>
+  </form>
+    </div>
+    </div>
+</main>
+
+{% endblock %}
+
+
+    
+   
+
+
+
+
