@@ -632,7 +632,7 @@ tr.clickable-row { cursor: pointer; }
   }
 }
 
-#whitehall-wrapper .withdrawal-notice .govspeak p {
+.govspeak p {
 	font-family:"nta", Arial, sans-serif;
 	font-size:16px;
 	line-height:1.25;
@@ -642,13 +642,13 @@ tr.clickable-row { cursor: pointer; }
 	padding-bottom:3px
 }
 @media (min-width: 641px) {
-	#whitehall-wrapper .withdrawal-notice .govspeak p {
+.govspeak p {
 		font-size:19px;
 		line-height:1.31579
 	}
 }
 @media (max-width: 640px) {
-	#whitehall-wrapper .withdrawal-notice .govspeak p {
+.govspeak p {
 		padding-top:6px;
 		padding-bottom:4px
 	}
@@ -682,5 +682,12 @@ tr.clickable-row { cursor: pointer; }
 .links{
     margin:0px;
     padding-bottom:0.62501rem;
+}
+
+
+.heading-group {
+  h1 {
+    margin-bottom: 0;
+  }
 }
 
