@@ -3761,6 +3761,7 @@ module.exports = {
         res.redirect('/lis/0/you/benefits/benefit-group1');
       }
     });
+    
 
   }
 };
