@@ -625,7 +625,7 @@ module.exports = {
         applicant.guest = true;
         res.redirect('/lis/7/live/guest/address');
       } else {
-        res.redirect('/lis/7/live/joint');
+        res.redirect('/lis/7/live/home');
       }
     });
 
@@ -1483,7 +1483,7 @@ module.exports = {
         applicant.guest = true;
         res.redirect('/lis/6/live/guest/address');
       } else {
-        res.redirect('/lis/6/live/joint');
+        res.redirect('/lis/6/live/home');
       }
     });
 
@@ -3798,6 +3798,7 @@ module.exports = {
         res.redirect('/lis/0/you/benefits/benefit-group1');
       }
     });
+    
 
   }
 };
