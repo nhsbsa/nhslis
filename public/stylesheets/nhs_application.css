@@ -2349,3 +2349,9 @@ tr.clickable-row {
 
 .heading-group h1 {
   margin-bottom: 0; }
+
+.text-small {
+  line-height: 2rem;
+  font-size: 1.2rem;
+  margin-bottom: 0.37499rem;
+  padding-top: 0.62501rem; }

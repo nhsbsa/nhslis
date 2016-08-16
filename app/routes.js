@@ -736,7 +736,7 @@ module.exports = {
         res.redirect('/lis/7/kickout');
       }
     });
-    
+
     //7) bank account handler
     app.get('/lis/7/assets/account-type-handler', function (req, res) {
       applicant.resetAccounts();
@@ -1032,6 +1032,43 @@ module.exports = {
         res.redirect('/lis/7/live/others/boarder-detail');
       } else {
         res.redirect('/lis/7/live/others/ft-student');
+      }
+    });
+
+//LIS sprint 7- Wizard
+
+
+    //7) country-handler
+    app.get('/lis/7/wizard/country-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.eligibility === 'uk') {
+        res.render('lis/7/wizard/dla');
+      } else if (req.query.eligibility === 'eu') {
+        res.render('lis/7/wizard/eu');
+      } else {
+        res.redirect('/lis/7/wizard/country');
+      }
+    });
+
+    //7) region-handler
+    app.get('/lis/7/wizard/region-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.eligibility === 'uk') {
+        res.render('lis/7/wizard/dla');
+      } else if (req.query.eligibility === 'eu') {
+        res.render('lis/7/wizard/eu');
+      } else {
+        res.redirect('/lis/7/wizard/date-of-birth');
+      }
+    });
+
+    //7) eligibility-handler
+    app.get('/lis/7/wizard/eligibility-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.kickout === 'continue') {
+        res.redirect('/lis/7/wizard/lis');
+      } else {
+        res.redirect('/lis/7/wizard/full-exemption');
       }
     });
     
@@ -3764,3 +3801,4 @@ module.exports = {
 
   }
 };
+
