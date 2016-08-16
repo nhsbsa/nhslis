@@ -1,0 +1,71 @@
+ {% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/health-costs-checker.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+
+       <!--2- What's your DOB?-->
+
+    <h2 class="heading-large">What is your date of birth?</h2>
+
+      <form action="eligibility-handler" method="get" class="form">
+
+     <div class="form-item-wrapper">
+<fieldset>
+
+        <p class="form-hint">For example 31 7 1961</p>
+
+      <div class="inline-form-groups">
+        <div class="form-group">
+          <label class="form-label" for="dob-day">Day</label>
+          <input class="form-control form-control-2-chars" id="dob-day" min="0" max="31" type="number">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="dob-month">Month</label>
+          <input class="form-control form-control-2-chars" id="dob-month" min="0" max="12" type="number">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="dob-year">Year</label>
+          <input class="form-control form-control-4-chars" id="dob-year" min="0" type="number">
+        </div>
+      </div>
+    </fieldset>
+     <!--under 16 "under16-eng-info"-->
+     <!--under 18 "3: full-time-education"-->
+     <!--under 19 "4: tax-credits-exemption"-->
+     <!--under 25 "4: tax-credits-exemption"-->
+     <!--20-25 "4: tax-credits-exemption"-->
+     <!--over 60 "4: tax-credits-exemption"-->
+      </div>
+
+
+    {{
+      form_macros.button({
+        label: 'Next'
+      })
+    }}
+
+  </form>
+      </div>
+        </div>
+</main>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+

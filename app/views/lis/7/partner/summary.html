@@ -21,6 +21,9 @@
       <td>Do you have a partner?</td>
         <td>Yes</td>
         <td><a href="partner">Change this</a></td>
+      </table>
+        <table class="data-table you-summary">
+        <p><strong>About your partner</strong></p>
       <tr>
         <td>Your partner's name</td>
         <td>Priya Mattu</td>
@@ -41,9 +44,12 @@
         <td>No</td>
         <td><a href="hospital">Change this</a></td>
       </tr>
+      </table>
+            <table class="data-table you-summary">
+        <p><strong>Priya's work and education</strong></p>
       <tr>
         <td>Does your partner have a job?</td>
-        <td>{{myWork}}</td>
+        <td>No</td>
         <td><a href="work">Change this</a></td>
       </tr>
       <tr>
@@ -51,6 +57,9 @@
         <td>No</td>
         <td><a href="education">Change this</a></td>
       </tr>
+      </table>
+    <table class="data-table you-summary">
+        <p><strong>Priya's pension(s)</strong></p>
       <tr>
         <td>Does your partner receive a pension?</td>
         <td>Yes</td>
@@ -70,6 +79,14 @@
         <td>£123 per week</td>
         <td><a href="pension/private-pension-amount">Change this</a></td>
       </tr>
+      </table>
+        <table class="data-table you-summary">
+        <p><strong>Priya's benefits</strong></p>
+        <tr>
+        <td>Benefits your partner recieves</td>
+        <td>They don't receive <br>any of these</td>
+        <td><a href="pension/private-pension-amount">Change this</a></td>
+      </tr>
       <tr>
         <td>Is your partner looking after someone but can’t get carers allowance because of another benefit?</td>
         <td>No</td>
@@ -80,6 +97,9 @@
         <td>No</td>
         <td><a href="benefits/benefit5">Change this</a></td>
       </tr>
+      </table>
+            <table class="data-table you-summary">
+        <p><strong>Priya's other money</strong></p>
       <tr>
         <td>Does your partner receive any other money?</td>
         <td>No</td>
@@ -87,6 +107,8 @@
       </tr>
 
     </table>
+      
+    
     <form action="partner-done" method="get" class="form">
       {{
         form_macros.button({
