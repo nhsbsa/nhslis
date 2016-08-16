@@ -161,6 +161,22 @@ function setPartnerText() {
   }
 }
 
+
+/*
+
+var xx = function() {
+
+  // partner summary
+  if (applicant.partner = true) {
+    {{tag}} = 'Yes';
+  } else {
+    {{tag}} = 'No';
+    }
+}
+
+*/
+
+
 var querystring = require('querystring');
 
 function resetVars() {
