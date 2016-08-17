@@ -1935,6 +1935,12 @@ p.intro-to-list {
   padding: 0.7894736842em;
   margin-bottom: 0.7894736842em; }
 
+.panel-smaller {
+  clear: both;
+  border-left-style: solid;
+  border-color: #bfc1c3;
+  padding: 0.1em 0.1em 0em 0.7894736842em; }
+
 .panel-border-wide {
   border-left-width: 10px; }
 
@@ -2318,6 +2324,9 @@ tr.clickable-row {
     padding-top: 6px;
     padding-bottom: 4px; } }
 
+.callout-box p {
+  margin-bottom: 0.3em; }
+
 .attachment {
   position: relative;
   padding: 15px 0 0 129px; }
@@ -2393,3 +2402,9 @@ tr.clickable-row {
   color: white;
   transition: .25s ease-in;
   border-bottom: 10px solid white; }
+
+.panel-border-narrow {
+  border-left-style: solid;
+  border-color: #bfc1c3;
+  padding: 0.7894736842em;
+  margin-bottom: 0.7894736842em; }

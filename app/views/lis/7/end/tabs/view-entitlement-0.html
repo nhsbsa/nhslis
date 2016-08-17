@@ -10,18 +10,13 @@
 
 <main id="content" role="main">
 
-    <div class="done-panel">
-        <p class="lede"><span id="done-tick"> </span><strong>Application submitted</strong> / Reference number: 1Q3 4T6 7K9</p>
+<div class="done-panel">
+    <h2 class="heading-medium"><span id="done-tick"> </span>Application complete</h2>
+    <h1 class="heading-large">You can get partial help with health costs</h1>
+    <h4 class="heading-small">Your certificate is valid for</h4>
+    <h2 class="heading-large">6 months</h2>
   </div>
 
-<!--
-      <div class="prompt-panel">
-        <p class="lede"><span id="done-tick"> </span><strong>Application submitted</strong> / Reference number: 1Q3 4T6 7K9</p>
-  </div>
--->
-
-
-  <h1 class="heading-xlarge"></h1>
   <nav class="tab-nav">
     <a href="#prototype" class="tab messages selected">What you’re entitled to</a>
     <a href="#certificate" class="tab messages">Get your certificate</a>
@@ -56,24 +51,28 @@
         <h4 class="heading-small">Glasses or contact lenses</h4>
         <p class="description">Towards an optical voucher, you pay:</p>
         <p class="heading-medium">£x.xx</p>
+        <a href="">How to use this certificate for glasses or contact lenses</a>
       </div>
 
       <div class="entitlement">
         <h4 class="heading-small">NHS dental treatment</h4>
         <p class="description">Per course of treatment, you pay a maximum of:</p>
         <p class="heading-medium">£x.xx</p>
+        <a href="">How to use this certificate for dental treatment</a>
       </div>
 
       <div class="entitlement">
         <h4 class="heading-small">Travel to receive NHS treatment</h4>
         <p class="description">Towards travel, in a week you pay:</p>
         <p class="heading-medium">£x.xx</p>
+        <a href="">How to use this certificate for travel</a>
       </div>
 
       <div class="entitlement">
         <h4 class="heading-small">NHS Wigs, or NHS fabric supports</h4>
         <p class="description">Per prescribed item you pay a maximum of:</p>
         <p class="heading-medium">£x.xx</p>
+        <a href="">How to use this certificate for wigs or fabric supports</a>
       </div>
     </div>
   </div>
@@ -87,40 +86,64 @@
 
   <div class="column-two-thirds">
     <h1 class="heading-large">Get your certificate</h1>
-      <div class="summary">
-  <p class="lede">You will need to show a copy of this information whenever you want to use it.</p>
-</div>
+
+     <div class="callout-box">
+       <p>You will need to show a copy of this information whenever you want to use it.</p>
      </div>
 
+     </div>
 
-
-          <div class="column-two-thirds">
+  <div class="column-two-thirds">
+<!--         <p class=""><img class="" style="margin-right:10px" src="/public/images/icon_email.png" alt="">Your  certificate has been emailed to <span style="font-weight:700" id="emailAddress">vinay.mattu@inter.net</span></p>-->
     <article>
       <div class="govspeak">
-          <section class="attachment embedded" id="attachment_hc3">
-  <div class="attachment-thumb">
-      <img alt="" src="/public/images/hc3-img-01.png">
-  </div>
-  <div class="attachment-details">
-             <p class="links">
-        <span class="download">
-          <a href="/government/uploads/system/uploads/attachment_data/file/396239/140930---Organogram-Data---HM-Passport-Office-senior-data_csv.csv">
-            <strong>Print</strong>
-</a>        </span>
-    </p>
-       <p class="links">
-        <span class="download">
-          <a href="/government/uploads/system/uploads/attachment_data/file/396239/140930---Organogram-Data---HM-Passport-Office-senior-data_csv.csv">
+        <section class="attachment embedded" id="attachment_hc3">
+          <div class="attachment-thumb"> <img alt="" src="/public/images/hc3-img-01.png">
+          </div>
+
+          <div class="attachment-details">
+            <details>
+              <summary role="button" aria-controls="paper-copy" tabindex="0" aria-expanded="true"><span class="summary"><strong>Email a copy</strong></span></summary>
+
+              <div class="panel-border-narrow" id="paper-copy" aria-hidden="false" style="display: block;">
+                <label class="heading-small" for="email-address">Email address</label>
+                <input id="email-address" class="form-control" type="text">
+              </div>
+            </details>
+<!--
+  <fieldset>
+            <p class="links js-toggle" for="email" data-show="#contact-email-address" data-hide="#contact-mobile-number"><span class="download"><a style="color: #0072C6;
+text-decoration: underline;cursor: pointer"><strong>Email a copy</strong></a></span></p>
+
+    <div class="js-hidden panel-indent" id="contact-email-address">
+      <label class="heading-small" for="email-address">
+        Email address
+      </label>
+      <input id="email-address" class="form-control" type="text">
+    </div>
+    </fieldset>
+-->
+
+            <p class="links"><span class="download">
+          <a href="javascript:window.print();"><strong>Print</strong></a>
+          </span></p>
+
+            <p class="links"> <span class="download"><a href="/public/images/hc3.pdf" target="_blank">
             <strong>Download PDF</strong>
-            9.97KB
-</a>        </span>
-    </p>
-  </div>
-</section>
+            9.97KB</a></span></p>
 
+            <details>
+              <summary role="button" aria-controls="paper-copy" tabindex="0" aria-expanded="true"><span class="summary"><strong>Request a paper copy</strong></span></summary>
 
+              <div class="panel panel-border-narrow" id="paper-copy" aria-hidden="false" style="display: block;">
+                <p>If you are unable to print or download a copy of your certificate we can send a copy in the post to the address you used when you applied.</p>
 
+                <p>It will take around xx days to arrive. </p>
+              </div>
+            </details>
 
+          </div>
+        </section>
       </div>
     </article>
   </div>
