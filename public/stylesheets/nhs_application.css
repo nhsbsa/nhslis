@@ -2408,3 +2408,11 @@ tr.clickable-row {
   border-color: #bfc1c3;
   padding: 0.7894736842em;
   margin-bottom: 0.7894736842em; }
+
+.info-panel {
+  padding: 20px 20px 20px 60px;
+  font-weight: bold;
+  background: #0072C6;
+  text-align: left;
+  color: white;
+  margin-bottom: 5px; }

@@ -7,6 +7,19 @@
 
 {% block content %}
 
+<style>
+
+    .right-col-details{
+        width: 95%;
+        float: right;
+        margin-top: 80px}
+
+    .right-col-details div:first-child {
+    border-bottom: 7px solid #0072C6;
+        padding-bottom: 0px;}
+
+</style>
+
 <main id="content" role="main">
 
   <div class="grid-row">
@@ -53,32 +66,37 @@
 
   </form>
       </div>
-        <div class="answers-wrapper">
-                <div class="column-third" style="margin-top:40px">
-           <div class="info-panel" id="prescription">
-             <p class="lede" style="font-weight:bold; margin:0 0 0 0;">Prescriptions</p>
-          </div>
+
+          <div class="column-third">
+
+      <div class="right-col-details">
+
+<div>
+          <h3 class="heading-medium">You get free:</h3>
         </div>
-        <div class="column-third">
-           <div class="info-panel" id="sight-test">
-             <p class="lede" style="font-weight:bold; margin:0 0 0 0;">Sight tests</p>
-          </div>
+
+        <div>
+          <h3 class="heading-small">Prescriptions</h3>
         </div>
-        <div class="column-third">
-           <div class="info-panel" id="glasses">
-             <p class="lede" style="font-weight:bold; margin:0 0 0 0;">Glasses or contact lenses</p>
-          </div>
+
+        <div>
+          <h3 class="heading-small">Sight tests</h3>
         </div>
-        <div class="column-third">
-           <div class="info-panel" id="dental-exam">
-             <p class="lede" style="font-weight:bold; margin:0 0 0 0;">NHS dental exam</p>
-          </div>
+
+        <div>
+          <h3 class="heading-small">Glasses or contact lenses</h3>
         </div>
-        <div class="column-third">
-           <div class="info-panel" id="dental-treatment">
-             <p class="lede" style="font-weight:bold; margin:0 0 0 0;">NHS dental treatment</p>
-          </div>
+
+        <div>
+          <h3 class="heading-small">NHS dental exam</h3>
         </div>
+
+        <div>
+          <h3 class="heading-small">NHS dental treatment</h3>
+        </div>
+
+      </div>
+
     </div>
     </div>
 
@@ -86,7 +104,6 @@
 
 
 {% endblock %}
-
 
 
 
