@@ -45,14 +45,6 @@
          Every month
         </label>
       </div>
-          <div class="js-hidden panel-indent" id="tax-months">
-          {{
-            form_macros.text_field({
-              id: 'tax-months',
-              label: 'How many months do you pay over?'
-            })
-          }}
-        </div><br>
       <div class="form-group">
         <input type="radio" id="year" name="minor">
         <label class="form-control-radio js-toggle" for="year" data-hide="#tax-months">
@@ -66,6 +58,14 @@
         label: 'How much do you pay?'
       })
     }}
+          <div class="js-hidden" id="tax-months">
+          {{
+            form_macros.text_field({
+              id: 'tax-months',
+              label: 'How many months do you pay over?'
+            })
+          }}
+        </div>
 
     </div>  
         
