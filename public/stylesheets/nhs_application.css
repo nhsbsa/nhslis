@@ -2416,3 +2416,43 @@ tr.clickable-row {
   text-align: left;
   color: white;
   margin-bottom: 5px; }
+
+.email-text {
+  padding-left: 2em;
+  background-image: url(/public/images/icon_email.png);
+  background-repeat: no-repeat;
+  background-position: 0px; }
+
+.pagination {
+  margin: 48px 0;
+  padding-top: 18px;
+  border-top: 2px solid #b9d2dc; }
+
+.pagination .previous-page {
+  margin-top: 12px; }
+
+@media (min-width: 769px) {
+  .pagination .previous-page {
+    margin-top: 0;
+    float: left;
+    width: 50%; }
+  .pagination .next-page {
+    float: right;
+    text-align: right;
+    width: 50%; } }
+
+.pagination a {
+  display: inline-block;
+  text-decoration: none !important; }
+
+.pagination .prefix {
+  font-size: 13px;
+  color: #231f20; }
+
+@media (min-width: 769px) {
+  .pagination .prefix {
+    font-size: 14px; } }
+
+.pagination .title {
+  display: block;
+  text-decoration: underline; }

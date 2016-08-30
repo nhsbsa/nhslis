@@ -7,7 +7,10 @@
 
 {% block content %}
 
+
 <main id="content" role="main">
+
+ <link rel="stylesheet" href="/public/stylesheets/pagination.css">
 
  <div class="grid-row">
   <div class="column-two-thirds">
@@ -30,53 +33,50 @@
     </div>
 
     <div class="grid-row">
-          <div class="column-two-thirds">
+  <div class="column-two-thirds">
+         <p class="email-text">Your certificate has been emailed to <span style="font-weight:700" id="emailAddress">vinay.mattu@inter.net</span></p>
     <article>
       <div class="govspeak">
-          <section class="attachment embedded" id="attachment_hc3">
-  <div class="attachment-thumb">
-      <img alt="" src="/public/images/hc3-img-01.png">
-  </div>
-  <div class="attachment-details">
-<!--    <h2 class="heading-medium">Your help with health costs </h2>-->
-    <p class="links">
-        <span class="preview">
-          <strong>
-            <a href="/government/uploads/system/uploads/attachment_data/file/396239/140930---Organogram-Data---HM-Passport-Office-senior-data_csv.csv/preview">View online</a>
-          </strong>
-        </span>
-      </p>
-             <p class="links">
-        <span class="download">
-          <a href="/government/uploads/system/uploads/attachment_data/file/396239/140930---Organogram-Data---HM-Passport-Office-senior-data_csv.csv">
-            <strong>Print</strong>
-</a>        </span>
-    </p>
-       <p class="links">
-        <span class="download">
-          <a href="/government/uploads/system/uploads/attachment_data/file/396239/140930---Organogram-Data---HM-Passport-Office-senior-data_csv.csv">
+        <section class="attachment embedded" id="attachment_hc3">
+          <div class="attachment-thumb"> <img alt="" src="/public/images/hc3-img-01.png">
+          </div>
+
+          <div class="attachment-details">
+            <p class="links"><span class="download"><a href="../../exemption/email-me?helplevel=3">
+            <strong>Email (another) copy</strong></a></span></p>
+
+            <p class="links"><span class="download">
+            <a href="javascript:window.print();"> <strong>Print</strong></a></span></p>
+
+            <p class="links"> <span class="download"><a href="/public/images/hc3.pdf">
             <strong>Download PDF</strong>
-            9.97KB
-</a>        </span>
-    </p>
-<!--
-                 <p class="links">
-        <span class="download">
-          <a href="/government/uploads/system/uploads/attachment_data/file/396239/140930---Organogram-Data---HM-Passport-Office-senior-data_csv.csv">
-            <strong>Print</strong>
-</a>        </span>
-    </p>
--->
-  </div>
-</section>
+            9.97KB</a></span></p>
 
+            <p class="links"> <span class="download"><a href="/public/images/hc3.pdf">
+            <strong>Request a paper copy</strong></a></span></p>
+          </div>
 
-
-
+        </section>
       </div>
     </article>
+    
+    <nav class="pagination_gds" role="navigation" aria-label="Pagination">
+        <ul class="group">
+          <li class="previous">
+            <a title="Navigate to previous part" rel="prev" href="view-entitlement">
+              <span class="pagination-label">Previous</span>
+              <span class="pagination-part-title">What you're entitled to</span>
+            </a>
+          </li>
+          <li class="next">
+        </ul>
+    </nav>
   </div>
 
     </div>
+    
+
 
   </main>
+
+

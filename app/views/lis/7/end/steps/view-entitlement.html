@@ -9,17 +9,18 @@
 
 <main id="content" role="main">
 
-    <div class="done-panel">
-        <p class="lede"><span id="done-tick"> </span><strong>Application submitted</strong> / Reference number: 1Q3 4T6 7K9</p>
-  </div>
-
-
- <div class="grid-row">
+<link rel="stylesheet" href="/public/stylesheets/pagination.css">
+    
+     <div class="grid-row">
   <div class="column-two-thirds">
+      <div class="done-panel">
+    <h1 class="heading-medium"><span id="done-tick"> </span>Application complete</h1>
+    <h2 class="heading-medium">You can get partial help with health costs</h2>
+  </div>
 
       <h1 class="heading-large">
         <span class="heading-secondary">Step 2</span>
-       View your entitlements
+       What you're entitled to
       </h1>
     </div>
     </div>
@@ -61,13 +62,47 @@
         <p class="heading-medium">£x.xx</p>
       </div>
 
-        <p>
-          <a class="button" href="hc3-entitlement-v2" id="next">Get your certificate</a>
-        </p>
+<!--Stepped pagination-->
+<!--
+        <nav class="pagination" role="navigation">
 
+            <div class="next-page">
+              <a href="hc3-documents">
+                <span class="prefix">Next step:</span>
+                <span class="title">Get your certificate</span>
+              </a>
+            </div>
 
+            <div class="previous-page">
+              <a href="">
+                <span class="prefix">Previous step:</span>
+                <span class="title">Your application</span>
+              </a>
+            </div>
+
+        </nav>
+        
+-->
+        
+
+        <nav class="pagination_gds" role="navigation" aria-label="Pagination">
+            <ul class="group">
+                  <li class="previous">
+                    <a title="Navigate to previous part" rel="prev" href="what-you-told-us">
+                      <span class="pagination-label">Previous</span>
+                      <span class="pagination-part-title">Your application</span>
+                    </a>
+                  </li>
+                  <li class="next">
+                    <a title="Navigate to next part" rel="next" href="hc3-documents">
+                      <span class="pagination-label">Next</span> <span class="pagination-part-title">Get your certificate</span>
+                    </a>
+                  </li>
+            </ul>
+          </nav>
     </div>
 
+<!--
     <div class="column-third">
 
       <div style="margin-top:135px;">
@@ -87,6 +122,7 @@
 
 
     </div>
+-->
 
   </div>
 
