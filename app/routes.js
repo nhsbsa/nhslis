@@ -129,9 +129,6 @@ var householder = {
       householder.overNineteen = true;
     }
   },
-  fullName : function () {
-    return this.firstName + " " + this.lastName;
-  },
   resetHouseHolder : function () {
     householder.relationship = null;
     householder.financialSupport = null;
