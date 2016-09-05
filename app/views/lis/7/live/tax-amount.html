@@ -21,34 +21,34 @@
   <form action="" method="get" class="form">
 
     <div class="form-item-wrapper">
-      <div class="form-group">
+      <!--div class="form-group">
         <input type="radio" id="week" name="minor">
         <label class="form-control-radio js-toggle" for="week" data-hide="#tax-months">
           Every week
         </label>
-      </div>
-      <div class="form-group">
+      </div-->
+      <!--div class="form-group">
         <input type="radio" id="fortnight" name="minor">
         <label class="form-control-radio js-toggle" for="fortnight" data-hide="#tax-months">
           Every two weeks
         </label>
-      </div>
-      <div class="form-group">
+      </div-->
+      <!--div class="form-group">
         <input type="radio" id="fourweekly" name="minor">
         <label class="form-control-radio js-toggle" for="fourweekly" data-hide="#tax-months">
          Every four weeks
+        </label>
+      </div-->
+      <div class="form-group">
+        <input type="radio" id="year" name="minor">
+        <label class="form-control-radio js-toggle" for="year" data-hide="#tax-months">
+          Annually
         </label>
       </div>
       <div class="form-group">
         <input type="radio" id="month" name="minor">
         <label class="form-control-radio js-toggle" for="month" data-show="#tax-months">
          Every month
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="radio" id="year" name="minor">
-        <label class="form-control-radio js-toggle" for="year" data-hide="#tax-months">
-          Annually
         </label>
       </div>
       
@@ -58,7 +58,8 @@
         label: 'How much do you pay?'
       })
     }}
-          <div class="js-hidden" id="tax-months">
+
+      <div class="js-hidden" id="tax-months">
           {{
             form_macros.text_field({
               id: 'tax-months',
