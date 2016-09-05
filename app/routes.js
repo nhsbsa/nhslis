@@ -74,6 +74,7 @@ var applicant = person.createPerson(
   this.dobDay = null,
   this.dobMonth = null,
   this.dobYear = null,
+  this.email = null,
   this.partner = true,
   this.statePension = false,
   this.privatePension = false,
@@ -98,6 +99,7 @@ var partner = person.createPerson(
   this.dobDay = null,
   this.dobMonth = null,
   this.dobYear = null,
+  this.email = null,
   this.partner = false,
   this.statePension = false,
   this.privatePension = false,
@@ -164,6 +166,35 @@ function setPartnerText() {
   }
 }
 
+var convertMonth = function(monthInt) {
+  monthInt = Number(monthInt);
+  if (monthInt === 1){
+    return ("January");
+  } else if (monthInt === 2) {
+    return ("February");
+  } else if (monthInt === 3) {
+    return ("March");
+  } else if (monthInt === 4) {
+    return ("April");
+  } else if (monthInt === 5) {
+    return ("May");
+  } else if (monthInt === 6) {
+    return ("June");
+  } else if (monthInt === 7) {
+    return ("July");
+  } else if (monthInt === 8) {
+    return ("August");
+  } else if (monthInt === 9) {
+    return ("September");
+  } else if (monthInt === 10) {
+    return ("October");
+  } else if (monthInt === 11) {
+    return ("November");
+  } else if (monthInt === 12) {
+    return ("December");
+  }
+};
+
 
 /*
 
@@ -197,13 +228,14 @@ module.exports = {
         }
       )[0];
     }
-  
+
     setPartnerText();
 
     app.get('/', function (req, res) {
       res.render('index');
       resetPeople();
       resetVars();
+      applicant.resetVars();
       applicant.resetBenefits();
       console.log('applicant =');
       applicant.printPerson();
@@ -221,22 +253,42 @@ module.exports = {
         'cert-title' : 'HC2'
       });
     });
-//LIS sprint 6
     
+//LIS sprint 7
+    
+    //7) email-address-handler
+    app.get('/lis/7/save-continue/email-address-handler', function (req, res) {
+      applicant.email = req.query.email;
+      res.render('lis/7/save-continue/mem-word');
+    });
+    
+    //7)
+    app.get('/lis/7/you/email', function (req, res) {
+      res.render('lis/7/you/email', {
+          'email' : applicant.email
+        });
+    });
+
     //7) contact-handler
     app.get('/lis/7/you/contact-handler', function (req, res) {
       if (req.query.contact === "email") {
         applicant.contactPref ='email';
-        res.render('lis/7/you/email');
+        res.render('lis/7/you/email', {
+          'email' : applicant.email
+        });
       } else if (req.query.contact === "telephone") {
         applicant.contactPref ='telephone';
         res.render('lis/7/you/telephone');
       } else if (req.query.contact === "both") {
         applicant.contactPref ='both';
-        res.render('lis/7/you/email');
+        res.render('lis/7/you/email', {
+          'email' : applicant.email
+        });
       } else {
         applicant.contactPref ='none';
-        res.render('lis/7/you/email');
+        res.render('lis/7/you/email', {
+          'email' : applicant.email
+        });
       }
     });
     
@@ -525,13 +577,13 @@ module.exports = {
 
     //7) about you summary
     app.get('/lis/7/you/about-you-summary', function (req, res) {
-      console.log(applicant.dobYear);
       res.render('lis/7/you/about-you-summary', {
         'mywork' : myWork,
         'applicantFullName' : applicant.fullName(),
         'dobday' : applicant.dobDay,
         'dobmonth' : applicant.dobMonth,
-        'dobyear' : applicant.dobYear
+        'dobyear' : applicant.dobYear,
+        'email' : applicant.email
       });
     });
     
@@ -542,7 +594,7 @@ module.exports = {
       applicant.firstName = req.query.firstname;
       applicant.lastName = req.query.lastname;
       applicant.dobDay = req.query.day;
-      applicant.dobMonth = req.query.month;
+      applicant.dobMonth = convertMonth(req.query.month);
       applicant.dobYear = req.query.year;
       console.log(applicant.dobYear);
       res.render('lis/7/you/contact-prefs', {

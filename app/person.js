@@ -4,6 +4,7 @@ function Person(
   dobDay,
   dobMonth,
   dobYear,
+  email,
   partner,
   statePension,
   privatePension,
@@ -28,6 +29,7 @@ function Person(
   this.dobDay = dobDay,
   this.dobMonth = dobMonth,
   this.dobYear = dobYear,
+  this.email = email;
   this.partner = partner;
   this.statePension = statePension;
   this.privatePension = privatePension;
@@ -94,6 +96,16 @@ Person.prototype.resetBenefits = function () {
   this.personalIndependence = false;
   this.childTaxCredits = false;
   console.log('resetting benefits...');
+};
+
+Person.prototype.resetVars = function () {
+  this.firstName = null;
+  this.lastName = null;
+  this.dobDay = null;
+  this.dobMonth = null;
+  this.dobYear = null;
+  this.email = null;
+  console.log('resetting vars...');
 };
 
 Person.prototype.resetContactPref = function () {
