@@ -71,6 +71,9 @@ var application = {
 var applicant = person.createPerson(
   this.firstName = null,
   this.lastName = null,
+  this.dobDay = null,
+  this.dobMonth = null,
+  this.dobYear = null,
   this.partner = true,
   this.statePension = false,
   this.privatePension = false,
@@ -92,6 +95,9 @@ var applicant = person.createPerson(
 var partner = person.createPerson(
   this.firstName = null,
   this.lastName = null,
+  this.dobDay = null,
+  this.dobMonth = null,
+  this.dobYear = null,
   this.partner = false,
   this.statePension = false,
   this.privatePension = false,
@@ -519,9 +525,13 @@ module.exports = {
 
     //7) about you summary
     app.get('/lis/7/you/about-you-summary', function (req, res) {
+      console.log(applicant.dobYear);
       res.render('lis/7/you/about-you-summary', {
         'mywork' : myWork,
-        'applicantFullName' : applicant.fullName()
+        'applicantFullName' : applicant.fullName(),
+        'dobday' : applicant.dobDay,
+        'dobmonth' : applicant.dobMonth,
+        'dobyear' : applicant.dobYear
       });
     });
     
@@ -531,6 +541,10 @@ module.exports = {
       application.aboutYouLink = continueText;
       applicant.firstName = req.query.firstname;
       applicant.lastName = req.query.lastname;
+      applicant.dobDay = req.query.day;
+      applicant.dobMonth = req.query.month;
+      applicant.dobYear = req.query.year;
+      console.log(applicant.dobYear);
       res.render('lis/7/you/contact-prefs', {
         'applicantFirstName' : applicant.firstName
       });

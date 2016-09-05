@@ -1,6 +1,9 @@
 function Person(
   firstName,
   lastName,
+  dobDay,
+  dobMonth,
+  dobYear,
   partner,
   statePension,
   privatePension,
@@ -22,6 +25,9 @@ function Person(
 ) {
   this.firstName = firstName;
   this.lastName = lastName;
+  this.dobDay = dobDay,
+  this.dobMonth = dobMonth,
+  this.dobYear = dobYear,
   this.partner = partner;
   this.statePension = statePension;
   this.privatePension = privatePension;
