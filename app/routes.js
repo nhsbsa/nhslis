@@ -195,22 +195,6 @@ var convertMonth = function(monthInt) {
   }
 };
 
-
-/*
-
-var xx = function() {
-
-  // partner summary
-  if (applicant.partner = true) {
-    {{tag}} = 'Yes';
-  } else {
-    {{tag}} = 'No';
-    }
-}
-
-*/
-
-
 var querystring = require('querystring');
 
 function resetVars() {
@@ -271,29 +255,25 @@ module.exports = {
 
     //7) contact-handler
     app.get('/lis/7/you/contact-handler', function (req, res) {
-      if (req.query.contact === "email") {
-        applicant.contactPref ='email';
-        res.render('lis/7/you/email', {
-          'email' : applicant.email
-        });
-      } else if (req.query.contact === "telephone") {
-        applicant.contactPref ='telephone';
+      applicant.contactPref = req.query.contact;
+      console.log(applicant.contactPref);
+      console.log(applicant.email);
+      if (applicant.contactPref === 'email' || applicant.contactPref === 'both') {
+        if (applicant.email != null) {
+          res.render('lis/7/you/email', {
+            'email' : applicant.email
+          });
+        } else {
+          res.render('lis/7/you/email-new');
+        }
+      } else if (applicant.contactPref === 'telephone') {
         res.render('lis/7/you/telephone');
-      } else if (req.query.contact === "both") {
-        applicant.contactPref ='both';
-        res.render('lis/7/you/email', {
-          'email' : applicant.email
-        });
-      } else {
-        applicant.contactPref ='none';
-        res.render('lis/7/you/email', {
-          'email' : applicant.email
-        });
       }
     });
     
     //7) email handler
     app.get('/lis/7/you/email-handler', function (req, res) {
+      applicant.email = req.query.email;
       if(applicant.contactPref === 'both') {
         res.render('lis/7/you/telephone');
       } else {

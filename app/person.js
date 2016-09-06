@@ -105,12 +105,8 @@ Person.prototype.resetVars = function () {
   this.dobMonth = null;
   this.dobYear = null;
   this.email = null;
-  console.log('resetting vars...');
-};
-
-Person.prototype.resetContactPref = function () {
   this.contactPref = null;
-  console.log('resetting contact preferences...');
+  console.log('resetting vars...');
 };
 
 Person.prototype.resetLivingSituation = function () {

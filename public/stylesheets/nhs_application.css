@@ -11,7 +11,7 @@
 @-o-viewport {
   width: device-width; }
 
-.grid-row:after, #content:after, fieldset:after, .form-item-wrapper:after, .form-group:after, .inline-form-groups:after, .panel-indent:after, .appointment-location:after, .appointment-details:after, .clearfix:after, .guide-header .guide-contents:after, .pagination-simple:after, #breadcrumbs:after, #global-header:after, #footer:after {
+.grid-row:after, #content:after, fieldset:after, .form-item-wrapper:after, .form-group:after, .inline-form-groups:after, .panel-indent:after, .appointment-location:after, .appointment-details:after, .clearfix:after, .guide-header .guide-contents:after, .pagination-simple:after, #breadcrumbs:after, #global-header:after, #footer:after, .phase-banner-alpha:after {
   content: "";
   display: block;
   clear: both; }
@@ -28,19 +28,19 @@
 @-o-viewport {
   width: device-width; }
 
-.grid-row:after, #content:after, fieldset:after, .form-item-wrapper:after, .form-group:after, .inline-form-groups:after, .panel-indent:after, .appointment-location:after, .appointment-details:after, .clearfix:after, .guide-header .guide-contents:after, .pagination-simple:after, #breadcrumbs:after, #global-header:after, #footer:after {
+.grid-row:after, #content:after, fieldset:after, .form-item-wrapper:after, .form-group:after, .inline-form-groups:after, .panel-indent:after, .appointment-location:after, .appointment-details:after, .clearfix:after, .guide-header .guide-contents:after, .pagination-simple:after, #breadcrumbs:after, #global-header:after, #footer:after, .phase-banner-alpha:after {
   content: "";
   display: block;
   clear: both; }
 
-#content {
+#content, .phase-banner-alpha {
   max-width: 960px;
   margin: 0 15px; }
   @media (min-width: 641px) {
-    #content {
+    #content, .phase-banner-alpha {
       margin: 0 30px; } }
   @media (min-width: 1020px) {
-    #content {
+    #content, .phase-banner-alpha {
       margin: 0 auto; } }
 
 .grid-row {
@@ -52,7 +52,7 @@
 @-o-viewport {
   width: device-width; }
 
-.grid-row:after, #content:after, fieldset:after, .form-item-wrapper:after, .form-group:after, .inline-form-groups:after, .panel-indent:after, .appointment-location:after, .appointment-details:after, .clearfix:after, .guide-header .guide-contents:after, .pagination-simple:after, #breadcrumbs:after, #global-header:after, #footer:after {
+.grid-row:after, #content:after, fieldset:after, .form-item-wrapper:after, .form-group:after, .inline-form-groups:after, .panel-indent:after, .appointment-location:after, .appointment-details:after, .clearfix:after, .guide-header .guide-contents:after, .pagination-simple:after, #breadcrumbs:after, #global-header:after, #footer:after, .phase-banner-alpha:after {
   content: "";
   display: block;
   clear: both; }
@@ -2456,3 +2456,7 @@ tr.clickable-row {
 .pagination .title {
   display: block;
   text-decoration: underline; }
+
+.phase-banner-alpha {
+  padding: 10px 0 8px;
+  border-bottom: 1px solid #bfc1c3; }
