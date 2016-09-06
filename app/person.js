@@ -7,8 +7,11 @@ function Person(
   email,
   partner,
   statePension,
+  statePensionAmount,
   privatePension,
+  privatePensionAmount,
   employmentPension,
+  employmentPensionAmount,
   warPension,
   warWidowPension,
   savings,
@@ -32,8 +35,10 @@ function Person(
   this.email = email;
   this.partner = partner;
   this.statePension = statePension;
-  this.privatePension = privatePension;
+  this.statePensionAmount = statePensionAmount;
+  this.privatePensionAmount = privatePensionAmount;
   this.employmentPension = employmentPension;
+  this.employmentPensionAmount = employmentPensionAmount;
   this.warPension = warPension;
   this.warWidowPension = warWidowPension;
   this.savings = savings;
