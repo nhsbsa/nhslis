@@ -244,20 +244,20 @@ module.exports = {
     
 //LIS sprint 7
     
-    //7) email-address-handler
+    //7) ref-email-handler
     app.get('/lis/7/save-continue/ref-email-handler', function (req, res) {
       if (req.query.email != '') {
         applicant.email = req.query.email;
       }
-      res.redirect('/lis/7/you/work');
+      res.redirect('/lis/7/save-continue/mem-word');
     });
     
     //7) email-address-handler
-    app.get('/lis/7/save-continue/email-address-handler', function (req, res) {
+    app.get('/lis/7/you/email-address-handler', function (req, res) {
       if (req.query.email != '') {
         applicant.email = req.query.email;
       }
-      res.render('lis/7/save-continue/mem-word');
+      res.redirect('/lis/7/you/work');
     });
     
     //7)
