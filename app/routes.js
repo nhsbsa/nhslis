@@ -80,6 +80,7 @@ var applicant = person.createPerson(
   this.privatePension = false,
   this.employmentPension = false,
   this.warPension = false,
+  this.savingsCredit = false,
   this.savings = false,
   this.premiumBonds = false,
   this.disabilityLivingAllowance = false,
@@ -192,6 +193,14 @@ var convertMonth = function(monthInt) {
     return ("November");
   } else if (monthInt === 12) {
     return ("December");
+  }
+};
+
+var boolToString = function(myBool) {
+  if(myBool === true) {
+    return 'Yes';
+  } else if (myBool === false) {
+    return 'No';
   }
 };
 
@@ -584,7 +593,8 @@ module.exports = {
         'dobyear' : applicant.dobYear,
         'email' : applicant.email,
         'contact' : applicant.contactPref,
-        'contacttext' : contactText
+        'contacttext' : contactText,
+        'savingscredit' : boolToString(applicant.savingsCredit)
       });
     });
     
@@ -709,12 +719,13 @@ module.exports = {
       }
     });
 
-    //7) pension credit kick out
+    //7) pension credit handler
     app.get('/lis/7/you/pension/pencred-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.prencred === 'ssp') {
+      if (req.query.savingscredit === 'yes') {
+        applicant.savingsCredit = true;
         res.redirect('/lis/7/you/pension/credit-amount');
       } else {
+        applicant.savingsCredit = false;
         res.redirect('/lis/7/you/pension/pension-type');
       }
     });

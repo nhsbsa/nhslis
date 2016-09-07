@@ -14,6 +14,7 @@ function Person(
   employmentPensionAmount,
   warPension,
   warWidowPension,
+  savingsCredit,
   savings,
   disabilityLivingAllowance,
   attendanceAllowance,
@@ -41,6 +42,7 @@ function Person(
   this.employmentPensionAmount = employmentPensionAmount;
   this.warPension = warPension;
   this.warWidowPension = warWidowPension;
+  this.savingsCredit = savingsCredit;
   this.savings = savings;
   this.disabilityLivingAllowance = disabilityLivingAllowance;
   this.attendanceAllowance = attendanceAllowance;
