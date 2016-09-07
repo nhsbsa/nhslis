@@ -195,6 +195,10 @@ var convertMonth = function(monthInt) {
   }
 };
 
+String.prototype.toProperCase = function () {
+    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+};
+
 var querystring = require('querystring');
 
 function resetVars() {
@@ -241,8 +245,18 @@ module.exports = {
 //LIS sprint 7
     
     //7) email-address-handler
+    app.get('/lis/7/save-continue/ref-email-handler', function (req, res) {
+      if (req.query.email != '') {
+        applicant.email = req.query.email;
+      }
+      res.redirect('/lis/7/you/work');
+    });
+    
+    //7) email-address-handler
     app.get('/lis/7/save-continue/email-address-handler', function (req, res) {
-      applicant.email = req.query.email;
+      if (req.query.email != '') {
+        applicant.email = req.query.email;
+      }
       res.render('lis/7/save-continue/mem-word');
     });
     
@@ -257,7 +271,6 @@ module.exports = {
     app.get('/lis/7/you/contact-handler', function (req, res) {
       applicant.contactPref = req.query.contact;
       console.log(applicant.contactPref);
-      console.log(applicant.email);
       if (applicant.contactPref === 'email' || applicant.contactPref === 'both') {
         if (applicant.email != null) {
           res.render('lis/7/you/email', {
@@ -273,7 +286,6 @@ module.exports = {
     
     //7) email handler
     app.get('/lis/7/you/email-handler', function (req, res) {
-      applicant.email = req.query.email;
       if(applicant.contactPref === 'both') {
         res.render('lis/7/you/telephone');
       } else {
@@ -557,13 +569,22 @@ module.exports = {
 
     //7) about you summary
     app.get('/lis/7/you/about-you-summary', function (req, res) {
+      var contactText = 'Email address';
+      if (applicant.contactPref == 'telephone') {
+        contactText = 'Telephone number';
+      };
+      if (applicant.contactPref != undefined) {
+        applicant.contactPref = applicant.contactPref.toProperCase();
+      }
       res.render('lis/7/you/about-you-summary', {
         'mywork' : myWork,
         'applicantFullName' : applicant.fullName(),
         'dobday' : applicant.dobDay,
         'dobmonth' : applicant.dobMonth,
         'dobyear' : applicant.dobYear,
-        'email' : applicant.email
+        'email' : applicant.email,
+        'contact' : applicant.contactPref,
+        'contacttext' : contactText
       });
     });
     
