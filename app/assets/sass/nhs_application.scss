@@ -36,6 +36,7 @@
 @import "elements/icons";
 @import "elements/utilities";
 @import "elements/cards";
+@import "elements/_alpha-beta";
 
 
 // Import modules
@@ -815,3 +816,9 @@ tr.clickable-row { cursor: pointer; }
 }
 
 
+.phase-banner-alpha {
+  @extend %site-width-container;
+  @extend %contain-floats;
+  padding: 10px 0 8px;
+  border-bottom: 1px solid #bfc1c3;
+}

@@ -17,26 +17,31 @@
     <h1 class="heading-large">
       Check your details
     </h1>
-<p><strong>Personal details</strong></p>
+    <p><strong>Personal details</strong></p>
     <table class="data-table you-summary">
       <tr>
-        <td>Date of birth</td>
-        <td>11 July 1949</td>
-        <td><a href="hospital">Change this</a></td>
+        <td>Full name</td>
+        <td>{{applicantFullName}}</td>
+        <td><a href="#">Change this</a></td>
       </tr>
       <tr>
+        <td>Date of birth</td>
+        <td>{{dobday}} {{dobmonth}} {{dobyear}}</td>
+        <td><a href="">Change this</a></td>
+      </tr>
+      <!--tr>
         <td>National insurance number</td>
         <td>JD 12 34 56 D</td>
         <td><a href="work">Change this</a></td>
-      </tr>
+      </tr-->
       <tr>
         <td>How would you like us to contact you?</td>
-        <td>Email</td>
+        <td>{{contact}}</td>
         <td><a href="education">Change this</a></td>
       </tr>
       <tr>
-        <td>Email address</td>
-        <td>test@inter.net</td>
+        <td>{{contacttext}}</td>
+        <td>{{email}}</td>
         <td><a href="pension/pension">Change this</a></td>
       </tr>
       <tr>

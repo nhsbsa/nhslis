@@ -22,7 +22,7 @@
         <h1 class="heading-xlarge">1Q3 4T6 7K9</h1> 
       </div>
       
-      <form action="" method="get" class="form">
+      <form action="ref-email-handler" method="get" class="form">
 
         <details>
 
@@ -34,10 +34,10 @@
             <div class="form-item-wrapper">
               <fieldset>
                 <div class="form-group">
-                  <label class="form-label-bold" for="email-address">
+                  <label class="form-label-bold" for="email">
                     Email address (optional)
                   </label>
-                  <input type="text" id="email-address" class="form-control">
+                  <input type="text" id="email" name="email" class="form-control">
                 </div>
               </fieldset>
             </div>
@@ -49,8 +49,7 @@
 
         {{
           form_macros.button({
-            label: 'Next',
-            href: 'mem-word'
+            label: 'Next'
           })
         }}
 

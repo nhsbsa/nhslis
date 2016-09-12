@@ -1,10 +1,17 @@
 function Person(
   firstName,
   lastName,
+  dobDay,
+  dobMonth,
+  dobYear,
+  email,
   partner,
   statePension,
+  statePensionAmount,
   privatePension,
+  privatePensionAmount,
   employmentPension,
+  employmentPensionAmount,
   warPension,
   warWidowPension,
   savings,
@@ -22,10 +29,16 @@ function Person(
 ) {
   this.firstName = firstName;
   this.lastName = lastName;
+  this.dobDay = dobDay,
+  this.dobMonth = dobMonth,
+  this.dobYear = dobYear,
+  this.email = email;
   this.partner = partner;
   this.statePension = statePension;
-  this.privatePension = privatePension;
+  this.statePensionAmount = statePensionAmount;
+  this.privatePensionAmount = privatePensionAmount;
   this.employmentPension = employmentPension;
+  this.employmentPensionAmount = employmentPensionAmount;
   this.warPension = warPension;
   this.warWidowPension = warWidowPension;
   this.savings = savings;
@@ -90,9 +103,15 @@ Person.prototype.resetBenefits = function () {
   console.log('resetting benefits...');
 };
 
-Person.prototype.resetContactPref = function () {
+Person.prototype.resetVars = function () {
+  this.firstName = null;
+  this.lastName = null;
+  this.dobDay = null;
+  this.dobMonth = null;
+  this.dobYear = null;
+  this.email = null;
   this.contactPref = null;
-  console.log('resetting contact preferences...');
+  console.log('resetting vars...');
 };
 
 Person.prototype.resetLivingSituation = function () {
