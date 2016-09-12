@@ -305,14 +305,18 @@ module.exports = {
           res.render('lis/7/you/email-new');
         }
       } else if (applicant.contactPref === 'telephone') {
-        res.render('lis/7/you/telephone');
+        res.render('lis/7/you/telephone', {
+          'telephone' : applicant.telephone
+        });
       }
     });
     
     //7) email handler
     app.get('/lis/7/you/email-handler', function (req, res) {
       if(applicant.contactPref === 'both') {
-        res.render('lis/7/you/telephone');
+        res.render('lis/7/you/telephone', {
+          'telephone' : applicant.telephone
+        });
       } else {
         res.render('lis/7/you/work');
       }
@@ -595,8 +599,10 @@ module.exports = {
     //7) about you summary
     app.get('/lis/7/you/about-you-summary', function (req, res) {
       var contactText = 'Email address';
+      var contactValue = applicant.email;
       if (applicant.contactPref == 'telephone') {
         contactText = 'Telephone number';
+        contactValue = applicant.telephone;
       };
       if (applicant.contactPref != undefined) {
         applicant.contactPref = applicant.contactPref.toProperCase();
@@ -607,9 +613,9 @@ module.exports = {
         'dobday' : applicant.dobDay,
         'dobmonth' : applicant.dobMonth,
         'dobyear' : applicant.dobYear,
-        'email' : applicant.email,
         'contact' : applicant.contactPref,
         'contacttext' : contactText,
+        'contactValue' : contactValue,
         'savingscredit' : boolToString(applicant.savingsCredit)
       });
     });
