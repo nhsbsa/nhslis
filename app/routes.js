@@ -75,6 +75,7 @@ var applicant = person.createPerson(
   this.dobMonth = null,
   this.dobYear = null,
   this.email = null,
+  this.telephone = null,
   this.partner = true,
   this.statePension = false,
   this.privatePension = false,
@@ -101,6 +102,7 @@ var partner = person.createPerson(
   this.dobMonth = null,
   this.dobYear = null,
   this.email = null,
+  this.telephone = null,
   this.partner = false,
   this.statePension = false,
   this.privatePension = false,
@@ -252,6 +254,20 @@ module.exports = {
     });
     
 //LIS sprint 7
+    
+    //7) telephone-number-handler
+    app.get('/lis/7/save-continue/telephone-number-handler', function (req, res) {
+      applicant.telephone = req.query.telephone;
+      console.log(applicant.telephone);
+      res.redirect('/lis/7/save-continue/code');
+    });
+    
+    //7) save-continue/code
+    app.get('/lis/7/save-continue/code', function (req, res) {
+      res.render('lis/7/save-continue/code', {
+      'telephone' : applicant.telephone
+      });
+    });
     
     //7) ref-email-handler
     app.get('/lis/7/save-continue/ref-email-handler', function (req, res) {

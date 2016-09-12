@@ -5,6 +5,7 @@ function Person(
   dobMonth,
   dobYear,
   email,
+  telephone,
   partner,
   statePension,
   statePensionAmount,
@@ -34,6 +35,7 @@ function Person(
   this.dobMonth = dobMonth,
   this.dobYear = dobYear,
   this.email = email;
+  this.telephone = telephone;
   this.partner = partner;
   this.statePension = statePension;
   this.statePensionAmount = statePensionAmount;
@@ -112,6 +114,7 @@ Person.prototype.resetVars = function () {
   this.dobMonth = null;
   this.dobYear = null;
   this.email = null;
+  this.telephone = null;
   this.contactPref = null;
   console.log('resetting vars...');
 };
