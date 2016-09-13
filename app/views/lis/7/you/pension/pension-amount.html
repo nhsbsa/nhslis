@@ -23,31 +23,31 @@
 
       <div class="form-item-wrapper">
         <div class="form-group">
-          <input type="radio" id="week" name="minor">
-          <label class="form-control-radio" for="week">
+          <input type="radio" id="weekly" value="weekly" name="frequency">
+          <label class="form-control-radio" for="weekly">
             Every week
           </label>
         </div>
         <!--div class="form-group">
-          <input type="radio" id="fortnight" name="minor">
+          <input type="radio" id="fortnight" name="freq">
           <label class="form-control-radio" for="fortnight">
             Every two weeks
           </label>
         </div-->
         <div class="form-group">
-          <input type="radio" id="fourweekly" name="minor">
+          <input type="radio" id="fourweekly" value="fourweekly" name="frequency">
           <label class="form-control-radio" for="fourweekly">
             Every four weeks
           </label>
         </div>
         <!--div class="form-group">
-          <input type="radio" id="month" name="minor">
+          <input type="radio" id="month" name="freq">
           <label class="form-control-radio" for="month">
            Every month
           </label>
         </div-->
         <!--div class="form-group">
-          <input type="radio" id="year" name="minor">
+          <input type="radio" id="year" name="freq">
           <label class="form-control-radio" for="year">
             Annually
           </label>
@@ -55,7 +55,7 @@
       </div> 
     {{
       form_macros.amount_field({
-        id: 'money-amount',
+        id: 'amount',
         label: 'How much do you receive?'
       })
     }}

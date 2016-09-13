@@ -1,12 +1,22 @@
 function Person(
   firstName,
   lastName,
+  dobDay,
+  dobMonth,
+  dobYear,
+  email,
+  telephone,
   partner,
   statePension,
+  statePensionAmount,
+  statePensionFrequency,
   privatePension,
+  privatePensionAmount,
   employmentPension,
+  employmentPensionAmount,
   warPension,
   warWidowPension,
+  savingsCredit,
   savings,
   disabilityLivingAllowance,
   attendanceAllowance,
@@ -22,12 +32,21 @@ function Person(
 ) {
   this.firstName = firstName;
   this.lastName = lastName;
+  this.dobDay = dobDay,
+  this.dobMonth = dobMonth,
+  this.dobYear = dobYear,
+  this.email = email;
+  this.telephone = telephone;
   this.partner = partner;
   this.statePension = statePension;
-  this.privatePension = privatePension;
+  this.statePensionFrequency = statePensionFrequency;
+  this.statePensionAmount = statePensionAmount;
+  this.privatePensionAmount = privatePensionAmount;
   this.employmentPension = employmentPension;
+  this.employmentPensionAmount = employmentPensionAmount;
   this.warPension = warPension;
   this.warWidowPension = warWidowPension;
+  this.savingsCredit = savingsCredit;
   this.savings = savings;
   this.disabilityLivingAllowance = disabilityLivingAllowance;
   this.attendanceAllowance = attendanceAllowance;
@@ -90,9 +109,16 @@ Person.prototype.resetBenefits = function () {
   console.log('resetting benefits...');
 };
 
-Person.prototype.resetContactPref = function () {
+Person.prototype.resetVars = function () {
+  this.firstName = null;
+  this.lastName = null;
+  this.dobDay = null;
+  this.dobMonth = null;
+  this.dobYear = null;
+  this.email = null;
+  this.telephone = null;
   this.contactPref = null;
-  console.log('resetting contact preferences...');
+  console.log('resetting vars...');
 };
 
 Person.prototype.resetLivingSituation = function () {
@@ -115,11 +141,13 @@ Person.prototype.resetPartner = function () {
 
 Person.prototype.resetPension = function () {
   this.statePension = false;
+  this.statePensionAmount = null;
+  this.statePensionFrequency = null;
   this.privatePension = false;
   this.employmentPension = false;
   this.warPension = false;
   this.warWidowPension = false;
-  console.log('resetting pension...');
+  console.log('resetting pensions...');
 };
 
 Person.prototype.benefitChecker = function (benefits) {
