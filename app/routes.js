@@ -336,7 +336,7 @@ module.exports = {
       }
     });
     
-    // savings kickout
+    // savings kickout handler
     app.get(/savings-ko-handler/, function (req, res) {
       if (req.query.savings === 'yes') {
         res.redirect('../savings-kickout');
@@ -344,6 +344,20 @@ module.exports = {
         res.redirect('../guarantee-credit');
       }
     });
+    
+    // carehome savings kickout handler
+    app.get(/carehome-savings-handler/, function (req, res) {
+      if (req.query.savings === 'yes') {
+        res.redirect('../../savings-kickout');
+      } else {
+        res.redirect('../../guarantee-credit');
+      }
+    });
+    
+    
+    
+    
+    
     
     
     // get a request for a url
@@ -534,17 +548,7 @@ module.exports = {
         res.redirect('/lis/7/sc/savings');
       }
     });
-    
-    //7)
-    app.get('/lis/7/sc/savings-sc-kickout-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.savings === 'yes') {
-        res.redirect('/lis/7/savings-kickout');
-      } else {
-        res.redirect('/lis/7/need-to-know');
-      }
-    });
-    
+        
     //7)
     app.get('/lis/7/assets/property', function (req, res) {
       console.log(partnerOrText);
@@ -1336,16 +1340,7 @@ module.exports = {
         res.redirect('/lis/6/sc/savings');
       }
     });
-    
-    //6)
-    app.get('/lis/6/sc/savings-sc-kickout-handler', function (req, res) {
-      if (req.query.savings === 'yes') {
-        res.redirect('/lis/6/savings-kickout');
-      } else {
-        res.redirect('/lis/6/need-to-know');
-      }
-    });
-    
+        
     //6)
     app.get('/lis/6/assets/property', function (req, res) {
       res.render('lis/6/assets/property', {
