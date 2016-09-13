@@ -9,6 +9,7 @@ function Person(
   partner,
   statePension,
   statePensionAmount,
+  statePensionFrequency,
   privatePension,
   privatePensionAmount,
   employmentPension,
@@ -38,6 +39,7 @@ function Person(
   this.telephone = telephone;
   this.partner = partner;
   this.statePension = statePension;
+  this.statePensionFrequency = statePensionFrequency;
   this.statePensionAmount = statePensionAmount;
   this.privatePensionAmount = privatePensionAmount;
   this.employmentPension = employmentPension;
@@ -139,11 +141,13 @@ Person.prototype.resetPartner = function () {
 
 Person.prototype.resetPension = function () {
   this.statePension = false;
+  this.statePensionAmount = null;
+  this.statePensionFrequency = null;
   this.privatePension = false;
   this.employmentPension = false;
   this.warPension = false;
   this.warWidowPension = false;
-  console.log('resetting pension...');
+  console.log('resetting pensions...');
 };
 
 Person.prototype.benefitChecker = function (benefits) {

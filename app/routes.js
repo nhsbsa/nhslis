@@ -1,3 +1,5 @@
+
+
 //import the person constructor
 var person = require("./person.js");
 
@@ -78,6 +80,8 @@ var applicant = person.createPerson(
   this.telephone = null,
   this.partner = true,
   this.statePension = false,
+  this.statePensionAmount = null,
+  this.statePensionFrequency = null,
   this.privatePension = false,
   this.employmentPension = false,
   this.warPension = false,
@@ -105,6 +109,8 @@ var partner = person.createPerson(
   this.telephone = null,
   this.partner = false,
   this.statePension = false,
+  this.statePensionAmount = null,
+  this.statePensionFrequency = null,
   this.privatePension = false,
   this.employmentPension = false,
   this.warPension = false,
@@ -168,6 +174,14 @@ function setPartnerText() {
     jointOwnerText = 'Is anyone else other than your partner a joint owner of the place you live';
   }
 }
+
+function convertFrequency(frequency) {
+  if (frequency === 'fourweekly') {
+    return('every four weeks');
+  } else if (frequency === 'weekly') {
+    return('every week');
+  }
+};
 
 var convertMonth = function(monthInt) {
   monthInt = Number(monthInt);
@@ -252,6 +266,28 @@ module.exports = {
         'cert-title' : 'HC2'
       });
     });
+    
+    
+    
+    // council-tax-handler
+    app.get(/ctax-handler/, function (req, res) {
+      if (req.query.counciltax === 'yes') {
+        res.redirect('../tax-amount');
+      } else {
+        res.redirect('../ground-rent');
+      }
+    });
+    
+    
+    // get a request for a url
+    // serve the file located in that folder
+    
+      //7) telephone-number-handler
+    app.get(/tester/, function (req, res) {
+      console.log(req.query);
+      res.redirect('../testing2');
+    });  
+    
     
 //LIS sprint 7
     
@@ -606,7 +642,10 @@ module.exports = {
       };
       if (applicant.contactPref != undefined) {
         applicant.contactPref = applicant.contactPref.toProperCase();
-      }
+      }; 
+      if (applicant.statePensionFrequency != undefined) {
+        var frequency = convertFrequency(applicant.statePensionFrequency);
+      };
       res.render('lis/7/you/about-you-summary', {
         'mywork' : myWork,
         'applicantFullName' : applicant.fullName(),
@@ -616,7 +655,9 @@ module.exports = {
         'contact' : applicant.contactPref,
         'contacttext' : contactText,
         'contactValue' : contactValue,
-        'savingscredit' : boolToString(applicant.savingsCredit)
+        'savingscredit' : boolToString(applicant.savingsCredit),
+        'statepensionamount' : applicant.statePensionAmount,
+        'statepensionfrequency' : frequency
       });
     });
     
@@ -804,6 +845,8 @@ module.exports = {
     
     //7) state-pension-handler
     app.get('/lis/7/you/pension/state-pension-handler', function (req, res) {
+      applicant.statePensionAmount = req.query.amount;
+      applicant.statePensionFrequency = req.query.frequency;
       if (applicant.privatePension === true) {
         res.redirect('/lis/7/you/pension/private-pension-amount');
       } else if (applicant.employmentPension === true) {
@@ -1980,6 +2023,11 @@ module.exports = {
         res.redirect('/lis/6/live/others/ft-student');
       }
     });
+    
+    
+    
+    
+    
     
     //LIS sprint 5    
     
