@@ -1,5 +1,3 @@
-
-
 //import the person constructor
 var person = require("./person.js");
 
@@ -259,16 +257,7 @@ module.exports = {
       application.resetApplication();
     });
 
-//LIS exemption
 
-    app.get('/lis/exemption/hc2certificate', function (req, res) {
-      res.render('lis/exemption/hc2certificate', {
-        'cert-title' : 'HC2'
-      });
-    });
-    
-    
-    
     // council-tax-handler
     app.get(/ctax-handler/, function (req, res) {
       if (req.query.counciltax === 'yes') {
@@ -278,15 +267,100 @@ module.exports = {
       }
     });
     
+    // work-hours-handler
+    app.get(/work-hours-handler/, function (req, res) {
+      if (req.query.hours === 'yes') {
+        res.redirect('../amount');
+      } else {
+        res.redirect('../benefits');
+      }
+    });
+    
+    // mortgaged-handler
+    app.get(/mortgaged-handler/, function (req, res) {
+      if (req.query.mortgaged === 'yes') {
+        res.redirect('../mortgage-amount');
+      } else {
+        res.redirect('../../services');
+      }
+    });
+    
+    // hospital-handler
+    app.get(/hospital-handler/, function (req, res) {
+      application.whereYouLiveStatus = "Started";
+      application.whereYouLiveLink = continueText;
+      res.redirect('../home');
+    });
+
+    // updates the home page when the you section is completed
+    app.get(/you-done/, function (req, res) {
+      application.aboutYouStatus = completedText;
+      application.aboutYouLink = changeText;
+      if (application.allComplete() === true) {
+        res.redirect('../../lis-home-updated');
+      } else {
+        res.redirect('../../lis-home');
+      }
+    });
+    
+    // updates the home page when the partner section is completed
+    app.get(/partner-done/, function (req, res) {
+      application.aboutPartnerStatus = completedText;
+      application.aboutPartnerLink = changeText;
+      if (application.allComplete() === true) {
+        res.redirect('../../lis-home-updated');
+      } else {
+        res.redirect('../../lis-home');
+      }
+    });
+    
+    // updates the home page when the assets section is completed
+    app.get(/assets-done/, function (req, res) {
+      application.propertyStatus = completedText;
+      application.propertyLink = changeText;
+      if (application.allComplete() === true) {
+        res.redirect('../../lis-home-updated');
+      } else {
+        res.redirect('../../lis-home');
+      }
+    });
+
+    // updates the home page when the living section is completed
+    app.get(/live-done/, function (req, res) {
+      application.whereYouLiveStatus = completedText;
+      application.whereYouLiveLink = changeText;
+      if (application.allComplete() === true) {
+        res.redirect('../../lis-home-updated');
+      } else {
+        res.redirect('../../lis-home');
+      }
+    });
+    
+    // savings kickout
+    app.get(/savings-ko-handler/, function (req, res) {
+      if (req.query.savings === 'yes') {
+        res.redirect('../savings-kickout');
+      } else {
+        res.redirect('../guarantee-credit');
+      }
+    });
+    
     
     // get a request for a url
     // serve the file located in that folder
     
-      //7) telephone-number-handler
     app.get(/tester/, function (req, res) {
       console.log(req.query);
       res.redirect('../testing2');
     });  
+
+    //LIS exemption
+
+    app.get('/lis/exemption/hc2certificate', function (req, res) {
+      res.render('lis/exemption/hc2certificate', {
+        'cert-title' : 'HC2'
+      });
+    });
     
     
 //LIS sprint 7
@@ -389,77 +463,7 @@ module.exports = {
         'helplevel' : helpLevel
       });
     });
-    
-     //7) council-tax-handler
-    app.get('/lis/7/live/council-tax-handler', function (req, res) {
-      if (req.query.counciltax === 'yes') {
-        res.redirect('/lis/7/live/tax-amount');
-      } else {
-        res.redirect('/lis/7/live/ground-rent');
-      }
-    });
-    
-    //7) hours-handler
-    app.get('/lis/7/live/others/hours-handler', function (req, res) {
-      if (req.query.hours === 'yes') {
-        res.redirect('/lis/7/live/others/amount');
-      } else {
-        res.redirect('/lis/7/live/others/benefits');
-      }
-    });
-    
-    //7)
-    app.get('/lis/7/you/you-done', function (req, res) {
-      application.aboutYouStatus = completedText;
-      application.aboutYouLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('/lis/7/lis-home-updated');
-      } else {
-        res.redirect('/lis/7/lis-home');
-      }
-    });
-    
-    //7)
-    app.get('/lis/7/live/mortgaged/mortgage-handler', function (req, res) {
-      if (req.query.mortgaged === 'yes') {
-        res.redirect('/lis/7/live/mortgaged/mortgage-amount');
-      } else {
-        res.redirect('/lis/7/live/services');
-      }
-    });
-    
-    //7)
-    app.get('/lis/7/partner/partner-done', function (req, res) {
-      application.aboutPartnerStatus = completedText;
-      application.aboutPartnerLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('/lis/7/lis-home-updated');
-      } else {
-        res.redirect('/lis/7/lis-home');
-      }
-    });
-    
-    //7)
-    app.get('/lis/7/assets/assets-done', function (req, res) {
-      application.propertyStatus = completedText;
-      application.propertyLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('/lis/7/lis-home-updated');
-      } else {
-        res.redirect('/lis/7/lis-home');
-      }
-    });
-    
-    //7)
-    app.get('/lis/7/live/live-done', function (req, res) {
-      application.whereYouLiveStatus = completedText;
-      application.whereYouLiveLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('/lis/7/lis-home-updated');
-      } else {
-        res.redirect('/lis/7/lis-home');
-      }
-    });
+                
     
     //7)
     app.get('/lis/7/lis-home', function (req, res) {
@@ -510,18 +514,7 @@ module.exports = {
         'partnerandext' : partnerAndText
       });
     });
-    
-    //7)
-    app.get('/lis/7/live/hospital-handler', function (req, res) {
-      application.whereYouLiveStatus = "Started";
-      application.whereYouLiveLink = continueText;
-      if (req.query.hospital === "yes") {
-        res.render('lis/7/live/home');
-      } else {
-        res.render('lis/7/live/home');
-      }
-    });
-    
+        
     //7)
     app.get('/lis/7/care-home-handler', function (req, res) {
       console.log(req.query);
@@ -584,16 +577,6 @@ module.exports = {
         'partnerortext' : partnerOrText,
         'partnerandText' : partnerAndText
       });
-    });
-    
-    //7)
-    app.get('/lis/7/savings-kickout-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.savings === 'yes') {
-        res.redirect('/lis/7/savings-kickout');
-      } else {
-        res.redirect('/lis/7/guarantee-credit');
-      }
     });
     
     //7)
@@ -1285,78 +1268,7 @@ module.exports = {
         'helplevel' : helpLevel
       });
     });
-    
-     //6) council-tax-handler
-    app.get('/lis/6/live/council-tax-handler', function (req, res) {
-      if (req.query.counciltax === 'yes') {
-        res.redirect('/lis/6/live/tax-amount');
-      } else {
-        res.redirect('/lis/6/live/ground-rent');
-      }
-    });
-    
-    //6) hours-handler
-    app.get('/lis/6/live/others/hours-handler', function (req, res) {
-      if (req.query.hours === 'yes') {
-        res.redirect('/lis/6/live/others/amount');
-      } else {
-        res.redirect('/lis/6/live/others/benefits');
-      }
-    });
-    
-    //6)
-    app.get('/lis/6/you/you-done', function (req, res) {
-      application.aboutYouStatus = completedText;
-      application.aboutYouLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('/lis/6/lis-home-updated');
-      } else {
-        res.redirect('/lis/6/lis-home');
-      }
-    });
-    
-    //6)
-    app.get('/lis/6/live/mortgaged/mortgage-handler', function (req, res) {
-      if (req.query.mortgaged === 'yes') {
-        res.redirect('/lis/6/live/mortgaged/mortgage-amount');
-      } else {
-        res.redirect('/lis/6/live/services');
-      }
-    });
-    
-    //6)
-    app.get('/lis/6/partner/partner-done', function (req, res) {
-      application.aboutPartnerStatus = completedText;
-      application.aboutPartnerLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('/lis/6/lis-home-updated');
-      } else {
-        res.redirect('/lis/6/lis-home');
-      }
-    });
-    
-    //6)
-    app.get('/lis/6/assets/assets-done', function (req, res) {
-      application.propertyStatus = completedText;
-      application.propertyLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('/lis/6/lis-home-updated');
-      } else {
-        res.redirect('/lis/6/lis-home');
-      }
-    });
-    
-    //6)
-    app.get('/lis/6/live/live-done', function (req, res) {
-      application.whereYouLiveStatus = completedText;
-      application.whereYouLiveLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('/lis/6/lis-home-updated');
-      } else {
-        res.redirect('/lis/6/lis-home');
-      }
-    });
-    
+                
     //6)
     app.get('/lis/6/lis-home', function (req, res) {
       res.render('lis/6/lis-home', {
@@ -1406,18 +1318,7 @@ module.exports = {
         'partnerandext' : partnerAndText
       });
     });
-    
-    //6)
-    app.get('/lis/6/live/hospital-handler', function (req, res) {
-      application.whereYouLiveStatus = "Started";
-      application.whereYouLiveLink = continueText;
-      if (req.query.hospital === "yes") {
-        res.render('lis/6/live/home');
-      } else {
-        res.render('lis/6/live/home');
-      }
-    });
-    
+        
     //6)
     app.get('/lis/6/care-home-handler', function (req, res) {
       if (req.query.carehome === 'yes') {
@@ -1475,15 +1376,6 @@ module.exports = {
         'partnerortext' : partnerOrText,
         'partnerandText' : partnerAndText
       });
-    });
-    
-    //6)
-    app.get('/lis/6/savings-kickout-handler', function (req, res) {
-      if (req.query.savings === 'yes') {
-        res.redirect('/lis/6/savings-kickout');
-      } else {
-        res.redirect('/lis/6/guarantee-credit');
-      }
     });
     
     //6)
@@ -2029,74 +1921,7 @@ module.exports = {
     
     
     
-    //LIS sprint 5    
-    
-    
-    //5) council-tax-handler
-    app.get('/lis/5/live/council-tax-handler', function (req, res) {
-      if (req.query.counciltax === 'yes') {
-        res.redirect('/lis/5/live/tax-amount');
-      } else {
-        res.redirect('/lis/5/live/ground-rent');
-      }
-    });
-    
-    //5) hours-handler
-    app.get('/lis/5/live/others/hours-handler', function (req, res) {
-      if (req.query.hours === 'yes') {
-        res.redirect('/lis/5/live/others/amount');
-      } else {
-        res.redirect('/lis/5/live/others/benefits');
-      }
-    });
-    
-    app.get('/lis/5/you/you-done', function (req, res) {
-      application.aboutYouStatus = completedText;
-      application.aboutYouLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('/lis/5/lis-home-updated');
-      } else {
-        res.redirect('/lis/5/lis-home');
-      }
-    });
-    
-    app.get('/lis/5/live/mortgaged/mortgage-handler', function (req, res) {
-      if (req.query.mortgaged === 'yes') {
-        res.redirect('/lis/5/live/mortgaged/mortgage-amount');
-      } else {
-        res.redirect('/lis/5/live/services');
-      }
-    });
-    
-    app.get('/lis/5/partner/partner-done', function (req, res) {
-      application.aboutPartnerStatus = completedText;
-      application.aboutPartnerLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('/lis/5/lis-home-updated');
-      } else {
-        res.redirect('/lis/5/lis-home');
-      }
-    });
-    
-    app.get('/lis/5/assets/assets-done', function (req, res) {
-      application.propertyStatus = completedText;
-      application.propertyLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('/lis/5/lis-home-updated');
-      } else {
-        res.redirect('/lis/5/lis-home');
-      }
-    });
-
-    app.get('/lis/5/live/live-done', function (req, res) {
-      application.whereYouLiveStatus = completedText;
-      application.whereYouLiveLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('/lis/5/lis-home-updated');
-      } else {
-        res.redirect('/lis/5/lis-home');
-      }
-    });
+    //LIS sprint 5
     
     app.get('/lis/5/lis-home', function (req, res) {
       res.render('lis/5/lis-home', {
@@ -2144,16 +1969,6 @@ module.exports = {
       });
     });
 
-    app.get('/lis/5/live/hospital-handler', function (req, res) {
-      application.whereYouLiveStatus = "Started";
-      application.whereYouLiveLink = continueText;
-      if (req.query.hospital === "yes") {
-        res.render('lis/5/live/home');
-      } else {
-        res.render('lis/5/live/home');
-      }
-    });
-    
     app.get('/lis/5/care-home-handler', function (req, res) {
       if (req.query.carehome === 'yes') {
         res.redirect('/lis/5/sc/authority-assessed');
@@ -2204,14 +2019,6 @@ module.exports = {
         'partnerortext' : partnerOrText,
         'partnerandText' : partnerAndText
       });
-    });
-    
-    app.get('/lis/5/savings-kickout-handler', function (req, res) {
-      if (req.query.savings === 'yes') {
-        res.redirect('/lis/5/savings-kickout');
-      } else {
-        res.redirect('/lis/5/guarantee-credit');
-      }
     });
 
     app.get('/lis/5/guacredit-kickout-handler', function (req, res) {
@@ -2734,55 +2541,6 @@ module.exports = {
     
     
 //LIS sprint 4
-
-    
-    app.get('/lis/4/you/you-done', function (req, res) {
-      application.aboutYouStatus = completedText;
-      application.aboutYouLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('/lis/4/lis-home-updated');
-      } else {
-        res.redirect('/lis/4/lis-home');
-      }
-    });
-    
-    app.get('/lis/4/live/mortgaged/mortgage-handler', function (req, res) {
-      if (req.query.mortgaged === 'yes') {
-        res.redirect('/lis/4/live/mortgaged/mortgage-amount');
-      } else {
-        res.redirect('/lis/4/live/services');
-      }
-    });
-    
-    app.get('/lis/4/partner/partner-done', function (req, res) {
-      application.aboutPartnerStatus = completedText;
-      application.aboutPartnerLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('/lis/4/lis-home-updated');
-      } else {
-        res.redirect('/lis/4/lis-home');
-      }
-    });
-    
-    app.get('/lis/4/assets/assets-done', function (req, res) {
-      application.propertyStatus = completedText;
-      application.propertyLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('/lis/4/lis-home-updated');
-      } else {
-        res.redirect('/lis/4/lis-home');
-      }
-    });
-
-    app.get('/lis/4/live/live-done', function (req, res) {
-      application.whereYouLiveStatus = completedText;
-      application.whereYouLiveLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('/lis/4/lis-home-updated');
-      } else {
-        res.redirect('/lis/4/lis-home');
-      }
-    });
     
     app.get('/lis/4/lis-home', function (req, res) {
       res.render('lis/4/lis-home', {
@@ -2817,16 +2575,6 @@ module.exports = {
         res.render('lis/4/assets/second-address');
       } else {
         res.render('lis/4/assets/money');
-      }
-    });
-    
-    app.get('/lis/4/live/hospital-handler', function (req, res) {
-      application.whereYouLiveStatus = "Started";
-      application.whereYouLiveStatus = continueText;
-      if (req.query.hospital === "yes") {
-        res.render('lis/4/live/hospital');
-      } else {
-        res.render('lis/4/live/home');
       }
     });
     
@@ -3964,3 +3712,4 @@ module.exports = {
   }
 };
 
+//3967
