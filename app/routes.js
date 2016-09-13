@@ -22,6 +22,7 @@ var resetPeople = function () {
 resetPeople();
 
 var i,
+  sprint,
   pension,
   pensions,
   benefits,
@@ -256,7 +257,11 @@ module.exports = {
       applicant.resetPartner();
       application.resetApplication();
     });
-
+    
+    
+    //
+    // Handlers
+    //
 
     // council-tax-handler
     app.get(/ctax-handler/, function (req, res) {
@@ -297,7 +302,7 @@ module.exports = {
       application.aboutYouStatus = completedText;
       application.aboutYouLink = changeText;
       if (application.allComplete() === true) {
-        res.redirect('../../lis-home-updated');
+        res.redirect('../../home-updated');
       } else {
         res.redirect('../../lis-home');
       }
@@ -308,7 +313,7 @@ module.exports = {
       application.aboutPartnerStatus = completedText;
       application.aboutPartnerLink = changeText;
       if (application.allComplete() === true) {
-        res.redirect('../../lis-home-updated');
+        res.redirect('../../home-updated');
       } else {
         res.redirect('../../lis-home');
       }
@@ -319,7 +324,7 @@ module.exports = {
       application.propertyStatus = completedText;
       application.propertyLink = changeText;
       if (application.allComplete() === true) {
-        res.redirect('../../lis-home-updated');
+        res.redirect('../../home-updated');
       } else {
         res.redirect('../../lis-home');
       }
@@ -330,7 +335,7 @@ module.exports = {
       application.whereYouLiveStatus = completedText;
       application.whereYouLiveLink = changeText;
       if (application.allComplete() === true) {
-        res.redirect('../../lis-home-updated');
+        res.redirect('../../home-updated');
       } else {
         res.redirect('../../lis-home');
       }
@@ -364,19 +369,47 @@ module.exports = {
         res.redirect('../money');
       }
     });
+    
+
+    //
+    // Renders
+    //
+    
+    app.get(/lis-home/, function (req, res) {
+      sprint = req.url.charAt(5);
+      console.log(req.url);
+      res.render('lis/' + sprint + '/lis-home', {
+        'aboutYouStatus' : application.aboutYouStatus,
+        'aboutPartnerStatus' : application.aboutPartnerStatus,
+        'propertyStatus' : application.propertyStatus,
+        'whereYouLiveStatus' : application.whereYouLiveStatus,
+        'aboutYouLink' : application.aboutYouLink,
+        'aboutPartnerLink' : application.aboutPartnerLink,
+        'propertyLink' : application.propertyLink,
+        'whereYouLiveLink' : application.whereYouLiveLink
+      });
+    });
+    
+    app.get(/home-updated/, function (req, res) {
+      sprint = req.url.charAt(5);
+      console.log(req.url);
+      res.render('lis/' + sprint + '/home-updated', {
+        'aboutYouStatus' : application.aboutYouStatus,
+        'aboutPartnerStatus' : application.aboutPartnerStatus,
+        'propertyStatus' : application.propertyStatus,
+        'whereYouLiveStatus' : application.whereYouLiveStatus,
+        'aboutYouLink' : application.aboutYouLink,
+        'aboutPartnerLink' : application.aboutPartnerLink,
+        'propertyLink' : application.propertyLink,
+        'whereYouLiveLink' : application.whereYouLiveLink
+      });
+    });
 
     
     
     
     
-    // get a request for a url
-    // serve the file located in that folder
     
-    app.get(/tester/, function (req, res) {
-      console.log(req.query);
-      res.redirect('../testing2');
-    });  
-
     //LIS exemption
 
     app.get('/lis/exemption/hc2certificate', function (req, res) {
@@ -486,44 +519,7 @@ module.exports = {
         'helplevel' : helpLevel
       });
     });
-                
-    
-    //7)
-    app.get('/lis/7/lis-home', function (req, res) {
-      res.render('lis/7/lis-home', {
-        'aboutYouStatus' : application.aboutYouStatus,
-        'aboutPartnerStatus' : application.aboutPartnerStatus,
-        'propertyStatus' : application.propertyStatus,
-        'whereYouLiveStatus' : application.whereYouLiveStatus,
-        'aboutYouLink' : application.aboutYouLink,
-        'aboutPartnerLink' : application.aboutPartnerLink,
-        'propertyLink' : application.propertyLink,
-        'whereYouLiveLink' : application.whereYouLiveLink
-      });
-    });
-    
-    //7)
-    app.get('/lis/7/lis-home-updated', function (req, res) {
-      res.render('lis/7/lis-home-updated', {
-        'aboutYouStatus' : application.aboutYouStatus,
-        'aboutPartnerStatus' : application.aboutPartnerStatus,
-        'propertyStatus' : application.propertyStatus,
-        'whereYouLiveStatus' : application.whereYouLiveStatus,
-        'aboutYouLink' : application.aboutYouLink,
-        'aboutPartnerLink' : application.aboutPartnerLink,
-        'propertyLink' : application.propertyLink,
-        'whereYouLiveLink' : application.whereYouLiveLink
-      });
-    });
-        
-    //7)
-    app.get('/lis/7/assets/other-property', function (req, res) {
-      res.render('lis/7/assets/other-property', {
-        'partnerortext' : partnerOrText,
-        'partnerandext' : partnerAndText
-      });
-    });
-        
+                    
     //7)
     app.get('/lis/7/care-home-handler', function (req, res) {
       console.log(req.query);
@@ -1267,43 +1263,7 @@ module.exports = {
         'helplevel' : helpLevel
       });
     });
-                
-    //6)
-    app.get('/lis/6/lis-home', function (req, res) {
-      res.render('lis/6/lis-home', {
-        'aboutYouStatus' : application.aboutYouStatus,
-        'aboutPartnerStatus' : application.aboutPartnerStatus,
-        'propertyStatus' : application.propertyStatus,
-        'whereYouLiveStatus' : application.whereYouLiveStatus,
-        'aboutYouLink' : application.aboutYouLink,
-        'aboutPartnerLink' : application.aboutPartnerLink,
-        'propertyLink' : application.propertyLink,
-        'whereYouLiveLink' : application.whereYouLiveLink
-      });
-    });
-    
-    //6)
-    app.get('/lis/6/lis-home-updated', function (req, res) {
-      res.render('lis/6/lis-home-updated', {
-        'aboutYouStatus' : application.aboutYouStatus,
-        'aboutPartnerStatus' : application.aboutPartnerStatus,
-        'propertyStatus' : application.propertyStatus,
-        'whereYouLiveStatus' : application.whereYouLiveStatus,
-        'aboutYouLink' : application.aboutYouLink,
-        'aboutPartnerLink' : application.aboutPartnerLink,
-        'propertyLink' : application.propertyLink,
-        'whereYouLiveLink' : application.whereYouLiveLink
-      });
-    });
-        
-    //6)
-    app.get('/lis/6/assets/other-property', function (req, res) {
-      res.render('lis/6/assets/other-property', {
-        'partnerortext' : partnerOrText,
-        'partnerandext' : partnerAndText
-      });
-    });
-        
+                            
     //6)
     app.get('/lis/6/care-home-handler', function (req, res) {
       if (req.query.carehome === 'yes') {
@@ -1898,40 +1858,7 @@ module.exports = {
     
     
     //LIS sprint 5
-    
-    app.get('/lis/5/lis-home', function (req, res) {
-      res.render('lis/5/lis-home', {
-        'aboutYouStatus' : application.aboutYouStatus,
-        'aboutPartnerStatus' : application.aboutPartnerStatus,
-        'propertyStatus' : application.propertyStatus,
-        'whereYouLiveStatus' : application.whereYouLiveStatus,
-        'aboutYouLink' : application.aboutYouLink,
-        'aboutPartnerLink' : application.aboutPartnerLink,
-        'propertyLink' : application.propertyLink,
-        'whereYouLiveLink' : application.whereYouLiveLink
-      });
-    });
-    
-    app.get('/lis/5/lis-home-updated', function (req, res) {
-      res.render('lis/5/lis-home-updated', {
-        'aboutYouStatus' : application.aboutYouStatus,
-        'aboutPartnerStatus' : application.aboutPartnerStatus,
-        'propertyStatus' : application.propertyStatus,
-        'whereYouLiveStatus' : application.whereYouLiveStatus,
-        'aboutYouLink' : application.aboutYouLink,
-        'aboutPartnerLink' : application.aboutPartnerLink,
-        'propertyLink' : application.propertyLink,
-        'whereYouLiveLink' : application.whereYouLiveLink
-      });
-    });
         
-    app.get('/lis/5/assets/other-property', function (req, res) {
-      res.render('lis/5/assets/other-property', {
-        'partnerortext' : partnerOrText,
-        'partnerandext' : partnerAndText
-      });
-    });
-
     app.get('/lis/5/care-home-handler', function (req, res) {
       if (req.query.carehome === 'yes') {
         res.redirect('/lis/5/sc/authority-assessed');
@@ -2505,32 +2432,14 @@ module.exports = {
     
 //LIS sprint 4
     
-    app.get('/lis/4/lis-home', function (req, res) {
-      res.render('lis/4/lis-home', {
-        'aboutYouStatus' : application.aboutYouStatus,
-        'aboutPartnerStatus' : application.aboutPartnerStatus,
-        'propertyStatus' : application.propertyStatus,
-        'whereYouLiveStatus' : application.whereYouLiveStatus,
-        'aboutYouLink' : application.aboutYouLink,
-        'aboutPartnerLink' : application.aboutPartnerLink,
-        'propertyLink' : application.propertyLink,
-        'whereYouLiveLink' : application.whereYouLiveLink
+    app.get(/other-property/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/' + sprint + '/assets/other-property', {
+        'partnerortext' : partnerOrText,
+        'partnerandext' : partnerAndText
       });
     });
-    
-    app.get('/lis/4/lis-home-updated', function (req, res) {
-      res.render('lis/4/lis-home-updated', {
-        'aboutYouStatus' : application.aboutYouStatus,
-        'aboutPartnerStatus' : application.aboutPartnerStatus,
-        'propertyStatus' : application.propertyStatus,
-        'whereYouLiveStatus' : application.whereYouLiveStatus,
-        'aboutYouLink' : application.aboutYouLink,
-        'aboutPartnerLink' : application.aboutPartnerLink,
-        'propertyLink' : application.propertyLink,
-        'whereYouLiveLink' : application.whereYouLiveLink
-      });
-    });
-    
+        
     app.get('/lis/4/care-home-handler', function (req, res) {
       if (req.query.carehome === 'yes') {
         res.redirect('/lis/4/carehome-kickout');
