@@ -370,10 +370,47 @@ module.exports = {
       }
     });
     
-
+    // pension credit handler sprints: 6, 7
+    app.get(/pencred-handler6/, function (req, res) {
+      if (req.query.savingscredit === 'yes') {
+        applicant.savingsCredit = true;
+        res.redirect('../credit-amount');
+      } else if (req.query.savingscredit === 'no') {
+          applicant.savingsCredit = false;
+        res.redirect('../pension-type');
+      } else if (req.query.partnersavingcredit === 'yes') {
+          partner.savingsCredit = true;
+        res.redirect('../credit-amount');
+      } else if (req.query.partnersavingcredit === 'no') {
+          partner.savingsCredit = false;
+        res.redirect('../pension-type');
+      }
+    });
+    
+    // pencred-handler sprint: 5
+    app.get(/pencred-handler5/, function (req, res) {
+      console.log(req.query);
+      if (req.query.savingsCredit === 'yes') {
+        res.redirect('../credit-amount');
+      } else {
+        res.redirect('../../benefits/benefit-sprint3');
+      }
+    });  
+    
+    // pencred-handler sprint: 4, 3
+    app.get(/pencred-handler3/, function (req, res) {
+      if (req.query.prencred === 'gc') {
+        res.redirect('../../../kickout');
+      } else {
+        res.redirect('../pension-type');
+      }
+    });
+    
+    
     //
     // Renders
     //
+    
     
     app.get(/lis-home/, function (req, res) {
       sprint = req.url.charAt(5);
@@ -760,17 +797,6 @@ module.exports = {
       }
     });
 
-    //7) pension credit handler
-    app.get('/lis/7/you/pension/pencred-handler', function (req, res) {
-      if (req.query.savingscredit === 'yes') {
-        applicant.savingsCredit = true;
-        res.redirect('/lis/7/you/pension/credit-amount');
-      } else {
-        applicant.savingsCredit = false;
-        res.redirect('/lis/7/you/pension/pension-type');
-      }
-    });
-
     //7) pension-handler
     app.get('/lis/7/you/pension/pension-handler', function (req, res) {
       console.log(req.query);
@@ -915,16 +941,6 @@ module.exports = {
     });
  
 // 6) partner handlers
-  
-    //7) partner-pension-credit kickout
-    app.get('/lis/7/partner/pension/pencred-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.prencred === 'ssp') {
-        res.redirect('/lis/7/partner/pension/credit-amount');
-      } else {
-        res.redirect('/lis/7/partner/pension/pension-type');
-      }
-    });
     
     //7) partner pension-handler
     app.get('/lis/7/partner/pension/pension-handler', function (req, res) {
@@ -1471,15 +1487,6 @@ module.exports = {
       }
     });
 
-    //6) pension credit kick out
-    app.get('/lis/6/you/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ssp') {
-        res.redirect('/lis/6/you/pension/credit-amount');
-      } else {
-        res.redirect('/lis/6/you/pension/pension-type');
-      }
-    });
-
     //6) pension-handler
     app.get('/lis/6/you/pension/pension-handler', function (req, res) {
       if (req.query.pension === 'yes') {
@@ -1619,15 +1626,6 @@ module.exports = {
     });
  
 // 6) partner handlers
-  
-    //6) partner-pension-credit kickout
-    app.get('/lis/6/partner/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ssp') {
-        res.redirect('/lis/6/partner/pension/credit-amount');
-      } else {
-        res.redirect('/lis/6/partner/pension/pension-type');
-      }
-    });
     
     //6) partner pension-handler
     app.get('/lis/6/partner/pension/pension-handler', function (req, res) {
@@ -2054,15 +2052,6 @@ module.exports = {
       }
     });
 
-    //5) pension credit kick out
-    app.get('/lis/5/you/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ssp') {
-        res.redirect('/lis/5/you/pension/credit-amount');
-      } else {
-        res.redirect('/lis/5/you/benefits/benefit-sprint3');
-      }
-    });
-
     //5) pension-handler
     app.get('/lis/5/you/pension/pension-handler', function (req, res) {
       if (req.query.pension === 'yes') {
@@ -2221,15 +2210,6 @@ module.exports = {
  
     // 5) partner handlers
   
-    //5) partner-pension-credit kickout
-    app.get('/lis/5/partner/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ssp') {
-        res.redirect('/lis/5/partner/pension/credit-amount');
-      } else {
-        res.redirect('/lis/5/partner/benefits/benefit-sprint3');
-      }
-    });
-    
     //5) partner pension-handler
     app.get('/lis/5/partner/pension/pension-handler', function (req, res) {
       if (req.query.pension === 'yes') {
@@ -2616,15 +2596,6 @@ module.exports = {
       }
     });
 
-    //4) pension credit kick out
-    app.get('/lis/4/you/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ib') {
-        res.redirect('/lis/4/kickout');
-      } else {
-        res.redirect('/lis/4/you/pension/pension-type');
-      }
-    });
-
     //4) pension-handler
     app.get('/lis/4/you/pension/pension-handler', function (req, res) {
       if (req.query.pension === 'yes') {
@@ -2733,16 +2704,6 @@ module.exports = {
  
 
     // 4) partner handlers
-    
-  
-    //4) partner-pension-credit kickout
-    app.get('/lis/4/partner/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ib') {
-        res.redirect('/lis/4/kickout');
-      } else {
-        res.redirect('/lis/4/partner/pension/pension-type');
-      }
-    });
     
     //4) partner pension-handler
     app.get('/lis/4/partner/pension/pension-handler', function (req, res) {
@@ -3109,15 +3070,6 @@ module.exports = {
       }
     });
 
-    //3) pension credit kick out
-    app.get('/lis/3/you/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ib') {
-        res.redirect('/lis/3/kickout');
-      } else {
-        res.redirect('/lis/3/you/pension/pension-type');
-      }
-    });
-
     //3) pension-handler
     app.get('/lis/3/you/pension/pension-handler', function (req, res) {
       if (req.query.pension === 'yes') {
@@ -3220,15 +3172,6 @@ module.exports = {
         res.redirect('/lis/3/you/education');
       } else {
         res.redirect('/lis/3/you/education');
-      }
-    });
-
-    //3) partner-pension-credit kickout
-    app.get('/lis/3/partner/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ib') {
-        res.redirect('/lis/3/kickout');
-      } else {
-        res.redirect('/lis/3/partner/pension/pension-type');
       }
     });
     
@@ -3341,15 +3284,6 @@ module.exports = {
         res.redirect('/lis/2/live/mortgaged/joint');
       } else {
         res.redirect('/lis/2/live/joint');
-      }
-    });
-
-    //2) pension-credit
-    app.get('/lis/2/you/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ib') {
-        res.redirect('/lis/2/kickout');
-      } else {
-        res.redirect('/lis/2/you/pension/pension-type');
       }
     });
 
