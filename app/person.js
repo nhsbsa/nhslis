@@ -5,15 +5,18 @@ function Person(
   dobMonth,
   dobYear,
   email,
+  telephone,
   partner,
   statePension,
   statePensionAmount,
+  statePensionFrequency,
   privatePension,
   privatePensionAmount,
   employmentPension,
   employmentPensionAmount,
   warPension,
   warWidowPension,
+  savingsCredit,
   savings,
   disabilityLivingAllowance,
   attendanceAllowance,
@@ -33,14 +36,17 @@ function Person(
   this.dobMonth = dobMonth,
   this.dobYear = dobYear,
   this.email = email;
+  this.telephone = telephone;
   this.partner = partner;
   this.statePension = statePension;
+  this.statePensionFrequency = statePensionFrequency;
   this.statePensionAmount = statePensionAmount;
   this.privatePensionAmount = privatePensionAmount;
   this.employmentPension = employmentPension;
   this.employmentPensionAmount = employmentPensionAmount;
   this.warPension = warPension;
   this.warWidowPension = warWidowPension;
+  this.savingsCredit = savingsCredit;
   this.savings = savings;
   this.disabilityLivingAllowance = disabilityLivingAllowance;
   this.attendanceAllowance = attendanceAllowance;
@@ -110,6 +116,7 @@ Person.prototype.resetVars = function () {
   this.dobMonth = null;
   this.dobYear = null;
   this.email = null;
+  this.telephone = null;
   this.contactPref = null;
   console.log('resetting vars...');
 };
@@ -134,11 +141,13 @@ Person.prototype.resetPartner = function () {
 
 Person.prototype.resetPension = function () {
   this.statePension = false;
+  this.statePensionAmount = null;
+  this.statePensionFrequency = null;
   this.privatePension = false;
   this.employmentPension = false;
   this.warPension = false;
   this.warWidowPension = false;
-  console.log('resetting pension...');
+  console.log('resetting pensions...');
 };
 
 Person.prototype.benefitChecker = function (benefits) {
