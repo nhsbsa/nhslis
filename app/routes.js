@@ -406,6 +406,27 @@ module.exports = {
       }
     });
     
+    // telephone-number-handler
+    app.get(/telephone-number-handler/, function (req, res) {
+      applicant.telephone = req.query.telephone;
+      res.redirect('../code');
+    });
+    
+    // handles the first oportunity for the user to enter their email at save and continue
+    app.get(/ref-email-handler/, function (req, res) {
+      if (req.query.email != '') {
+        applicant.email = req.query.email;
+      }
+      res.redirect('../mem-word');
+    });
+    
+    // email-address-handler
+    app.get(/email-address-handler/, function (req, res) {
+      if (req.query.email != '') {
+        applicant.email = req.query.email;
+      }
+      res.redirect('../work');
+    });  
     
     //
     // Renders
@@ -441,88 +462,77 @@ module.exports = {
         'whereYouLiveLink' : application.whereYouLiveLink
       });
     });
+    
+    // save-continue/code
+    app.get(/code/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/save-continue/code', {
+      'telephone' : applicant.telephone
+      });
+    });
 
+   // email address
+    app.get(/email/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/you/email', {
+          'email' : applicant.email
+        });
+    });
     
+    // telephone handler
+    app.get(/telephone/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/' + sprint + '/you/telephone', {
+        'telephone' : applicant.telephone
+      });
+    });
     
-    
-    
+    // email handler
+    app.get(/mail-handler/, function (req, res) {
+      if(applicant.contactPref === 'both') {
+        res.redirect('../telephone');
+      } else {
+        res.redirect('../work');
+      }
+    });
     
     //LIS exemption
-
     app.get('/lis/exemption/hc2certificate', function (req, res) {
       res.render('lis/exemption/hc2certificate', {
         'cert-title' : 'HC2'
       });
-    });
+    });  
     
-    
+ 
 //LIS sprint 7
     
-    //7) telephone-number-handler
-    app.get('/lis/7/save-continue/telephone-number-handler', function (req, res) {
-      applicant.telephone = req.query.telephone;
-      console.log(applicant.telephone);
-      res.redirect('/lis/7/save-continue/code');
-    });
     
-    //7) save-continue/code
-    app.get('/lis/7/save-continue/code', function (req, res) {
-      res.render('lis/7/save-continue/code', {
-      'telephone' : applicant.telephone
-      });
-    });
     
-    //7) ref-email-handler
-    app.get('/lis/7/save-continue/ref-email-handler', function (req, res) {
-      if (req.query.email != '') {
-        applicant.email = req.query.email;
+    
+    // contact-handler
+    app.get(/contact-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      if (req.query.contact === "email") {
+        applicant.contactPref ='email';
+        res.render('lis/'+ sprint +'/you/email');
+      } else if (req.query.contact === "telephone") {
+        applicant.contactPref ='telephone';
+        res.render('lis/'+ sprint +'/you/telephone');
+      } else if (req.query.contact === "both") {
+        applicant.contactPref ='both';
+        res.render('lis/'+ sprint +'/you/email');
+      } else {
+        applicant.contactPref ='none';
+        res.render('lis/'+ sprint +'/you/email');
       }
-      res.redirect('/lis/7/save-continue/mem-word');
     });
-    
+        
     //7) email-address-handler
     app.get('/lis/7/you/email-address-handler', function (req, res) {
       if (req.query.email != '') {
         applicant.email = req.query.email;
       }
       res.redirect('/lis/7/you/work');
-    });
-    
-    //7)
-    app.get('/lis/7/you/email', function (req, res) {
-      res.render('lis/7/you/email', {
-          'email' : applicant.email
-        });
-    });
-
-    //7) contact-handler
-    app.get('/lis/7/you/contact-handler', function (req, res) {
-      applicant.contactPref = req.query.contact;
-      console.log(applicant.contactPref);
-      if (applicant.contactPref === 'email' || applicant.contactPref === 'both') {
-        if (applicant.email != null) {
-          res.render('lis/7/you/email', {
-            'email' : applicant.email
-          });
-        } else {
-          res.render('lis/7/you/email-new');
-        }
-      } else if (applicant.contactPref === 'telephone') {
-        res.render('lis/7/you/telephone', {
-          'telephone' : applicant.telephone
-        });
-      }
-    });
-    
-    //7) email handler
-    app.get('/lis/7/you/email-handler', function (req, res) {
-      if(applicant.contactPref === 'both') {
-        res.render('lis/7/you/telephone', {
-          'telephone' : applicant.telephone
-        });
-      } else {
-        res.render('lis/7/you/work');
-      }
     });
     
     //7) email-me
@@ -1238,15 +1248,6 @@ module.exports = {
       } else {
         applicant.contactPref ='none';
         res.render('lis/6/you/email');
-      }
-    });
-    
-    //6) email handler
-    app.get('/lis/6/you/email-handler', function (req, res) {
-      if(applicant.contactPref === 'both') {
-        res.render('lis/6/you/telephone');
-      } else {
-        res.render('lis/6/you/work');
       }
     });
     
