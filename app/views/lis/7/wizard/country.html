@@ -7,10 +7,20 @@
 
 {% block content %}
 
+<style>
+
+    .right-col-details{
+        margin-top: 1em}
+
+    .right-col-details div:first-child {
+    border-bottom: 7px solid #0072C6;
+        padding-bottom: 0px;}
+
+</style>
 <main id="content" role="main">
 
   <div class="grid-row">
-    <div class="column-two-thirds" style="margin-bottom:100px">
+    <div class="column-two-thirds">
    <!--1B- lives in the UK-->
     <h2 class="heading-large">Which country do you live in?</h2>
 
@@ -53,33 +63,53 @@
 
   </form>
       </div>
-        <div class="answers-wrapper">
-                <div class="column-third" style="margin-top:40px">
-           <div class="info-panel" id="prescription">
-             <p class="lede" style="font-weight:bold; margin:0 0 0 0;">Prescriptions</p>
-          </div>
-        </div>
+
+
+<!-- help received-->
+<!--
         <div class="column-third">
-           <div class="info-panel" id="sight-test">
-             <p class="lede" style="font-weight:bold; margin:0 0 0 0;">Sight tests</p>
+         <div class="right-col-details">
+
+         <div>
+          <h3 class="heading-medium" style="margin-bottom:0em">You get free:</h3>
+         </div>
+
+          <div class="info-panel prescription" id="prescription" style="margin-top:1em">
+             <p class="lede" style="font-weight:bold; margin:0 0 0 0; padding-left:1.2em;">Prescriptions</p>
           </div>
-        </div>
-        <div class="column-third">
-           <div class="info-panel" id="glasses">
-             <p class="lede" style="font-weight:bold; margin:0 0 0 0;">Glasses or contact lenses</p>
+
+          <div class="info-panel dental-exam" id="dental-exam">
+             <p class="lede" style="font-weight:bold; margin:0 0 0 0; padding-left:1.2em;">NHS dental exam</p>
           </div>
-        </div>
-        <div class="column-third">
-           <div class="info-panel" id="dental-exam">
-             <p class="lede" style="font-weight:bold; margin:0 0 0 0;">NHS dental exam</p>
+
+        <div>
+          <h3 class="heading-medium" style="margin-bottom:0em; border-bottom: 7px solid #0072C6;">You do not get free:</h3>
+         </div>
+
+           <div class="info-panel-negative dental" id="dental-treatment" style="margin-top:1em">
+             <p class="lede" style="font-weight:bold; margin:0 0 0 0; padding-left:1.2em;">NHS dental treatment</p>
           </div>
-        </div>
-        <div class="column-third">
-           <div class="info-panel" id="dental-treatment">
-             <p class="lede" style="font-weight:bold; margin:0 0 0 0;">NHS dental treatment</p>
+
+           <div class="info-panel-negative sight-test" id="sight-test">
+             <p class="lede" style="font-weight:bold; margin:0 0 0 0; padding-left:1.2em;">Sight tests</p>
           </div>
-        </div>
+
+           <div class="info-panel-negative glasses" id="glasses">
+             <p class="lede" style="font-weight:bold; margin:0 0 0 0;padding-left:1.2em;">Glasses or contact lenses</p>
+          </div>
+
+           <div class="info-panel-negative wigs" id="wigs">
+             <p class="lede" style="font-weight:bold; margin:0 0 0 0; padding-left:1.2em;">NHS wigs</p>
+          </div>
+
+
+           <div class="info-panel-negative travel" id="travel">
+             <p class="lede" style="font-weight:bold; margin:0 0 0 0; padding-left:1.2em;">Travel costs</p>
+          </div>
+
     </div>
+    </div>
+-->
     </div>
 
 </main>

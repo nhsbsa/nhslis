@@ -1148,7 +1148,7 @@ module.exports = {
       if (req.query.kickout === 'continue') {
         res.redirect('/lis/7/wizard/lis');
       } else {
-        res.redirect('/lis/7/wizard/full-exemption');
+        res.redirect('/lis/7/wizard/passported-benefits');
       }
     });
     
