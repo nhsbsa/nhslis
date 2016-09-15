@@ -15,7 +15,7 @@
 
        <!--3- Are you named on a Tax Credits Exemption certificate-->
     <h2 class="heading-large">Are you named on a valid NHS Tax Credit Exemption Certificate?</h2>
-         <form action="eligibility-handler" method="get" class="form">
+         <form action="medical-handler" method="get" class="form">
 
 <details>
   <summary role="button" aria-controls="details-content-0" tabindex="0" aria-expanded="true"><span class="summary">What is a NHS Tax Credit Exemption Certificate?</span></summary>
@@ -43,18 +43,19 @@
   </div>
 </details>
 
-<div class="form-item-wrapper">
+
+      <div class="form-item-wrapper">
         <fieldset>
           <div class="inline-form-groups">
             <div class="form-group">
-              <input id="binary-yes" name="tax-crdeit" type="radio">
-              <label class="form-control-radio" for="tax-credit-yes">
+              <input type="radio" id="yes" name="tax-credits" value="yes">
+              <label class="form-control-radio" for="yes">
                 Yes
               </label>
             </div>
             <div class="form-group">
-              <input id="binary-no" name="tax-credit" type="radio">
-              <label class="form-control-radio" for="tax-credit-no">
+              <input type="radio" id="no" name="tax-credits" value="no">
+              <label class="form-control-radio" for="no">
                 No
               </label>
             </div>

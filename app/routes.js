@@ -1151,6 +1151,45 @@ module.exports = {
         res.redirect('/lis/7/wizard/passported-benefits');
       }
     });
+
+    //7) benefitsv2-handler
+    app.get('/lis/7/wizard/benefitsv2-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.kickout === 'continue') {
+        res.redirect('/lis/7/wizard/tax-credits-exemption');
+      } else {
+        res.redirect('/lis/7/wizard/full-exemption-benefits');
+      }
+    });
+
+    //7) medical-handler
+    app.get('/lis/7/wizard/medical-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.kickout === 'continue') {
+        res.redirect('/lis/7/wizard/lis');
+      } else {
+        res.redirect('/lis/7/wizard/long-term-medical-condition');
+      }
+    });
+
+    //7) pregnancy-handler
+    app.get('/lis/7/wizard/pregnancy-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.kickout === 'continue') {
+        res.redirect('/lis/7/wizard/lis');
+      } else {
+        res.redirect('/lis/7/wizard/pregnancy');
+      }
+    });
+       //7) lis-handler
+    app.get('/lis/7/wizard/lis-handler', function (req, res) {
+      console.log(req.query);
+      if (req.query.kickout === 'continue') {
+        res.redirect('/lis/7/wizard/lis');
+      } else {
+        res.redirect('/lis/7/wizard/lis');
+      }
+    });
     
 //LIS sprint 6
     

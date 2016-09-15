@@ -13,62 +13,15 @@
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-      Do you or your partner receive any of the following?
+      Help with health costs if you are on a low income
   </h1>
 
-  <details>
+ <p>If you have difficulty in meeting your health costs and do not qualify for any other kind of help, you may be able to get help under the NHS low income scheme.</p>
 
-  <summary><span class="summary">What we mean by partner</span></summary>
-
-  <div class="panel panel-border-narrow">
-
-    <p>
-      We use the term partner to mean a person you live with as part of a couple of the same or opposite sex, whether or not you are married or in a civil partnership.
-    </p>
-
-  </div>
-
-</details>
-  <br>
   <form action="eligibility-handler" method="get" class="form">
-    <div class="form-item-wrapper">
-      <div class="form-group">
-        <input type="radio" id="cbsa" name="kickout">
-        <label class="form-control-radio" for="cbsa">
-          Income support
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="radio" id="cbj" name="kickout">
-        <label class="form-control-radio" for="cbj">
-          Universal credit
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="radio" id="sa" name="kickout">
-        <label class="form-control-radio" for="sa">
-          Income based job seekers allowance
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="radio" id="jsa" name="kickout">
-        <label class="form-control-radio" for="jsa">
-          Income related employment &amp; support allowance
-        </label>
-      </div>
-      <p class="form-block">or</p>
-      <div class="form-group">
-        <input type="radio" id="continue" name="kickout" value="continue">
-        <label class="form-control-radio" for="continue">
-          I don't receive any of these
-        </label>
-      </div>
-    {{
-      form_macros.button({
-        label: 'Next'
-      })
-    }}
-          </div>
+        <p>
+          <a class="button button-get-started" href="../care-home" id="next">Start a new application</a>
+        </p>
 
   </form>
     </div>
