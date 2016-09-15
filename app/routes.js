@@ -496,43 +496,44 @@ module.exports = {
       }
     });
     
-    //LIS exemption
+    // contact-handler
+    app.get(/contact-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      if (req.query.contact === "email") {
+        applicant.contactPref ='email';
+        if (applicant.email != undefined) {
+          res.redirect('../email');
+        } else {
+          res.redirect('../new-mail');
+        }
+      } else if (req.query.contact === "telephone") {
+        applicant.contactPref ='telephone';
+        res.redirect('../telephone');
+      } else if (req.query.contact === "both") {
+        applicant.contactPref ='both';
+        res.redirect('../email');
+      } else {
+        applicant.contactPref ='none';
+        res.redirect('../work');
+      }
+    });
+    
+    // LIS exemption
     app.get('/lis/exemption/hc2certificate', function (req, res) {
       res.render('lis/exemption/hc2certificate', {
         'cert-title' : 'HC2'
       });
     });  
     
- 
 //LIS sprint 7
     
-    
-    
-    
-    // contact-handler
-    app.get(/contact-handler/, function (req, res) {
-      sprint = req.url.charAt(5);
-      if (req.query.contact === "email") {
-        applicant.contactPref ='email';
-        res.render('lis/'+ sprint +'/you/email');
-      } else if (req.query.contact === "telephone") {
-        applicant.contactPref ='telephone';
-        res.render('lis/'+ sprint +'/you/telephone');
-      } else if (req.query.contact === "both") {
-        applicant.contactPref ='both';
-        res.render('lis/'+ sprint +'/you/email');
-      } else {
-        applicant.contactPref ='none';
-        res.render('lis/'+ sprint +'/you/email');
-      }
-    });
         
-    //7) email-address-handler
-    app.get('/lis/7/you/email-address-handler', function (req, res) {
+    // email-address-handler
+    app.get(/email-address-handler/, function (req, res) {
       if (req.query.email != '') {
         applicant.email = req.query.email;
       }
-      res.redirect('/lis/7/you/work');
+      res.redirect('../work');
     });
     
     //7) email-me
@@ -1234,23 +1235,6 @@ module.exports = {
     
 //LIS sprint 6
     
-    //6) contact-handler
-    app.get('/lis/6/you/contact-handler', function (req, res) {
-      if (req.query.contact === "email") {
-        applicant.contactPref ='email';
-        res.render('lis/6/you/email');
-      } else if (req.query.contact === "telephone") {
-        applicant.contactPref ='telephone';
-        res.render('lis/6/you/telephone');
-      } else if (req.query.contact === "both") {
-        applicant.contactPref ='both';
-        res.render('lis/6/you/email');
-      } else {
-        applicant.contactPref ='none';
-        res.render('lis/6/you/email');
-      }
-    });
-    
     //6) email-me
     app.get('/lis/6/exemption/email-me', function (req, res) {
       helpLevel = req.query.helplevel;
@@ -1850,10 +1834,6 @@ module.exports = {
         res.redirect('/lis/6/live/others/ft-student');
       }
     });
-    
-    
-    
-    
     
     
     //LIS sprint 5
