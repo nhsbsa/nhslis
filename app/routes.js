@@ -370,10 +370,68 @@ module.exports = {
       }
     });
     
-
+    // pension credit handler sprints: 6, 7
+    app.get(/pencred-handler6/, function (req, res) {
+      if (req.query.savingscredit === 'yes') {
+        applicant.savingsCredit = true;
+        res.redirect('../credit-amount');
+      } else if (req.query.savingscredit === 'no') {
+          applicant.savingsCredit = false;
+        res.redirect('../pension-type');
+      } else if (req.query.partnersavingcredit === 'yes') {
+          partner.savingsCredit = true;
+        res.redirect('../credit-amount');
+      } else if (req.query.partnersavingcredit === 'no') {
+          partner.savingsCredit = false;
+        res.redirect('../pension-type');
+      }
+    });
+    
+    // pencred-handler sprint: 5
+    app.get(/pencred-handler5/, function (req, res) {
+      console.log(req.query);
+      if (req.query.savingsCredit === 'yes') {
+        res.redirect('../credit-amount');
+      } else {
+        res.redirect('../../benefits/benefit-sprint3');
+      }
+    });  
+    
+    // pencred-handler sprint: 4, 3
+    app.get(/pencred-handler3/, function (req, res) {
+      if (req.query.prencred === 'gc') {
+        res.redirect('../../../kickout');
+      } else {
+        res.redirect('../pension-type');
+      }
+    });
+    
+    // telephone-number-handler
+    app.get(/telephone-number-handler/, function (req, res) {
+      applicant.telephone = req.query.telephone;
+      res.redirect('../code');
+    });
+    
+    // handles the first oportunity for the user to enter their email at save and continue
+    app.get(/ref-email-handler/, function (req, res) {
+      if (req.query.email != '') {
+        applicant.email = req.query.email;
+      }
+      res.redirect('../mem-word');
+    });
+    
+    // email-address-handler
+    app.get(/email-address-handler/, function (req, res) {
+      if (req.query.email != '') {
+        applicant.email = req.query.email;
+      }
+      res.redirect('../work');
+    });  
+    
     //
     // Renders
     //
+    
     
     app.get(/lis-home/, function (req, res) {
       sprint = req.url.charAt(5);
@@ -404,88 +462,78 @@ module.exports = {
         'whereYouLiveLink' : application.whereYouLiveLink
       });
     });
+    
+    // save-continue/code
+    app.get(/code/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/save-continue/code', {
+      'telephone' : applicant.telephone
+      });
+    });
 
+   // email address
+    app.get(/email/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/you/email', {
+          'email' : applicant.email
+        });
+    });
     
+    // telephone handler
+    app.get(/telephone/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/' + sprint + '/you/telephone', {
+        'telephone' : applicant.telephone
+      });
+    });
     
+    // email handler
+    app.get(/mail-handler/, function (req, res) {
+      if(applicant.contactPref === 'both') {
+        res.redirect('../telephone');
+      } else {
+        res.redirect('../work');
+      }
+    });
     
+    // contact-handler
+    app.get(/contact-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      if (req.query.contact === "email") {
+        applicant.contactPref ='email';
+        if (applicant.email != undefined) {
+          res.redirect('../email');
+        } else {
+          res.redirect('../new-mail');
+        }
+      } else if (req.query.contact === "telephone") {
+        applicant.contactPref ='telephone';
+        res.redirect('../telephone');
+      } else if (req.query.contact === "both") {
+        applicant.contactPref ='both';
+        res.redirect('../email');
+      } else {
+        applicant.contactPref ='none';
+        res.redirect('../work');
+      }
+    });
     
-    
-    //LIS exemption
-
+    // LIS exemption
     app.get('/lis/exemption/hc2certificate', function (req, res) {
       res.render('lis/exemption/hc2certificate', {
         'cert-title' : 'HC2'
       });
-    });
-    
+    });  
     
 //LIS sprint 7
     
-    //7) telephone-number-handler
-    app.get('/lis/7/save-continue/telephone-number-handler', function (req, res) {
-      applicant.telephone = req.query.telephone;
-      console.log(applicant.telephone);
-      res.redirect('/lis/7/save-continue/code');
-    });
-    
-    //7) save-continue/code
-    app.get('/lis/7/save-continue/code', function (req, res) {
-      res.render('lis/7/save-continue/code', {
-      'telephone' : applicant.telephone
-      });
-    });
-    
-    //7) ref-email-handler
-    app.get('/lis/7/save-continue/ref-email-handler', function (req, res) {
+        
+    // email-address-handler
+    app.get(/email-address-handler/, function (req, res) {
       if (req.query.email != '') {
         applicant.email = req.query.email;
       }
-      res.redirect('/lis/7/save-continue/mem-word');
-    });
-    
-    //7) email-address-handler
-    app.get('/lis/7/you/email-address-handler', function (req, res) {
-      if (req.query.email != '') {
-        applicant.email = req.query.email;
-      }
-      res.redirect('/lis/7/you/work');
-    });
-    
-    //7)
-    app.get('/lis/7/you/email', function (req, res) {
-      res.render('lis/7/you/email', {
-          'email' : applicant.email
-        });
-    });
-
-    //7) contact-handler
-    app.get('/lis/7/you/contact-handler', function (req, res) {
-      applicant.contactPref = req.query.contact;
-      console.log(applicant.contactPref);
-      if (applicant.contactPref === 'email' || applicant.contactPref === 'both') {
-        if (applicant.email != null) {
-          res.render('lis/7/you/email', {
-            'email' : applicant.email
-          });
-        } else {
-          res.render('lis/7/you/email-new');
-        }
-      } else if (applicant.contactPref === 'telephone') {
-        res.render('lis/7/you/telephone', {
-          'telephone' : applicant.telephone
-        });
-      }
-    });
-    
-    //7) email handler
-    app.get('/lis/7/you/email-handler', function (req, res) {
-      if(applicant.contactPref === 'both') {
-        res.render('lis/7/you/telephone', {
-          'telephone' : applicant.telephone
-        });
-      } else {
-        res.render('lis/7/you/work');
-      }
+      res.redirect('../work');
     });
     
     //7) email-me
@@ -760,17 +808,6 @@ module.exports = {
       }
     });
 
-    //7) pension credit handler
-    app.get('/lis/7/you/pension/pencred-handler', function (req, res) {
-      if (req.query.savingscredit === 'yes') {
-        applicant.savingsCredit = true;
-        res.redirect('/lis/7/you/pension/credit-amount');
-      } else {
-        applicant.savingsCredit = false;
-        res.redirect('/lis/7/you/pension/pension-type');
-      }
-    });
-
     //7) pension-handler
     app.get('/lis/7/you/pension/pension-handler', function (req, res) {
       console.log(req.query);
@@ -915,16 +952,6 @@ module.exports = {
     });
  
 // 6) partner handlers
-  
-    //7) partner-pension-credit kickout
-    app.get('/lis/7/partner/pension/pencred-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.prencred === 'ssp') {
-        res.redirect('/lis/7/partner/pension/credit-amount');
-      } else {
-        res.redirect('/lis/7/partner/pension/pension-type');
-      }
-    });
     
     //7) partner pension-handler
     app.get('/lis/7/partner/pension/pension-handler', function (req, res) {
@@ -1247,32 +1274,6 @@ module.exports = {
     
 //LIS sprint 6
     
-    //6) contact-handler
-    app.get('/lis/6/you/contact-handler', function (req, res) {
-      if (req.query.contact === "email") {
-        applicant.contactPref ='email';
-        res.render('lis/6/you/email');
-      } else if (req.query.contact === "telephone") {
-        applicant.contactPref ='telephone';
-        res.render('lis/6/you/telephone');
-      } else if (req.query.contact === "both") {
-        applicant.contactPref ='both';
-        res.render('lis/6/you/email');
-      } else {
-        applicant.contactPref ='none';
-        res.render('lis/6/you/email');
-      }
-    });
-    
-    //6) email handler
-    app.get('/lis/6/you/email-handler', function (req, res) {
-      if(applicant.contactPref === 'both') {
-        res.render('lis/6/you/telephone');
-      } else {
-        res.render('lis/6/you/work');
-      }
-    });
-    
     //6) email-me
     app.get('/lis/6/exemption/email-me', function (req, res) {
       helpLevel = req.query.helplevel;
@@ -1510,15 +1511,6 @@ module.exports = {
       }
     });
 
-    //6) pension credit kick out
-    app.get('/lis/6/you/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ssp') {
-        res.redirect('/lis/6/you/pension/credit-amount');
-      } else {
-        res.redirect('/lis/6/you/pension/pension-type');
-      }
-    });
-
     //6) pension-handler
     app.get('/lis/6/you/pension/pension-handler', function (req, res) {
       if (req.query.pension === 'yes') {
@@ -1658,15 +1650,6 @@ module.exports = {
     });
  
 // 6) partner handlers
-  
-    //6) partner-pension-credit kickout
-    app.get('/lis/6/partner/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ssp') {
-        res.redirect('/lis/6/partner/pension/credit-amount');
-      } else {
-        res.redirect('/lis/6/partner/pension/pension-type');
-      }
-    });
     
     //6) partner pension-handler
     app.get('/lis/6/partner/pension/pension-handler', function (req, res) {
@@ -1892,10 +1875,6 @@ module.exports = {
     });
     
     
-    
-    
-    
-    
     //LIS sprint 5
         
     app.get('/lis/5/care-home-handler', function (req, res) {
@@ -2093,15 +2072,6 @@ module.exports = {
       }
     });
 
-    //5) pension credit kick out
-    app.get('/lis/5/you/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ssp') {
-        res.redirect('/lis/5/you/pension/credit-amount');
-      } else {
-        res.redirect('/lis/5/you/benefits/benefit-sprint3');
-      }
-    });
-
     //5) pension-handler
     app.get('/lis/5/you/pension/pension-handler', function (req, res) {
       if (req.query.pension === 'yes') {
@@ -2260,15 +2230,6 @@ module.exports = {
  
     // 5) partner handlers
   
-    //5) partner-pension-credit kickout
-    app.get('/lis/5/partner/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ssp') {
-        res.redirect('/lis/5/partner/pension/credit-amount');
-      } else {
-        res.redirect('/lis/5/partner/benefits/benefit-sprint3');
-      }
-    });
-    
     //5) partner pension-handler
     app.get('/lis/5/partner/pension/pension-handler', function (req, res) {
       if (req.query.pension === 'yes') {
@@ -2655,15 +2616,6 @@ module.exports = {
       }
     });
 
-    //4) pension credit kick out
-    app.get('/lis/4/you/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ib') {
-        res.redirect('/lis/4/kickout');
-      } else {
-        res.redirect('/lis/4/you/pension/pension-type');
-      }
-    });
-
     //4) pension-handler
     app.get('/lis/4/you/pension/pension-handler', function (req, res) {
       if (req.query.pension === 'yes') {
@@ -2772,16 +2724,6 @@ module.exports = {
  
 
     // 4) partner handlers
-    
-  
-    //4) partner-pension-credit kickout
-    app.get('/lis/4/partner/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ib') {
-        res.redirect('/lis/4/kickout');
-      } else {
-        res.redirect('/lis/4/partner/pension/pension-type');
-      }
-    });
     
     //4) partner pension-handler
     app.get('/lis/4/partner/pension/pension-handler', function (req, res) {
@@ -3148,15 +3090,6 @@ module.exports = {
       }
     });
 
-    //3) pension credit kick out
-    app.get('/lis/3/you/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ib') {
-        res.redirect('/lis/3/kickout');
-      } else {
-        res.redirect('/lis/3/you/pension/pension-type');
-      }
-    });
-
     //3) pension-handler
     app.get('/lis/3/you/pension/pension-handler', function (req, res) {
       if (req.query.pension === 'yes') {
@@ -3259,15 +3192,6 @@ module.exports = {
         res.redirect('/lis/3/you/education');
       } else {
         res.redirect('/lis/3/you/education');
-      }
-    });
-
-    //3) partner-pension-credit kickout
-    app.get('/lis/3/partner/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ib') {
-        res.redirect('/lis/3/kickout');
-      } else {
-        res.redirect('/lis/3/partner/pension/pension-type');
       }
     });
     
@@ -3380,15 +3304,6 @@ module.exports = {
         res.redirect('/lis/2/live/mortgaged/joint');
       } else {
         res.redirect('/lis/2/live/joint');
-      }
-    });
-
-    //2) pension-credit
-    app.get('/lis/2/you/pension/pencred-handler', function (req, res) {
-      if (req.query.prencred === 'ib') {
-        res.redirect('/lis/2/kickout');
-      } else {
-        res.redirect('/lis/2/you/pension/pension-type');
       }
     });
 
