@@ -532,19 +532,22 @@ module.exports = {
       res.render('lis/exemption/hc2certificate', {
         'cert-title' : 'HC2'
       });
-    });  
+    }); 
+    
+    // send-mail
+    app.get(/send-mail/, function (req, res) {
+      sprint = req.url.charAt(5);
+      helpLevel = req.query.helplevel;
+      console.log(helpLevel);
+      res.render('lis/'+ sprint +'/exemption/send-mail', {
+        'helplevel' : helpLevel
+      });
+    });
+
     
     
 //LIS sprint 7
     
-    //7) send-mail
-    app.get('/lis/7/exemption/send-mail', function (req, res) {
-      helpLevel = req.query.helplevel;
-      console.log(helpLevel);
-      res.render('lis/7/exemption/send-mail', {
-        'helplevel' : helpLevel
-      });
-    });
     
     //7) mail-confirm
     app.get('/lis/7/exemption/mail-confirm', function (req, res) {
@@ -1274,14 +1277,6 @@ module.exports = {
     });
     
 //LIS sprint 6
-    
-    //6) send-mail
-    app.get('/lis/6/exemption/send-mail', function (req, res) {
-      helpLevel = req.query.helplevel;
-      res.render('lis/6/exemption/send-mail', {
-        'helplevel' : helpLevel
-      });
-    });
     
     //6) email-confirm
     app.get(/email-confirm/, function (req, res) {
