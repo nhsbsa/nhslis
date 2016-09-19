@@ -1,9 +1,5 @@
 {% extends 'templates/nhs_transaction_layout.html' %}
 
-{% block afterHeader %}
-  {% include "includes/service-headers/low-income.html" %}
-{% endblock %}
-
 {% block content %}
 
 <main id="content" role="main">
@@ -14,8 +10,11 @@
 
       <div class="text">
                   
-        <h1 class="heading-large">Complete the following sections</h1>
+        <h1 class="heading-large">Apply for help with health costs<br>The Low Income Scheme</h1>
+        
+        <p>You can apply once you have completed all of the sections.</p>
         <br>
+        
         <table class="data-table">
           <tr class='clickable-row' data-href='you/registration'>
             <td>About you</td>
@@ -38,12 +37,7 @@
             <a href="live/hospital">{{whereYouLiveLink}}</a></td>
           </tr>
         </table>
-        
-        <div class="panel panel-border-wide">
-          <p>
-            You can submit your application here once you have completed all of the sections above.
-          </p>
-        </div>
+    
   
       </div>
       

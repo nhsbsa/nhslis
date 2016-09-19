@@ -13,39 +13,31 @@
     <div class="column-two-thirds">
 
       <h1 class="heading-large">
-        Make a note of your application number
+        Your application number is
       </h1>
       
-      <p>You'll need this if you come back later.</p>
-
       <div class="panel panel-border-wide claim-ref">
         <h1 class="heading-xlarge">1Q3 4T6 7K9</h1> 
       </div>
       
+      <p>You will need this number if you save your application and come back to it later.</p>
+      
+      <p><a href="">Print this page</a></p>
+      
       <form action="ref-email-handler" method="get" class="form">
-
-        <details>
-
-          <summary><span class="summary">Email this number to me</span></summary>
-
-          <div class="panel panel-border-narrow">
-            <p>Enter your email address below if you would like your application number emailed to you.</p>
-
-            <div class="form-item-wrapper">
-              <fieldset>
-                <div class="form-group">
-                  <label class="form-label-bold" for="email">
-                    Email address (optional)
-                  </label>
-                  <input type="text" id="email" name="email" class="form-control">
-                </div>
-              </fieldset>
-            </div>
-          </div>
-
-        </details>
         
-        <p><a href="">Print this page</a></p>
+        <div class="form-item-wrapper">
+          <fieldset>
+            <div class="form-group">
+              <label class="form-label-bold" for="email">
+                Email address (optional)
+                <span class="form-hint">Enter your email address and we will email a copy of your registration number.</span>
+
+              </label>
+              <input type="text" id="email" name="email" class="form-control">
+            </div>
+          </fieldset>
+        </div>        
 
         {{
           form_macros.button({
