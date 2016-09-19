@@ -68,6 +68,11 @@ var application = {
   }
 };
   
+var wizard = {
+    country : null,
+    ageBand : null
+};
+
 //create an applicant
 var applicant = person.createPerson(
   this.firstName = null,
@@ -156,6 +161,8 @@ var householder = {
     console.log('resetting householder...');
   }
 };
+
+
 
 // change the text if the applicant has a partner
 function setPartnerText() {
@@ -1214,6 +1221,8 @@ module.exports = {
     //7) region-handler
     app.get('/lis/7/wizard/region-handler', function (req, res) {
       console.log(req.query);
+        wizard.country = req.query.country;
+        console.log('country is', wizard.country);
       if (req.query.eligibility === 'uk') {
         res.render('lis/7/wizard/dla');
       } else if (req.query.eligibility === 'eu') {
@@ -1223,9 +1232,17 @@ module.exports = {
       }
     });
 
+//7) date-of-birth-handler
+    app.get('/lis/7/wizard/date-of-birth', function (req, res) {
+      console.log('hi');
+        res.render('lis/7/wizard/date-of-birth', {'country' : wizard.country});
+
+    });
+
     //7) eligibility-handler
     app.get('/lis/7/wizard/eligibility-handler', function (req, res) {
       console.log(req.query);
+        // do something with date
       if (req.query.kickout === 'continue') {
         res.redirect('/lis/7/wizard/lis');
       } else {
@@ -1235,6 +1252,7 @@ module.exports = {
 
     //7) benefitsv2-handler
     app.get('/lis/7/wizard/benefitsv2-handler', function (req, res) {
+        console.log("thing");
       console.log(req.query);
       if (req.query.kickout === 'continue') {
         res.redirect('/lis/7/wizard/tax-credits-exemption');
