@@ -518,6 +518,15 @@ module.exports = {
       }
     });
     
+    // email-address-handler
+    app.get(/mail-handler/, function (req, res) {
+      if (req.query.email != '') {
+        applicant.email = req.query.email;
+        console.log(applicant.email);
+      }
+      res.redirect('../work');
+    });
+    
     // LIS exemption
     app.get('/lis/exemption/hc2certificate', function (req, res) {
       res.render('lis/exemption/hc2certificate', {
@@ -525,29 +534,21 @@ module.exports = {
       });
     });  
     
+    
 //LIS sprint 7
     
-        
-    // email-address-handler
-    app.get(/email-address-handler/, function (req, res) {
-      if (req.query.email != '') {
-        applicant.email = req.query.email;
-      }
-      res.redirect('../work');
-    });
-    
-    //7) email-me
-    app.get('/lis/7/exemption/email-me', function (req, res) {
+    //7) send-mail
+    app.get('/lis/7/exemption/send-mail', function (req, res) {
       helpLevel = req.query.helplevel;
       console.log(helpLevel);
-      res.render('lis/7/exemption/email-me', {
+      res.render('lis/7/exemption/send-mail', {
         'helplevel' : helpLevel
       });
     });
     
-    //7) email-confirm
-    app.get('/lis/7/exemption/email-confirm', function (req, res) {
-      res.render('lis/7/exemption/email-confirm', {
+    //7) mail-confirm
+    app.get('/lis/7/exemption/mail-confirm', function (req, res) {
+      res.render('lis/7/exemption/mail-confirm', {
         'helplevel' : helpLevel
       });
     });
@@ -1235,17 +1236,17 @@ module.exports = {
     
 //LIS sprint 6
     
-    //6) email-me
-    app.get('/lis/6/exemption/email-me', function (req, res) {
+    //6) send-mail
+    app.get('/lis/6/exemption/send-mail', function (req, res) {
       helpLevel = req.query.helplevel;
-      res.render('lis/6/exemption/email-me', {
+      res.render('lis/6/exemption/send-mail', {
         'helplevel' : helpLevel
       });
     });
     
     //6) email-confirm
-    app.get('/lis/6/exemption/email-confirm', function (req, res) {
-      res.render('lis/6/exemption/email-confirm', {
+    app.get(/email-confirm/, function (req, res) {
+      res.render('../email-confirm', {
         'helplevel' : helpLevel
       });
     });
