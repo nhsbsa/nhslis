@@ -524,41 +524,53 @@ module.exports = {
         res.redirect('../work');
       }
     });
+
+    // email-address-handler
+    app.get(/mail-handler/, function (req, res) {
+      if (req.query.email != '') {
+        applicant.email = req.query.email;
+        console.log(applicant.email);
+      }
+      res.redirect('../work');
+    });
     
     // LIS exemption
     app.get('/lis/exemption/hc2certificate', function (req, res) {
       res.render('lis/exemption/hc2certificate', {
         'cert-title' : 'HC2'
       });
-    });  
+    });
+
+    // send-mail
+    app.get(/send-mail/, function (req, res) {
+      sprint = req.url.charAt(5);
+      helpLevel = req.query.helplevel;
+      res.render('lis/'+ sprint +'/exemption/send-mail', {
+        'helplevel' : helpLevel
+      });
+    });
+
+    // mail-confirm
+    app.get(/mail-confirm/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/exemption/mail-confirm', {
+        'helplevel' : helpLevel
+      });
+    });
     
 //LIS sprint 7
-    
-        
-    // email-address-handler
-    app.get(/email-address-handler/, function (req, res) {
-      if (req.query.email != '') {
-        applicant.email = req.query.email;
+
+
+    //7)
+    app.get(/carehome-handler/, function (req, res) {
+      if (req.query.carehome === 'yes') {
+        res.redirect('../sc/authority-assessed');
+      } else {
+        res.redirect('../savings');
       }
-      res.redirect('../work');
     });
-    
-    //7) email-me
-    app.get('/lis/7/exemption/email-me', function (req, res) {
-      helpLevel = req.query.helplevel;
-      console.log(helpLevel);
-      res.render('lis/7/exemption/email-me', {
-        'helplevel' : helpLevel
-      });
-    });
-    
-    //7) email-confirm
-    app.get('/lis/7/exemption/email-confirm', function (req, res) {
-      res.render('lis/7/exemption/email-confirm', {
-        'helplevel' : helpLevel
-      });
-    });
-    
+
+
     //7) post
     app.get('/lis/7/exemption/post', function (req, res) {
       helpLevel = req.query.helplevel;
@@ -575,15 +587,7 @@ module.exports = {
       });
     });
                     
-    //7)
-    app.get('/lis/7/care-home-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.carehome === 'yes') {
-        res.redirect('/lis/7/sc/authority-assessed');
-      } else {
-        res.redirect('/lis/7/savings');
-      }
-    });
+
     
     //7)
     app.get('/lis/7/sc/authority-assessed-handler', function (req, res) {
@@ -1291,22 +1295,7 @@ module.exports = {
     });
     
 //LIS sprint 6
-    
-    //6) email-me
-    app.get('/lis/6/exemption/email-me', function (req, res) {
-      helpLevel = req.query.helplevel;
-      res.render('lis/6/exemption/email-me', {
-        'helplevel' : helpLevel
-      });
-    });
-    
-    //6) email-confirm
-    app.get('/lis/6/exemption/email-confirm', function (req, res) {
-      res.render('lis/6/exemption/email-confirm', {
-        'helplevel' : helpLevel
-      });
-    });
-    
+
     //6) post
     app.get('/lis/6/exemption/post', function (req, res) {
       helpLevel = req.query.helplevel;
@@ -1322,15 +1311,6 @@ module.exports = {
       });
     });
                             
-    //6)
-    app.get('/lis/6/care-home-handler', function (req, res) {
-      if (req.query.carehome === 'yes') {
-        res.redirect('/lis/6/sc/authority-assessed');
-      } else {
-        res.redirect('/lis/6/savings');
-      }
-    });
-    
     //6)
     app.get('/lis/6/sc/authority-assessed-handler', function (req, res) {
       if (req.query.authority === 'yes') {
@@ -1894,14 +1874,6 @@ module.exports = {
     
     
     //LIS sprint 5
-        
-    app.get('/lis/5/care-home-handler', function (req, res) {
-      if (req.query.carehome === 'yes') {
-        res.redirect('/lis/5/sc/authority-assessed');
-      } else {
-        res.redirect('/lis/5/savings');
-      }
-    });
 
     app.get('/lis/5/sc/authority-assessed-handler', function (req, res) {
       if (req.query.authority === 'yes') {
@@ -2457,15 +2429,7 @@ module.exports = {
         'partnerandext' : partnerAndText
       });
     });
-        
-    app.get('/lis/4/care-home-handler', function (req, res) {
-      if (req.query.carehome === 'yes') {
-        res.redirect('/lis/4/carehome-kickout');
-      } else {
-        res.redirect('/lis/4/savings');
-      }
-    });
-    
+
     app.get('/lis/4/assets/property', function (req, res) {
       res.render('lis/4/assets/property', {
         'partnerortext' : partnerOrText,

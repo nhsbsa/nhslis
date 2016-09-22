@@ -1,3 +1,13 @@
+/*
+treatmenttype
+dobYear
+country
+medicalexempt
+diabetes
+glaucoma
+carehome
+*/
+
 function Person(
   firstName,
   lastName,
