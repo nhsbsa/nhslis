@@ -272,12 +272,17 @@ module.exports = {
     // partner handler v2
     app.get(/p2-handler/, function (req, res) {     
       sprint = req.url.charAt(5);
-      application.aboutPartnerStatus = "Started";
-      application.aboutPartnerLink = continueText;
+
+      
       if (req.query.partner === 'yes') {
         applicant.partner = true;
+        application.aboutPartnerStatus = "Started";
+        application.aboutPartnerLink = continueText;
+        // this needs a new url
       } else if (req.query.partner === 'no') {
         applicant.partner = false;
+        application.aboutPartnerStatus = completedText;
+        application.aboutPartnerLink = changeText;
       }
       setPartnerText();
       res.render('lis/'+ sprint +'//ko', {
