@@ -427,12 +427,7 @@ module.exports = {
       }
       res.redirect('../work');
     });  
-    
-    //
-    // Renders
-    //
-    
-    
+
     app.get(/lis-home/, function (req, res) {
       sprint = req.url.charAt(5);
       console.log(req.url);
@@ -551,10 +546,6 @@ module.exports = {
       });
     });
     
-//LIS sprint 7
-    
-    
-    //7)
     app.get(/carehome-handler/, function (req, res) {
       if (req.query.carehome === 'yes') {
         res.redirect('../sc/authority-assessed');
@@ -563,7 +554,37 @@ module.exports = {
       }
     });
     
+    // authority-assessed-handler
+    app.get(/authority-assessed-handler/, function (req, res) {
+      if (req.query.authority === 'yes') {
+        res.redirect('../about-you');
+      } else {
+        res.redirect('../savings');
+      }
+    });
     
+    // property
+    app.get(/property/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/assets/property', {
+        'partnerortext' : partnerOrText,
+        'partnerandext' : partnerAndText
+      });
+    });
+    
+    // other-assets/ 
+    app.get(/other-assets/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/assets/other-assets', {
+        'partnerortext' : partnerOrText,
+        'partnerandtext' : partnerAndText
+      });
+    });
+
+    
+    
+//LIS sprint 7
+        
     //7) post
     app.get('/lis/7/exemption/post', function (req, res) {
       helpLevel = req.query.helplevel;
@@ -579,36 +600,10 @@ module.exports = {
         'helplevel' : helpLevel
       });
     });
-                    
+
     
     
-    //7)
-    app.get('/lis/7/sc/authority-assessed-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.authority === 'yes') {
-        res.redirect('/lis/7/sc/about-you');
-      } else {
-        res.redirect('/lis/7/sc/savings');
-      }
-    });
-        
-    //7)
-    app.get('/lis/7/assets/property', function (req, res) {
-      console.log(partnerOrText);
-      res.render('lis/7/assets/property', {
-        'partnerortext' : partnerOrText,
-        'partnerandext' : partnerAndText
-      });
-    });
     
-    //7)
-    app.get('/lis/7/assets/other', function (req, res) {
-      console.log(partnerOrText);
-      res.render('lis/7/assets/other', {
-        'partnerortext' : partnerOrText,
-        'partnerandtext' : partnerAndText
-      });
-    });
     
     //7)
     app.get('/lis/7/assets/money', function (req, res) {
@@ -928,7 +923,7 @@ module.exports = {
           'partnerandrext' : partnerAndText
         });
       } else {
-        res.render('lis/7/assets/other', {
+        res.render('lis/7/assets/other-assets', {
           'partnerortext' : partnerOrText,
           'partnerandrext' : partnerAndText
         });
@@ -940,7 +935,7 @@ module.exports = {
       if (applicant.premiumBonds === true) {
         res.render('lis/7/assets/premium-bonds');
       } else {
-        res.render('lis/7/assets/other', {
+        res.render('lis/7/assets/other-assets', {
           'partnerortext' : partnerOrText,
           'partnerandrext' : partnerAndText
         });
@@ -949,7 +944,7 @@ module.exports = {
         
     //7)
     app.get('/lis/7/assets/premium-bond-handler', function (req, res) {
-      res.render('lis/7/assets/other', {
+      res.render('lis/7/assets/other-assets', {
         'partnerortext' : partnerOrText,
         'partnerandrext' : partnerAndText
       });
@@ -1292,27 +1287,10 @@ module.exports = {
         'helplevel' : helpLevel
       });
     });
-                            
-    //6)
-    app.get('/lis/6/sc/authority-assessed-handler', function (req, res) {
-      if (req.query.authority === 'yes') {
-        res.redirect('/lis/6/sc/about-you');
-      } else {
-        res.redirect('/lis/6/sc/savings');
-      }
-    });
-        
-    //6)
-    app.get('/lis/6/assets/property', function (req, res) {
-      res.render('lis/6/assets/property', {
-        'partnerortext' : partnerOrText,
-        'partnerandext' : partnerAndText
-      });
-    });
     
     //6)
-    app.get('/lis/6/assets/other', function (req, res) {
-      res.render('lis/6/assets/other', {
+    app.get('/lis/6/', function (req, res) {
+      res.render('lis/6/', {
         'partnerortext' : partnerOrText,
         'partnerandtext' : partnerAndText
       });
@@ -1602,7 +1580,7 @@ module.exports = {
           'partnerandrext' : partnerAndText
         });
       } else {
-        res.render('lis/6/assets/other', {
+        res.render('lis/6/', {
           'partnerortext' : partnerOrText,
           'partnerandrext' : partnerAndText
         });
@@ -1614,7 +1592,7 @@ module.exports = {
       if (applicant.premiumBonds === true) {
         res.render('lis/6/assets/premium-bonds');
       } else {
-        res.render('lis/6/assets/other', {
+        res.render('lis/6/', {
           'partnerortext' : partnerOrText,
           'partnerandrext' : partnerAndText
         });
@@ -1623,7 +1601,7 @@ module.exports = {
         
     //6)
     app.get('/lis/6/assets/premium-bond-handler', function (req, res) {
-      res.render('lis/6/assets/other', {
+      res.render('lis/6/', {
         'partnerortext' : partnerOrText,
         'partnerandrext' : partnerAndText
       });
@@ -1856,14 +1834,6 @@ module.exports = {
     
     
     //LIS sprint 5
-        
-    app.get('/lis/5/sc/authority-assessed-handler', function (req, res) {
-      if (req.query.authority === 'yes') {
-        res.redirect('/lis/5/sc/about-you');
-      } else {
-        res.redirect('/lis/5/sc/savings');
-      }
-    });
 
     app.get('/lis/5/sc/savings-sc-kickout-handler', function (req, res) {
       if (req.query.savings === 'yes') {
@@ -1872,16 +1842,9 @@ module.exports = {
         res.redirect('/lis/5/need-to-know');
       }
     });
-    
-    app.get('/lis/5/assets/property', function (req, res) {
-      res.render('lis/5/assets/property', {
-        'partnerortext' : partnerOrText,
-        'partnerandext' : partnerAndText
-      });
-    });
         
-    app.get('/lis/5/assets/other', function (req, res) {
-      res.render('lis/5/assets/other', {
+    app.get('/lis/5/', function (req, res) {
+      res.render('lis/5/', {
         'partnerortext' : partnerOrText,
         'partnerandtext' : partnerAndText
       });
@@ -2153,7 +2116,7 @@ module.exports = {
           'partnerandrext' : partnerAndText
         });
       } else {
-        res.render('lis/5/assets/other', {
+        res.render('lis/5/', {
           'partnerortext' : partnerOrText,
           'partnerandrext' : partnerAndText
         });
@@ -2165,7 +2128,7 @@ module.exports = {
       if (applicant.premiumBonds === true) {
         res.render('lis/5/assets/premium-bonds');
       } else {
-        res.render('lis/5/assets/other', {
+        res.render('lis/5/', {
           'partnerortext' : partnerOrText,
           'partnerandrext' : partnerAndText
         });
@@ -2174,7 +2137,7 @@ module.exports = {
         
     //5)
     app.get('/lis/5/assets/premium-bond-handler', function (req, res) {
-      res.render('lis/5/assets/other', {
+      res.render('lis/5/', {
         'partnerortext' : partnerOrText,
         'partnerandrext' : partnerAndText
       });
@@ -2412,14 +2375,7 @@ module.exports = {
       });
     });
             
-    app.get('/lis/4/assets/property', function (req, res) {
-      res.render('lis/4/assets/property', {
-        'partnerortext' : partnerOrText,
-        'partnerandext' : partnerAndText
-      });
-    });
-        
-    app.get('/lis/4/assets/other', function (req, res) {
+    app.get('/lis/4/', function (req, res) {
       res.render('lis/4/assets/money', {
         'partnerortext' : partnerOrText,
         'partnerandtext' : partnerAndText
@@ -2645,7 +2601,7 @@ module.exports = {
           'partnerandrext' : partnerAndText
         });
       } else {
-        res.render('lis/4/assets/other', {
+        res.render('lis/4/', {
           'partnerortext' : partnerOrText,
           'partnerandrext' : partnerAndText
         });
@@ -2657,13 +2613,13 @@ module.exports = {
       if (applicant.premiumBonds === true) {
         res.render('lis/4/assets/premium-bonds');
       } else {
-        res.render('lis/4/assets/other');
+        res.render('lis/4/');
       }
     });
         
     //4)
     app.get('/lis/4/assets/premium-bond-handler', function (req, res) {
-      res.render('lis/4/assets/other');
+      res.render('lis/4/');
     });
                 
     //work
@@ -2884,14 +2840,7 @@ module.exports = {
       }
     });
     
-    app.get('/lis/3/assets/property', function (req, res) {
-      res.render('lis/3/assets/property', {
-        'partnerortext' : partnerOrText,
-        'partnerandext' : partnerAndText
-      });
-    });
-        
-    app.get('/lis/3/assets/other', function (req, res) {
+    app.get('/lis/3/', function (req, res) {
       res.render('lis/3/assets/money', {
         'partnerortext' : partnerOrText,
         'partnerandtext' : partnerAndText
@@ -3118,7 +3067,7 @@ module.exports = {
           'partnerandrext' : partnerAndText
         });
       } else {
-        res.render('lis/4/assets/other', {
+        res.render('lis/4/', {
           'partnerortext' : partnerOrText,
           'partnerandrext' : partnerAndText
         });
@@ -3130,13 +3079,13 @@ module.exports = {
       if (applicant.premiumBonds === true) {
         res.render('lis/3/assets/premium-bonds');
       } else {
-        res.render('lis/3/assets/other');
+        res.render('lis/3/');
       }
     });
         
     //3)
     app.get('/lis/3/assets/premium-bond-handler', function (req, res) {
-      res.render('lis/3/assets/other');
+      res.render('lis/3/');
     });
                 
     //work
@@ -3355,7 +3304,7 @@ module.exports = {
       if (req.query.banktype === 'bank') {
         res.redirect('/lis/2/assets/accounts');
       } else {
-        res.redirect('/lis/2/assets/other');
+        res.redirect('/lis/2/');
       }
     });
   
