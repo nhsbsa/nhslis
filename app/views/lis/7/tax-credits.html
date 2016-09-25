@@ -13,22 +13,21 @@
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-    Do you or your partner have more than £16,000 in savings?
-      <span class="form-hint">Include investments and properties (but not place where you live)</span>  
+    Do {{partnerortext}} have a NHS Tax Credits Exemption Certificate? 
   </h1>
 
-  <form action="sko-handler" method="get" class="form">
+      <form action="tce-handler" method="get" class="form">
       <div class="form-item-wrapper">
         <fieldset>
           <div class="inline-form-groups">
             <div class="form-group">
-              <input type="radio" id="yes" name="savings" value="yes">
+              <input type="radio" id="yes" name="taxcredits" value="yes">
               <label class="form-control-radio" for="yes">
                 Yes
               </label>
             </div>
             <div class="form-group">
-              <input type="radio" id="no" name="savings" value="no">
+              <input type="radio" id="no" name="taxcredits" value="no">
               <label class="form-control-radio" for="no">
                 No
               </label>

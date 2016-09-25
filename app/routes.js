@@ -298,7 +298,7 @@ module.exports = {
       }
     });
     
-    // guacredit-kickout-handler
+    // guacredit-kickout-handler v2
     app.get(/guacredit-handler/, function (req, res) {     
       sprint = req.url.charAt(5);
       if (req.query.guacredit === 'yes') {
@@ -349,6 +349,15 @@ module.exports = {
       }
     });
     
+    // carehome savings kickout handler v2
+    app.get(/chome-savings-handler/, function (req, res) {
+      if (req.query.savings === 'yes') {
+        res.redirect('../../savings-kickout');
+      } else {
+        res.redirect('../../need-to-know');
+      }
+    });
+    
     // carehome savings kickout handler
     app.get(/carehome-savings-handler/, function (req, res) {
       if (req.query.savings === 'no') {
@@ -358,9 +367,18 @@ module.exports = {
       }
     });
 
-    // savings kickout handler
+    // savings kickout handler v2
     app.get(/savings-ko-handler/, function (req, res) {
       if (req.query.savings === 'no') {
+        res.redirect('../savings-kickout');
+      } else {
+        res.redirect('../need-to-know');
+      }
+    });
+    
+    // savings kickout handler
+    app.get(/sko-handler/, function (req, res) {
+      if (req.query.savings === 'yes') {
         res.redirect('../savings-kickout');
       } else {
         res.redirect('../need-to-know');
@@ -370,7 +388,7 @@ module.exports = {
     // need to know
     app.get(/need-to-know/, function (req, res) {
       sprint = req.url.charAt(5);
-      res.render('lis/'+ sprint +'//need-to-know', {
+      res.render('lis/'+ sprint +'/need-to-know', {
         'partnerstext' : partnersText
       });
     });
