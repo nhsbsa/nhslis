@@ -162,15 +162,19 @@ function setPartnerText() {
   if (applicant.partner === false) {
     partnerOrText = 'you';
     partnerAndText = 'you';
+    partnersText = 'your';
     partnerLiveText = 'Does anyone else live in your home with you?';
     jointTennantText = 'Is anyone else a joint tenant of the place you live';
     jointOwnerText = 'Is anyone else a joint owner of the place you live';
+    iWe = 'I';
   } else {
     partnerOrText = 'you or your partner';
     partnerAndText = 'you and your partner';
+    partnersText = "you and your partner's";
     partnerLiveText = 'Does anyone else other than your partner live in your home with you?';
     jointTennantText = 'Is anyone else other than your partner a joint tenant of the place you live';
     jointOwnerText = 'Is anyone else other than your partner a joint owner of the place you live';
+    iWe = 'we';
   }
 }
 
@@ -263,12 +267,44 @@ module.exports = {
     // Pre questions
     // -------------
     
+    // partner handler v2
+    app.get(/p2-handler/, function (req, res) {     
+      sprint = req.url.charAt(5);
+      application.aboutPartnerStatus = "Started";
+      application.aboutPartnerLink = continueText;
+      if (req.query.partner === 'yes') {
+        applicant.partner = true;
+      } else if (req.query.partner === 'no') {
+        applicant.partner = false;
+      }
+      setPartnerText();
+      res.render('lis/'+ sprint +'//ko', {
+        'partnerortext' : partnerOrText,
+        'iwe' : iWe
+      });
+    });
+
     // kickout-handler
-    app.get(/kickout-handler/, function (req, res) {     
+    app.get(/kickout-handler/, function (req, res) {   
+      sprint = req.url.charAt(5);
       if (req.query.kickout === 'continue') {
-        res.redirect('../care-home');
+        res.render('lis/'+ sprint +'/guarantee-credit', {
+          'partnerortext' : partnerOrText
+        });
       } else {
         res.redirect('../exempt-kickout');
+      }
+    });
+    
+    // guacredit-kickout-handler
+    app.get(/guacredit-handler/, function (req, res) {     
+      sprint = req.url.charAt(5);
+      if (req.query.guacredit === 'yes') {
+        res.redirect('../exempt-kickout');
+      } else {
+        res.render('lis/'+ sprint +'/tax-credits', {
+          'partnerortext' : partnerOrText
+        });
       }
     });
     
@@ -277,47 +313,66 @@ module.exports = {
       if (req.query.carehome === 'yes') {
         res.redirect('../sc/authority-assessed');
       } else {
-        res.redirect('../savings');
+        res.render('lis/'+ sprint +'/savings', {
+          'partnerortext' : partnerOrText
+        });
+      }
+    });
+    
+    app.get(/saving-ch/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/sc/saving-ch', {
+        'partnerortext' : partnerOrText
+      });
+    });
+
+    // tax credits cert-handler
+    app.get(/tce-handler/, function (req, res) { 
+    sprint = req.url.charAt(5);
+      if (req.query.taxcredits === 'yes') {
+        res.redirect('../tce-kickout');
+      } else {
+        res.render('lis/'+sprint+'/care-home', {
+          'partnerortext' : partnerOrText
+        });
       }
     });
     
     // authority-assessed-handler
     app.get(/authority-assessed-handler/, function (req, res) {     
-      console.log(req.query);
       if (req.query.authority === 'yes') {
         res.redirect('../about-you');
       } else {
-        res.redirect('../savings');
+        res.redirect('../saving-ch');
       }
     });
     
     // carehome savings kickout handler
     app.get(/carehome-savings-handler/, function (req, res) {
-      if (req.query.savings === 'yes') {
+      if (req.query.savings === 'no') {
         res.redirect('../../savings-kickout');
       } else {
-        res.redirect('../../guarantee-credit');
+        res.redirect('../../need-to-know');
       }
     });
 
     // savings kickout handler
     app.get(/savings-ko-handler/, function (req, res) {
-      if (req.query.savings === 'yes') {
+      if (req.query.savings === 'no') {
         res.redirect('../savings-kickout');
-      } else {
-        res.redirect('../guarantee-credit');
-      }
-    });
-    
-    // guacredit-kickout-handler
-    app.get(/guacredit-handler/, function (req, res) {     
-      console.log(req.query);
-      if (req.query.guacredit === 'yes') {
-        res.redirect('../exempt-kickout');
       } else {
         res.redirect('../need-to-know');
       }
     });
+    
+    // need to know
+    app.get(/need-to-know/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'//need-to-know', {
+        'partnerstext' : partnersText
+      });
+    });
+    
     
     
     // -----------------
@@ -701,7 +756,7 @@ module.exports = {
     // -------
     // Partner
     // -------
-        
+            
     // partner handler
     app.get(/partner-handler/, function (req, res) {     
       sprint = req.url.charAt(5);

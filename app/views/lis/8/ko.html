@@ -13,24 +13,10 @@
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-      Do you or your partner receive any of the following?
+      Do {{partnerortext}} get any of these benefits?
   </h1>
 
-  <details>
-
-  <summary><span class="summary">What we mean by partner</span></summary>
-
-  <div class="panel panel-border-narrow">
-
-    <p>
-      We use the term partner to mean a person you live with as part of a couple of the same or opposite sex, whether or not you are married or in a civil partnership.
-    </p>
-
-  </div>
-
-</details>
-  <br>
-  <form action="kickout-handler" method="get" class="form">
+ <form action="kickout-handler" method="get" class="form">
     <div class="form-item-wrapper">
       <div class="form-group">
         <input type="radio" id="cbsa" name="kickout">
@@ -60,9 +46,12 @@
       <div class="form-group">
         <input type="radio" id="continue" name="kickout" value="continue">
         <label class="form-control-radio" for="continue">
-          I do not receive any of these
+          No, {{iwe}} <span class="bold">do not</span> get any of these
         </label>
       </div>
+    </div>
+         <div class="form-item-wrapper">
+
     {{
       form_macros.button({
         label: 'Next'

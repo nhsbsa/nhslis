@@ -13,29 +13,30 @@
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-    Do you or your partner have more than £16,000 in savings?
-      <span class="form-hint">Include investments and properties (but not place where you live)</span>  
+    Do {{partnerortext}} have less than  £16,000 in savings, investments and properties?
   </h1>
-
+      
+  <p>Property does not include where you live.</p>
+  
   <form action="savings-ko-handler" method="get" class="form">
-      <div class="form-item-wrapper">
-        <fieldset>
-          <div class="inline-form-groups">
-            <div class="form-group">
-              <input type="radio" id="yes" name="savings" value="yes">
-              <label class="form-control-radio" for="yes">
-                Yes
-              </label>
-            </div>
-            <div class="form-group">
-              <input type="radio" id="no" name="savings" value="no">
-              <label class="form-control-radio" for="no">
-                No
-              </label>
-            </div>
+    <div class="form-item-wrapper">
+      <fieldset>
+        <div class="inline-form-groups">
+          <div class="form-group">
+            <input type="radio" id="yes" name="savings" value="yes">
+            <label class="form-control-radio" for="yes">
+              Yes
+            </label>
           </div>
-        </fieldset>
-      </div>
+          <div class="form-group">
+            <input type="radio" id="no" name="savings" value="no">
+            <label class="form-control-radio" for="no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
     
     {{
       form_macros.button({

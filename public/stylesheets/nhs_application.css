@@ -2509,3 +2509,6 @@ tr.clickable-row {
 .phase-banner-alpha {
   padding: 10px 0 8px;
   border-bottom: 1px solid #bfc1c3; }
+
+.bold {
+  font-weight: bold; }
