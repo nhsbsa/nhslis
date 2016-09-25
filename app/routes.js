@@ -160,6 +160,7 @@ var householder = {
 // change the text if the applicant has a partner
 function setPartnerText() {
   if (applicant.partner === false) {
+    partnerBothText = 'you';
     partnerOrText = 'you';
     partnerAndText = 'you';
     partnersText = 'your';
@@ -168,6 +169,7 @@ function setPartnerText() {
     jointOwnerText = 'Is anyone else a joint owner of the place you live';
     iWe = 'I';
   } else {
+    partnerBothText = 'you, your partner or both of you';
     partnerOrText = 'you or your partner';
     partnerAndText = 'you and your partner';
     partnersText = "you and your partner's";
@@ -314,7 +316,7 @@ module.exports = {
         res.redirect('../sc/authority-assessed');
       } else {
         res.render('lis/'+ sprint +'/savings', {
-          'partnerortext' : partnerOrText
+          'partnerbothtext' : partnerBothText
         });
       }
     });
@@ -322,7 +324,7 @@ module.exports = {
     app.get(/saving-ch/, function (req, res) {
       sprint = req.url.charAt(5);
       res.render('lis/'+ sprint +'/sc/saving-ch', {
-        'partnerortext' : partnerOrText
+        'partnerbothtext' : partnerBothText
       });
     });
 
