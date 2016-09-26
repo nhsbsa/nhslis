@@ -1,13 +1,15 @@
 //import the person constructor
 var person = require("./person.js");
 
-var partnerLiveText;
-var partnerOrText;
-var partnerAndText;
+var partnerLiveText,
+partnerOrText, 
+partnerAndText,
+iWe,
+doNot,
+jointTennantText,
+jointOwnerText;
 var continueText = 'Continue';
 var changeText = 'View or change';
-var jointTennantText;
-var jointOwnerText;
 var completedText = "Completed";
 
 var helpLevel = 3;
@@ -168,6 +170,7 @@ function setPartnerText() {
     jointTennantText = 'Is anyone else a joint tenant of the place you live';
     jointOwnerText = 'Is anyone else a joint owner of the place you live';
     iWe = 'I';
+    doNot = ' ';
   } else {
     partnerBothText = 'you, your partner or both of you';
     partnerOrText = 'you or your partner';
@@ -177,6 +180,7 @@ function setPartnerText() {
     jointTennantText = 'Is anyone else other than your partner a joint tenant of the place you live';
     jointOwnerText = 'Is anyone else other than your partner a joint owner of the place you live';
     iWe = 'we';
+    doNot = 'do not';
   }
 }
 
@@ -272,13 +276,10 @@ module.exports = {
     // partner handler v2
     app.get(/p2-handler/, function (req, res) {     
       sprint = req.url.charAt(5);
-
-      
       if (req.query.partner === 'yes') {
         applicant.partner = true;
         application.aboutPartnerStatus = "Started";
         application.aboutPartnerLink = continueText;
-        // this needs a new url
       } else if (req.query.partner === 'no') {
         applicant.partner = false;
         application.aboutPartnerStatus = completedText;
@@ -322,6 +323,17 @@ module.exports = {
       } else {
         res.render('lis/'+ sprint +'/savings', {
           'partnerbothtext' : partnerBothText
+        });
+      }
+    });
+    
+     // carehome-handler v2
+    app.get(/carehome-v2-handler/, function (req, res) {
+      if (req.query.carehome === 'yes') {
+        res.redirect('../sc/authority-assessed');
+      } else {
+        res.render('lis/'+ sprint +'/hospital', {
+          'partnerortext' : partnerOrText
         });
       }
     });

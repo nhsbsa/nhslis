@@ -1,3 +1,7 @@
+
+
+
+
 {% extends 'templates/nhs_transaction_layout.html' %}
 {% import 'includes/form_macros.html' as form_macros %}
 
@@ -13,10 +17,10 @@
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-    Do you have a partner?
+    Do you live with a partner?
   </h1>
   
-  <p class="form-hint">We use the term partner to mean a person you live with as part of a couple of the same or opposite sex, whether or not you are married or in a civil partnership.</p>
+  <p>You may be married or in a civil partnership but may not be.</p>
 
   <form action="partner-handler" method="get" class="form">
       <div class="form-item-wrapper">
@@ -37,14 +41,17 @@
           </div>
         </fieldset>
       </div>
-    
+      <div class="form-item-wrapper">
     {{
       form_macros.button({
         label: 'Save and continue'
       })
     }}
-    <p class="navigation"><a class="cancel" href="../lis-home">Save and come back later</a></p>
-  </form>
+        
+            <p class="navigation"><a class="cancel" href="../lis-home">Save and come back later</a></p>
+
+    </div>
+      </form>
     </div>
     </div>
 </main>

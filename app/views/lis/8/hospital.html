@@ -13,10 +13,10 @@
     <div class="column-two-thirds">
 
       <h1 class="heading-large">
-        Are you currently in hospital?
+        Are {{partnerortext}} in hospital?
       </h1>
   
-      <form action="hospital-handler" method="get" class="form">
+      <form action="" method="get" class="form">
           <div class="form-item-wrapper">
             <fieldset>
               <div class="inline-form-groups">
@@ -36,13 +36,13 @@
             </fieldset>
           </div>
 
-            {{
+        {{
           form_macros.button({
-            label: 'Save and continue'
+            label: 'Next',
+            href : 'savings'
           })
         }}
 
-    <p class="navigation"><a class="cancel" href="../lis-home">Save and come back later</a></p>
 
       </form>
       
