@@ -500,6 +500,29 @@ module.exports = {
       applicant.dobMonth = convertMonth(req.query.month);
       applicant.dobYear = req.query.year;
       console.log(applicant.dobYear);
+      res.redirect('../contact-prefs');
+    });
+    
+    app.get(/name-handler/, function (req, res) {     
+      sprint = req.url.charAt(5);
+      application.aboutYouStatus = "Started";
+      application.aboutYouLink = continueText;
+      applicant.firstName = req.query.firstname;
+      applicant.lastName = req.query.lastname;
+      applicant.dobDay = req.query.day;
+      applicant.dobMonth = convertMonth(req.query.month);
+      applicant.dobYear = req.query.year;
+      console.log(applicant.dobYear);
+      res.redirect('../dob');
+    });
+    
+    // dob handler
+    app.get(/dob-handler/, function (req, res) {     
+      sprint = req.url.charAt(5);
+      applicant.dobDay = req.query.day;
+      applicant.dobMonth = convertMonth(req.query.month);
+      applicant.dobYear = req.query.year;
+      console.log(applicant.dobYear);
       res.render('lis/'+ sprint +'/you/contact-prefs', {
         'applicantFirstName' : applicant.firstName
       });
