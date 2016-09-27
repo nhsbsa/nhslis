@@ -166,7 +166,7 @@ function setPartnerText() {
     partnerOrText = 'you';
     partnerAndText = 'you';
     partnersText = 'your';
-    partnerLiveText = 'Does anyone else live in your home with you?';
+    partnerLiveText = 'Does anyone else live with you?';
     jointTennantText = 'Is anyone else a joint tenant of the place you live';
     jointOwnerText = 'Is anyone else a joint owner of the property you live in';
     otherThanPartner = ' ';
@@ -177,7 +177,7 @@ function setPartnerText() {
     partnerOrText = 'you or your partner';
     partnerAndText = 'you and your partner';
     partnersText = "you and your partner's";
-    partnerLiveText = 'Does anyone else other than your partner live in your home with you?';
+    partnerLiveText = 'Does anyone else other than your partner live with you?';
     jointTennantText = 'Is anyone else other than your partner a joint tenant of the place you live';
     jointOwnerText = 'Is anyone else other than your partner a joint owner of the property you live in';
     otherThanPartner = 'other than your partner';
@@ -1040,6 +1040,15 @@ module.exports = {
     });
     
     // mortgaged-handler
+    app.get(/mortgaged2-handler/, function (req, res) {
+      if (req.query.mortgaged === 'yes') {
+        res.redirect('../mortgage-frequency');
+      } else {
+        res.redirect('../../services');
+      }
+    });
+
+    // mortgaged-handler
     app.get(/mortgaged-handler/, function (req, res) {
       if (req.query.mortgaged === 'yes') {
         res.redirect('../mortgage-amount');
@@ -1048,10 +1057,19 @@ module.exports = {
       }
     });
 
-    // council-tax-handler
+    // council-tax-handler 2
     app.get(/ctax-handler/, function (req, res) {
       if (req.query.counciltax === 'yes') {
         res.redirect('../tax-amount');
+      } else {
+        res.redirect('../ground-rent');
+      }
+    });
+    
+    // council-tax-handler
+    app.get(/ctax2-handler/, function (req, res) {
+      if (req.query.counciltax === 'yes') {
+        res.redirect('../tax-frequency');
       } else {
         res.redirect('../ground-rent');
       }

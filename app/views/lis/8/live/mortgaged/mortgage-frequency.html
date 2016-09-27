@@ -1,4 +1,4 @@
-{% extends 'templates/nhs_transaction_layout.html' %}
+ {% extends 'templates/nhs_transaction_layout.html' %}
 {% import 'includes/form_macros.html' as form_macros %}
 
 {% block afterHeader %}
@@ -13,10 +13,8 @@
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-    About your boarder
+    How often do you pay your mortgage or loan?
   </h1>
-  
-  <h2 class="heading-medium">How often do they pay you?</h2>
   
   <form action="" method="get" class="form">
 
@@ -36,7 +34,7 @@
       <div class="form-group">
         <input type="radio" id="fourweekly" name="minor">
         <label class="form-control-radio" for="fourweekly">
-         Every 4 weeks
+          Every 4 weeks
         </label>
       </div>
       <div class="form-group">
@@ -52,18 +50,11 @@
         </label>
       </div>
       
-      {{
-        form_macros.amount_field({
-          id: 'money-amount',
-        label: 'How much do they pay?'
-        })
-      }}
-
     </div>  
         
     {{
       form_macros.button({
-        href: 'boarder-includes',
+        href: 'mortgage-amount',
         label: 'Save and continue'
       })
     }}

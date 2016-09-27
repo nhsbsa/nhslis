@@ -13,47 +13,23 @@
     <div class="column-two-thirds">
 
   <h1 class="heading-large">
-    How often do you pay your mortgage or loan?
+    How much do you pay?
   </h1>
+      
+    <p>
+      Do include any endowment premiums linked to the mortgage.
+    </p>
+      
+    <p>
+      Do not include premiums for any other type of insurance, money you owe that should have been paid earlier, or any amount of mortgage that you are voluntarily overpaying.
+    </p>
   
   <form action="" method="get" class="form">
 
     <div class="form-item-wrapper">
-      <div class="form-group">
-        <input type="radio" id="week" name="minor">
-        <label class="form-control-radio" for="week">
-          Every week
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="radio" id="fortnight" name="minor">
-        <label class="form-control-radio" for="fortnight">
-          Every two weeks
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="radio" id="fourweekly" name="minor">
-        <label class="form-control-radio" for="fourweekly">
-          Every four weeks
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="radio" id="month" name="minor">
-        <label class="form-control-radio" for="month">
-         Every month
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="radio" id="year" name="minor">
-        <label class="form-control-radio" for="year">
-          Annually
-        </label>
-      </div>
-      
     {{
       form_macros.amount_field({
-        id: 'money-name',
-      label: 'How much do you pay? <span class="form-hint">Include any endowment premiums linked to the mortgage.<br>Dont include premiums for any other type of insurance, any arrears, or any amount of mortgage that you are voluntarily overpaying</span>'
+        id: 'money-name'
       })
     }}
       
