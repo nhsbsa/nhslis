@@ -16,8 +16,9 @@
 
   <h1 class="heading-large">
     Do {{partnerortext}} have any other money?
-    <span class="form-hint">For example cash</span>
   </h1>
+      
+  <p>For example cash</p>
 
   <form action="" method="get" class="form">
 
@@ -43,8 +44,7 @@
           {{
             form_macros.amount_field({
               id: 'money-amount',
-              hint: 'Please tell us the combined total of any money you have',
-              label: 'Total value of money'
+              label: 'How much money do have?'
             })
           }}
 

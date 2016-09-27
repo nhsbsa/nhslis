@@ -892,22 +892,14 @@ module.exports = {
       }
     });
     
-    // second property mortgage
-    app.get(/outstanding/, function (req, res) {     
-      sprint = req.url.charAt(5);
-      res.render('lis/'+ sprint +'/assets/outstanding', {
-        'partnerortext' : partnerOrText,
-      });
+    // property handler
+    app.get(/assets-mortgage-handler/, function (req, res) {
+      if (req.query.mortgage === "yes") {
+        res.redirect('../outstanding');
+      } else {
+        res.redirect('../property');
+      }
     });
-
-    /* second property mortgage
-    app.get(/secondprop-handler/, function (req, res) {     
-      sprint = req.url.charAt(5);
-      res.render('lis/'+ sprint +'/assets/outstanding', {
-        'partnerortext' : partnerOrText,
-      });
-    });
-  */
     
     // money
     app.get(/accounts/, function (req, res) {     
