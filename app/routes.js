@@ -168,7 +168,8 @@ function setPartnerText() {
     partnersText = 'your';
     partnerLiveText = 'Does anyone else live in your home with you?';
     jointTennantText = 'Is anyone else a joint tenant of the place you live';
-    jointOwnerText = 'Is anyone else a joint owner of the place you live';
+    jointOwnerText = 'Is anyone else a joint owner of the property you live in';
+    otherThanPartner = ' ';
     iWe = 'I';
     doNot = ' ';
   } else {
@@ -178,7 +179,8 @@ function setPartnerText() {
     partnersText = "you and your partner's";
     partnerLiveText = 'Does anyone else other than your partner live in your home with you?';
     jointTennantText = 'Is anyone else other than your partner a joint tenant of the place you live';
-    jointOwnerText = 'Is anyone else other than your partner a joint owner of the place you live';
+    jointOwnerText = 'Is anyone else other than your partner a joint owner of the property you live in';
+    otherThanPartner = 'other than your partner';
     iWe = 'we';
     doNot = 'do not';
   }
@@ -757,6 +759,22 @@ module.exports = {
         res.redirect('../benefit4');
       }
     });
+    
+    // care-allowance
+    app.get(/care-allowance/, function (req, res) {     
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/you/benefits/care-allowance', {
+        'otherthanartner' : otherThanPartner
+      });
+    });
+
+    // partner care-allowance
+    app.get(/partnercare-allowance/, function (req, res) {     
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/partner/benefits/partner-careallowance', {
+        'otherthanartner' : otherThanPartner
+      });
+    });
 
     // disability living allowance
     app.get(/dla-handler/, function (req, res) {     
@@ -873,6 +891,23 @@ module.exports = {
         res.redirect('../accounts');
       }
     });
+    
+    // second property mortgage
+    app.get(/outstanding/, function (req, res) {     
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/assets/outstanding', {
+        'partnerortext' : partnerOrText,
+      });
+    });
+
+    /* second property mortgage
+    app.get(/secondprop-handler/, function (req, res) {     
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/assets/outstanding', {
+        'partnerortext' : partnerOrText,
+      });
+    });
+  */
     
     // money
     app.get(/accounts/, function (req, res) {     

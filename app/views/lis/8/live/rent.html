@@ -15,8 +15,7 @@
   <!-- <p class="navigation"><a class="back-to-previous">Back</a></p> -->
 
   <h1 class="heading-large">
-    Do you pay rent?
-    <span class="form-hint">Do not include money you pay to parents, relatives or friends.<br>Answer yes if you get help with your rent but still pay something towards it.</span>
+    Who do you pay your rent to?
   </h1>
   <form action="" method="get" class="form">
 
@@ -26,13 +25,13 @@
           <div class="form-group">
             <input type="radio" id="email" name="contact">
             <label class="form-control-radio" for="email" data-show="#contact-email-address" data-hide="#contact-mobile-number">
-              Yes
+              A landlord
             </label>
           </div>
           <div class="form-group">
             <input type="radio" id="mobile" name="contact">
             <label class="form-control-radio" for="mobile" data-hide="#contact-email-address">
-              No
+              Parents, relatives or friends
             </label>
           </div>
         </div>
@@ -41,7 +40,7 @@
 
     {{
       form_macros.button({
-        href: 'rent-amount',
+        href: 'rent-frequency',
         label: 'Save and continue'
       })
     }}

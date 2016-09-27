@@ -15,28 +15,21 @@
   <!-- <p class="navigation"><a class="back-to-previous">Back</a></p> -->
 
   <h1 class="heading-large">
-    What is your partner's name?
+    What is your partner's date of birth?
   </h1>
 
   <form action="" method="get" class="form">
 
     {{
-      form_macros.text_field({
-        id: 'first-name',
-        label: 'First name'
-      })
-    }}
-
-    {{
-      form_macros.text_field({
-        id: 'last-name',
-        label: 'Last name'
+      form_macros.date_field({
+        hint_date: '31 7 1961',
+        id_prefix: 'dob-'
       })
     }}
 
     {{
       form_macros.button({
-        href: 'dob',
+        href: 'work',
         label: 'Save and continue'
       })
     }}
