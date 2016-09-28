@@ -694,8 +694,20 @@ module.exports = {
     
     // private-pension-handler
     app.get(/pp-handler/, function (req, res) { 
-      console.log('here');
       if (applicant.employmentPension === true) {
+        res.redirect('../employment-pension-amount');
+      } else if (applicant.warPension === true) {
+        res.redirect('../war-pension');
+      } else if (applicant.warPension === false) {
+        res.redirect('../../benefits/benefit-sprint3');
+      }
+    });
+    
+    // private-pension-handler
+    app.get(/pp2/, function (req, res) { 
+      if (req.query.pp === 'yes') {
+        res.redirect('../private-pension-amount');
+      } else if (applicant.employmentPension === true) {
         res.redirect('../employment-pension-amount');
       } else if (applicant.warPension === true) {
         res.redirect('../war-pension');
@@ -707,6 +719,17 @@ module.exports = {
      // employment-pension-handler
     app.get(/ep-handler/, function (req, res) {   
       if (applicant.warPension === true) {
+        res.redirect('../war-pension');
+      } else if (applicant.warPension === false) {
+        res.redirect('../../benefits/benefit-sprint3');
+      }
+    });
+    
+    // employment-pension-handler
+    app.get(/ep2/, function (req, res) {   
+      if (req.query.ep === 'yes') {
+        res.redirect('../employment-pension-amount');
+      } else if (applicant.warPension === true) {
         res.redirect('../war-pension');
       } else if (applicant.warPension === false) {
         res.redirect('../../benefits/benefit-sprint3');

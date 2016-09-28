@@ -16,7 +16,7 @@
     How often do you get your workplace pension payments?
   </h1>
     
-  <form action="ep-handler" method="get" class="form">
+  <form action="" method="get" class="form">
 
     <div class="form-item-wrapper">
       <div class="form-group">
@@ -28,25 +28,25 @@
       <div class="form-group">
         <input type="radio" id="fortnight" name="minor">
         <label class="form-control-radio" for="fortnight">
-          Every two weeks
+          Every 2 weeks
         </label>
       </div>
       <div class="form-group">
         <input type="radio" id="fourweekly" name="minor">
         <label class="form-control-radio" for="fourweekly">
-          Every four weeks
+          Every 4 weeks
         </label>
       </div>
       <div class="form-group">
         <input type="radio" id="month" name="minor">
         <label class="form-control-radio" for="month">
-         Every month
+         Every calendar month
         </label>
       </div>
       <div class="form-group">
         <input type="radio" id="year" name="minor">
         <label class="form-control-radio" for="year">
-          Annually
+          Once a year
         </label>
       </div>
       
@@ -58,31 +58,11 @@
     }}
 
     </div>  
-    
- <div class="form-item-wrapper">
-            <fieldset>
-                <h2 class="heading-medium">Do you have another employment pension?</h2>
-
-              <div class="inline-form-groups">
-                <div class="form-group">
-                  <input type="radio" id="binary-yes" name="pension" value="yes">
-                  <label class="form-control-radio" for="binary-yes">
-                    Yes
-                  </label>
-                </div>
-                <div class="form-group">
-                  <input type="radio" id="binary-no" name="pension" value="no">
-                  <label class="form-control-radio" for="binary-no">
-                    No
-                  </label>
-                </div>
-              </div>
-            </fieldset>
-          </div>    
-    
+        
     {{
       form_macros.button({
-        label: 'Save and continue'
+        label: 'Save and continue',
+        href : 'another-ep'
       })
     }}
     <p class="navigation"><a class="cancel" href="../../lis-home">Save and come back later</a></p>
