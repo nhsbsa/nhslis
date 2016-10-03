@@ -56,7 +56,23 @@ $(document).ready(function () {
     }
   }
   updateList();
-
+  
+  /*
+  function selectPartner() {
+    if (document.getElementById("pyes")) {
+      var partnerStatus = document.getElementById("partner-status").innerHTML;
+      console.log(partnerStatus);
+      var pyes = document.getElementById("pyes");
+      var pno = document.getElementById("pno");
+      if (partnerStatus === 'true') {
+        pyes.checked = true;
+      } else if (partnerStatus === 'false') {
+        pno.checked = true;
+      }
+    }
+  }
+  selectPartner();
+*/
 });
 
 jQuery(document).ready(function($) {

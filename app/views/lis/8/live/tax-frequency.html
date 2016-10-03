@@ -16,7 +16,7 @@
     How often do you pay your council tax?
   </h1>
     
-  <form action="" method="get" class="form">
+  <form action="taxfreq-handler" method="get" class="form">
 
     <div class="form-item-wrapper">
       <!--div class="form-group">
@@ -38,13 +38,13 @@
         </label>
       </div-->
       <div class="form-group">
-        <input type="radio" id="year" name="minor">
+        <input type="radio" id="year" value="year" name="ctax">
         <label class="form-control-radio js-toggle" for="year" data-hide="#tax-months">
           Once a year
         </label>
       </div>
       <div class="form-group">
-        <input type="radio" id="month" name="minor">
+        <input type="radio" id="month" value="month" name="ctax">
         <label class="form-control-radio js-toggle" for="month" data-show="#tax-months">
          Every calendar month
         </label>
@@ -63,7 +63,6 @@
         
     {{
       form_macros.button({
-        href: 'tax-amount',
         label: 'Save and continue'
       })
     }}

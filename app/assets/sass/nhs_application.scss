@@ -874,7 +874,14 @@ tr.clickable-row { cursor: pointer; }
   border-bottom: 1px solid #bfc1c3;
 }
 
-
 .bold {
   font-weight: bold;
+}
+
+#money-amount {
+  width : 200px;
+} 
+
+.hidden {
+  display: none;
 }

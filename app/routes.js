@@ -4,6 +4,7 @@ var person = require("./person.js");
 var partnerLiveText,
 partnerOrText, 
 partnerAndText,
+partnerBothText,
 iWe,
 doNot,
 jointTennantText,
@@ -96,7 +97,8 @@ var applicant = person.createPerson(
   this.guest = false,
   this.othersAtHome = false,
   this.bankAccount = false,
-  this.contactPref = null
+  this.contactPref = null,
+  this.councilTaxFreq = null
 );
 
 //create a partner
@@ -122,7 +124,7 @@ var partner = person.createPerson(
   this.homeOwner = false,
   this.tennant = false,
   this.guest = false,
-  this.othersAtHome = false,
+  //this.othersAtHome = false,
   this.bankAccount = false
 );
 
@@ -280,12 +282,12 @@ module.exports = {
       sprint = req.url.charAt(5);
       if (req.query.partner === 'yes') {
         applicant.partner = true;
-        application.aboutPartnerStatus = "Started";
-        application.aboutPartnerLink = continueText;
+        //application.aboutPartnerStatus = "Started";
+        //application.aboutPartnerLink = continueText;
       } else if (req.query.partner === 'no') {
         applicant.partner = false;
-        application.aboutPartnerStatus = completedText;
-        application.aboutPartnerLink = changeText;
+        //application.aboutPartnerStatus = completedText;
+        //application.aboutPartnerLink = changeText;
       }
       setPartnerText();
       res.render('lis/'+ sprint +'//ko', {
@@ -320,6 +322,7 @@ module.exports = {
     
     // carehome-handler
     app.get(/carehome-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
       if (req.query.carehome === 'yes') {
         res.redirect('../sc/authority-assessed');
       } else {
@@ -327,6 +330,13 @@ module.exports = {
           'partnerbothtext' : partnerBothText
         });
       }
+    });
+    
+    // hospital-handler
+    app.get(/hospital2-handler/, function (req, res) {
+      res.render('lis/'+ sprint +'/savings', {
+        'partnerbothtext' : partnerBothText
+      })
     });
     
      // carehome-handler v2
@@ -857,6 +867,17 @@ module.exports = {
     // -------
     // Partner
     // -------
+    
+    
+    
+    // partner summary
+    app.get(/p-status/, function (req, res) {
+      sprint = req.url.charAt(5);
+      console.log(applicant.partner);
+      res.render('lis/'+ sprint +'/partner/p-status', {
+          'partnerstatus' : applicant.partner         
+      });
+    });
             
     // partner handler
     app.get(/partner-handler/, function (req, res) {     
@@ -1034,6 +1055,8 @@ module.exports = {
       } else if (req.query.home === 'guest') {
         applicant.guest = true;
         res.redirect('../guest/address');
+      } else if (req.query.home === 'homeless') {
+        res.redirect('../living-summary-nh');
       } else {
         res.redirect('../home');
       }
@@ -1079,6 +1102,16 @@ module.exports = {
       } else {
         res.redirect('../ground-rent');
       }
+    });
+    
+     // council-tax-handler 2
+    app.get(/taxfreq-handler/, function (req, res) {
+    applicant.councilTaxFreq = req.query.ctax;
+    console.log(applicant.councilTaxFreq);
+    sprint = req.url.charAt(5);
+    res.render('lis/'+ sprint +'/live/tax-amount', {
+        'taxfreq' : applicant.councilTaxFreq
+      });
     });
     
     // council-tax-handler

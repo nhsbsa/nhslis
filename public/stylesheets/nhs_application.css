@@ -2512,3 +2512,9 @@ tr.clickable-row {
 
 .bold {
   font-weight: bold; }
+
+#money-amount {
+  width: 200px; }
+
+.hidden {
+  display: none; }
