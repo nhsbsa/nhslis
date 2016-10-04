@@ -77,7 +77,7 @@
 }
 
 .pagination_gds li.next a:before {
-  background: transparent url(https://assets.publishing.service.gov.uk/static/arrow-sprite-0fa429eadf557102b8e1ca6bf7220f7e61812efbc4f52ed40e5aedd11474635f.png) no-repeat -102px -11px;
+  background: transparent url(/public/images/arrow.png) no-repeat -102px -11px;
   margin: -4px -32px 0 0;
   display: block;
   float: right;
@@ -87,7 +87,7 @@
 }
 
 .pagination_gds li.previous a:before {
-  background: transparent url(https://assets.publishing.service.gov.uk/static/arrow-sprite-0fa429eadf557102b8e1ca6bf7220f7e61812efbc4f52ed40e5aedd11474635f.png) no-repeat -20px -11px;
+  background: transparent url(/public/images/arrow.png) no-repeat -20px -11px;
   margin: -4px 0 0 -32px;
   display: block;
   float: left;
