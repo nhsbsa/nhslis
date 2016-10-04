@@ -3,6 +3,7 @@
 {% block content %}
 
 <main id="content" role="main">
+  <link rel="stylesheet" href="/public/stylesheets/pagination.css">
 
   <div class="grid-row">
 
@@ -66,17 +67,21 @@
 
       </div>
 
-      <div class="pagination">
-        <div class="pag-right">
-          <p>
-            <a href="#">
-              <span class="pag-graphic"></span>
-              <span class="pag-title">Next</span>
-              <span class="pag-label">help for people aged 16,<br>17 or 18</span>
-            </a>
-          </p>
-        </div>
-      </div>
+        <nav class="pagination_gds" role="navigation" aria-label="Pagination">
+            <ul class="group">
+                  <li class="previous">
+                    <a title="Navigate to previous part" rel="prev" href="u16">
+                      <span class="pagination-label">Previous</span>
+                      <span class="pagination-part-title">Help for people aged 16 and under</span>
+                    </a>
+                  </li>
+                  <li class="next">
+                    <a title="Navigate to next part" rel="next" href="19">
+                      <span class="pagination-label">Next</span> <span class="pagination-part-title">Help for people aged 19</span>
+                    </a>
+                  </li>
+            </ul>
+          </nav>
 
     </div>
 
