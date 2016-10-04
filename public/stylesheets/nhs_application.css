@@ -2518,3 +2518,35 @@ tr.clickable-row {
 
 .hidden {
   display: none; }
+
+.column-half, .column-one-half {
+  float: left;
+  width: 50%; }
+
+.navigation-links {
+  font-size: 90%;
+  padding: 0 11px; }
+
+.pagination .pag-right {
+  text-align: right;
+  display: block;
+  float: right;
+  width: 50%; }
+  .pagination .pag-right .pag-graphic {
+    width: 52px;
+    margin-top: -20px;
+    height: 75px;
+    float: right;
+    background-image: url(https://assets.publishing.service.gov.uk/static/arrow-sprite-0fa429eadf557102b8e1ca6bf7220f7e61812efbc4f52ed40e5aedd11474635f.png);
+    background-position: right;
+    background-repeat: none;
+    display: block; }
+.pagination a .pag-title {
+  font-size: 150%;
+  display: block;
+  width: 80%;
+  float: left; }
+.pagination a .pag-title {
+  float: right;
+  padding-bottom: 3px;
+  width: 80%; }
