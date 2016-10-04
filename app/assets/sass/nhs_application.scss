@@ -867,10 +867,63 @@ tr.clickable-row { cursor: pointer; }
     text-decoration: underline;
 }
 
-
 .phase-banner-alpha {
   @extend %site-width-container;
   @extend %contain-floats;
   padding: 10px 0 8px;
   border-bottom: 1px solid #bfc1c3;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+#money-amount {
+  width : 200px;
+}
+
+.hidden {
+  display: none;
+}
+
+.column-half, .column-one-half {
+    float: left;
+    width: 50%;
+}
+
+.navigation-links {
+  font-size :90%;
+  padding : 0 11px;
+}
+
+.pagination {
+  .pag-right {
+    text-align:  right;
+    display : block;
+    float :right;
+    width : 50%;
+   .pag-graphic {
+      width : 52px;
+      margin-top : -20px;
+      height :75px;
+      float: right;
+      background-image: url(https://assets.publishing.service.gov.uk/static/arrow-sprite-0fa429eadf557102b8e1ca6bf7220f7e61812efbc4f52ed40e5aedd11474635f.png);
+      background-position: right;
+      background-repeat: none;
+      display : block;
+    }
+  }
+  a {
+    .pag-title {
+      font-size : 150%;
+      display : block;
+      width : 80%;
+      float : left;
+    }
+    .pag-title {
+      float : right;
+      padding-bottom: 3px;
+      width : 80%;
+    }
+  }
 }

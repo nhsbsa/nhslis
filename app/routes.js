@@ -1,13 +1,16 @@
 //import the person constructor
 var person = require("./person.js");
 
-var partnerLiveText;
-var partnerOrText;
-var partnerAndText;
+var partnerLiveText,
+partnerOrText,
+partnerAndText,
+partnerBothText,
+iWe,
+doNot,
+jointTennantText,
+jointOwnerText;
 var continueText = 'Continue';
 var changeText = 'View or change';
-var jointTennantText;
-var jointOwnerText;
 var completedText = "Completed";
 
 var helpLevel = 3;
@@ -67,11 +70,6 @@ var application = {
     }
   }
 };
-  
-var wizard = {
-    country : null,
-    ageBand : null
-};
 
 //create an applicant
 var applicant = person.createPerson(
@@ -99,7 +97,8 @@ var applicant = person.createPerson(
   this.guest = false,
   this.othersAtHome = false,
   this.bankAccount = false,
-  this.contactPref = null
+  this.contactPref = null,
+  this.councilTaxFreq = null
 );
 
 //create a partner
@@ -125,7 +124,7 @@ var partner = person.createPerson(
   this.homeOwner = false,
   this.tennant = false,
   this.guest = false,
-  this.othersAtHome = false,
+  //this.othersAtHome = false,
   this.bankAccount = false
 );
 
@@ -162,22 +161,30 @@ var householder = {
   }
 };
 
-
-
 // change the text if the applicant has a partner
 function setPartnerText() {
   if (applicant.partner === false) {
+    partnerBothText = 'you';
     partnerOrText = 'you';
     partnerAndText = 'you';
-    partnerLiveText = 'Does anyone else live in your home with you?';
+    partnersText = 'your';
+    partnerLiveText = 'Does anyone else live with you?';
     jointTennantText = 'Is anyone else a joint tenant of the place you live';
-    jointOwnerText = 'Is anyone else a joint owner of the place you live';
+    jointOwnerText = 'Is anyone else a joint owner of the property you live in';
+    otherThanPartner = ' ';
+    iWe = 'I';
+    doNot = ' ';
   } else {
+    partnerBothText = 'you, your partner or both of you';
     partnerOrText = 'you or your partner';
     partnerAndText = 'you and your partner';
-    partnerLiveText = 'Does anyone else other than your partner live in your home with you?';
+    partnersText = "you and your partner's";
+    partnerLiveText = 'Does anyone else other than your partner live with you?';
     jointTennantText = 'Is anyone else other than your partner a joint tenant of the place you live';
-    jointOwnerText = 'Is anyone else other than your partner a joint owner of the place you live';
+    jointOwnerText = 'Is anyone else other than your partner a joint owner of the property you live in';
+    otherThanPartner = 'other than your partner';
+    iWe = 'we';
+    doNot = 'do not';
   }
 }
 
@@ -266,179 +273,199 @@ module.exports = {
     });
     
     
-    //
-    // Handlers
-    //
 
-    // council-tax-handler
-    app.get(/ctax-handler/, function (req, res) {
-      if (req.query.counciltax === 'yes') {
-        res.redirect('../tax-amount');
+
+    // -------------
+    // Pre questions
+    // -------------
+
+    // partner handler v2
+    app.get(/p2-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      if (req.query.partner === 'yes') {
+        applicant.partner = true;
+        //application.aboutPartnerStatus = "Started";
+        //application.aboutPartnerLink = continueText;
+      } else if (req.query.partner === 'no') {
+        applicant.partner = false;
+        //application.aboutPartnerStatus = completedText;
+        //application.aboutPartnerLink = changeText;
+      }
+      setPartnerText();
+      res.render('lis/'+ sprint +'//ko', {
+        'partnerortext' : partnerOrText,
+        'iwe' : iWe
+      });
+    });
+
+    // kickout-handler
+    app.get(/kickout-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      if (req.query.kickout === 'continue') {
+        res.render('lis/'+ sprint +'/guarantee-credit', {
+          'partnerortext' : partnerOrText
+        });
       } else {
-        res.redirect('../ground-rent');
+        res.redirect('../exempt-kickout');
       }
     });
     
-    // work-hours-handler
-    app.get(/work-hours-handler/, function (req, res) {
-      if (req.query.hours === 'yes') {
-        res.redirect('../amount');
+    // guacredit-kickout-handler v2
+    app.get(/guacredit-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      if (req.query.guacredit === 'yes') {
+        res.redirect('../exempt-kickout');
       } else {
-        res.redirect('../benefits');
+        res.render('lis/'+ sprint +'/tax-credits', {
+          'partnerortext' : partnerOrText
+        });
       }
     });
     
-    // mortgaged-handler
-    app.get(/mortgaged-handler/, function (req, res) {
-      if (req.query.mortgaged === 'yes') {
-        res.redirect('../mortgage-amount');
+    // carehome-handler
+    app.get(/carehome-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      if (req.query.carehome === 'yes') {
+        res.redirect('../sc/authority-assessed');
       } else {
-        res.redirect('../../services');
+        res.render('lis/'+ sprint +'/savings', {
+          'partnerbothtext' : partnerBothText
+        });
       }
     });
     
     // hospital-handler
-    app.get(/hospital-handler/, function (req, res) {
-      application.whereYouLiveStatus = "Started";
-      application.whereYouLiveLink = continueText;
-      res.redirect('../home');
+    app.get(/hospital2-handler/, function (req, res) {
+      res.render('lis/'+ sprint +'/savings', {
+        'partnerbothtext' : partnerBothText
+      })
+    });
+    
+     // carehome-handler v2
+    app.get(/carehome-v2-handler/, function (req, res) {
+      if (req.query.carehome === 'yes') {
+        res.redirect('../sc/authority-assessed');
+      } else {
+        res.render('lis/'+ sprint +'/hospital', {
+          'partnerortext' : partnerOrText
+        });
+      }
+    });
+    
+    app.get(/saving-ch/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/sc/saving-ch', {
+        'partnerbothtext' : partnerBothText
+      });
     });
 
-    // updates the home page when the you section is completed
-    app.get(/you-done/, function (req, res) {
-      application.aboutYouStatus = completedText;
-      application.aboutYouLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('../../home-updated');
+    // tax credits cert-handler
+    app.get(/tce-handler/, function (req, res) {
+    sprint = req.url.charAt(5);
+      if (req.query.taxcredits === 'yes') {
+        res.redirect('../tce-kickout');
       } else {
-        res.redirect('../../lis-home');
-      }
-    });
-    
-    // updates the home page when the partner section is completed
-    app.get(/partner-done/, function (req, res) {
-      application.aboutPartnerStatus = completedText;
-      application.aboutPartnerLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('../../home-updated');
-      } else {
-        res.redirect('../../lis-home');
-      }
-    });
-    
-    // updates the home page when the assets section is completed
-    app.get(/assets-done/, function (req, res) {
-      application.propertyStatus = completedText;
-      application.propertyLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('../../home-updated');
-      } else {
-        res.redirect('../../lis-home');
+        res.render('lis/'+sprint+'/care-home', {
+          'partnerortext' : partnerOrText
+        });
       }
     });
 
-    // updates the home page when the living section is completed
-    app.get(/live-done/, function (req, res) {
-      application.whereYouLiveStatus = completedText;
-      application.whereYouLiveLink = changeText;
-      if (application.allComplete() === true) {
-        res.redirect('../../home-updated');
+    // authority-assessed-handler
+    app.get(/authority-assessed-handler/, function (req, res) {
+      if (req.query.authority === 'yes') {
+        res.redirect('../about-you');
       } else {
-        res.redirect('../../lis-home');
+        res.redirect('../saving-ch');
       }
     });
     
-    // savings kickout handler
-    app.get(/savings-ko-handler/, function (req, res) {
+    // carehome savings kickout handler v2
+    app.get(/chome-savings-handler/, function (req, res) {
       if (req.query.savings === 'yes') {
-        res.redirect('../savings-kickout');
+        res.redirect('../../savings-kickout');
       } else {
-        res.redirect('../guarantee-credit');
+        res.redirect('../../need-to-know');
       }
     });
     
     // carehome savings kickout handler
     app.get(/carehome-savings-handler/, function (req, res) {
-      if (req.query.savings === 'yes') {
+      if (req.query.savings === 'no') {
         res.redirect('../../savings-kickout');
       } else {
-        res.redirect('../../guarantee-credit');
+        res.redirect('../../need-to-know');
+      }
+    });
+
+    // savings kickout handler v2
+    app.get(/savings-ko-handler/, function (req, res) {
+      if (req.query.savings === 'no') {
+        res.redirect('../savings-kickout');
+      } else {
+        res.redirect('../need-to-know');
       }
     });
     
-    // property handler
-    app.get(/property-handler/, function (req, res) {
-      application.propertyStatus = "Started";
-      application.propertyLink = continueText;
-      if (req.query.property === "yes") {
-        res.redirect('../second-address');
+    // savings kickout handler
+    app.get(/sko-handler/, function (req, res) {
+      if (req.query.savings === 'yes') {
+        res.redirect('../savings-kickout');
       } else {
-        res.redirect('../money');
+        res.redirect('../need-to-know');
       }
     });
     
-    // pension credit handler sprints: 6, 7
-    app.get(/pencred-handler6/, function (req, res) {
-      if (req.query.savingscredit === 'yes') {
-        applicant.savingsCredit = true;
-        res.redirect('../credit-amount');
-      } else if (req.query.savingscredit === 'no') {
-          applicant.savingsCredit = false;
-        res.redirect('../pension-type');
-      } else if (req.query.partnersavingcredit === 'yes') {
-          partner.savingsCredit = true;
-        res.redirect('../credit-amount');
-      } else if (req.query.partnersavingcredit === 'no') {
-          partner.savingsCredit = false;
-        res.redirect('../pension-type');
-      }
+    // need to know
+    app.get(/need-to-know/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/need-to-know', {
+        'partnerstext' : partnersText
+      });
     });
     
-    // pencred-handler sprint: 5
-    app.get(/pencred-handler5/, function (req, res) {
-      console.log(req.query);
-      if (req.query.savingsCredit === 'yes') {
-        res.redirect('../credit-amount');
-      } else {
-        res.redirect('../../benefits/benefit-sprint3');
+
+
+    // -----------------
+    // Save and continue
+    // -----------------
+
+    // handles the first email at save and continue
+    app.get(/ref-email-handler/, function (req, res) {
+      if (req.query.email != '') {
+        applicant.email = req.query.email;
+        console.log('applicant.email = ' + applicant.email);
       }
-    });  
-    
-    // pencred-handler sprint: 4, 3
-    app.get(/pencred-handler3/, function (req, res) {
-      if (req.query.prencred === 'gc') {
-        res.redirect('../../../kickout');
-      } else {
-        res.redirect('../pension-type');
-      }
+      res.redirect('../mem-word');
     });
     
     // telephone-number-handler
     app.get(/telephone-number-handler/, function (req, res) {
       applicant.telephone = req.query.telephone;
+      console.log('applicant.telephone = ' + applicant.telephone);
       res.redirect('../code');
     });
     
-    // handles the first oportunity for the user to enter their email at save and continue
-    app.get(/ref-email-handler/, function (req, res) {
-      if (req.query.email != '') {
-        applicant.email = req.query.email;
-      }
-      res.redirect('../mem-word');
+    // save-continue/code
+    app.get(/code/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/save-continue/code', {
+      'telephone' : applicant.telephone
+      });
     });
-    
-    // email-address-handler
+
+        // email-address-handler
     app.get(/email-address-handler/, function (req, res) {
       if (req.query.email != '') {
         applicant.email = req.query.email;
       }
       res.redirect('../work');
     });  
-    
-    //
-    // Renders
-    //
-    
+
+
+    // ----
+    // Home
+    // ----
     
     app.get(/lis-home/, function (req, res) {
       sprint = req.url.charAt(5);
@@ -455,6 +482,7 @@ module.exports = {
       });
     });
     
+    // home updated
     app.get(/home-updated/, function (req, res) {
       sprint = req.url.charAt(5);
       console.log(req.url);
@@ -469,43 +497,53 @@ module.exports = {
         'whereYouLiveLink' : application.whereYouLiveLink
       });
     });
+
     
-    // save-continue/code
-    app.get(/code/, function (req, res) {
+    // ---------
+    // About you
+    // ---------
+
+    // registration-handler
+    app.get(/registration-handler/, function (req, res) {
       sprint = req.url.charAt(5);
-      res.render('lis/'+ sprint +'/save-continue/code', {
-      'telephone' : applicant.telephone
+      application.aboutYouStatus = "Started";
+      application.aboutYouLink = continueText;
+      applicant.firstName = req.query.firstname;
+      applicant.lastName = req.query.lastname;
+      applicant.dobDay = req.query.day;
+      applicant.dobMonth = convertMonth(req.query.month);
+      applicant.dobYear = req.query.year;
+      console.log(applicant.dobYear);
+      res.redirect('../contact-prefs');
+    });
+
+    app.get(/name-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      application.aboutYouStatus = "Started";
+      application.aboutYouLink = continueText;
+      applicant.firstName = req.query.firstname;
+      applicant.lastName = req.query.lastname;
+      applicant.dobDay = req.query.day;
+      applicant.dobMonth = convertMonth(req.query.month);
+      applicant.dobYear = req.query.year;
+      console.log(applicant.dobYear);
+      res.redirect('../dob');
+    });
+    
+    // dob handler
+    app.get(/dob-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      applicant.dobDay = req.query.day;
+      applicant.dobMonth = convertMonth(req.query.month);
+      applicant.dobYear = req.query.year;
+      console.log(applicant.dobYear);
+      res.render('lis/'+ sprint +'/you/contact-prefs', {
+        'applicantFirstName' : applicant.firstName
       });
     });
 
-   // email address
-    app.get(/email/, function (req, res) {
-      sprint = req.url.charAt(5);
-      res.render('lis/'+ sprint +'/you/email', {
-          'email' : applicant.email
-        });
-    });
-    
-    // telephone handler
-    app.get(/telephone/, function (req, res) {
-      sprint = req.url.charAt(5);
-      res.render('lis/' + sprint + '/you/telephone', {
-        'telephone' : applicant.telephone
-      });
-    });
-    
-    // email handler
-    app.get(/mail-handler/, function (req, res) {
-      if(applicant.contactPref === 'both') {
-        res.redirect('../telephone');
-      } else {
-        res.redirect('../work');
-      }
-    });
-    
     // contact-handler
     app.get(/contact-handler/, function (req, res) {
-      sprint = req.url.charAt(5);
       if (req.query.contact === "email") {
         applicant.contactPref ='email';
         if (applicant.email != undefined) {
@@ -524,16 +562,729 @@ module.exports = {
         res.redirect('../work');
       }
     });
-
-    // email-address-handler
-    app.get(/mail-handler/, function (req, res) {
-      if (req.query.email != '') {
-        applicant.email = req.query.email;
-        console.log(applicant.email);
-      }
-      res.redirect('../work');
+    
+    // email address
+    app.get(/email/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/you/email', {
+          'email' : applicant.email
+        });
     });
     
+    // email handler
+    app.get(/mail-handler/, function (req, res) {
+      if(applicant.contactPref === 'both') {
+        res.redirect('../telephone');
+      } else {
+        res.redirect('../work');
+      }
+    });
+        
+    // telephone handler
+    app.get(/telephone/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/' + sprint + '/you/telephone', {
+        'telephone' : applicant.telephone
+      });
+    });
+    
+    // about you summary
+    app.get(/about-you-summary/, function (req, res) {
+      sprint = req.url.charAt(5);
+      var contactText = 'Email address';
+      var contactValue = applicant.email;
+      if (applicant.contactPref == 'telephone') {
+        contactText = 'Telephone number';
+        contactValue = applicant.telephone;
+      };
+      if (applicant.contactPref != undefined) {
+        applicant.contactPref = applicant.contactPref.toProperCase();
+      }; 
+      if (applicant.statePensionFrequency != undefined) {
+        var frequency = convertFrequency(applicant.statePensionFrequency);
+      };
+      res.render('lis/'+ sprint +'/you/about-you-summary', {
+        'mywork' : myWork,
+        'applicantFullName' : applicant.fullName(),
+        'dobday' : applicant.dobDay,
+        'dobmonth' : applicant.dobMonth,
+        'dobyear' : applicant.dobYear,
+        'contact' : applicant.contactPref,
+        'contacttext' : contactText,
+        'contactValue' : contactValue,
+        'savingscredit' : boolToString(applicant.savingsCredit),
+        'statepensionamount' : applicant.statePensionAmount,
+        'statepensionfrequency' : frequency
+      });
+    });
+
+    
+    // -------
+    // Pension
+    // -------
+    
+    // pension-handler
+    app.get(/pension-handler/, function (req, res) {
+      if (req.query.pension === 'yes') {
+        res.redirect('../pension-credit');
+      } else {
+        res.redirect('../../benefits/benefit-sprint3');
+      }
+    });
+    
+    // pension credit handler sprints: 6, 7, 8
+    app.get(/pencred-handler6/, function (req, res) {
+      if (req.query.savingscredit === 'yes') {
+        applicant.savingsCredit = true;
+        res.redirect('../credit-amount');
+      } else if (req.query.savingscredit === 'no') {
+          applicant.savingsCredit = false;
+        res.redirect('../pension-type');
+      } else if (req.query.partnersavingcredit === 'yes') {
+          partner.savingsCredit = true;
+        res.redirect('../credit-amount');
+      } else if (req.query.partnersavingcredit === 'no') {
+          partner.savingsCredit = false;
+        res.redirect('../pension-type');
+      }
+    });
+    
+    // pension-type-handler
+    app.get(/pension-type-handler/, function (req, res) {
+      applicant.resetPension();
+      pensions = req.query.pensiontype;
+      console.log(pensions);
+      sprint = req.url.charAt(5);
+      if (pensions === 'state') {
+        applicant.statePension = true;
+        res.redirect('../pension-amount');
+      } else if (pensions === 'private') {
+        applicant.privatePension = true;
+        res.redirect('../private-pension-amount');
+      } else if (pensions === 'employment') {
+        applicant.employmentPension = true;
+        res.redirect('../employment-pension-amount');
+      } else if (pensions === 'wardisablement') {
+        applicant.warPension = true;
+        res.redirect('../war-pension');
+      } else if (pensions === 'warwidow') {
+        applicant.warWidowPension = true;
+        res.redirect('../war-widow-pension');
+      } else if (pensions === undefined) {
+          res.redirect('../pension-type');
+      } else {
+        applicant.pensionChecker(pensions);
+        console.log(applicant.statePension + " " + applicant.privatePension);
+        if (applicant.statePension === true) {
+          res.redirect('../pension-amount');
+        } else if (applicant.privatePension === true) {
+          res.redirect('../private-pension-amount');
+        } else if (applicant.employmentPension === true) {
+          res.redirect('../employment-pension-amount');
+        } else if (applicant.warPension === true) {
+          res.redirect('../war-pension');
+        } else if (applicant.warWidowPension === true) {
+          res.redirect('../war-widow-pension');
+        } else {
+          res.redirect('../benefit-sprint3');
+        }
+      }
+    });
+    
+    // state-pension-handler
+    app.get(/sp-handler/, function (req, res) {
+      applicant.statePensionAmount = req.query.amount;
+      applicant.statePensionFrequency = req.query.frequency;
+      if (applicant.privatePension === true) {
+        res.redirect('../private-pension-amount');
+      } else if (applicant.employmentPension === true) {
+        res.redirect('../employment-pension-amount');
+      } else {
+        res.redirect('../../benefits/benefit-sprint3');
+      }
+    });
+
+    // private-pension-handler
+    app.get(/pp-handler/, function (req, res) {
+      if (applicant.employmentPension === true) {
+        res.redirect('../employment-pension-amount');
+      } else if (applicant.warPension === true) {
+        res.redirect('../war-pension');
+      } else if (applicant.warPension === false) {
+        res.redirect('../../benefits/benefit-sprint3');
+      }
+    });
+
+    // private-pension-handler
+    app.get(/pp2/, function (req, res) {
+      if (req.query.pp === 'yes') {
+        res.redirect('../private-pension-amount');
+      } else if (applicant.employmentPension === true) {
+        res.redirect('../employment-pension-amount');
+      } else if (applicant.warPension === true) {
+        res.redirect('../war-pension');
+      } else if (applicant.warPension === false) {
+        res.redirect('../../benefits/benefit-sprint3');
+      }
+    });
+
+     // employment-pension-handler
+    app.get(/ep-handler/, function (req, res) {
+      if (applicant.warPension === true) {
+        res.redirect('../war-pension');
+      } else if (applicant.warPension === false) {
+        res.redirect('../../benefits/benefit-sprint3');
+      }
+    });
+
+    // employment-pension-handler
+    app.get(/ep2/, function (req, res) {
+      if (req.query.ep === 'yes') {
+        res.redirect('../employment-pension-amount');
+      } else if (applicant.warPension === true) {
+        res.redirect('../war-pension');
+      } else if (applicant.warPension === false) {
+        res.redirect('../../benefits/benefit-sprint3');
+      }
+    });
+
+    // war-pension-handler
+    app.get(/wp-handler/, function (req, res) {
+      if (applicant.warWidowPension === true) {
+        res.redirect('../war-widow-pension');
+      } else if (applicant.warWidowPension === false) {
+        res.redirect('../../benefits/benefit-sprint3');
+      }
+    });
+
+
+    // --------
+    // Benefits
+    // --------
+
+    // benefit handler
+    app.get(/sprint3-benefit-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      applicant.resetBenefits();
+      benefits = req.query.sprint3benefits;
+      console.log(typeof benefits);
+      firstBenefit = applicant.benefitChecker(benefits);
+      //if (firstBenefit === "aa") {
+      //  res.render('lis/'+ sprint +'/you/benefits/aa');
+      //} else
+      //if (firstBenefit === "ctc") {
+      //  res.render('lis/'+ sprint +'/you/benefits/ctc');
+      //} else
+      if (firstBenefit === "dla") {
+        res.redirect('../dla');
+      } else if (firstBenefit === "pip") {
+        res.redirect('../pip');
+      } else {
+        res.redirect('../benefit4');
+      }
+    });
+
+    //child tax credit
+    app.get(/ctc-handler/, function (req, res) {
+      if (applicant.disabilityLivingAllowance === true) {
+        res.redirect('../dla');
+      } else if (applicant.personalIndependence === true) {
+        res.redirect('../pip');
+      } else {
+        res.redirect('../benefit4');
+      }
+    });
+
+    // care-allowance
+    app.get(/care-allowance/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/you/benefits/care-allowance', {
+        'otherthanartner' : otherThanPartner
+      });
+    });
+
+    // partner care-allowance
+    app.get(/partnercare-allowance/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/partner/benefits/partner-careallowance', {
+        'otherthanartner' : otherThanPartner
+      });
+    });
+
+    // disability living allowance
+    app.get(/dla-handler/, function (req, res) {
+      if (applicant.personalIndependence === true) {
+        res.redirect('../pip');
+      } else {
+        res.redirect('../benefit4');
+      }
+    });
+
+    // attendance allowance handler
+    app.get(/attendance-allowance-handler/, function (req, res) {
+      if (applicant.childTaxCredits === true) {
+        res.redirect('../benefits/ctc');
+      } else if (applicant.disabilityLivingAllowance === true) {
+        res.redirect('../benefits/dla');
+      } else if (applicant.personalIndependence === true) {
+        res.redirect('../benefits/pip');
+      } else {
+        res.redirect('../benefits/benefit4');
+      }
+    });
+
+    // updates the home page when the you section is completed
+    app.get(/you-done/, function (req, res) {
+      application.aboutYouStatus = completedText;
+      application.aboutYouLink = changeText;
+      if (application.allComplete() === true) {
+        res.redirect('../../home-updated');
+      } else {
+        res.redirect('../../lis-home');
+      }
+    });
+
+    // Old routes...
+
+    // pencred-handler sprint: 5
+    app.get(/pencred-handler5/, function (req, res) {
+      console.log(req.query);
+      if (req.query.savingsCredit === 'yes') {
+        res.redirect('../credit-amount');
+      } else {
+        res.redirect('../../benefits/benefit-sprint3');
+      }
+    });
+
+    // pencred-handler sprint: 4, 3
+    app.get(/pencred-handler3/, function (req, res) {
+      if (req.query.prencred === 'gc') {
+        res.redirect('../../../kickout');
+      } else {
+        res.redirect('../pension-type');
+      }
+    });
+
+
+    // -------
+    // Partner
+    // -------
+
+
+
+    // partner summary
+    app.get(/p-status/, function (req, res) {
+      sprint = req.url.charAt(5);
+      console.log(applicant.partner);
+      res.render('lis/'+ sprint +'/partner/p-status', {
+          'partnerstatus' : applicant.partner
+      });
+    });
+
+    // partner handler
+    app.get(/partner-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      application.aboutPartnerStatus = "Started";
+      application.aboutPartnerLink = continueText;
+      if (req.query.partner === 'yes') {
+        applicant.partner = true;
+        setPartnerText();
+        res.redirect('../basic');
+      } else if (req.query.partner === 'no') {
+        applicant.partner = false;
+        setPartnerText();
+        res.redirect('../summary-no');
+      }
+    });
+
+     // partner summary
+    app.get(/summary-full/, function (req, res) {
+      res.render('../summary-full');
+    });
+
+    // updates the home page when the partner section is completed
+    app.get(/partner-done/, function (req, res) {
+      application.aboutPartnerStatus = completedText;
+      application.aboutPartnerLink = changeText;
+      if (application.allComplete() === true) {
+        res.redirect('../../home-updated');
+      } else {
+        res.redirect('../../lis-home');
+      }
+    });
+
+
+    // ------
+    // Assets
+    // ------
+
+    // property
+    app.get(/property/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/assets/property', {
+        'partnerortext' : partnerOrText,
+        'partnerandext' : partnerAndText
+      });
+    });
+
+    // property handler
+    app.get(/land-handler/, function (req, res) {
+      application.propertyStatus = "Started";
+      application.propertyLink = continueText;
+      if (req.query.property === "yes") {
+        res.redirect('../second-address');
+      } else {
+        res.redirect('../accounts');
+      }
+    });
+
+    // property handler
+    app.get(/assets-mortgage-handler/, function (req, res) {
+      if (req.query.mortgage === "yes") {
+        res.redirect('../outstanding');
+      } else {
+        res.redirect('../property');
+      }
+    });
+
+    // money
+    app.get(/accounts/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/assets/accounts', {
+        'partnerortext' : partnerOrText,
+        'partnerandText' : partnerAndText
+      });
+    });
+
+    // accounts
+    app.get(/accounts/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/assets/accounts', {
+        'partnerortext' : partnerOrText,
+        'partnerandText' : partnerAndText
+      });
+    });
+
+    // account-type-handler
+    app.get(/account-type-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      applicant.resetAccounts();
+      accounts = req.query.banktype;
+      firstSavingsAcc = applicant.savingChecker(accounts);
+      if (firstSavingsAcc === 'bank') {
+        res.render('lis/'+ sprint +'/assets/bank', {
+          'partnerortext' : partnerOrText,
+          'partnerandtext' : partnerAndText
+        });
+      } else if (firstSavingsAcc === 'pb') {
+        res.render('lis/'+ sprint +'/assets/premium-bonds', {
+          'partnerortext' : partnerOrText,
+          'partnerandrext' : partnerAndText
+        });
+      } else {
+        res.render('lis/'+ sprint +'/assets/assets-other', {
+          'partnerortext' : partnerOrText,
+          'partnerandrext' : partnerAndText
+        });
+      }
+    });
+
+    // bank accounts handler
+    app.get(/bank-savings-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      console.log('here');
+      if (applicant.premiumBonds === true) {
+        res.render('lis/'+ sprint +'/assets/premium-bonds');
+      } else {
+        res.render('lis/'+ sprint +'/assets/assets-other', {
+          'partnerortext' : partnerOrText,
+          'partnerandrext' : partnerAndText
+        });
+      }
+    });
+
+    //p remium-bond-handler
+    app.get(/premium-bond-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/assets/assets-other', {
+        'partnerortext' : partnerOrText,
+        'partnerandrext' : partnerAndText
+      });
+    });
+    
+    // assets/other
+    app.get(/assets-other/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('../assets-other', {
+        'partnerortext' : partnerOrText,
+        'partnerandtext' : partnerAndText
+      });
+    });
+
+    // updates the home page when the assets section is completed
+    app.get(/assets-done/, function (req, res) {
+      application.propertyStatus = completedText;
+      application.propertyLink = changeText;
+      if (application.allComplete() === true) {
+        res.redirect('../../home-updated');
+      } else {
+        res.redirect('../../lis-home');
+      }
+    });
+
+
+    // --------------
+    // Where you live
+    // --------------
+
+    // hospital-handler
+    app.get(/hospital-handler/, function (req, res) {
+      application.whereYouLiveStatus = "Started";
+      application.whereYouLiveLink = continueText;
+      res.redirect('../you-live');
+    });
+
+    // home-handler
+    app.get(/home-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      console.log(req.query);
+      if (req.query.home === 'own') {
+        applicant.homeOwner = true;
+        res.redirect('../mortgaged/joint-own');
+      } else if (req.query.home === 'rented') {
+        applicant.tennant = true;
+        res.redirect('../joint-tenant');
+      } else if (req.query.home === 'guest') {
+        applicant.guest = true;
+        res.redirect('../guest/address');
+      } else if (req.query.home === 'homeless') {
+        res.redirect('../living-summary-nh');
+      } else {
+        res.redirect('../home');
+      }
+    });
+    
+    // home
+    app.get(/your-home/, function (req, res) {
+      applicant.resetLivingSituation();
+      res.redirect('../your-home');
+    });
+
+
+    // mortgaged/joint
+    app.get(/joint-own/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/live/mortgaged/joint-own', {
+        'jointownertext' : jointOwnerText
+      });
+    });
+    
+    // mortgaged-handler
+    app.get(/mortgaged2-handler/, function (req, res) {
+      if (req.query.mortgaged === 'yes') {
+        res.redirect('../mortgage-frequency');
+      } else {
+        res.redirect('../../services');
+      }
+    });
+
+    // mortgaged-handler
+    app.get(/mortgaged-handler/, function (req, res) {
+      if (req.query.mortgaged === 'yes') {
+        res.redirect('../mortgage-amount');
+      } else {
+        res.redirect('../../services');
+      }
+    });
+
+    // council-tax-handler 2
+    app.get(/ctax-handler/, function (req, res) {
+      if (req.query.counciltax === 'yes') {
+        res.redirect('../tax-amount');
+      } else {
+        res.redirect('../ground-rent');
+      }
+    });
+    
+     // council-tax-handler 2
+    app.get(/taxfreq-handler/, function (req, res) {
+    applicant.councilTaxFreq = req.query.ctax;
+    console.log(applicant.councilTaxFreq);
+    sprint = req.url.charAt(5);
+    res.render('lis/'+ sprint +'/live/tax-amount', {
+        'taxfreq' : applicant.councilTaxFreq
+      });
+    });
+
+    // council-tax-handler
+    app.get(/ctax2-handler/, function (req, res) {
+      if (req.query.counciltax === 'yes') {
+        res.redirect('../tax-frequency');
+      } else {
+        res.redirect('../ground-rent');
+      }
+    });
+
+
+    // ------
+    // Others
+    // ------
+
+    // people-handler
+    app.get(/people-list/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/live/others/people-list', {
+        'partnerlivetext' : partnerLiveText,
+        'peoplelist' : peopleList
+      });
+    });
+
+    // people-handler
+    app.get(/people-handler/, function (req, res) {
+      if (req.query.people === 'yes') {
+        res.redirect('../name');
+      } else {
+        res.redirect('../../living-summary');
+      }
+    });
+    
+    //8 people-handler
+    app.get(/people/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/'+ sprint +'/live/others/people', {
+        'partnerlivetext' : partnerLiveText
+      });
+    });
+
+    // persons details
+    app.get(/name/, function (req, res) {
+      sprint = req.url.charAt(5);
+      householder.resetHouseHolder();
+      res.render('lis/'+ sprint +'/live/others/name');
+    });
+
+    // others details
+    app.get(/others-details/, function (req, res) {
+      sprint = req.url.charAt(5);
+      householder.firstName = (req.query.firstname);
+      console.log(householder.firstName);
+      householder.lastName = (req.query.lastname);
+      var bigname = householder.firstName + " " + householder.lastName;
+      peopleList.push(bigname);
+      householder.age = (2016 - req.query.dob);
+      console.log(householder.age);
+      householder.ageRange();
+      if (householder.overNineteen) {
+        res.render('lis/'+ sprint +'/live/others/boarder');
+      } else {
+        res.render('lis/'+ sprint +'/live/others/relationship');
+      }
+    });
+    //child || none underFifteen = people
+    //child sixteenToNineteen = education
+    //none sixteenToNineteen = boarder
+    //child overNineteen = he-education
+    //none overNineteen = boarder
+
+    //family underFifteen > are you financially responsable > done
+    //family sixteenToNineteen > are you financially responsable > education...
+    //family overNineteen > he-education
+
+    // boarder-handler
+    app.get(/boarder-handler/, function (req, res) {
+      if (req.query.boarder === 'yes') {
+        res.redirect('../boarder-detail');
+      } else {
+        res.redirect('../ft-student');
+      }
+    });
+    
+    // others-work-handler
+    app.get(/others-work-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      if (req.query.work === 'yes') {
+        res.redirect('../hours');
+      } else {
+        if (householder.sixteenToNineteen) {
+          res.redirect('../benefits-reduced');
+        } else {
+          res.redirect('../benefits');
+        }
+      }
+    });
+    
+    // work-hours-handler
+    app.get(/work-hours-handler/, function (req, res) {
+      if (req.query.hours === 'yes') {
+        res.redirect('../amount');
+      } else {
+        res.redirect('../benefits');
+      }
+    });
+
+    // others-education-handler
+    app.get(/others-education-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      if (req.query.education === 'yes') {
+        res.render('lis/'+ sprint +'/live/others/people-list', {
+          'partnerlivetext' : partnerLiveText
+        });
+      } else {
+        res.redirect('../training');
+      }
+    });
+
+    // others-training-handler
+    app.get(/others-training-handler/, function (req, res) {
+      if (req.query.training === 'yes') {
+        res.redirect('../people-list');
+      } else {
+        res.redirect('../he-student');
+      }
+    });
+
+     // relationship-handler
+    app.get(/relationship-handler/, function (req, res) {
+      sprint = req.url.charAt(5);
+      householder.relationship = req.query.relationship;
+      console.log(householder.relationship);
+      if (householder.underFifteen === true) {
+        //child || none underFifteen = people
+        res.render('lis/'+ sprint +'/live/others/people-list', {
+          'partnerlivetext' : partnerLiveText,
+          'peoplelist' : peopleList
+        });
+      } else if (householder.relationship === 'child' && householder.sixteenToNineteen === true) {
+        //child sixteenToNineteen = education
+        res.redirect('../alevel');
+      } else if (householder.relationship === 'none' && householder.sixteenToNineteen === true) {
+        //none sixteenToNineteen = boarder
+        res.redirect('../boarder');
+      } else if (householder.relationship === 'child' && householder.overNineteen === true) {
+        //child overNineteen = full time-education
+        res.redirect('../ft-student');
+      } else if (householder.relationship === 'none' && householder.overNineteen === true) {
+        //none overNineteen = boarder
+        res.redirect('../boarder');
+      }
+    });
+
+    // updates the home page when the living section is completed
+    app.get(/live-done/, function (req, res) {
+      application.whereYouLiveStatus = completedText;
+      application.whereYouLiveLink = changeText;
+      if (application.allComplete() === true) {
+        res.redirect('../../home-updated');
+      } else {
+        res.redirect('../../lis-home');
+      }
+    });
+
+
+    // ---------
+    // Exemption
+    // ---------
+
     // LIS exemption
     app.get('/lis/exemption/hc2certificate', function (req, res) {
       res.render('lis/exemption/hc2certificate', {
@@ -557,743 +1308,25 @@ module.exports = {
         'helplevel' : helpLevel
       });
     });
-    
-//LIS sprint 7
 
-
-    //7)
-    app.get(/carehome-handler/, function (req, res) {
-      if (req.query.carehome === 'yes') {
-        res.redirect('../sc/authority-assessed');
-      } else {
-        res.redirect('../savings');
-      }
-    });
-
-
-    //7) post
-    app.get('/lis/7/exemption/post', function (req, res) {
+    // post cert
+    app.get(/post-cert/, function (req, res) {
       helpLevel = req.query.helplevel;
+      sprint = req.url.charAt(5);
       console.log(helpLevel);
-      res.render('lis/7/exemption/post', {
+      res.render('lis/'+ sprint +'/exemption/post-cert', {
         'helplevel' : helpLevel
       });
     });
-    
-    //7) post-confirm
-    app.get('/lis/7/exemption/post-confirm', function (req, res) {
-      res.render('lis/7/exemption/post-confirm', {
-        'helplevel' : helpLevel
-      });
-    });
-                    
 
-    
-    //7)
-    app.get('/lis/7/sc/authority-assessed-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.authority === 'yes') {
-        res.redirect('/lis/7/sc/about-you');
-      } else {
-        res.redirect('/lis/7/sc/savings');
-      }
-    });
-        
-    //7)
-    app.get('/lis/7/assets/property', function (req, res) {
-      console.log(partnerOrText);
-      res.render('lis/7/assets/property', {
-        'partnerortext' : partnerOrText,
-        'partnerandext' : partnerAndText
-      });
-    });
-    
-    //7)
-    app.get('/lis/7/assets/other', function (req, res) {
-      console.log(partnerOrText);
-      res.render('lis/7/assets/other', {
-        'partnerortext' : partnerOrText,
-        'partnerandtext' : partnerAndText
-      });
-    });
-    
-    //7)
-    app.get('/lis/7/assets/money', function (req, res) {
-      res.render('lis/7/assets/money', {
-        'partnerortext' : partnerOrText,
-        'partnerandText' : partnerAndText
-      });
-    });
-    
-    //7)
-    app.get('/lis/7/assets/accounts', function (req, res) {
-      res.render('lis/7/assets/accounts', {
-        'partnerortext' : partnerOrText,
-        'partnerandText' : partnerAndText
-      });
-    });
-    
-    //7)
-    app.get('/lis/7/guacredit-kickout-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.guacredit === 'yes') {
-        res.redirect('/lis/7/kickout');
-      } else {
-        res.redirect('/lis/7/need-to-know');
-      }
-    });
-    
-    //7) about you summary
-    app.get('/lis/7/partner/summary', function (req, res) {
-      res.render('lis/7/partner/summary');
-    });
-    
-    //7) partner handler
-    app.get('/lis/7/partner/partner-handler', function (req, res) {
-      application.aboutPartnerStatus = "Started";
-      application.aboutPartnerLink = continueText;
-      if (req.query.partner === 'yes') {
-        applicant.partner = true;
-        setPartnerText();
-        res.render('lis/7/partner/basic');
-      } else if (req.query.partner === 'no') {
-        applicant.partner = false;
-        setPartnerText();
-        console.log(applicant.partner);
-        res.render('lis/7/partner/summary-no');
-      }
-    });
-    
-    //7) partner summary
-    app.get('/lis/7/partner/summary', function (req, res) {
-      res.render('lis/7/partner/summary');
-    });
-
-    //7) about you summary
-    app.get('/lis/7/you/about-you-summary', function (req, res) {
-      var contactText = 'Email address';
-      var contactValue = applicant.email;
-      if (applicant.contactPref == 'telephone') {
-        contactText = 'Telephone number';
-        contactValue = applicant.telephone;
-      };
-      if (applicant.contactPref != undefined) {
-        applicant.contactPref = applicant.contactPref.toProperCase();
-      }; 
-      if (applicant.statePensionFrequency != undefined) {
-        var frequency = convertFrequency(applicant.statePensionFrequency);
-      };
-      res.render('lis/7/you/about-you-summary', {
-        'mywork' : myWork,
-        'applicantFullName' : applicant.fullName(),
-        'dobday' : applicant.dobDay,
-        'dobmonth' : applicant.dobMonth,
-        'dobyear' : applicant.dobYear,
-        'contact' : applicant.contactPref,
-        'contacttext' : contactText,
-        'contactValue' : contactValue,
-        'savingscredit' : boolToString(applicant.savingsCredit),
-        'statepensionamount' : applicant.statePensionAmount,
-        'statepensionfrequency' : frequency
-      });
-    });
-    
-    //7) registration-handler
-    app.get('/lis/7/you/registration-handler', function (req, res) {
-      application.aboutYouStatus = "Started";
-      application.aboutYouLink = continueText;
-      applicant.firstName = req.query.firstname;
-      applicant.lastName = req.query.lastname;
-      applicant.dobDay = req.query.day;
-      applicant.dobMonth = convertMonth(req.query.month);
-      applicant.dobYear = req.query.year;
-      console.log(applicant.dobYear);
-      res.render('lis/7/you/contact-prefs', {
-        'applicantFirstName' : applicant.firstName
-      });
-    });
-
-    //7) benefit handler
-    app.get('/lis/7/you/benefits/sprint3-benefit-handler', function (req, res) {
-      applicant.resetBenefits();
-      benefits = req.query.sprint3benefits;
-      console.log(typeof benefits);
-      firstBenefit = applicant.benefitChecker(benefits);
-      //if (firstBenefit === "aa") {
-      //  res.render('lis/7/you/benefits/aa');
-      //} else
-      //if (firstBenefit === "ctc") {
-      //  res.render('lis/7/you/benefits/ctc');
-      //} else 
-      if (firstBenefit === "dla") {
-        res.render('lis/7/you/benefits/dla');
-      } else if (firstBenefit === "pip") {
-        res.render('lis/7/you/benefits/pip');
-      } else {
-        res.render('lis/7/you/benefits/benefit4');
-      }
-    });
-    
-    //7 Armed forces independence payment = single amount 
-    
-    //7 attendance allowance 
-    app.get('/lis/7/you/benefits/attendance-allowance-handler', function (req, res) {
-      if (applicant.childTaxCredits === true) {
-        res.render('lis/7/you/benefits/ctc');
-      } else if (applicant.disabilityLivingAllowance === true) {
-        res.render('lis/7/you/benefits/dla');
-      } else if (applicant.personalIndependence === true) {
-        res.render('lis/7/you/benefits/pip');
-      } else {
-        res.render('lis/7/you/benefits/benefit4');
-      }
-    });
-    
-    //7 Carers allowance = single amount 
-    
-    //7 child tax credit 
-    app.get('/lis/7/you/benefits/ctc-handler', function (req, res) {
-      if (applicant.disabilityLivingAllowance === true) {
-        res.render('lis/7/you/benefits/dla');
-      } else if (applicant.personalIndependence === true) {
-        res.render('lis/7/you/benefits/pip');
-      } else {
-        res.render('lis/7/you/benefits/benefit4');
-      }
-    });
-
-    //7 disability living allowance
-    app.get('/lis/7/you/benefits/dla-handler', function (req, res) {
-      if (applicant.personalIndependence === true) {
-        res.render('lis/7/you/benefits/pip');
-      } else {
-        res.render('lis/7/you/benefits/benefit4');
-      }
-    });
-    
-    //7 Industrial injuries disablement benefit
-    
-    //7 Maintenance payments
-        
-    //7) home
-    app.get('/lis/7/live/home', function (req, res) {
-      applicant.resetLivingSituation();
-      res.render('lis/7/live/home');
-    });
-
-    //7) mortgaged/joint
-    app.get('/lis/7/live/mortgaged/joint', function (req, res) {
-      res.render('lis/7/live/mortgaged/joint', {
-        'jointownertext' : jointOwnerText
-      });
-    });
-    
-    //7) tenant/joint
-    app.get('/lis/7/live/mortgaged/joint', function (req, res) {
-      res.render('lis/7/live/mortgaged/joint', {
-        'partnerortext' : partnerOrText
-      });
-    });
-    
-    //7) tenant/joint
-    app.get('/lis/7/live/joint', function (req, res) {
-      res.render('lis/7/live/joint', {
-        'jointtennanttext' : jointTennantText
-      });
-    });
-
-    //7) where you live
-    app.get('/lis/7/live/home-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.home === 'own') {
-        applicant.homeOwner = true;
-        res.redirect('/lis/7/live/mortgaged/joint');
-      } else if (req.query.home === 'rented') {
-        applicant.tennant = true;
-        res.redirect('/lis/7/live/joint');
-      } else if (req.query.home === 'guest') {
-        applicant.guest = true;
-        res.redirect('/lis/7/live/guest/address');
-      } else {
-        res.redirect('/lis/7/live/home');
-      }
-    });
-
-    //7) pension-handler
-    app.get('/lis/7/you/pension/pension-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.pension === 'yes') {
-        res.redirect('/lis/7/you/pension/pension-credit');
-      } else {
-        res.redirect('/lis/7/you/benefits/benefit-sprint3');
-      }
-    });
-
-    //7) pension-type-handler
-    app.get('/lis/7/you/pension/pension-type-handler', function (req, res) {
-      applicant.resetPension();
-      pensions = req.query.pensiontype;
-      console.log(pensions);
-      if (pensions === 'state') {
-        applicant.statePension = true;
-        res.render('lis/7/you/pension/pension-amount');
-      } else if (pensions === 'private') {
-        applicant.privatePension = true;
-        res.render('lis/7/you/pension/private-pension-amount');
-      } else if (pensions === 'employment') {
-        applicant.employmentPension = true;
-        res.render('lis/7/you/pension/employment-pension-amount');
-      } else if (pensions === 'wardisablement') {
-        applicant.warPension = true;
-        res.render('lis/7/you/pension/war-pension');
-      } else if (pensions === 'warwidow') {
-        applicant.warWidowPension = true;
-        res.render('lis/7/you/pension/war-widow-pension');
-      } else if (pensions === undefined) {
-          res.redirect('/lis/7/you/pension/pension-type');
-      } else {
-        applicant.pensionChecker(pensions);
-        if (applicant.statePension === true) {
-          res.render('lis/7/you/pension/pension-amount');
-        } else if (applicant.privatePension === true) {
-          res.render('lis/7/you/pension/private-pension-amount');
-        } else if (applicant.employmentPension === true) {
-          res.render('lis/7/you/pension/employment-pension-amount');
-        } else if (applicant.warPension === true) {
-          res.render('lis/7/you/pension/war-pension');
-        } else if (applicant.warWidowPension === true) {
-          res.render('lis/7/you/pension/war-widow-pension');
-        } else {
-          res.redirect('/lis/7/you/benefits/benefit-sprint3');
-        }
-      }
-    });
-    
-    //7) state-pension-handler
-    app.get('/lis/7/you/pension/state-pension-handler', function (req, res) {
-      applicant.statePensionAmount = req.query.amount;
-      applicant.statePensionFrequency = req.query.frequency;
-      if (applicant.privatePension === true) {
-        res.redirect('/lis/7/you/pension/private-pension-amount');
-      } else if (applicant.employmentPension === true) {
-        res.redirect('/lis/7/you/pension/employment-pension-amount');
-      } else {
-        res.redirect('/lis/7/you/benefits/benefit-sprint3');
-      }
-    });
-
-    //7) private-pension-handler
-    app.get('/lis/7/you/pension/private-pension-handler', function (req, res) {
-      if (applicant.employmentPension === true) {
-        res.redirect('/lis/7/you/pension/employment-pension-amount');
-      } else if (applicant.employmentPension === false) {
-        res.redirect('/lis/7/you/benefits/benefit-sprint3');
-      }
-    });
-
-    //7) employment-pension-handler
-    app.get('/lis/7/you/pension/employment-pension-handler', function (req, res) {
-      if (applicant.warPension === true) {
-        res.redirect('/lis/7/you/pension/war-pension');
-      } else if (applicant.warPension === false) {
-        res.redirect('/lis/7/you/benefits/benefit-sprint3');
-      }
-    });
-
-    //7) war-pension-handler
-    app.get('/lis/7/you/pension/war-pension-handler', function (req, res) {
-      if (applicant.warWidowPension === true) {
-        res.redirect('/lis/7/you/pension/war-widow-pension');
-      } else if (applicant.warWidowPension === false) {
-        res.redirect('/lis/7/you/benefits/benefit-sprint3');
-      }
-    });
-
-    //7) kickout-handler
-    app.get('/lis/7/kickout-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.kickout === 'continue') {
-        res.redirect('/lis/7/care-home');
-      } else {
-        res.redirect('/lis/7/kickout');
-      }
-    });
-
-    //7) bank account handler
-    app.get('/lis/7/assets/account-type-handler', function (req, res) {
-      applicant.resetAccounts();
-      accounts = req.query.banktype;
-      firstSavingsAcc = applicant.savingChecker(accounts);
-      if (firstSavingsAcc === 'bank') {
-        res.render('lis/7/assets/accounts', {
-          'partnerortext' : partnerOrText,
-          'partnerandtext' : partnerAndText
-        });
-      } else if (firstSavingsAcc === 'pb') {
-        res.render('lis/7/assets/premium-bonds', {
-          'partnerortext' : partnerOrText,
-          'partnerandrext' : partnerAndText
-        });
-      } else {
-        res.render('lis/7/assets/other', {
-          'partnerortext' : partnerOrText,
-          'partnerandrext' : partnerAndText
-        });
-      }
-    });
-        
-    //7)
-    app.get('/lis/7/assets/bank-savings-handler', function (req, res) {
-      if (applicant.premiumBonds === true) {
-        res.render('lis/7/assets/premium-bonds');
-      } else {
-        res.render('lis/7/assets/other', {
-          'partnerortext' : partnerOrText,
-          'partnerandrext' : partnerAndText
-        });
-      }
-    });
-        
-    //7)
-    app.get('/lis/7/assets/premium-bond-handler', function (req, res) {
-      res.render('lis/7/assets/other', {
-        'partnerortext' : partnerOrText,
-        'partnerandrext' : partnerAndText
-      });
-    });
- 
-// 6) partner handlers
-    
-    //7) partner pension-handler
-    app.get('/lis/7/partner/pension/pension-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.pension === 'yes') {
-        res.redirect('/lis/7/partner/pension/pension-credit');
-      } else {
-        res.redirect('/lis/7/partner/benefits/benefit-sprint3');
-      }
-    });
+    /*
     
 
-    //7) partner pension-type-handler
-    app.get('/lis/7/partner/pension/pension-type-handler', function (req, res) {
-      partner.resetPension();
-      pensions = req.query.pensiontype;
-      console.log(pensions);
-      if (pensions === 'state') {
-        partner.statePension = true;
-        res.render('lis/7/partner/pension/pension-amount');
-      } else if (pensions === 'private') {
-        partner.privatePension = true;
-        res.render('lis/7/partner/pension/private-pension-amount');
-      } else if (pensions === 'employment') {
-        partner.employmentPension = true;
-        res.render('lis/7/partner/pension/employment-pension-amount');
-      } else if (pensions === undefined) {
-          res.redirect('/lis/7/partner/pension/pension-type');
-      } else {
-        partner.pensionChecker(pensions);
-        if (partner.statePension === true) {
-          res.render('lis/7/partner/pension/pension-amount');
-        } else if (partner.privatePension === true) {
-          res.render('lis/7/partner/pension/private-pension-amount');
-        } else if (partner.employmentPension === true) {
-          res.render('lis/7/partner/pension/employment-pension-amount');
-        } else {
-          res.redirect('/lis/7/partner/benefits/benefit-sprint3');
-        }
-      }
-    });
-    
-    //7) partner state-pension-handler
-    app.get('/lis/7/partner/pension/state-pension-handler', function (req, res) {
-      if (partner.privatePension === true) {
-        res.redirect('/lis/7/partner/pension/private-pension-amount');
-      } else if (applicant.employmentPension === true) {
-        res.redirect('/lis/7/partner/pension/employment-pension-amount');
-      } else {
-        res.redirect('/lis/7/partner/benefits/benefit-sprint3');
-      }
-    });
-
-    //7) partner private-pension-handler
-    app.get('/lis/7/partner/pension/private-pension-handler', function (req, res) {
-      if (partner.employmentPension === true) {
-        res.redirect('/lis/7/partner/pension/employment-pension-amount');
-      } else if (applicant.employmentPension === false) {
-        res.redirect('/lis/7/partner/benefits/benefit-sprint3');
-      }
-    });
-
-    //7) partner benefit handler
-    app.get('/lis/7/partner/benefits/sprint3-benefit-handler', function (req, res) {
-      partner.resetBenefits();
-      partnerBenefits = req.query.sprint3benefits;
-      console.log(typeof partnerBenefits);
-      firstPartnerBenefit = partner.benefitChecker(partnerBenefits);
-      console.log(firstPartnerBenefit);
-      //if (firstPartnerBenefit === "aa") {
-      //  res.render('lis/7/partner/benefits/aa');
-      //} else if (firstPartnerBenefit === "ctc") {
-      //  res.render('lis/7/partner/benefits/ctc');
-      //} else 
-      if (firstPartnerBenefit === "dla") {
-        res.render('lis/7/partner/benefits/dla');
-      } else if (firstPartnerBenefit === "pip") {
-        res.render('lis/7/partner/benefits/pip');
-      } else {
-        res.render('lis/7/partner/benefits/benefit4');
-      }
-    });
-
-    //7 attendance allowance 
-    app.get('/lis/7/partner/benefits/attendance-allowance-handler', function (req, res) {
-      if (partner.childTaxCredits === true) {
-        res.render('lis/7/partner/benefits/ctc');
-      } else if (partner.disabilityLivingAllowance === true) {
-        res.render('lis/7/partner/benefits/dla');
-      } else if (partner.personalIndependence === true) {
-        res.render('lis/7/partner/benefits/pip');
-      } else {
-        res.render('lis/7/partner/benefits/benefit4');
-      }
-    });
-    
-    //7 partner child tax credit 
-    app.get('/lis/7/partner/benefits/ctc-handler', function (req, res) {
-      if (partner.disabilityLivingAllowance === true) {
-        res.render('lis/7/partner/benefits/dla');
-      } else if (partner.personalIndependence === true) {
-        res.render('lis/7/partner/benefits/pip');
-      } else {
-        res.render('lis/7/partner/benefits/benefit4');
-      }
-    });
-
-    //7 partner disability living allowance
-    app.get('/lis/7/partner/benefits/dla-handler', function (req, res) {
-      if (partner.personalIndependence === true) {
-        res.render('lis/7/partner/benefits/pip');
-      } else {
-        res.render('lis/7/partner/benefits/benefit4');
-      }
-    });
- 
-    //7) householder
-                    
-    //7) people-handler
-    app.get('/lis/7/live/others/people-list', function (req, res) {
-      res.render('lis/7/live/others/people-list', {
-        'partnerlivetext' : partnerLiveText,
-        'peoplelist' : peopleList
-      });
-    });
-    
-    //7) people-handler
-    app.get('/lis/7/live/others/people', function (req, res) {
-      res.render('lis/7/live/others/people', {
-        'partnerlivetext' : partnerLiveText
-      });
-    });
-    
-    //7) persons details
-    app.get('/lis/7/live/others/name', function (req, res) {
-      householder.resetHouseHolder();
-      res.render('lis/7/live/others/name');
-    });
-    
-    //7) people-handler
-    app.get('/lis/7/live/others/people-handler', function (req, res) {
-      if (req.query.people === 'yes') {
-        res.redirect('/lis/7/live/others/name');
-      } else {
-        res.redirect('/lis/7/live/living-summary');
-      }
-    });
-    
-    //7 others details
-    app.get('/lis/7/live/others/others-details', function (req, res) {
-      householder.firstName = (req.query.firstname);
-      console.log(householder.firstName);
-      householder.lastName = (req.query.lastname);
-      var bigname = householder.firstName + " " + householder.lastName;
-      peopleList.push(bigname);
-      householder.age = (2016 - req.query.dob);
-      console.log(householder.age);
-      householder.ageRange();
-      if (householder.overNineteen) {
-        res.render('lis/7/live/others/boarder');
-      } else {
-        res.render('lis/7/live/others/relationship');
-      }
-    });
-        
-    //child || none underFifteen = people
-    //child sixteenToNineteen = education
-    //none sixteenToNineteen = boarder
-    //child overNineteen = he-education
-    //none overNineteen = boarder
-
-    //family underFifteen > are you financially responsable > done
-    //family sixteenToNineteen > are you financially responsable > education...
-    //family overNineteen > he-education
+    // ----------
+    // Old routes
+    // ----------
 
 
-    //7) relationship-handler
-    app.get('/lis/7/live/others/relationship-handler', function (req, res) {
-      householder.relationship = req.query.relationship;
-      console.log(householder.relationship);
-      if (householder.underFifteen === true) {
-        //child || none underFifteen = people
-        res.render('lis/7/live/others/people-list', {
-          'partnerlivetext' : partnerLiveText,
-          'peoplelist' : peopleList
-        });
-      } else if (householder.relationship === 'child' && householder.sixteenToNineteen === true) {
-        //child sixteenToNineteen = education
-        res.render('lis/7/live/others/alevel');
-      } else if (householder.relationship === 'none' && householder.sixteenToNineteen === true) {
-        //none sixteenToNineteen = boarder
-        res.render('lis/7/live/others/boarder');
-      } else if (householder.relationship === 'child' && householder.overNineteen === true) {
-        //child overNineteen = full time-education
-        res.render('lis/7/live/others/ft-student');
-      } else if (householder.relationship === 'none' && householder.overNineteen === true) {
-        //none overNineteen = boarder
-        res.render('lis/7/live/others/boarder');
-      }
-    });
-    
-    //7) others-work-handler
-    app.get('/lis/7/live/others/others-work-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.work === 'yes') {
-        res.render('lis/7/live/others/hours');
-      } else {
-        if (householder.sixteenToNineteen) {
-          res.render('lis/7/live/others/benefits-reduced');
-        } else {
-          res.render('lis/7/live/others/benefits');
-        }
-      }
-    });
-    
-    //7) others-education-handler
-    app.get('/lis/7/live/others/others-education-handler', function (req, res) {
-      if (req.query.education === 'yes') {
-        res.render('lis/7/live/others/people-list', {
-          'partnerlivetext' : partnerLiveText
-        });
-      } else {
-        res.render('lis/7/live/others/training');
-      }
-    });
-    
-    //7) others-training-handler
-    app.get('/lis/7/live/others/others-training-handler', function (req, res) {
-      if (req.query.training === 'yes') {
-        res.redirect('/lis/7/live/others/people-list');
-      } else {
-        res.redirect('/lis/7/live/others/he-student');
-      }
-    });
-    
-    //7) boarder-handler
-    app.get('/lis/7/live/others/boarder-handler', function (req, res) {
-      if (req.query.boarder === 'yes') {
-        res.redirect('/lis/7/live/others/boarder-detail');
-      } else {
-        res.redirect('/lis/7/live/others/ft-student');
-      }
-    });
-
-//LIS sprint 7- Wizard
-
-
-    //7) country-handler
-    app.get('/lis/7/wizard/country-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.eligibility === 'uk') {
-        res.render('lis/7/wizard/dla');
-      } else if (req.query.eligibility === 'eu') {
-        res.render('lis/7/wizard/eu');
-      } else {
-        res.redirect('/lis/7/wizard/country');
-      }
-    });
-
-    //7) region-handler
-    app.get('/lis/7/wizard/region-handler', function (req, res) {
-      console.log(req.query);
-        wizard.country = req.query.country;
-        console.log('country is', wizard.country);
-      if (req.query.eligibility === 'uk') {
-        res.render('lis/7/wizard/dla');
-      } else if (req.query.eligibility === 'eu') {
-        res.render('lis/7/wizard/eu');
-      } else {
-        res.redirect('/lis/7/wizard/date-of-birth');
-      }
-    });
-
-//7) date-of-birth-handler
-    app.get('/lis/7/wizard/date-of-birth', function (req, res) {
-      console.log('hi');
-        res.render('lis/7/wizard/date-of-birth', {'country' : wizard.country});
-
-    });
-
-    //7) eligibility-handler
-    app.get('/lis/7/wizard/eligibility-handler', function (req, res) {
-      console.log(req.query);
-        // do something with date
-      if (req.query.kickout === 'continue') {
-        res.redirect('/lis/7/wizard/lis');
-      } else {
-        res.redirect('/lis/7/wizard/passported-benefits');
-      }
-    });
-
-    //7) benefitsv2-handler
-    app.get('/lis/7/wizard/benefitsv2-handler', function (req, res) {
-        console.log("thing");
-      console.log(req.query);
-      if (req.query.kickout === 'continue') {
-        res.redirect('/lis/7/wizard/tax-credits-exemption');
-      } else {
-        res.redirect('/lis/7/wizard/full-exemption-benefits');
-      }
-    });
-
-    //7) medical-handler
-    app.get('/lis/7/wizard/medical-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.kickout === 'continue') {
-        res.redirect('/lis/7/wizard/lis');
-      } else {
-        res.redirect('/lis/7/wizard/long-term-medical-condition');
-      }
-    });
-
-    //7) pregnancy-handler
-    app.get('/lis/7/wizard/pregnancy-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.kickout === 'continue') {
-        res.redirect('/lis/7/wizard/lis');
-      } else {
-        res.redirect('/lis/7/wizard/pregnancy');
-      }
-    });
-       //7) lis-handler
-    app.get('/lis/7/wizard/lis-handler', function (req, res) {
-      console.log(req.query);
-      if (req.query.kickout === 'continue') {
-        res.redirect('/lis/7/wizard/lis');
-      } else {
-        res.redirect('/lis/7/wizard/lis');
-      }
-    });
-    
 //LIS sprint 6
 
     //6) post
@@ -1310,27 +1343,10 @@ module.exports = {
         'helplevel' : helpLevel
       });
     });
-                            
-    //6)
-    app.get('/lis/6/sc/authority-assessed-handler', function (req, res) {
-      if (req.query.authority === 'yes') {
-        res.redirect('/lis/6/sc/about-you');
-      } else {
-        res.redirect('/lis/6/sc/savings');
-      }
-    });
-        
-    //6)
-    app.get('/lis/6/assets/property', function (req, res) {
-      res.render('lis/6/assets/property', {
-        'partnerortext' : partnerOrText,
-        'partnerandext' : partnerAndText
-      });
-    });
     
     //6)
-    app.get('/lis/6/assets/other', function (req, res) {
-      res.render('lis/6/assets/other', {
+    app.get('/lis/6/', function (req, res) {
+      res.render('lis/6/', {
         'partnerortext' : partnerOrText,
         'partnerandtext' : partnerAndText
       });
@@ -1620,7 +1636,7 @@ module.exports = {
           'partnerandrext' : partnerAndText
         });
       } else {
-        res.render('lis/6/assets/other', {
+        res.render('lis/6/', {
           'partnerortext' : partnerOrText,
           'partnerandrext' : partnerAndText
         });
@@ -1632,7 +1648,7 @@ module.exports = {
       if (applicant.premiumBonds === true) {
         res.render('lis/6/assets/premium-bonds');
       } else {
-        res.render('lis/6/assets/other', {
+        res.render('lis/6/', {
           'partnerortext' : partnerOrText,
           'partnerandrext' : partnerAndText
         });
@@ -1641,7 +1657,7 @@ module.exports = {
         
     //6)
     app.get('/lis/6/assets/premium-bond-handler', function (req, res) {
-      res.render('lis/6/assets/other', {
+      res.render('lis/6/', {
         'partnerortext' : partnerOrText,
         'partnerandrext' : partnerAndText
       });
@@ -1875,14 +1891,6 @@ module.exports = {
     
     //LIS sprint 5
 
-    app.get('/lis/5/sc/authority-assessed-handler', function (req, res) {
-      if (req.query.authority === 'yes') {
-        res.redirect('/lis/5/sc/about-you');
-      } else {
-        res.redirect('/lis/5/sc/savings');
-      }
-    });
-
     app.get('/lis/5/sc/savings-sc-kickout-handler', function (req, res) {
       if (req.query.savings === 'yes') {
         res.redirect('/lis/5/savings-kickout');
@@ -1890,16 +1898,9 @@ module.exports = {
         res.redirect('/lis/5/need-to-know');
       }
     });
-    
-    app.get('/lis/5/assets/property', function (req, res) {
-      res.render('lis/5/assets/property', {
-        'partnerortext' : partnerOrText,
-        'partnerandext' : partnerAndText
-      });
-    });
         
-    app.get('/lis/5/assets/other', function (req, res) {
-      res.render('lis/5/assets/other', {
+    app.get('/lis/5/', function (req, res) {
+      res.render('lis/5/', {
         'partnerortext' : partnerOrText,
         'partnerandtext' : partnerAndText
       });
@@ -2171,7 +2172,7 @@ module.exports = {
           'partnerandrext' : partnerAndText
         });
       } else {
-        res.render('lis/5/assets/other', {
+        res.render('lis/5/', {
           'partnerortext' : partnerOrText,
           'partnerandrext' : partnerAndText
         });
@@ -2183,7 +2184,7 @@ module.exports = {
       if (applicant.premiumBonds === true) {
         res.render('lis/5/assets/premium-bonds');
       } else {
-        res.render('lis/5/assets/other', {
+        res.render('lis/5/', {
           'partnerortext' : partnerOrText,
           'partnerandrext' : partnerAndText
         });
@@ -2192,7 +2193,7 @@ module.exports = {
         
     //5)
     app.get('/lis/5/assets/premium-bond-handler', function (req, res) {
-      res.render('lis/5/assets/other', {
+      res.render('lis/5/', {
         'partnerortext' : partnerOrText,
         'partnerandrext' : partnerAndText
       });
@@ -2420,6 +2421,8 @@ module.exports = {
     });
     
     
+    */
+
 //LIS sprint 4
     
     app.get(/other-property/, function (req, res) {
@@ -2430,14 +2433,7 @@ module.exports = {
       });
     });
 
-    app.get('/lis/4/assets/property', function (req, res) {
-      res.render('lis/4/assets/property', {
-        'partnerortext' : partnerOrText,
-        'partnerandext' : partnerAndText
-      });
-    });
-        
-    app.get('/lis/4/assets/other', function (req, res) {
+    app.get('/lis/4/', function (req, res) {
       res.render('lis/4/assets/money', {
         'partnerortext' : partnerOrText,
         'partnerandtext' : partnerAndText
@@ -2663,7 +2659,7 @@ module.exports = {
           'partnerandrext' : partnerAndText
         });
       } else {
-        res.render('lis/4/assets/other', {
+        res.render('lis/4/', {
           'partnerortext' : partnerOrText,
           'partnerandrext' : partnerAndText
         });
@@ -2675,13 +2671,13 @@ module.exports = {
       if (applicant.premiumBonds === true) {
         res.render('lis/4/assets/premium-bonds');
       } else {
-        res.render('lis/4/assets/other');
+        res.render('lis/4/');
       }
     });
         
     //4)
     app.get('/lis/4/assets/premium-bond-handler', function (req, res) {
-      res.render('lis/4/assets/other');
+      res.render('lis/4/');
     });
                 
     //work
@@ -2902,14 +2898,7 @@ module.exports = {
       }
     });
     
-    app.get('/lis/3/assets/property', function (req, res) {
-      res.render('lis/3/assets/property', {
-        'partnerortext' : partnerOrText,
-        'partnerandext' : partnerAndText
-      });
-    });
-        
-    app.get('/lis/3/assets/other', function (req, res) {
+    app.get('/lis/3/', function (req, res) {
       res.render('lis/3/assets/money', {
         'partnerortext' : partnerOrText,
         'partnerandtext' : partnerAndText
@@ -3136,7 +3125,7 @@ module.exports = {
           'partnerandrext' : partnerAndText
         });
       } else {
-        res.render('lis/4/assets/other', {
+        res.render('lis/4/', {
           'partnerortext' : partnerOrText,
           'partnerandrext' : partnerAndText
         });
@@ -3148,13 +3137,13 @@ module.exports = {
       if (applicant.premiumBonds === true) {
         res.render('lis/3/assets/premium-bonds');
       } else {
-        res.render('lis/3/assets/other');
+        res.render('lis/3/');
       }
     });
         
     //3)
     app.get('/lis/3/assets/premium-bond-handler', function (req, res) {
-      res.render('lis/3/assets/other');
+      res.render('lis/3/');
     });
                 
     //work
@@ -3373,7 +3362,7 @@ module.exports = {
       if (req.query.banktype === 'bank') {
         res.redirect('/lis/2/assets/accounts');
       } else {
-        res.redirect('/lis/2/assets/other');
+        res.redirect('/lis/2/');
       }
     });
   
@@ -3508,5 +3497,3 @@ module.exports = {
 
   }
 };
-
-//3967

@@ -38,7 +38,8 @@ function Person(
   fullName,
   bankAccount,
   premiumBonds,
-  contactPref
+  contactPref,
+  councilTaxFreq
 ) {
   this.firstName = firstName;
   this.lastName = lastName;
@@ -68,6 +69,7 @@ function Person(
   this.bankAccount = bankAccount;
   this.premiumBonds = premiumBonds;
   this.contactPref = contactPref;
+  this.councilTaxFreq = councilTaxFreq;
 }
 
 var i,

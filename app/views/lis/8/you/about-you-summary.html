@@ -1,0 +1,137 @@
+{% extends 'templates/nhs_transaction_layout.html' %}
+{% import 'includes/form_macros.html' as form_macros %}
+
+{% block afterHeader %}
+  {% include "includes/service-headers/low-income.html" %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+  <div class="grid-row">
+    <div style="min-width:580px">
+
+  <div class="text">
+
+    <h1 class="heading-large">
+      Check your answers
+    </h1>
+    <p><strong>Personal details</strong></p>
+    <table class="data-table you-summary">
+      <tr>
+        <td>Full name</td>
+        <td>{{applicantFullName}}</td>
+        <td><a href="#">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Date of birth</td>
+        <td>{{dobday}} {{dobmonth}} {{dobyear}}</td>
+        <td><a href="">Change this</a></td>
+      </tr>
+      <!--tr>
+        <td>National insurance number</td>
+        <td>JD 12 34 56 D</td>
+        <td><a href="work">Change this</a></td>
+      </tr-->
+      <tr>
+        <td>How would you like us to contact you?</td>
+        <td>{{contact}}</td>
+        <td><a href="education">Change this</a></td>
+      </tr>
+      <tr>
+        <td>{{contacttext}}</td>
+        <td>{{contactValue}}</td>
+        <td><a href="pension/pension">Change this</a></td>
+      </tr>
+      <tr>
+          </table>
+
+      <p><strong>Jobs and education</strong></p>
+          <table class="data-table you-summary">
+              <tr>
+        <td>
+          Do you have a job?
+        </td>
+        <td>
+        No
+        </td>
+        <td><a href="pension/pension-type">Change this</a></td>
+      </tr>
+      <tr>
+        <td>
+          Are you in fulltime education?
+        </td>
+        <td>
+        No
+        </td>
+        <td><a href="pension/pension-type">Change this</a></td>
+      </tr>
+        </table>
+
+      <p><strong>Pensions</strong></p>
+      <table class="data-table you-summary">
+        <tr>
+        <td>Which pension(s) do you receive?</td>
+        <td>State,<br>Private</td>
+        <td><a href="pension/private-pension-amount">Change this</a></td>
+      </tr>
+        <tr>
+        <td>About your state pension</td>
+        <td>£{{statepensionamount}} {{statepensionfrequency}}</td>
+        <td><a href="pension/private-pension-amount">Change this</a></td>
+      </tr>
+         <tr>
+        <td>Do you receive Pension Credit Savings Credit?</td>
+        <td>{{savingscredit}}</td>
+        <td><a href="pension/private-pension-amount">Change this</a></td>
+      </tr>
+      <tr>
+        <td>About your Pension Credit Savings Credit payments?</td>
+        <td>£121 per week</td>
+        <td><a href="pension/private-pension-amount">Change this</a></td>
+      </tr>
+      <tr>
+          <tr>
+        <td>About your private pension</td>
+        <td>£321 per week</td>
+        <td><a href="pension/private-pension-amount">Change this</a></td>
+      </tr>
+      </table>
+
+      <p><strong>Benefits and other money</strong></p>
+    <table class="data-table you-summary">
+      <tr>
+        <td>Are you looking after someone but can’t get carers allowance because of another benefit?</td>
+        <td>No</td>
+        <td><a href="benefits/care-allowance">Change this</a></td>
+      </tr>
+      <tr>
+        <td>Does someone other than your partner get carers allowance for looking after you?</td>
+        <td>No</td>
+        <td><a href="benefits/other-money">Change this</a></td>
+      </tr>
+         <tr>
+        <td>Do you receive any other money?</td>
+        <td>No</td>
+        <td><a href="benefits/other-money">Change this</a></td>
+      </tr>
+
+    </table>
+
+    <form action="you-done" method="get" class="form">
+      {{
+        form_macros.button({
+          label: 'Save and continue',
+          id : 'next'
+        })
+      }}
+    </form>
+
+  </div>
+  </div>
+  </div>
+
+</main>
+
+{% endblock %}
