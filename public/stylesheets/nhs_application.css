@@ -527,7 +527,7 @@ table th.numeric {
   padding-right: 3rem;
   background-image: url("/public/images/icon-button-start.svg");
   background-repeat: no-repeat;
-  background-position: 95% 55%;
+  background-position: 98% 55%;
 }
 
 .button-cancel {
@@ -3534,4 +3534,16 @@ td, th {
 .additional-info {
   padding: 1rem 2rem 1rem 4rem;
   background: rgba(0, 114, 198, 0.1) url("/public/images/icon-information.png") 1rem no-repeat;
+}
+
+.additional-info-no-image {
+  padding: 1rem 2rem 1rem 1.5rem;
+  background: rgba(0, 114, 198, 0.1);
+}
+
+.panel-indent-body {
+  clear: both;
+  border-left: 6px solid #eff3f5;
+  padding: 0.3rem 1rem 0.8rem 1rem;
+  line-height: 2.5rem;
 }
