@@ -3,6 +3,7 @@
 {% block content %}
 
 <main id="content" role="main">
+  <link rel="stylesheet" href="/public/stylesheets/pagination.css">
 
   <div class="grid-row">
 
@@ -15,11 +16,11 @@
     <div class="column-one-half">
 
       <ul class="navigation-links">
-        <li><a href="">1. Introduction to help with health costs</a></li>
+        <li><a href="start">1. Introduction to help with health costs</a></li>
         <li>2. people aged under 16</li>
-        <li><a href="">3. people aged 16, 17 or 18</a></li>
-        <li><a href="">4. people aged 19</a></li>
-        <li><a href="">5. people aged over 60</a></li>
+        <li><a href="18">3. people aged 16, 17 or 18</a></li>
+        <li><a href="19">4. people aged 19</a></li>
+        <li><a href="60">5. people aged over 60</a></li>
       </ul>
 
     </div>
@@ -27,11 +28,11 @@
     <div class="column-one-half">
 
       <ul class="navigation-links">
-        <li><a href="">6. people who get benefits</a></li>
-        <li><a href="">7. people who have a long term medical condition</a></li>
-        <li><a href="">8. people who are pregnant or have had a baby in the last twelve months</a></li>
-        <li><a href="">9. people who have little money to live on</a></li>
-        <li><a href="">10. people who want to save money on regular prescriptions</a></li>
+        <li><a href="benefits">6. people who get benefits</a></li>
+        <li><a href="medex">7. people who have a long term medical condition</a></li>
+        <li><a href="matex">8. people who are pregnant or have had a baby in the last twelve months</a></li>
+        <li><a href="lis">9. people who have little money to live on</a></li>
+        <li><a href="ppc">10. people who want to save money on regular prescriptions</a></li>
       </ul>
     </div>
   </div>
@@ -62,21 +63,25 @@
           <li>May get help with travel costs for NHS treatment.</li>
         </ul>
 
-        <p><a class="button" href="#">Help me work out if I can get help with health costs</a></p>
+<!--        <p><a class="button" href="#">Help me work out if I can get help with health costs</a></p>-->
 
       </div>
 
-      <div class="pagination">
-        <div class="pag-right">
-          <p>
-            <a href="#">
-              <span class="pag-graphic"></span>
-              <span class="pag-title">Next</span>
-              <span class="pag-label">help for people aged 16,<br>17 or 18</span>
-            </a>
-          </p>
-        </div>
-      </div>
+        <nav class="pagination_gds" role="navigation" aria-label="Pagination">
+            <ul class="group">
+                  <li class="previous">
+                    <a title="Navigate to previous part" rel="prev" href="start">
+                      <span class="pagination-label">Previous</span>
+                      <span class="pagination-part-title">Introduction</span>
+                    </a>
+                  </li>
+                  <li class="next">
+                    <a title="Navigate to next part" rel="next" href="18">
+                      <span class="pagination-label">Next</span> <span class="pagination-part-title">Help for people aged 16,17 or 18</span>
+                    </a>
+                  </li>
+            </ul>
+          </nav>
 
     </div>
 
