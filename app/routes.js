@@ -1,3 +1,7 @@
+// set a variable to partner or applicant
+// change the text on the pages based on what the selection was
+// set the variables based on what the selection was current-person {applicant} .thing =
+
 //import the person constructor
 var person = require("./person.js");
 
@@ -1063,7 +1067,16 @@ module.exports = {
         res.redirect('../home');
       }
     });
-    
+        
+    // rent to parents relitives friends
+    app.get(/prf-handler/, function (req, res) {
+      if (req.query.prf === 'yes') {
+        res.redirect('../guest/address');
+      } else {
+        res.redirect('../joint-tenant');
+    }
+    });
+
     // home
     app.get(/your-home/, function (req, res) {
       applicant.resetLivingSituation();
