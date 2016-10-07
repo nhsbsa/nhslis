@@ -9,64 +9,63 @@
 
 <main id="content" role="main">
 
-  <div class="grid-row">
-    <div style="min-width:580px">
+      
+      <h1 class="heading-large">
+        Check your answers
+      </h1>
+      
+      <p><strong>Personal details</strong></p>
+      
+      <table class="data-table you-summary">
+        <tr>
+          <td>Full name</td>
+          <td>{{applicantFullName}}</td>
+          <td><a href="#">Change this</a></td>
+        </tr>
+        <tr>
+          <td>Date of birth</td>
+          <td>{{dobday}} {{dobmonth}} {{dobyear}}</td>
+          <td><a href="">Change this</a></td>
+        </tr>
+        <!--tr>
+          <td>National insurance number</td>
+          <td>JD 12 34 56 D</td>
+          <td><a href="work">Change this</a></td>
+        </tr-->
+        <tr>
+          <td>How would you like us to contact you?</td>
+          <td>{{contact}}</td>
+          <td><a href="education">Change this</a></td>
+        </tr>
+        <tr>
+          <td>{{contacttext}}</td>
+          <td>{{contactValue}}</td>
+          <td><a href="pension/pension">Change this</a></td>
+        </tr>
+        <tr>
+        </table>
 
-  <div class="text">
-
-    <h1 class="heading-large">
-      Check your answers
-    </h1>
-    <p><strong>Personal details</strong></p>
-    <table class="data-table you-summary">
-      <tr>
-        <td>Full name</td>
-        <td>{{applicantFullName}}</td>
-        <td><a href="#">Change this</a></td>
-      </tr>
-      <tr>
-        <td>Date of birth</td>
-        <td>{{dobday}} {{dobmonth}} {{dobyear}}</td>
-        <td><a href="">Change this</a></td>
-      </tr>
-      <!--tr>
-        <td>National insurance number</td>
-        <td>JD 12 34 56 D</td>
-        <td><a href="work">Change this</a></td>
-      </tr-->
-      <tr>
-        <td>How would you like us to contact you?</td>
-        <td>{{contact}}</td>
-        <td><a href="education">Change this</a></td>
-      </tr>
-      <tr>
-        <td>{{contacttext}}</td>
-        <td>{{contactValue}}</td>
-        <td><a href="pension/pension">Change this</a></td>
-      </tr>
-      <tr>
-          </table>
-
-      <p><strong>Jobs and education</strong></p>
-          <table class="data-table you-summary">
-              <tr>
-        <td>
-          Do you have a job?
-        </td>
-        <td>
-        No
-        </td>
-        <td><a href="pension/pension-type">Change this</a></td>
-      </tr>
-      <tr>
-        <td>
-          Are you in fulltime education?
-        </td>
-        <td>
-        No
-        </td>
-        <td><a href="pension/pension-type">Change this</a></td>
-      </tr>
+        <p><strong>Jobs and education</strong></p>
+        
+        <table class="data-table you-summary">
+          <tr>
+          <td>
+            Do you have a job?
+          </td>
+          <td>
+          No
+          </td>
+          <td><a href="pension/pension-type">Change this</a></td>
+          </tr>
+          <tr>
+            <td>
+              Are you in fulltime education?
+            </td>
+            <td>
+            No
+            </td>
+            <td><a href="pension/pension-type">Change this</a></td>
+          </tr>
         </table>
 
       <p><strong>Pensions</strong></p>
@@ -127,10 +126,6 @@
         })
       }}
     </form>
-
-  </div>
-  </div>
-  </div>
 
 </main>
 
