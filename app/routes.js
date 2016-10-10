@@ -546,6 +546,35 @@ module.exports = {
       });
     });
 
+    // contact-handler 2
+    app.get(/contact-handler2/, function (req, res) {
+      if (req.query.contact === "email") {
+        applicant.contactPref ='email';
+        if (applicant.email != undefined) {
+          res.redirect('../email');
+        } else {
+          res.redirect('../new-mail');
+        }
+      } else if (req.query.contact === "text") {
+        applicant.contactPref ='text';
+        if (applicant.telephone != undefined) {
+          res.redirect('../telephone');
+        } else {
+          res.redirect('../telephone');
+        }
+        res.redirect('../telephone');
+      } else if (req.query.contact === "telephone") {
+        applicant.contactPref ='telephone';
+        res.redirect('../telephone');
+      } else if (req.query.contact === "both") {
+        applicant.contactPref ='both';
+        res.redirect('../email');
+      } else {
+        applicant.contactPref ='none';
+        res.redirect('../work');
+      }
+    });
+    
     // contact-handler
     app.get(/contact-handler/, function (req, res) {
       if (req.query.contact === "email") {
