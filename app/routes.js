@@ -550,6 +550,8 @@ module.exports = {
         'applicantFirstName' : applicant.firstName
       });
     });
+    
+    //this is a test
 
     // contact-handler 2
     app.get(/contact-handler2/, function (req, res) {
