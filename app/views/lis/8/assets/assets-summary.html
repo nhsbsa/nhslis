@@ -1,4 +1,4 @@
- {% extends 'templates/nhs_transaction_layout.html' %}
+{% extends 'templates/nhs_transaction_layout.html' %}
 {% import 'includes/form_macros.html' as form_macros %}
 
 {% block afterHeader %}
@@ -7,80 +7,80 @@
 
 {% block content %}
 
-<main id="content" role="main">
+  <main id="content" role="main">
 
-<div class="grid-row">
-    <div class="column-two-thirds">
+    <div class="grid-row">
+    
+      <div class="column-two-thirds">
 
-  <div class="text">
-    <h1 class="heading-large">
-      Check your answers
-    </h1>
+        <div class="text">
+          
+          <h1 class="heading-large">
+            Check your answers
+          </h1>
+          
+          <p><strong>Property and land</strong></p>
+          <table class="data-table assets-summary">
+            <tr>
+              <td>Do you or your partner own any property or land?</td>
+              <td>No</td>
+              <td><a href="property">Change this</a></td>
+            </tr>
+          </table>
+            
+          <p><strong>Money, savings and investments</strong></p>
+          <table class="data-table assets-summary">
+            <tr>
+              <td>How much do you and your partner have in all of your bank, building society, savings accounts and ISAs?</td>
+              <td>£2000</td>
+              <td><a href="accounts">Change this</a></td>
+            </tr>
+            <tr>
+              <td>Do you or your partner have any Premium bonds</td>
+              <td>No</td>
+              <td><a href="accounts">Change this</a></td>
+            </tr>
+            <tr>
+              <td>Do you or your partner have any Capital bonds</td>
+              <td>No</td>
+              <td><a href="accounts">Change this</a></td>
+            </tr>
+            <tr>
+              <td>Do you or your partner have any Shares</td>
+              <td>No</td>
+              <td><a href="accounts">Change this</a></td>
+            </tr>
+            <tr>
+              <td>Do you or your partner have any National Saving Certificates</td>
+              <td>No</td>
+              <td><a href="accounts">Change this</a></td>
+            </tr>
+            <tr>
+              <td>Do you or your partner have any other investments</td>
+              <td>No</td>
+              <td><a href="accounts">Change this</a></td>
+            </tr>
+            <tr>
+              <td>Do you or your partner have any other money</td>
+              <td>No</td>
+              <td><a href="assets-other">Change this</a></td>
+            </tr>
+          </table>
 
-    <table class="data-table assets-summary">
-        <p><strong>Property and land</strong></p>
-      <tr>
-        <td>Do you have any property or land in this country or abroad?</td>
-        <td>No</td>
-        <td><a href="property">Change this</a></td>
-      </tr>
-      </table>
-
-            <table class="data-table assets-summary">
-        <p><strong>Money, savings and investments</strong></p>
-      <tr>
-        <td>Total held in bank, building society or savings accounts</td>
-        <td>£8000</td>
-        <td><a href="account-amount">Change this</a></td>
-      </tr>
-      <tr>
-        <td>Premium bonds</td>
-        <td>No</td>
-        <td><a href="money">Change this</a></td>
-      </tr>
-      <tr>
-        <td>Capital bonds</td>
-        <td>No</td>
-        <td><a href="money">Change this</a></td>
-      </tr>
-      <tr>
-        <td>Shares</td>
-        <td>No</td>
-        <td><a href="money">Change this</a></td>
-      </tr>
-      <tr>
-        <td>National Saving Certificates</td>
-        <td>No</td>
-        <td><a href="money">Change this</a></td>
-      </tr>
-      <tr>
-        <td>Any other investments</td>
-        <td>No</td>
-        <td><a href="money">Change this</a></td>
-      </tr>
-      <tr>
-        <td>Do you have any other money</td>
-        <td>Yes</td>
-        <td><a href="other">Change this</a></td>
-      </tr>
-      <tr>
-        <td>Total other money</td>
-        <td>£70</td>
-        <td><a href="other">Change this</a></td>
-      </tr>
-    </table>
-
-    <form action="assets-done" method="get" class="form">
-      {{
-        form_macros.button({
-          label: 'Save and continue',
-          id : 'next'
-        })
-      }}
-    </form>
+          <form action="assets-done" method="get" class="form">
+            {{
+              form_macros.button({
+                label: 'Save and continue',
+                id : 'next'
+              })
+            }}
+          </form>
+          
       </div>
-      </div>
-      </div>
+      
+    </div>
+  
+  </div>
 
 </main>
 
