@@ -7,38 +7,41 @@
 
 {% block content %}
 
-<main id="content" role="main">
+  <main id="content" role="main">
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+    <div class="grid-row">
+    
+      <div class="column-two-thirds">
 
-  <div class="text">
+        <div class="text">
 
-    <h1 class="heading-large">
-      Check your answers
-    </h1>
+          <h1 class="heading-large">
+            Check your answers
+          </h1>
 
-    <table class="data-table living-summary">
-      <tr>
-        <td>Where do you live?</td>
-        <td>I don't have a perminant address</td>
-        <td><a href="home">Change this</a></td>
-      </tr>
-    </table>
+          <table class="data-table living-summary">
+            <tr>
+              <td>Where do you live?</td>
+              <td>I don't have a perminant address</td>
+              <td><a href="you-live">Change this</a></td>
+            </tr>
+          </table>
 
-    <form action="live-done" method="get" class="form">
-      {{
-        form_macros.button({
-          label: 'Save and continue',
-          id : 'next'
-        })
-      }}
-    </form>
+          <form action="live-done" method="get" class="form">
+            {{
+              form_macros.button({
+                label: 'Save and continue',
+                id : 'next'
+              })
+            }}
+          </form>
 
-  </div>
-  </div>
-  </div>
+        </div>
+        
+      </div>
+      
+    </div>
 
-</main>
+  </main>
 
 {% endblock %}
