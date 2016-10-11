@@ -10,25 +10,24 @@
 <main id="content" role="main">
 
   <div class="grid-row">
-
     <div class="column-two-thirds">
 
       <h1 class="heading-large">
-        Are you in full time education?
+        Do you get a pension?
       </h1>
 
-      <form action="" method="get" class="form">
+      <form action="newpen-handler" method="get" class="form">
           <div class="form-item-wrapper">
             <fieldset>
               <div class="inline-form-groups">
                 <div class="form-group">
-                  <input type="radio" id="binary-yes" name="education" value="yes">
+                  <input type="radio" id="binary-yes" name="pension" value="yes">
                   <label class="form-control-radio" for="binary-yes">
                     Yes
                   </label>
                 </div>
                 <div class="form-group">
-                  <input type="radio" id="binary-no" name="education" value="no">
+                  <input type="radio" id="binary-no" name="pension" value="no">
                   <label class="form-control-radio" for="binary-no">
                     No
                   </label>
@@ -37,15 +36,12 @@
             </fieldset>
           </div>
 
-          {{
-            form_macros.button({
-              label: 'Save and continue',
-              href : 'pension/newpension'
-            })
-          }}
-
-    <p class="navigation"><a class="cancel" href="../lis-home">Save and come back later</a></p>
-
+            {{
+          form_macros.button({
+            label: 'Save and continue'
+          })
+        }}
+      <p class="navigation"><a class="cancel" href="../../lis-home">Save and come back later</a></p>
       </form>
 
     </div>

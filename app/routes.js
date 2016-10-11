@@ -1,4 +1,3 @@
-
 // set a variable to partner or applicant
 // change the text on the pages based on what the selection was
 // set the variables based on what the selection was current-person {applicant} .thing =
@@ -25,11 +24,28 @@ var contactValue;
 var helpLevel = 3;
 
 var peopleList;
-var privatePensionList;
+
+
+// var pensionList;
+// var resetPensionList = function () {
+//   pensionList = [];
+//   console.log('resetting pension list')
+// }
+// stateamount-handler 
+// req.query.pension === 'yes'
+// req.query.amount = penAmount;
+// req.query.freq = penFreq;
+// pensionName = '<span>Another pension</span> <span> £' + penAmount + '</span>';
+// pensionList.push(pensionName);
+//
+// if state pension pensionList.push state pension + amount + freq
+// if otherpension pensionList.push 'Another pension' + amount + freq 
+//
+// resetPensionList();
+
 
 var resetPeople = function () {
   peopleList = [];
-  privatePensionList = [];
   console.log('resetting people')
 }
 
@@ -664,6 +680,44 @@ module.exports = {
     // -------
     // Pension
     // -------
+    
+    // pension credit handler sprints: 6, 7, 8
+    app.get(/newcred-handler/, function (req, res) {
+      if (req.query.savingscredit === 'yes') {
+        applicant.savingsCredit = true;
+        res.redirect('../newcredit-amount');
+      } else if (req.query.savingscredit === 'no') {
+          applicant.savingsCredit = false;
+        res.redirect('../statepension');
+      }
+    });
+
+    // newpen-handler
+    app.get(/newpen-handler/, function (req, res) {
+      if (req.query.pension === 'yes') {
+        res.redirect('../newpen-credit');
+      } else {
+        res.redirect('../../benefits/benefit-sprint3');
+      }
+    });
+    
+    // otherpen-handler
+    app.get(/otherpen-handler/, function (req, res) {
+      if (req.query.pension === 'yes') {
+        res.redirect('../pensionamount');
+      } else {
+        res.redirect('../../benefits/benefit-sprint3');
+      }
+    });
+    
+    // newstate-handler
+    app.get(/newstate-handler/, function (req, res) {
+      if (req.query.pension === 'yes') {
+        res.redirect('../state-amount');
+      } else {
+        res.redirect('../other-pension');
+      }
+    });
     
     // pension-handler
     app.get(/pension-handler/, function (req, res) {
