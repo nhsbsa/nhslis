@@ -9,130 +9,122 @@
 
 <main id="content" role="main">
 
-      <div class="grid-row">
+  <div class="grid-row">
+    
     <div class="column-two-thirds">
 
-  <div class="text">
-      <h1 class="heading-large">
-        Check your answers
-      </h1>
-      
-      <p><strong>Personal details</strong></p>
-      
-      <table class="data-table you-summary">
-        <tr>
-          <td>Full name</td>
-          <td>{{applicantFullName}}</td>
-          <td><a href="#">Change this</a></td>
-        </tr>
-        <tr>
-          <td>Date of birth</td>
-          <td>{{dobday}} {{dobmonth}} {{dobyear}}</td>
-          <td><a href="">Change this</a></td>
-        </tr>
-        <!--tr>
-          <td>National insurance number</td>
-          <td>JD 12 34 56 D</td>
-          <td><a href="work">Change this</a></td>
-        </tr-->
-        <tr>
-          <td>How would you like us to contact you?</td>
-          <td>{{contact}}</td>
-          <td><a href="education">Change this</a></td>
-        </tr>
-        <tr>
-          <td>{{contacttext}}</td>
-          <td>{{contactValue}}</td>
-          <td><a href="pension/pension">Change this</a></td>
-        </tr>
-        <tr>
-        </table>
-
-        <p><strong>Jobs and education</strong></p>
+      <div class="text">
         
+        <h1 class="heading-large">
+          Check your answers
+        </h1>
+      
+        <p class="bold">Personal details</p>
+      
         <table class="data-table you-summary">
           <tr>
-          <td>
-            Do you have a job?
-          </td>
-          <td>
-          No
-          </td>
-          <td><a href="pension/pension-type">Change this</a></td>
+            <td>Full name</td>
+            <td>{{applicantFullName}}</td>
+            <td><a href="#">Change this</a></td>
           </tr>
           <tr>
-            <td>
-              Are you in fulltime education?
-            </td>
-            <td>
-            No
-            </td>
+            <td>Date of birth</td>
+            <td>{{dobday}} {{dobmonth}} {{dobyear}}</td>
+            <td><a href="">Change this</a></td>
+          </tr>
+          <tr>
+            <td>How would you like us to contact you?</td>
+            <td>{{contact}}</td>
+            <td><a href="education">Change this</a></td>
+          </tr>
+          <tr>
+            <td>{{contacttext}}</td>
+            <td>{{contactvalue}}</td>
+            <td><a href="pension/pension">Change this</a></td>
+          </tr>
+        </table>
+
+        <p class="bold">Jobs and education</p>
+        <table class="data-table you-summary">
+          <tr>
+            <td>Do you have a job?</td>
+            <td>No</td>
+            <td><a href="pension/pension-type">Change this</a></td>
+          </tr>
+          <tr>
+            <td>Are you in full time education?</td>
+            <td>No</td>
             <td><a href="pension/pension-type">Change this</a></td>
           </tr>
         </table>
 
-      <p><strong>Pensions</strong></p>
-      <table class="data-table you-summary">
-        <tr>
-        <td>Which pension(s) do you receive?</td>
-        <td>State,<br>Private</td>
-        <td><a href="pension/private-pension-amount">Change this</a></td>
-      </tr>
-        <tr>
-        <td>About your state pension</td>
-        <td>£{{statepensionamount}} {{statepensionfrequency}}</td>
-        <td><a href="pension/private-pension-amount">Change this</a></td>
-      </tr>
-         <tr>
-        <td>Do you receive Pension Credit Savings Credit?</td>
-        <td>{{savingscredit}}</td>
-        <td><a href="pension/private-pension-amount">Change this</a></td>
-      </tr>
-      <tr>
-        <td>About your Pension Credit Savings Credit payments?</td>
-        <td>£121 per week</td>
-        <td><a href="pension/private-pension-amount">Change this</a></td>
-      </tr>
-      <tr>
+        <p class="bold">Pensions</p>
+        <table class="data-table you-summary">
           <tr>
-        <td>About your private pension</td>
-        <td>£321 per week</td>
-        <td><a href="pension/private-pension-amount">Change this</a></td>
-      </tr>
-      </table>
+            <td>Do you get a pension?</td>
+            <td>Yes</td>
+            <td><a href="pension/private-pension-amount">Change this</a></td>
+          </tr>
+          <tr>
+            <td>Do you get Pension Credit Savings Credit?</td>
+            <td>{{savingscredit}}</td>
+            <td><a href="pension/private-pension-amount">Change this</a></td>
+          </tr>
+          <tr>
+            <td>About your state pension</td>
+            <td>£{{statepensionamount}} {{statepensionfrequency}}</td>
+            <td><a href="pension/private-pension-amount">Change this</a></td>
+          </tr>
+          <tr>
+            <td>About your Pension Credit Savings Credit payments?</td>
+            <td>£121 per week</td>
+            <td><a href="pension/private-pension-amount">Change this</a></td>
+          </tr>
+          <tr>
+            <td>About your private pension</td>
+            <td>£321 per week</td>
+            <td><a href="pension/private-pension-amount">Change this</a></td>
+          </tr>
+        </table>
 
-      <p><strong>Benefits and other money</strong></p>
-    <table class="data-table you-summary">
-      <tr>
-        <td>Are you looking after someone but can’t get carers allowance because of another benefit?</td>
-        <td>No</td>
-        <td><a href="benefits/care-allowance">Change this</a></td>
-      </tr>
-      <tr>
-        <td>Does someone other than your partner get carers allowance for looking after you?</td>
-        <td>No</td>
-        <td><a href="benefits/other-money">Change this</a></td>
-      </tr>
-         <tr>
-        <td>Do you receive any other money?</td>
-        <td>No</td>
-        <td><a href="benefits/other-money">Change this</a></td>
-      </tr>
+        <p class="bold">Benefits and other money</p>
+        <table class="data-table you-summary">
+          <tr>
+            <td>Do you get any of these benefits?</td>
+            <td>No</td>
+            <td><a href="benefits/care-allowance">Change this</a></td>
+          </tr>
+          <tr>
+            <td>Are you looking after someone but can’t get carers allowance because of another benefit?</td>
+            <td>No</td>
+            <td><a href="benefits/care-allowance">Change this</a></td>
+          </tr>
+          <tr>
+            <td>Does someone get Carer’s Allowance for looking after you?</td>
+            <td>No</td>
+            <td><a href="benefits/other-money">Change this</a></td>
+          </tr>
+             <tr>
+            <td>Do you get any other money?</td>
+            <td>No</td>
+            <td><a href="benefits/other-money">Change this</a></td>
+          </tr>
+        </table>
 
-    </table>
-
-    <form action="you-done" method="get" class="form">
-      {{
-        form_macros.button({
-          label: 'Save and continue',
-          id : 'next'
-        })
-      }}
-    </form>
+        <form action="you-done" method="get" class="form">
+          {{
+            form_macros.button({
+              label: 'Save and continue',
+              id : 'next'
+            })
+          }}
+        </form>
     
       </div>
-      </div>
-      </div>
+      
+    </div>
+    
+  </div>
 
 </main>
 

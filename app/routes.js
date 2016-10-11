@@ -1,3 +1,4 @@
+
 // set a variable to partner or applicant
 // change the text on the pages based on what the selection was
 // set the variables based on what the selection was current-person {applicant} .thing =
@@ -16,6 +17,10 @@ jointOwnerText;
 var continueText = 'Continue';
 var changeText = 'View or change';
 var completedText = "Completed";
+
+//summary
+var contactText;
+var contactValue;
 
 var helpLevel = 3;
 
@@ -383,7 +388,7 @@ module.exports = {
         res.redirect('../saving-ch');
       }
     });
-    
+        
     // carehome savings kickout handler v2
     app.get(/chome-savings-handler/, function (req, res) {
       if (req.query.savings === 'yes') {
@@ -562,15 +567,13 @@ module.exports = {
         } else {
           res.redirect('../telephone');
         }
-        res.redirect('../telephone');
       } else if (req.query.contact === "telephone") {
         applicant.contactPref ='telephone';
         res.redirect('../telephone');
-      } else if (req.query.contact === "both") {
-        applicant.contactPref ='both';
-        res.redirect('../email');
+      } else if (req.query.contact === "post") {
+        applicant.contactPref ='post';
+        res.redirect('../work');
       } else {
-        applicant.contactPref ='none';
         res.redirect('../work');
       }
     });
@@ -624,11 +627,15 @@ module.exports = {
     // about you summary
     app.get(/about-you-summary/, function (req, res) {
       sprint = req.url.charAt(5);
-      var contactText = 'Email address';
-      var contactValue = applicant.email;
-      if (applicant.contactPref == 'telephone') {
+      if (applicant.contactPref == 'telephone' || applicant.contactPref == 'text') {
         contactText = 'Telephone number';
         contactValue = applicant.telephone;
+      } else if (applicant.contactPref == 'email') {
+        contactText = 'Email address';
+        contactValue = applicant.email;
+      } else if (applicant.contactPref == 'post') {
+        contactText = 'Post';
+        contactValue = undefined;
       };
       if (applicant.contactPref != undefined) {
         applicant.contactPref = applicant.contactPref.toProperCase();
@@ -644,7 +651,7 @@ module.exports = {
         'dobyear' : applicant.dobYear,
         'contact' : applicant.contactPref,
         'contacttext' : contactText,
-        'contactValue' : contactValue,
+        'contactvalue' : contactValue,
         'savingscredit' : boolToString(applicant.savingsCredit),
         'statepensionamount' : applicant.statePensionAmount,
         'statepensionfrequency' : frequency
