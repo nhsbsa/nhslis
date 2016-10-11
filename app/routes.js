@@ -25,9 +25,11 @@ var contactValue;
 var helpLevel = 3;
 
 var peopleList;
+var privatePensionList;
 
 var resetPeople = function () {
   peopleList = [];
+  privatePensionList = [];
   console.log('resetting people')
 }
 
@@ -551,8 +553,6 @@ module.exports = {
       });
     });
     
-    //this is a test
-
     // contact-handler 2
     app.get(/contact-handler2/, function (req, res) {
       if (req.query.contact === "email") {
