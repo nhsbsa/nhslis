@@ -1,7 +1,3 @@
-// set a variable to partner or applicant
-// change the text on the pages based on what the selection was
-// set the variables based on what the selection was current-person {applicant} .thing =
-
 //import the person constructor
 var person = require("./person.js");
 
@@ -63,7 +59,8 @@ var i,
   accounts,
   firstSavingsAcc,
   stateP,
-  privateP;
+  privateP,
+  pensionNumber;
 
 //create an application
 var application = {
@@ -125,7 +122,8 @@ var applicant = person.createPerson(
   this.othersAtHome = false,
   this.bankAccount = false,
   this.contactPref = null,
-  this.councilTaxFreq = null
+  this.councilTaxFreq = null,
+  this.penCount = 0
 );
 
 //create a partner
@@ -151,9 +149,12 @@ var partner = person.createPerson(
   this.homeOwner = false,
   this.tennant = false,
   this.guest = false,
-  //this.othersAtHome = false,
-  this.bankAccount = false
+  this.bankAccount = false,
+  this.penCount = 0
 );
+
+applicant.penCount = 0;
+partner.penCount = 0;
 
 //create someone else in the household
 var householder = {
@@ -703,11 +704,22 @@ module.exports = {
     
     // otherpen-handler
     app.get(/otherpen-handler/, function (req, res) {
-      if (req.query.pension === 'yes') {
-        res.redirect('../pensionamount');
+      sprint = req.url.charAt(5);
+      if (req.query.pension === 'a-yes') {
+        pensionNumber = applicant.updatePensionNumber(applicant.penCount);
+        applicant.penCount++;
+        res.render('lis/' + sprint + '/you/pension/pensionamount', {
+          pensionNumber : pensionNumber
+        });
+      } else if (req.query.pension === 'p-yes') {
+        pensionNumber = partner.updatePensionNumber(partner.penCount);
+        partner.penCount++; 
+        res.render('lis/' + sprint + '/partner/pension/pensionamount', {
+          pensionNumber : pensionNumber
+        });
       } else {
         res.redirect('../../benefits/benefit-sprint3');
-      }
+      };
     });
     
     // newstate-handler

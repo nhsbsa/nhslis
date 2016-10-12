@@ -39,13 +39,14 @@ function Person(
   bankAccount,
   premiumBonds,
   contactPref,
-  councilTaxFreq
+  councilTaxFreq,
+  penCount
 ) {
   this.firstName = firstName;
   this.lastName = lastName;
-  this.dobDay = dobDay,
-  this.dobMonth = dobMonth,
-  this.dobYear = dobYear,
+  this.dobDay = dobDay;
+  this.dobMonth = dobMonth;
+  this.dobYear = dobYear;
   this.email = email;
   this.telephone = telephone;
   this.partner = partner;
@@ -70,12 +71,14 @@ function Person(
   this.premiumBonds = premiumBonds;
   this.contactPref = contactPref;
   this.councilTaxFreq = councilTaxFreq;
+  this.penCount = penCount;
 }
 
 var i,
   benefit,
   firstBenefit,
-  savingsType;
+  savingsType,
+  text;
 
 Person.prototype.pensionChecker = function (pensionsList) {
   for (i = 0; i < pensionsList.length; i += 1) {
@@ -92,6 +95,21 @@ Person.prototype.pensionChecker = function (pensionsList) {
       this.warWidowPension = true;
     }
   }
+};
+
+Person.prototype.updatePensionNumber = function (count) {
+  if (count === 0) {
+    text = 'first';
+  } else if (count === 1) {
+    text = 'second';
+  } else if (count === 2) {
+    text = 'third';
+  } else if (count === 3) {
+    text = 'fourth';
+  } else if (count === 4) {
+    text = 'fifth';
+  }
+  return text;
 };
 
 Person.prototype.fullName = function () {
