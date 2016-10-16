@@ -57,22 +57,44 @@ $(document).ready(function () {
   }
   updateList();
 
-  /*
-  function selectPartner() {
-    if (document.getElementById("pyes")) {
-      var partnerStatus = document.getElementById("partner-status").innerHTML;
-      console.log(partnerStatus);
-      var pyes = document.getElementById("pyes");
-      var pno = document.getElementById("pno");
-      if (partnerStatus === 'true') {
-        pyes.checked = true;
-      } else if (partnerStatus === 'false') {
-        pno.checked = true;
+  //update the summary
+  var updateSummary = function (answer, rows) {
+    answer = answer.innerHTML;
+    if (answer == 'No') {
+      for (var i = 0; i < rows.length; i++) {
+        rows[i].style.display = 'none';
       }
     }
-  }
-  selectPartner();
-*/
+  };
+  
+  // remove all pension answers if the user says no
+  if(document.getElementById("pension_answer")) {
+    
+//    if pension = no hide all
+//    if pension credit = no hide pen credit amount
+//    if state pension = no hide state pension amount
+//    if another pension = no hide other pension amount
+    
+    updateSummary(document.getElementById("pension_answer"), 
+    [ 
+      document.getElementById("credit_row"), 
+      document.getElementById("credit_payments_row"), 
+      document.getElementById("state_pension_answer"),
+      document.getElementById("state_payments_row"),
+      document.getElementById("private_pension_answer"),
+      document.getElementById("private_payments_row")
+    ]);
+    updateSummary(document.getElementById("credit_answer"), 
+    [ 
+      document.getElementById("credit_payments_row") 
+    ]);
+    updateSummary(document.getElementById("state_pension_answer"), 
+    [ 
+      document.getElementById("state_payments_row") 
+    ]);
+  };  
+  
+  
 });
 
 jQuery(document).ready(function($) {

@@ -1,6 +1,9 @@
 //import the person constructor
 var person = require("./person.js");
 
+//import the LIS application constructor
+var lis = require("./lis.js");
+
 var partnerLiveText,
 partnerOrText,
 partnerAndText,
@@ -9,6 +12,7 @@ iWe,
 doNot,
 jointTennantText,
 jointOwnerText;
+
 var continueText = 'Continue';
 var changeText = 'View or change';
 var completedText = "Completed";
@@ -63,37 +67,17 @@ var i,
   pensionNumber;
 
 //create an application
-var application = {
-  aboutYouStatus : "Not started",
-  aboutPartnerStatus : "Not started",
-  propertyStatus : "Not started",
-  whereYouLiveStatus : "Not started",
-  aboutYouLink : "Start",
-  aboutPartnerLink : "Start",
-  propertyLink : "Start",
-  whereYouLiveLink : "Start",
-  resetApplication : function () {
-    this.aboutYouStatus = "Not started";
-    this.aboutPartnerStatus = "Not started";
-    this.propertyStatus = "Not started";
-    this.whereYouLiveStatus = "Not started";
-    this.aboutYouLink = "Start";
-    this.aboutPartnerLink = "Start";
-    this.propertyLink = "Start";
-    this.whereYouLiveLink = "Start";
-    console.log('Resetting application...');
-  },
-  allComplete : function () {
-    if (application.aboutYouStatus === completedText &&
-        application.aboutPartnerStatus === completedText &&
-        application.propertyStatus === completedText &&
-        application.whereYouLiveStatus === completedText) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-};
+var application = lis.createLIS (
+  this.aboutYouStatus = "Not started",
+  this.aboutPartnerStatus = "Not started",
+  this.propertyStatus = "Not started",
+  this.whereYouLiveStatus = "Not started",
+  this.aboutYouLink = "Start",
+  this.aboutPartnerLink = "Start",
+  this.propertyLink = "Start",
+  this.whereYouLiveLink = "Start"
+);
+
 
 //create an applicant
 var applicant = person.createPerson(
@@ -105,6 +89,7 @@ var applicant = person.createPerson(
   this.email = null,
   this.telephone = null,
   this.partner = true,
+  this.pension = 'No',
   this.statePension = false,
   this.statePensionAmount = null,
   this.statePensionFrequency = null,
@@ -136,6 +121,7 @@ var partner = person.createPerson(
   this.email = null,
   this.telephone = null,
   this.partner = false,
+  this.pension = 'No',
   this.statePension = false,
   this.statePensionAmount = null,
   this.statePensionFrequency = null,
@@ -155,6 +141,7 @@ var partner = person.createPerson(
 
 applicant.penCount = 0;
 partner.penCount = 0;
+applicant.pension = 'No';
 
 //create someone else in the household
 var householder = {
@@ -565,7 +552,7 @@ module.exports = {
       applicant.dobMonth = convertMonth(req.query.month);
       applicant.dobYear = req.query.year;
       console.log(applicant.dobYear);
-      res.render('lis/'+ sprint +'/you/contact-prefs', {
+      res.render('lis/'+ sprint +'/you/address', {
         'applicantFirstName' : applicant.firstName
       });
     });
@@ -671,7 +658,9 @@ module.exports = {
         'contact' : applicant.contactPref,
         'contacttext' : contactText,
         'contactvalue' : contactValue,
+        'pensionanswer' : applicant.pension,
         'savingscredit' : boolToString(applicant.savingsCredit),
+        'stateensionanswer' : applicant.statePension,
         'statepensionamount' : applicant.statePensionAmount,
         'statepensionfrequency' : frequency
       });
@@ -692,12 +681,21 @@ module.exports = {
         res.redirect('../statepension');
       }
     });
+    
+    app.get(/newpension/, function (req, res) {
+      sprint = req.url.charAt(5);
+      applicant.pension = "No";
+      console.log(applicant.pension);
+      res.render('lis/' + sprint + '/you/pension/newpension');
+    });
 
     // newpen-handler
     app.get(/newpen-handler/, function (req, res) {
       if (req.query.pension === 'yes') {
+        applicant.pension = 'Yes';
         res.redirect('../newpen-credit');
       } else {
+        applicant.pension = 'No';
         res.redirect('../../benefits/benefit-sprint3');
       }
     });

@@ -17,6 +17,7 @@ function Person(
   email,
   telephone,
   partner,
+  pension,
   statePension,
   statePensionAmount,
   statePensionFrequency,
@@ -50,6 +51,7 @@ function Person(
   this.email = email;
   this.telephone = telephone;
   this.partner = partner;
+  this.pension = pension;
   this.statePension = statePension;
   this.statePensionFrequency = statePensionFrequency;
   this.statePensionAmount = statePensionAmount;
