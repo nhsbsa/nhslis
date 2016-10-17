@@ -23,6 +23,7 @@ function Person(
   statePensionFrequency,
   privatePension,
   privatePensionAmount,
+  privatePensionFrequency,
   employmentPension,
   employmentPensionAmount,
   warPension,
@@ -55,7 +56,9 @@ function Person(
   this.statePension = statePension;
   this.statePensionFrequency = statePensionFrequency;
   this.statePensionAmount = statePensionAmount;
+  this.privatePension = privatePension,
   this.privatePensionAmount = privatePensionAmount;
+  this.privatePensionFrequency = privatePensionFrequency,
   this.employmentPension = employmentPension;
   this.employmentPensionAmount = employmentPensionAmount;
   this.warPension = warPension;

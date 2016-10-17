@@ -51,19 +51,19 @@
           </label>
         </div-->
       </div>
-    {{
-      form_macros.amount_field({
-        id: 'money-amount',
-        label: 'How much do you get?'
-      })
-    }}
-
-    {{
-      form_macros.button({
-        label : 'Save and continue',
-        href : 'other-pension'
-      })
-    }}
+      <div class="form-item-wrapper">
+        <div class="form-group">
+          <label class="form-label-bold" for="money-amount">
+            How much do you get?
+          </label>
+          <p class="amount">£</p><input type="text" id="money-amount" name="moneyamount" class="form-control">
+        </div>
+      </div>
+      {{
+        form_macros.button({
+          label : 'Save and continue'
+        })
+      }}
 
     </form>
 

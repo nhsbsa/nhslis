@@ -56,45 +56,66 @@ $(document).ready(function () {
     }
   }
   updateList();
-
-  //update the summary
-  var updateSummary = function (answer, rows) {
-    answer = answer.innerHTML;
-    if (answer == 'No') {
-      for (var i = 0; i < rows.length; i++) {
-        rows[i].style.display = 'none';
-      }
-    }
+  
+  var buildRow = function(q, a, url) {
+    return  '<tr>' +
+            '<td>' + q + '</td>' +
+            '<td>' + a + '</td>' +
+            '<td><a href="' + url + '">Change this</a></td>' +
+            '</tr>';
   };
   
-  // remove all pension answers if the user says no
-  if(document.getElementById("pension_answer")) {
-    
-//    if pension = no hide all
-//    if pension credit = no hide pen credit amount
-//    if state pension = no hide state pension amount
-//    if another pension = no hide other pension amount
-    
-    updateSummary(document.getElementById("pension_answer"), 
-    [ 
-      document.getElementById("credit_row"), 
-      document.getElementById("credit_payments_row"), 
-      document.getElementById("state_pension_answer"),
-      document.getElementById("state_payments_row"),
-      document.getElementById("private_pension_answer"),
-      document.getElementById("private_payments_row")
-    ]);
-    updateSummary(document.getElementById("credit_answer"), 
-    [ 
-      document.getElementById("credit_payments_row") 
-    ]);
-    updateSummary(document.getElementById("state_pension_answer"), 
-    [ 
-      document.getElementById("state_payments_row") 
-    ]);
-  };  
-  
-  
+  if(document.getElementById('pension_answer')) {
+    var pensionAnswer = document.getElementById('pension_answer').innerHTML;
+    var creditAnswer = document.getElementById('credit_answer').innerHTML;
+    var stateAnswer = document.getElementById('state_answer').innerHTML;
+    var stateAmount = document.getElementById('state_amount').innerHTML;
+    var stateFrequency = document.getElementById('state_frequency').innerHTML;
+    var privateAnswer = document.getElementById('private_answer').innerHTML;
+    var privateFrequency = document.getElementById('private_frequency').innerHTML;
+    var privateAmount = document.getElementById('private_amount').innerHTML;
+    var pensionSummary = [];
+    var pensionTable = document.getElementById('pension_table');
+
+    pensionSummary.push(buildRow(
+      'Do you get a pension?', 
+      pensionAnswer, 
+      'pension/newpension'));
+    if(pensionAnswer === 'Yes') {
+      pensionSummary.push(buildRow(
+        'Do you get Pension Credit Savings Credit?', 
+        creditAnswer,
+        'pension/pension-credit'));
+      if(creditAnswer === 'Yes') {
+      pensionSummary.push(buildRow(
+        'Pension Credit Savings Credit payments', 
+        '£121 per week',
+        'pension/private-pension-amount'));
+      }
+      pensionSummary.push(buildRow(
+        'Do you get a state pension?', 
+        stateAnswer,
+        'pension/pension'));
+      if(stateAnswer === 'Yes') {
+      pensionSummary.push(buildRow(
+        'State pension payments', 
+        '£' + stateAmount + ' ' + stateFrequency,
+        'pension/pension-amount'));
+      }
+      pensionSummary.push(buildRow(
+        'Do you get another pension?', 
+        privateAnswer,
+        'pension/pension'));
+    }
+    if(privateAnswer === 'Yes') {
+      pensionSummary.push(buildRow(
+        'First pension payments', 
+        '£' + privateAmount + ' ' + privateFrequency,
+        'pension/pension'));
+    }
+    pensionTable.innerHTML = pensionSummary;
+  }
+
 });
 
 jQuery(document).ready(function($) {

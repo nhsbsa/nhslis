@@ -94,6 +94,8 @@ var applicant = person.createPerson(
   this.statePensionAmount = null,
   this.statePensionFrequency = null,
   this.privatePension = false,
+  this.privatePensionAmount = null,
+  this.privatePensionFrequency = null,
   this.employmentPension = false,
   this.warPension = false,
   this.savingsCredit = false,
@@ -126,6 +128,8 @@ var partner = person.createPerson(
   this.statePensionAmount = null,
   this.statePensionFrequency = null,
   this.privatePension = false,
+  this.privatePensionAmount = null,
+  this.privatePensionFrequency = null,
   this.employmentPension = false,
   this.warPension = false,
   this.savings = false,
@@ -205,7 +209,7 @@ function setPartnerText() {
 
 function convertFrequency(frequency) {
   if (frequency === 'fourweekly') {
-    return('every four weeks');
+    return('every 4 weeks');
   } else if (frequency === 'weekly') {
     return('every week');
   }
@@ -647,8 +651,9 @@ module.exports = {
         applicant.contactPref = applicant.contactPref.toProperCase();
       }; 
       if (applicant.statePensionFrequency != undefined) {
-        var frequency = convertFrequency(applicant.statePensionFrequency);
+        var stateFrequency = convertFrequency(applicant.statePensionFrequency);
       };
+      console.log(applicant.privatePensionAmount);
       res.render('lis/'+ sprint +'/you/about-you-summary', {
         'mywork' : myWork,
         'applicantFullName' : applicant.fullName(),
@@ -660,9 +665,12 @@ module.exports = {
         'contactvalue' : contactValue,
         'pensionanswer' : applicant.pension,
         'savingscredit' : boolToString(applicant.savingsCredit),
-        'stateensionanswer' : applicant.statePension,
-        'statepensionamount' : applicant.statePensionAmount,
-        'statepensionfrequency' : frequency
+        'stateanswer' : applicant.statePension,
+        'stateamount' : applicant.statePensionAmount,
+        'statepensionfrequency' : stateFrequency,
+        'privateanswer' : applicant.privatePension,
+        'privatefrequency' : applicant.privatePensionFrequency,
+        'privateAmount' : applicant.privatePensionAmount
       });
     });
 
@@ -700,10 +708,18 @@ module.exports = {
       }
     });
     
+    // newpen-handler
+    app.get(/stateamount-handler/, function (req, res) {
+      applicant.statePensionAmount = req.query.moneyamount;
+      applicant.statePensionFrequency = req.query.frequency;
+      res.redirect('../other-pension');
+    });
+    
     // otherpen-handler
     app.get(/otherpen-handler/, function (req, res) {
       sprint = req.url.charAt(5);
       if (req.query.pension === 'a-yes') {
+        applicant.privatePension = 'Yes';
         pensionNumber = applicant.updatePensionNumber(applicant.penCount);
         applicant.penCount++;
         res.render('lis/' + sprint + '/you/pension/pensionamount', {
@@ -720,11 +736,21 @@ module.exports = {
       };
     });
     
-    // newstate-handler
+    
+    
+    app.get(/p-amount-handler/, function (req, res) {
+      applicant.privatePensionAmount = req.query.moneyamount;
+      applicant.privatePensionFrequency = req.query.frequency;
+      res.redirect('../other-pension');
+    });
+    
+     // newstate-handler
     app.get(/newstate-handler/, function (req, res) {
       if (req.query.pension === 'yes') {
+        applicant.statePension = 'Yes';
         res.redirect('../state-amount');
       } else {
+        applicant.statePension = 'No';
         res.redirect('../other-pension');
       }
     });
