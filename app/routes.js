@@ -11,7 +11,9 @@ partnerBothText,
 iWe,
 doNot,
 jointTennantText,
-jointOwnerText;
+jointOwnerText,
+partnersText,
+otherThanPartner;
 
 var continueText = 'Continue';
 var changeText = 'View or change';
@@ -46,8 +48,8 @@ var peopleList;
 
 var resetPeople = function () {
   peopleList = [];
-  console.log('resetting people')
-}
+  console.log('resetting people');
+};
 
 resetPeople();
 
@@ -77,7 +79,6 @@ var application = lis.createLIS (
   this.propertyLink = "Start",
   this.whereYouLiveLink = "Start"
 );
-
 
 //create an applicant
 var applicant = person.createPerson(
@@ -210,10 +211,16 @@ function setPartnerText() {
 function convertFrequency(frequency) {
   if (frequency === 'fourweekly') {
     return('every 4 weeks');
+  } else if (frequency === 'fortnight') {
+    return('every 2 weeks');
   } else if (frequency === 'weekly') {
     return('every week');
+  } else if (frequency === 'month') {
+    return('every month');
+  } else if (frequency === 'year') {
+    return('every year');
   }
-};
+}
 
 var convertMonth = function(monthInt) {
   monthInt = Number(monthInt);
@@ -357,7 +364,7 @@ module.exports = {
     app.get(/hospital2-handler/, function (req, res) {
       res.render('lis/'+ sprint +'/savings', {
         'partnerbothtext' : partnerBothText
-      })
+      });
     });
     
      // carehome-handler v2
@@ -556,7 +563,7 @@ module.exports = {
       applicant.dobMonth = convertMonth(req.query.month);
       applicant.dobYear = req.query.year;
       console.log(applicant.dobYear);
-      res.render('lis/'+ sprint +'/you/address', {
+      res.render('lis/'+ sprint +'/you/contact-prefs', {
         'applicantFirstName' : applicant.firstName
       });
     });
@@ -619,6 +626,7 @@ module.exports = {
     
     // email handler
     app.get(/mail-handler/, function (req, res) {
+      applicant.email = req.query.email;
       if(applicant.contactPref === 'both') {
         res.redirect('../telephone');
       } else {
@@ -646,14 +654,18 @@ module.exports = {
       } else if (applicant.contactPref == 'post') {
         contactText = 'Post';
         contactValue = undefined;
-      };
+      }
       if (applicant.contactPref != undefined) {
         applicant.contactPref = applicant.contactPref.toProperCase();
-      }; 
+      } 
+      var stateFrequency;
+      var privateFrequency;
       if (applicant.statePensionFrequency != undefined) {
-        var stateFrequency = convertFrequency(applicant.statePensionFrequency);
-      };
-      console.log(applicant.privatePensionAmount);
+      	stateFrequency = convertFrequency(applicant.statePensionFrequency);
+      }
+      if (applicant.privatePensionFrequency != undefined) {
+        privateFrequency = convertFrequency(applicant.privatePensionFrequency);
+      }
       res.render('lis/'+ sprint +'/you/about-you-summary', {
         'mywork' : myWork,
         'applicantFullName' : applicant.fullName(),
@@ -733,7 +745,7 @@ module.exports = {
         });
       } else {
         res.redirect('../../benefits/benefit-sprint3');
-      };
+      }
     });
     
     
