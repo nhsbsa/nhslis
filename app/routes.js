@@ -5,9 +5,9 @@ var person = require("./person.js");
 var lis = require("./lis.js");
 
 var partnerLiveText,
-partnerOrText,
-partnerAndText,
-partnerBothText,
+//partnerOrText,
+//partnerAndText,
+//partnerBothText,
 iWe,
 doNot,
 jointTennantText,
@@ -182,31 +182,31 @@ var householder = {
 };
 
 // change the text if the applicant has a partner
-function setPartnerText() {
-  if (applicant.partner === false) {
-    partnerBothText = 'you';
-    partnerOrText = 'you';
-    partnerAndText = 'you';
-    partnersText = 'your';
-    partnerLiveText = 'Does anyone else live with you?';
-    jointTennantText = 'Is anyone else a joint tenant of the place you live';
-    jointOwnerText = 'Is anyone else a joint owner of the property you live in';
-    otherThanPartner = ' ';
-    iWe = 'I';
-    doNot = ' ';
-  } else {
-    partnerBothText = 'you, your partner or both of you';
-    partnerOrText = 'you or your partner';
-    partnerAndText = 'you and your partner';
-    partnersText = "you and your partner's";
-    partnerLiveText = 'Does anyone else other than your partner live with you?';
-    jointTennantText = 'Is anyone else other than your partner a joint tenant of the place you live';
-    jointOwnerText = 'Is anyone else other than your partner a joint owner of the property you live in';
-    otherThanPartner = 'other than your partner';
-    iWe = 'we';
-    doNot = 'do not';
-  }
-}
+//function setPartnerText() {
+//  if (applicant.partner === false) {
+//    application.partnerBothText = 'you';
+//    partnerOrText = 'you';
+//    applicant.partnerAndText = 'you';
+//    partnersText = 'your';
+//    partnerLiveText = 'Does anyone else live with you?';
+//    jointTennantText = 'Is anyone else a joint tenant of the place you live';
+//    jointOwnerText = 'Is anyone else a joint owner of the property you live in';
+//    otherThanPartner = ' ';
+//    iWe = 'I';
+//    doNot = ' ';
+//  } else {
+//    application.partnerBothText = 'you, your partner or both of you';
+//    partnerOrText = 'you or your partner';
+//    applicant.partnerAndText = 'you and your partner';
+//    partnersText = "you and your partner's";
+//    partnerLiveText = 'Does anyone else other than your partner live with you?';
+//    jointTennantText = 'Is anyone else other than your partner a joint tenant of the place you live';
+//    jointOwnerText = 'Is anyone else other than your partner a joint owner of the property you live in';
+//    otherThanPartner = 'other than your partner';
+//    iWe = 'we';
+//    doNot = 'do not';
+//  }
+//}
 
 function convertFrequency(frequency) {
   if (frequency === 'fourweekly') {
@@ -281,7 +281,7 @@ module.exports = {
       )[0];
     }
 
-    setPartnerText();
+    application.setPartnerText(applicant.partner);
 
     app.get('/', function (req, res) {
       res.render('index');
@@ -317,9 +317,9 @@ module.exports = {
         //application.aboutPartnerStatus = completedText;
         //application.aboutPartnerLink = changeText;
       }
-      setPartnerText();
+      application.setPartnerText(applicant.partner);
       res.render('lis/'+ sprint +'//ko', {
-        'partnerortext' : partnerOrText,
+        'partnerortext' : application.partnerOrText,
         'iwe' : iWe
       });
     });
@@ -329,7 +329,7 @@ module.exports = {
       sprint = req.url.charAt(5);
       if (req.query.kickout === 'continue') {
         res.render('lis/'+ sprint +'/guarantee-credit', {
-          'partnerortext' : partnerOrText
+          'partnerortext' : application.partnerOrText
         });
       } else {
         res.redirect('../exempt-kickout');
@@ -343,7 +343,7 @@ module.exports = {
         res.redirect('../exempt-kickout');
       } else {
         res.render('lis/'+ sprint +'/tax-credits', {
-          'partnerortext' : partnerOrText
+          'partnerortext' : application.partnerOrText
         });
       }
     });
@@ -355,7 +355,7 @@ module.exports = {
         res.redirect('../sc/authority-assessed');
       } else {
         res.render('lis/'+ sprint +'/savings', {
-          'partnerbothtext' : partnerBothText
+          'partnerbothtext' : application.partnerBothText
         });
       }
     });
@@ -363,7 +363,7 @@ module.exports = {
     // hospital-handler
     app.get(/hospital2-handler/, function (req, res) {
       res.render('lis/'+ sprint +'/savings', {
-        'partnerbothtext' : partnerBothText
+        'partnerbothtext' : application.partnerBothText
       });
     });
     
@@ -373,7 +373,7 @@ module.exports = {
         res.redirect('../sc/authority-assessed');
       } else {
         res.render('lis/'+ sprint +'/hospital', {
-          'partnerortext' : partnerOrText
+          'partnerortext' : application.partnerOrText
         });
       }
     });
@@ -381,7 +381,7 @@ module.exports = {
     app.get(/saving-ch/, function (req, res) {
       sprint = req.url.charAt(5);
       res.render('lis/'+ sprint +'/sc/saving-ch', {
-        'partnerbothtext' : partnerBothText
+        'partnerbothtext' : application.partnerBothText
       });
     });
 
@@ -392,7 +392,7 @@ module.exports = {
         res.redirect('../tce-kickout');
       } else {
         res.render('lis/'+sprint+'/care-home', {
-          'partnerortext' : partnerOrText
+          'partnerortext' : application.partnerOrText
         });
       }
     });
@@ -1032,11 +1032,11 @@ module.exports = {
       application.aboutPartnerLink = continueText;
       if (req.query.partner === 'yes') {
         applicant.partner = true;
-        setPartnerText();
+        application.setPartnerText(applicant.partner);
         res.redirect('../basic');
       } else if (req.query.partner === 'no') {
         applicant.partner = false;
-        setPartnerText();
+        application.setPartnerText(applicant.partner);
         res.redirect('../summary-no');
       }
     });
@@ -1066,8 +1066,8 @@ module.exports = {
     app.get(/property/, function (req, res) {
       sprint = req.url.charAt(5);
       res.render('lis/'+ sprint +'/assets/property', {
-        'partnerortext' : partnerOrText,
-        'partnerandext' : partnerAndText
+        'partnerortext' : application.partnerOrText,
+        'partnerandext' : applicant.partnerAndText
       });
     });
 
@@ -1095,8 +1095,8 @@ module.exports = {
     app.get(/accounts/, function (req, res) {
       sprint = req.url.charAt(5);
       res.render('lis/'+ sprint +'/assets/accounts', {
-        'partnerortext' : partnerOrText,
-        'partnerandText' : partnerAndText
+        'partnerortext' : application.partnerOrText,
+        'partnerandtext' : applicant.partnerAndText
       });
     });
 
@@ -1104,8 +1104,8 @@ module.exports = {
     app.get(/accounts/, function (req, res) {
       sprint = req.url.charAt(5);
       res.render('lis/'+ sprint +'/assets/accounts', {
-        'partnerortext' : partnerOrText,
-        'partnerandText' : partnerAndText
+        'partnerortext' : application.partnerOrText,
+        'partnerandtext' : applicant.partnerAndText
       });
     });
 
@@ -1117,18 +1117,18 @@ module.exports = {
       firstSavingsAcc = applicant.savingChecker(accounts);
       if (firstSavingsAcc === 'bank') {
         res.render('lis/'+ sprint +'/assets/bank', {
-          'partnerortext' : partnerOrText,
-          'partnerandtext' : partnerAndText
+          'partnerortext' : application.partnerOrText,
+          'partnerandtext' : applicant.partnerAndText
         });
       } else if (firstSavingsAcc === 'pb') {
         res.render('lis/'+ sprint +'/assets/premium-bonds', {
-          'partnerortext' : partnerOrText,
-          'partnerandrext' : partnerAndText
+          'partnerortext' : application.partnerOrText,
+          'partnerandrext' : applicant.partnerAndText
         });
       } else {
         res.render('lis/'+ sprint +'/assets/assets-other', {
-          'partnerortext' : partnerOrText,
-          'partnerandrext' : partnerAndText
+          'partnerortext' : application.partnerOrText,
+          'partnerandrext' : applicant.partnerAndText
         });
       }
     });
@@ -1141,8 +1141,8 @@ module.exports = {
         res.render('lis/'+ sprint +'/assets/premium-bonds');
       } else {
         res.render('lis/'+ sprint +'/assets/assets-other', {
-          'partnerortext' : partnerOrText,
-          'partnerandrext' : partnerAndText
+          'partnerortext' : application.partnerOrText,
+          'partnerandrext' : applicant.partnerAndText
         });
       }
     });
@@ -1151,8 +1151,8 @@ module.exports = {
     app.get(/premium-bond-handler/, function (req, res) {
       sprint = req.url.charAt(5);
       res.render('lis/'+ sprint +'/assets/assets-other', {
-        'partnerortext' : partnerOrText,
-        'partnerandrext' : partnerAndText
+        'partnerortext' : application.partnerOrText,
+        'partnerandrext' : applicant.partnerAndText
       });
     });
     
@@ -1160,8 +1160,8 @@ module.exports = {
     app.get(/assets-other/, function (req, res) {
       sprint = req.url.charAt(5);
       res.render('../assets-other', {
-        'partnerortext' : partnerOrText,
-        'partnerandtext' : partnerAndText
+        'partnerortext' : application.partnerOrText,
+        'partnerandtext' : applicant.partnerAndText
       });
     });
 
@@ -1501,7 +1501,7 @@ module.exports = {
     app.get('/lis/6/', function (req, res) {
       res.render('lis/6/', {
         'partnerortext' : partnerOrText,
-        'partnerandtext' : partnerAndText
+        'partnerandtext' : applicant.partnerAndText
       });
     });
     
@@ -1509,7 +1509,7 @@ module.exports = {
     app.get('/lis/6/assets/money', function (req, res) {
       res.render('lis/6/assets/money', {
         'partnerortext' : partnerOrText,
-        'partnerandText' : partnerAndText
+        'partnerandtext' : applicant.partnerAndText
       });
     });
     
@@ -1517,7 +1517,7 @@ module.exports = {
     app.get('/lis/6/assets/accounts', function (req, res) {
       res.render('lis/6/assets/accounts', {
         'partnerortext' : partnerOrText,
-        'partnerandText' : partnerAndText
+        'partnerandtext' : applicant.partnerAndText
       });
     });
     
@@ -1781,17 +1781,17 @@ module.exports = {
       if (firstSavingsAcc === 'bank') {
         res.render('lis/6/assets/accounts', {
           'partnerortext' : partnerOrText,
-          'partnerandtext' : partnerAndText
+          'partnerandtext' : applicant.partnerAndText
         });
       } else if (firstSavingsAcc === 'pb') {
         res.render('lis/6/assets/premium-bonds', {
           'partnerortext' : partnerOrText,
-          'partnerandrext' : partnerAndText
+          'partnerandrext' : applicant.partnerAndText
         });
       } else {
         res.render('lis/6/', {
           'partnerortext' : partnerOrText,
-          'partnerandrext' : partnerAndText
+          'partnerandrext' : applicant.partnerAndText
         });
       }
     });
@@ -1803,7 +1803,7 @@ module.exports = {
       } else {
         res.render('lis/6/', {
           'partnerortext' : partnerOrText,
-          'partnerandrext' : partnerAndText
+          'partnerandrext' : applicant.partnerAndText
         });
       }
     });
@@ -1812,7 +1812,7 @@ module.exports = {
     app.get('/lis/6/assets/premium-bond-handler', function (req, res) {
       res.render('lis/6/', {
         'partnerortext' : partnerOrText,
-        'partnerandrext' : partnerAndText
+        'partnerandrext' : applicant.partnerAndText
       });
     });
  
@@ -2055,21 +2055,21 @@ module.exports = {
     app.get('/lis/5/', function (req, res) {
       res.render('lis/5/', {
         'partnerortext' : partnerOrText,
-        'partnerandtext' : partnerAndText
+        'partnerandtext' : applicant.partnerAndText
       });
     });
     
     app.get('/lis/5/assets/money', function (req, res) {
       res.render('lis/5/assets/money', {
         'partnerortext' : partnerOrText,
-        'partnerandText' : partnerAndText
+        'partnerandtext' : applicant.partnerAndText
       });
     });
     
     app.get('/lis/5/assets/accounts', function (req, res) {
       res.render('lis/5/assets/accounts', {
         'partnerortext' : partnerOrText,
-        'partnerandText' : partnerAndText
+        'partnerandtext' : applicant.partnerAndText
       });
     });
 
@@ -2317,17 +2317,17 @@ module.exports = {
       if (firstSavingsAcc === 'bank') {
         res.render('lis/5/assets/accounts', {
           'partnerortext' : partnerOrText,
-          'partnerandtext' : partnerAndText
+          'partnerandtext' : applicant.partnerAndText
         });
       } else if (firstSavingsAcc === 'pb') {
         res.render('lis/5/assets/premium-bonds', {
           'partnerortext' : partnerOrText,
-          'partnerandrext' : partnerAndText
+          'partnerandrext' : applicant.partnerAndText
         });
       } else {
         res.render('lis/5/', {
           'partnerortext' : partnerOrText,
-          'partnerandrext' : partnerAndText
+          'partnerandrext' : applicant.partnerAndText
         });
       }
     });
@@ -2339,7 +2339,7 @@ module.exports = {
       } else {
         res.render('lis/5/', {
           'partnerortext' : partnerOrText,
-          'partnerandrext' : partnerAndText
+          'partnerandrext' : applicant.partnerAndText
         });
       }
     });
@@ -2348,7 +2348,7 @@ module.exports = {
     app.get('/lis/5/assets/premium-bond-handler', function (req, res) {
       res.render('lis/5/', {
         'partnerortext' : partnerOrText,
-        'partnerandrext' : partnerAndText
+        'partnerandrext' : applicant.partnerAndText
       });
     });
                 
@@ -2582,28 +2582,28 @@ module.exports = {
       sprint = req.url.charAt(5);
       res.render('lis/' + sprint + '/assets/other-property', {
         'partnerortext' : partnerOrText,
-        'partnerandext' : partnerAndText
+        'partnerandext' : applicant.partnerAndText
       });
     });
 
     app.get('/lis/4/', function (req, res) {
       res.render('lis/4/assets/money', {
         'partnerortext' : partnerOrText,
-        'partnerandtext' : partnerAndText
+        'partnerandtext' : applicant.partnerAndText
       });
     });
     
     app.get('/lis/4/assets/money', function (req, res) {
       res.render('lis/4/assets/money', {
         'partnerortext' : partnerOrText,
-        'partnerandText' : partnerAndText
+        'partnerandtext' : applicant.partnerAndText
       });
     });
     
     app.get('/lis/4/assets/accounts', function (req, res) {
       res.render('lis/4/assets/accounts', {
         'partnerortext' : partnerOrText,
-        'partnerandText' : partnerAndText
+        'partnerandtext' : applicant.partnerAndText
       });
     });
     
@@ -2626,11 +2626,11 @@ module.exports = {
       application.aboutPartnerLink = continueText;
       if (req.query.partner === 'yes') {
         applicant.partner = true;
-        setPartnerText();
+        application.setPartnerText(applicant.partner);
         res.render('lis/4/partner/basic');
       } else if (req.query.partner === 'no') {
         applicant.partner = false;
-        setPartnerText();
+        application.setPartnerText(applicant.partner);
         res.render('lis/4/partner/summary-no');
       }
     });
@@ -2804,17 +2804,17 @@ module.exports = {
       if (firstSavingsAcc === 'bank') {
         res.render('lis/4/assets/accounts', {
           'partnerortext' : partnerOrText,
-          'partnerandtext' : partnerAndText
+          'partnerandtext' : applicant.partnerAndText
         });
       } else if (firstSavingsAcc === 'pb') {
         res.render('lis/4/assets/premium-bonds', {
           'partnerortext' : partnerOrText,
-          'partnerandrext' : partnerAndText
+          'partnerandrext' : applicant.partnerAndText
         });
       } else {
         res.render('lis/4/', {
           'partnerortext' : partnerOrText,
-          'partnerandrext' : partnerAndText
+          'partnerandrext' : applicant.partnerAndText
         });
       }
     });
@@ -3054,21 +3054,21 @@ module.exports = {
     app.get('/lis/3/', function (req, res) {
       res.render('lis/3/assets/money', {
         'partnerortext' : partnerOrText,
-        'partnerandtext' : partnerAndText
+        'partnerandtext' : applicant.partnerAndText
       });
     });
     
     app.get('/lis/3/assets/money', function (req, res) {
       res.render('lis/3/assets/money', {
         'partnerortext' : partnerOrText,
-        'partnerandText' : partnerAndText
+        'partnerandtext' : applicant.partnerAndText
       });
     });
     
     app.get('/lis/3/assets/accounts', function (req, res) {
       res.render('lis/3/assets/accounts', {
         'partnerortext' : partnerOrText,
-        'partnerandText' : partnerAndText
+        'partnerandtext' : applicant.partnerAndText
       });
     });
     
@@ -3089,7 +3089,7 @@ module.exports = {
     app.get('/lis/3/partner/partner-handler', function (req, res) {
       if (req.query.partner === 'yes') {
         applicant.partner = true;
-        setPartnerText();
+        application.setPartnerText(applicant.partner);
         res.render('lis/3/partner/basic');
       } else if (req.query.partner === 'no') {
         applicant.partner = false;
@@ -3270,17 +3270,17 @@ module.exports = {
       if (firstSavingsAcc === 'bank') {
         res.render('lis/3/assets/accounts', {
           'partnerortext' : partnerOrText,
-          'partnerandtext' : partnerAndText
+          'partnerandtext' : applicant.partnerAndText
         });
       } else if (firstSavingsAcc === 'pb') {
         res.render('lis/3/assets/premium-bonds', {
           'partnerortext' : partnerOrText,
-          'partnerandrext' : partnerAndText
+          'partnerandrext' : applicant.partnerAndText
         });
       } else {
         res.render('lis/4/', {
           'partnerortext' : partnerOrText,
-          'partnerandrext' : partnerAndText
+          'partnerandrext' : applicant.partnerAndText
         });
       }
     });
