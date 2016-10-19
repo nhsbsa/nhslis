@@ -4,17 +4,6 @@ var person = require("./person.js");
 //import the LIS application constructor
 var lis = require("./lis.js");
 
-var partnerLiveText,
-//partnerOrText,
-//partnerAndText,
-//partnerBothText,
-iWe,
-doNot,
-jointTennantText,
-jointOwnerText,
-partnersText,
-otherThanPartner;
-
 var continueText = 'Continue';
 var changeText = 'View or change';
 var completedText = "Completed";
@@ -27,25 +16,6 @@ var helpLevel = 3;
 
 var peopleList;
 
-
-// var pensionList;
-// var resetPensionList = function () {
-//   pensionList = [];
-//   console.log('resetting pension list')
-// }
-// stateamount-handler 
-// req.query.pension === 'yes'
-// req.query.amount = penAmount;
-// req.query.freq = penFreq;
-// pensionName = '<span>Another pension</span> <span> £' + penAmount + '</span>';
-// pensionList.push(pensionName);
-//
-// if state pension pensionList.push state pension + amount + freq
-// if otherpension pensionList.push 'Another pension' + amount + freq 
-//
-// resetPensionList();
-
-
 var resetPeople = function () {
   peopleList = [];
   console.log('resetting people');
@@ -53,20 +23,21 @@ var resetPeople = function () {
 
 resetPeople();
 
-var i,
+var
   sprint,
-  pension,
-  pensions,
-  benefits,
-  firstBenefit,
-  myWork,
-  partnerBenefits,
-  firstPartnerBenefit,
-  accounts,
-  firstSavingsAcc,
-  stateP,
-  privateP,
   pensionNumber;
+  //pension,
+  //pensions,
+  //benefits,
+  //firstBenefit,
+  //myWork,
+  //partnerBenefits,
+  //firstPartnerBenefit,
+  //accounts,
+  //firstSavingsAcc,
+  //stateP,
+  //privateP,
+  
 
 //create an application
 var application = lis.createLIS (
@@ -187,23 +158,23 @@ var householder = {
 //    application.partnerBothText = 'you';
 //    partnerOrText = 'you';
 //    applicant.partnerAndText = 'you';
-//    partnersText = 'your';
-//    partnerLiveText = 'Does anyone else live with you?';
-//    jointTennantText = 'Is anyone else a joint tenant of the place you live';
-//    jointOwnerText = 'Is anyone else a joint owner of the property you live in';
-//    otherThanPartner = ' ';
-//    iWe = 'I';
+//    application.partnersText = 'your';
+//    application.partnerLiveText = 'Does anyone else live with you?';
+//    application.jointTennantText = 'Is anyone else a joint tenant of the place you live';
+//    application.jointOwnerText = 'Is anyone else a joint owner of the property you live in';
+//    application.otherThanPartner = ' ';
+//    application.iWe = 'I';
 //    doNot = ' ';
 //  } else {
 //    application.partnerBothText = 'you, your partner or both of you';
 //    partnerOrText = 'you or your partner';
 //    applicant.partnerAndText = 'you and your partner';
-//    partnersText = "you and your partner's";
-//    partnerLiveText = 'Does anyone else other than your partner live with you?';
-//    jointTennantText = 'Is anyone else other than your partner a joint tenant of the place you live';
-//    jointOwnerText = 'Is anyone else other than your partner a joint owner of the property you live in';
-//    otherThanPartner = 'other than your partner';
-//    iWe = 'we';
+//    application.partnersText = "you and your partner's";
+//    application.partnerLiveText = 'Does anyone else other than your partner live with you?';
+//    application.jointTennantText = 'Is anyone else other than your partner a joint tenant of the place you live';
+//    application.jointOwnerText = 'Is anyone else other than your partner a joint owner of the property you live in';
+//    application.otherThanPartner = 'other than your partner';
+//    application.iWe = 'we';
 //    doNot = 'do not';
 //  }
 //}
@@ -281,7 +252,7 @@ module.exports = {
       )[0];
     }
 
-    application.setPartnerText(applicant.partner);
+    //application.setPartnerText(applicant.partner);
 
     app.get('/', function (req, res) {
       res.render('index');
@@ -318,9 +289,9 @@ module.exports = {
         //application.aboutPartnerLink = changeText;
       }
       application.setPartnerText(applicant.partner);
-      res.render('lis/'+ sprint +'//ko', {
+      res.render('lis/'+ sprint +'/ko', {
         'partnerortext' : application.partnerOrText,
-        'iwe' : iWe
+        'iwe' : application.iWe
       });
     });
 
@@ -446,7 +417,7 @@ module.exports = {
     app.get(/need-to-know/, function (req, res) {
       sprint = req.url.charAt(5);
       res.render('lis/'+ sprint +'/need-to-know', {
-        'partnerstext' : partnersText
+        'partnerstext' : application.partnersText
       });
     });
     
@@ -497,14 +468,14 @@ module.exports = {
       sprint = req.url.charAt(5);
       console.log(req.url);
       res.render('lis/' + sprint + '/lis-home', {
-        'aboutYouStatus' : application.aboutYouStatus,
-        'aboutPartnerStatus' : application.aboutPartnerStatus,
-        'propertyStatus' : application.propertyStatus,
-        'whereYouLiveStatus' : application.whereYouLiveStatus,
-        'aboutYouLink' : application.aboutYouLink,
-        'aboutPartnerLink' : application.aboutPartnerLink,
-        'propertyLink' : application.propertyLink,
-        'whereYouLiveLink' : application.whereYouLiveLink
+        'aboutyoustatus' : application.aboutYouStatus,
+        'aboutpartnerstatus' : application.aboutPartnerStatus,
+        'propertystatus' : application.propertyStatus,
+        'whereyoulivestatus' : application.whereYouLiveStatus,
+        'aboutyoulink' : application.aboutYouLink,
+        'aboutpartnerlink' : application.aboutPartnerLink,
+        'propertylink' : application.propertyLink,
+        'whereyoulivelink' : application.whereYouLiveLink
       });
     });
     
@@ -513,14 +484,14 @@ module.exports = {
       sprint = req.url.charAt(5);
       console.log(req.url);
       res.render('lis/' + sprint + '/home-updated', {
-        'aboutYouStatus' : application.aboutYouStatus,
-        'aboutPartnerStatus' : application.aboutPartnerStatus,
-        'propertyStatus' : application.propertyStatus,
-        'whereYouLiveStatus' : application.whereYouLiveStatus,
-        'aboutYouLink' : application.aboutYouLink,
-        'aboutPartnerLink' : application.aboutPartnerLink,
-        'propertyLink' : application.propertyLink,
-        'whereYouLiveLink' : application.whereYouLiveLink
+        'aboutyoustatus' : application.aboutYouStatus,
+        'aboutpartnerstatus' : application.aboutPartnerStatus,
+        'propertystatus' : application.propertyStatus,
+        'whereyoulivestatus' : application.whereYouLiveStatus,
+        'aboutyoulink' : application.aboutYouLink,
+        'aboutpartnerlink' : application.aboutPartnerLink,
+        'propertylink' : application.propertyLink,
+        'whereyouLivelink' : application.whereYouLiveLink
       });
     });
 
@@ -667,7 +638,6 @@ module.exports = {
         privateFrequency = convertFrequency(applicant.privatePensionFrequency);
       }
       res.render('lis/'+ sprint +'/you/about-you-summary', {
-        'mywork' : myWork,
         'applicantFullName' : applicant.fullName(),
         'dobday' : applicant.dobDay,
         'dobmonth' : applicant.dobMonth,
@@ -912,7 +882,7 @@ module.exports = {
       applicant.resetBenefits();
       benefits = req.query.sprint3benefits;
       console.log(typeof benefits);
-      firstBenefit = applicant.benefitChecker(benefits);
+      var firstBenefit = applicant.benefitChecker(benefits);
       //if (firstBenefit === "aa") {
       //  res.render('lis/'+ sprint +'/you/benefits/aa');
       //} else
@@ -943,7 +913,7 @@ module.exports = {
     app.get(/care-allowance/, function (req, res) {
       sprint = req.url.charAt(5);
       res.render('lis/'+ sprint +'/you/benefits/care-allowance', {
-        'otherthanartner' : otherThanPartner
+        'otherthanartner' : application.otherThanPartner
       });
     });
 
@@ -951,7 +921,7 @@ module.exports = {
     app.get(/partnercare-allowance/, function (req, res) {
       sprint = req.url.charAt(5);
       res.render('lis/'+ sprint +'/partner/benefits/partner-careallowance', {
-        'otherthanartner' : otherThanPartner
+        'otherthanartner' : application.otherThanPartner
       });
     });
 
@@ -1113,8 +1083,8 @@ module.exports = {
     app.get(/account-type-handler/, function (req, res) {
       sprint = req.url.charAt(5);
       applicant.resetAccounts();
-      accounts = req.query.banktype;
-      firstSavingsAcc = applicant.savingChecker(accounts);
+      var accounts = req.query.banktype;
+      var firstSavingsAcc = applicant.savingChecker(accounts);
       if (firstSavingsAcc === 'bank') {
         res.render('lis/'+ sprint +'/assets/bank', {
           'partnerortext' : application.partnerOrText,
@@ -1228,7 +1198,7 @@ module.exports = {
     app.get(/joint-own/, function (req, res) {
       sprint = req.url.charAt(5);
       res.render('lis/'+ sprint +'/live/mortgaged/joint-own', {
-        'jointownertext' : jointOwnerText
+        'jointownertext' : application.jointOwnerText
       });
     });
     
@@ -1287,7 +1257,7 @@ module.exports = {
     app.get(/people-list/, function (req, res) {
       sprint = req.url.charAt(5);
       res.render('lis/'+ sprint +'/live/others/people-list', {
-        'partnerlivetext' : partnerLiveText,
+        'partnerlivetext' : application.partnerLiveText,
         'peoplelist' : peopleList
       });
     });
@@ -1305,7 +1275,7 @@ module.exports = {
     app.get(/people/, function (req, res) {
       sprint = req.url.charAt(5);
       res.render('lis/'+ sprint +'/live/others/people', {
-        'partnerlivetext' : partnerLiveText
+        'partnerlivetext' : application.partnerLiveText
       });
     });
 
@@ -1380,7 +1350,7 @@ module.exports = {
       sprint = req.url.charAt(5);
       if (req.query.education === 'yes') {
         res.render('lis/'+ sprint +'/live/others/people-list', {
-          'partnerlivetext' : partnerLiveText
+          'partnerlivetext' : application.partnerLiveText
         });
       } else {
         res.redirect('../training');
@@ -1404,7 +1374,7 @@ module.exports = {
       if (householder.underFifteen === true) {
         //child || none underFifteen = people
         res.render('lis/'+ sprint +'/live/others/people-list', {
-          'partnerlivetext' : partnerLiveText,
+          'partnerlivetext' : application.partnerLiveText,
           'peoplelist' : peopleList
         });
       } else if (householder.relationship === 'child' && householder.sixteenToNineteen === true) {
@@ -1644,7 +1614,7 @@ module.exports = {
     //6) mortgaged/joint
     app.get('/lis/6/live/mortgaged/joint', function (req, res) {
       res.render('lis/6/live/mortgaged/joint', {
-        'jointownertext' : jointOwnerText
+        'jointownertext' : application.jointOwnerText
       });
     });
     
@@ -1658,7 +1628,7 @@ module.exports = {
     //6) tenant/joint
     app.get('/lis/6/live/joint', function (req, res) {
       res.render('lis/6/live/joint', {
-        'jointtennanttext' : jointTennantText
+        'application.jointTennantText' : application.jointTennantText
       });
     });
 
@@ -1933,7 +1903,7 @@ module.exports = {
     //6) people-handler
     app.get('/lis/6/live/others/people-list', function (req, res) {
       res.render('lis/6/live/others/people-list', {
-        'partnerlivetext' : partnerLiveText,
+        'partnerlivetext' : application.partnerLiveText,
         'peoplelist' : peopleList
       });
     });
@@ -1941,7 +1911,7 @@ module.exports = {
     //6) people-handler
     app.get('/lis/6/live/others/people', function (req, res) {
       res.render('lis/6/live/others/people', {
-        'partnerlivetext' : partnerLiveText
+        'partnerlivetext' : application.partnerLiveText
       });
     });
     
@@ -1981,7 +1951,7 @@ module.exports = {
       if (householder.underFifteen === true) {
         //child || none underFifteen = people
         res.render('lis/6/live/others/people-list', {
-          'partnerlivetext' : partnerLiveText,
+          'partnerlivetext' : application.partnerLiveText,
           'peoplelist' : peopleList
         });
       } else if (householder.relationship === 'child' && householder.sixteenToNineteen === true) {
@@ -2016,7 +1986,7 @@ module.exports = {
     app.get('/lis/6/live/others/others-education-handler', function (req, res) {
       if (req.query.education === 'yes') {
         res.render('lis/6/live/others/people-list', {
-          'partnerlivetext' : partnerLiveText
+          'partnerlivetext' : application.partnerLiveText
         });
       } else {
         res.render('lis/6/live/others/training');
@@ -2185,7 +2155,7 @@ module.exports = {
     //5) mortgaged/joint
     app.get('/lis/5/live/mortgaged/joint', function (req, res) {
       res.render('lis/5/live/mortgaged/joint', {
-        'jointownertext' : jointOwnerText
+        'jointownertext' : application.jointOwnerText
       });
     });
     
@@ -2199,7 +2169,7 @@ module.exports = {
     //5) tenant/joint
     app.get('/lis/5/live/joint', function (req, res) {
       res.render('lis/5/live/joint', {
-        'jointtennanttext' : jointTennantText
+        'application.jointTennantText' : application.jointTennantText
       });
     });
 
@@ -2486,7 +2456,7 @@ module.exports = {
     //5) people-handler
     app.get('/lis/5/live/others/people', function (req, res) {
       res.render('lis/5/live/others/people', {
-        'partnerlivetext' : partnerLiveText
+        'partnerlivetext' : application.partnerLiveText
       });
     });
     
@@ -2518,7 +2488,7 @@ module.exports = {
       if (householder.underFifteen === true) {
         //child || none underFifteen = people
         res.render('lis/5/live/others/people', {
-          'partnerlivetext' : partnerLiveText
+          'partnerlivetext' : application.partnerLiveText
         });
       } else if (householder.relationship === 'child' && householder.sixteenToNineteen === true) {
         res.render('lis/5/live/others/alevel');
@@ -2548,7 +2518,7 @@ module.exports = {
     app.get('/lis/5/live/others/others-education-handler', function (req, res) {
       if (req.query.education === 'yes') {
         res.render('lis/5/live/others/people', {
-          'partnerlivetext' : partnerLiveText
+          'partnerlivetext' : application.partnerLiveText
         });
       } else {
         res.render('lis/5/live/others/training');
@@ -2899,8 +2869,8 @@ module.exports = {
     //4) partner benefit handler
     app.get('/lis/4/partner/benefits/sprint3-benefit-handler', function (req, res) {
       partner.resetBenefits();
-      partnerBenefits = req.query.sprint3benefits;
-      firstPartnerBenefit = partner.benefitChecker(partnerBenefits);
+      var partnerBenefits = req.query.sprint3benefits;
+      var firstPartnerBenefit = partner.benefitChecker(partnerBenefits);
       if (firstPartnerBenefit === "aaaa") {
         res.render('lis/4/partner/benefits/aa');
       } else if (firstPartnerBenefit === "ctc") {
@@ -3450,7 +3420,7 @@ module.exports = {
         privateP = true;
         res.render('lis/2/you/pension/private-pension-amount');
       } else {
-        for (i = 0; i < pensions.length; i += 1) {
+        for (var i = 0; i < pensions.length; i += 1) {
           if (pensions[i] === 'state') {
             stateP = true;
           } else if (pensions[i] === 'private') {

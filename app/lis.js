@@ -52,7 +52,6 @@ Lis.prototype.setPartnerText = function (partner) {
     this.jointOwnerText = 'Is anyone else a joint owner of the property you live in';
     this.otherThanPartner = ' ';
     this.iWe = 'I';
-    this.doNot = ' ';
   } else {
     this.partnerBothText = 'you, your partner or both of you';
     this.partnerOrText = 'you or your partner';
@@ -63,7 +62,6 @@ Lis.prototype.setPartnerText = function (partner) {
     this.jointOwnerText = 'Is anyone else other than your partner a joint owner of the property you live in';
     this.otherThanPartner = 'other than your partner';
     this.iWe = 'we';
-    this.doNot = 'do not';
   }
 }
 
