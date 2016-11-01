@@ -16,7 +16,7 @@
       Do you receive pension credit?
   </h1>
 
-  <form action="pencred-handler3" method="get" class="form">
+  <form action="" method="get" class="form">
     <div class="form-item-wrapper">
       <div class="form-group">
         <input type="radio" id="gc" name="prencred" value="gc">
@@ -40,7 +40,8 @@
     </div>
     {{
       form_macros.button({
-        label: 'Next'
+        label: 'Next',
+        href : 'pension-amount'
       })  
     }}
     

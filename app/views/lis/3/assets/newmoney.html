@@ -13,11 +13,11 @@
     <div class="column-two-thirds">
 
       <h1 class="heading-large">
-        Do {{partnerortext}} have any of the following in this country or abroad?
+        Do you have any of the following in this country or abroad?
         <span class="form-hint">Tick all that apply</span>
       </h1>
       
-  <form action="account-type-handler" method="get" class="form">
+  <form action="" method="get" class="form">
     <div class="form-item-wrapper">
       <div class="form-group">
         <input type="checkbox" id="bank" name="banktype" value="bank">
@@ -71,7 +71,8 @@
 
             {{
           form_macros.button({
-            label: 'Save and continue'
+            label: 'Save and continue',
+            href : 'accounts'
           })
         }}
 

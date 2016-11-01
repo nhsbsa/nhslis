@@ -1,73 +1,57 @@
-function Lis(
-  aboutYouStatus,
-  aboutPartnerStatus,
-  propertyStatus,
-  whereYouLive,
-  aboutYouLink,
-  aboutPartnerLink,
-  propertyLink,
-  whereYouLiveLink
-) {
-    this.aboutYouStatus = aboutYouStatus;
-    this.aboutPartnerStatus = aboutPartnerStatus;
-    this.propertyStatus = propertyStatus;
-    this.whereYouLive = whereYouLive;
-    this.aboutYouLink = aboutYouLink;
-    this.aboutPartnerLink = aboutPartnerLink;
-    this.propertyLink = propertyLink;
-    this.whereYouLiveLink = whereYouLiveLink;
-};
-
-Lis.prototype.resetApplication = function() {
-  this.aboutYouStatus = "Not started";
-  this.aboutPartnerStatus = "Not started";
-  this.propertyStatus = "Not started";
-  this.whereYouLiveStatus = "Not started";
-  this.aboutYouLink = "Start";
-  this.aboutPartnerLink = "Start";
-  this.propertyLink = "Start";
-  this.whereYouLiveLink = "Start";
-  console.log('Resetting application...');
-};
-
-Lis.prototype.allComplete = function () {
-  if (this.aboutYouStatus === 'Completed' &&
-    this.aboutPartnerStatus === 'Completed' &&
-    this.propertyStatus === 'Completed' &&
-    this.whereYouLiveStatus === 'Completed') {
+var LIS ={
+  aboutYouStatus : "Not started",
+  aboutPartnerStatus : "Not started",
+  propertyStatus : "Not started",
+  whereYouLiveStatus : "Not started",
+  aboutYouLink : "Start",
+  aboutPartnerLink : "Start",
+  propertyLink : "Start",
+  whereYouLiveLink : "Start",
+  resetApplication : function() {
+    aboutYouStatus = "Not started";
+    aboutPartnerStatus = "Not started";
+    propertyStatus = "Not started";
+    whereYouLiveStatus = "Not started";
+    aboutYouLink = "Start";
+    aboutPartnerLink = "Start";
+    propertyLink = "Start";
+    whereYouLiveLink = "Start";
+    jointOwnerText : 'Is anyone else other than your partner a joint owner of the property you live in',
+    console.log('Resetting application...');
+  },
+  allComplete : function () {
+    if (LIS.aboutYouStatus === 'Completed' &&
+      LIS.aboutPartnerStatus === 'Completed' &&
+      LIS.propertyStatus === 'Completed' &&
+      LIS.whereYouLiveStatus === 'Completed') {
       return true;
     } else {
       return false;
     }
-};
-
-Lis.prototype.setPartnerText = function (partner) {
-  if (partner === false) {
-    this.partnerBothText = 'you';
-    this.partnerOrText = 'you';
-    this.partnerAndText = 'you';
-    this.partnersText = 'your';
-    this.partnerLiveText = 'Does anyone else live with you?';
-    this.jointTennantText = 'Is anyone else a joint tenant of the place you live';
-    this.jointOwnerText = 'Is anyone else a joint owner of the property you live in';
-    this.otherThanPartner = ' ';
-    this.iWe = 'I';
-  } else {
-    this.partnerBothText = 'you, your partner or both of you';
-    this.partnerOrText = 'you or your partner';
-    this.partnerAndText = 'you and your partner';
-    this.partnersText = "you and your partner's";
-    this.partnerLiveText = 'Does anyone else other than your partner live with you?';
-    this.jointTennantText = 'Is anyone else other than your partner a joint tenant of the place you live';
-    this.jointOwnerText = 'Is anyone else other than your partner a joint owner of the property you live in';
-    this.otherThanPartner = 'other than your partner';
-    this.iWe = 'we';
+  },
+  setPartnerText : function (partner) {
+    if (partner === false) {
+      partnerBothText = 'you';
+      partnerOrText = 'you';
+      partnerAndText = 'you';
+      partnersText = 'your';
+      partnerLiveText = 'Does anyone else live with you?';
+      jointTennantText = 'Is anyone else a joint tenant of the place you live';
+      jointOwnerText = 'Is anyone else a joint owner of the property you live in';
+      otherThanPartner = ' ';
+      iWe = 'I';
+    } else {
+      partnerBothText = 'you, your partner or both of you';
+      partnerOrText = 'you or your partner';
+      partnerAndText = 'you and your partner';
+      partnersText = "you and your partner's";
+      partnerLiveText = 'Does anyone else other than your partner live with you?';
+      jointTennantText = 'Is anyone else other than your partner a joint tenant of the place you live';
+      jointOwnerText = 'Is anyone else other than your partner a joint owner of the property you live in';
+      otherThanPartner = 'other than your partner';
+      iWe = 'we';
+    }
   }
 }
 
-
-function createLIS() {
-  return new Lis();
-}
-
-module.exports.createLIS = createLIS;
+module.exports.LIS = LIS;

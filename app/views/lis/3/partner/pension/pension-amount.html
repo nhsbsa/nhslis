@@ -18,7 +18,7 @@
   
   <h2 class="heading-medium">How often does your partner receive their state pension payments?</h2>
   
-  <form action="state-pension-handler" method="get" class="form">
+  <form action="" method="get" class="form">
 
     <div class="form-item-wrapper">
       <div class="form-group">
@@ -63,7 +63,8 @@
         
     {{
       form_macros.button({
-        label: 'Save and continue'
+        label: 'Save and continue',
+    href : 'private-pension-amount'
       })
     }}
     <p class="navigation"><a class="cancel" href="../../lis-home">Save and come back later</a></p>
