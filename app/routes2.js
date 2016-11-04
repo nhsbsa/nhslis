@@ -408,9 +408,9 @@ module.exports = {
     // savings kickout handler v2
     app.get(/savings-ko-handler/, function (req, res) {
       if (req.query.savings === 'no') {
-        res.redirect('../savings-kickout');
-      } else {
         res.redirect('../need-to-know');
+      } else {
+        res.redirect('../savings-kickout');
       }
     });
 

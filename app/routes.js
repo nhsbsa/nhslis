@@ -159,6 +159,7 @@ var partner = person.createPerson(
 applicant.penCount = 0;
 partner.penCount = 0;
 applicant.pension = 'No';
+var address;
 
 //create someone else in the household
 var householder = {
@@ -413,11 +414,12 @@ module.exports = {
     // savings kickout handler v2
     app.get(/savings-ko-handler/, function (req, res) {
       if (req.query.savings === 'no') {
-        res.redirect('../savings-kickout');
-      } else {
         res.redirect('../need-to-know');
+      } else {
+        res.redirect('../savings-kickout');
       }
     });
+    
     
     // savings kickout handler
     app.get(/sko-handler/, function (req, res) {
@@ -1067,6 +1069,28 @@ module.exports = {
         res.redirect('../accounts');
       }
     });
+          // home address for property handler
+    app.get(/otherProp-handler/, function (req, res) {
+      LIS.propertyStatus = "Started";
+      LIS.propertyLink = continueText;
+        address = req.query.addressLineone;
+      if (req.query.property === "yes") {
+        res.redirect('../second-address');
+      } else {
+        res.redirect('../accounts');
+      }
+    });
+      
+     
+          // property handler
+    app.get(/address-prop/, function (req, res) {
+        sprint = req.url.charAt(5);
+        res.render('lis/' + sprint + '/assets/address-prop', {
+         'addressLineone' : address               
+        });
+      });
+      
+
 
     // property handler
     app.get(/assets-mortgage-handler/, function (req, res) {
