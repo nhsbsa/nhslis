@@ -34,7 +34,7 @@ var person = require("./person.js");
     }
   };
   setPartnerText = function (partner) {
-    if (partner === false) {
+    if (applicant.partner === false) {
       partnerBothText = 'you';
       partnerOrText = 'you';
       partnerAndText = 'you';
