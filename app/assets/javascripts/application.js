@@ -85,12 +85,12 @@ $(document).ready(function () {
       pensionSummary.push(buildRow(
         'Do you get Pension Credit Savings Credit?', 
         creditAnswer,
-        'pension/pension-credit'));
+        'pension/newpen-credit'));
       if(creditAnswer === 'Yes') {
       pensionSummary.push(buildRow(
         'Pension Credit Savings Credit payments', 
         '£121 per week',
-        'pension/private-pension-amount'));
+        'pension/newpen-credit'));
       }
       pensionSummary.push(buildRow(
         'Do you get a state pension?', 
@@ -100,18 +100,18 @@ $(document).ready(function () {
       pensionSummary.push(buildRow(
         'State pension payments', 
         '£' + stateAmount + ' ' + stateFrequency,
-        'pension/pension-amount'));
+        'pension/other-pension'));
       }
       pensionSummary.push(buildRow(
         'Do you get another pension?', 
         privateAnswer,
-        'pension/pension'));
+        'pension/other-pension'));
     }
     if(privateAnswer === 'Yes') {
       pensionSummary.push(buildRow(
         'First pension payments', 
         '£' + privateAmount + ' ' + privateFrequency,
-        'pension/pension'));
+        'pension/other-pension'));
     }
     pensionTable.innerHTML = pensionSummary;
   }

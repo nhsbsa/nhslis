@@ -283,6 +283,8 @@ module.exports = {
       applicant.resetPartner();
       resetApplication();
       setPartnerText();
+      applicant.penCount = 0;
+      partner.penCount = 0;
     });
     
     
@@ -1071,8 +1073,8 @@ module.exports = {
     });
           // home address for property handler
     app.get(/otherProp-handler/, function (req, res) {
-      LIS.propertyStatus = "Started";
-      LIS.propertyLink = continueText;
+      propertyStatus = "Started";
+      propertyLink = continueText;
         address = req.query.addressLineone;
       if (req.query.property === "yes") {
         res.redirect('../second-address');
