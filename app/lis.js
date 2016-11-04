@@ -17,7 +17,7 @@ var LIS ={
     propertyLink = "Start";
     whereYouLiveLink = "Start";
     jointOwnerText : 'Is anyone else other than your partner a joint owner of the property you live in',
-    console.log('Resetting application...');
+    console.log('Resetting application now... ' + aboutPartnerStatus);
   },
   allComplete : function () {
     if (LIS.aboutYouStatus === 'Completed' &&
