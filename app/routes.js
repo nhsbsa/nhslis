@@ -1089,7 +1089,8 @@ module.exports = {
     app.get(/address-prop/, function (req, res) {
       sprint = req.url.charAt(5);
       res.render('lis/' + sprint + '/assets/address-prop', {
-        'applicantaddress' : applicant.homeAddress               
+        'applicantaddress' : applicant.homeAddress,
+        'partnerortext' : partnerOrText,
       });
     });
 
@@ -1227,7 +1228,6 @@ module.exports = {
       } else {
         applicant.homeAddress = (req.query.lineone + ', ' + req.query.linetwo);
       }
-      console.log('applicant.homeAddress = ' + applicant.homeAddress);
       res.redirect('../mortgage');
     });
     
