@@ -16,18 +16,18 @@
       What is your address?
   </h1>
 
-  <form action="otherProp-handler" method="get" class="form">
+  <form action="homeadd-handler" method="get" class="form">
 
     {{
       form_macros.text_field({
-        id: 'addressLineone',
+        id: 'lineone',
         label: 'Building and street'
       })
     }}
 
     {{
       form_macros.text_field({
-        id: 'address-line-two'
+        id: 'linetwo'
       })
     }}
 
@@ -54,7 +54,6 @@
 
     {{
       form_macros.button({
-        href: 'mortgage',
         label: 'Save and continue'
       })
     }}

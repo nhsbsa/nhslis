@@ -42,6 +42,7 @@ function Person(
   premiumBonds,
   contactPref,
   councilTaxFreq,
+  homeAddress,
   penCount
 ) {
   this.firstName = firstName;
@@ -76,6 +77,7 @@ function Person(
   this.premiumBonds = premiumBonds;
   this.contactPref = contactPref;
   this.councilTaxFreq = councilTaxFreq;
+  this.homeAddress = homeAddress;
   this.penCount = penCount;
 }
 
@@ -160,6 +162,7 @@ Person.prototype.resetLivingSituation = function () {
   this.homeOwner = false;
   this.tennant = false;
   this.guest = false;
+  this.homeAddress = null;
   console.log('resetting living situation...');
 };
 

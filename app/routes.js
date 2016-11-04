@@ -10,6 +10,7 @@ var person = require("./person.js");
   var aboutPartnerLink = "Start";
   var propertyLink = "Start";
   var whereYouLiveLink = "Start";
+  var jointOwnerText = 'Is anyone else other than your partner a joint owner of the property you live in';
   var resetApplication = function() {
     aboutYouStatus = "Not started";
     aboutPartnerStatus = "Not started";
@@ -19,7 +20,7 @@ var person = require("./person.js");
     aboutPartnerLink = "Start";
     propertyLink = "Start";
     whereYouLiveLink = "Start";
-    jointOwnerText : 'Is anyone else other than your partner a joint owner of the property you live in',
+    jointOwnerText = 'Is anyone else other than your partner a joint owner of the property you live in';
     console.log('Resetting application now... ' + aboutPartnerStatus);
   };
   allComplete = function () {
@@ -470,7 +471,7 @@ module.exports = {
       });
     });
 
-        // email-address-handler
+    // email-address-handler
     app.get(/email-address-handler/, function (req, res) {
       if (req.query.email != '') {
         applicant.email = req.query.email;
@@ -1071,7 +1072,8 @@ module.exports = {
         res.redirect('../accounts');
       }
     });
-          // home address for property handler
+    
+    // home address for property handler
     app.get(/otherProp-handler/, function (req, res) {
       propertyStatus = "Started";
       propertyLink = continueText;
@@ -1082,17 +1084,14 @@ module.exports = {
         res.redirect('../accounts');
       }
     });
-      
      
-          // property handler
+    // property handler
     app.get(/address-prop/, function (req, res) {
-        sprint = req.url.charAt(5);
-        res.render('lis/' + sprint + '/assets/address-prop', {
-         'addressLineone' : address               
-        });
+      sprint = req.url.charAt(5);
+      res.render('lis/' + sprint + '/assets/address-prop', {
+        'applicantaddress' : applicant.homeAddress               
       });
-      
-
+    });
 
     // property handler
     app.get(/assets-mortgage-handler/, function (req, res) {
@@ -1219,7 +1218,19 @@ module.exports = {
         res.redirect('../home');
       }
     });
+    
         
+    // capture address
+    app.get(/homeadd-handler/, function (req, res) {
+      if(req.query.linetwo === '') {
+        applicant.homeAddress = (req.query.lineone);
+      } else {
+        applicant.homeAddress = (req.query.lineone + ', ' + req.query.linetwo);
+      }
+      console.log('applicant.homeAddress = ' + applicant.homeAddress);
+      res.redirect('../mortgage');
+    });
+    
     // rent to parents relitives friends
     app.get(/prf-handler/, function (req, res) {
       if (req.query.prf === 'yes') {
