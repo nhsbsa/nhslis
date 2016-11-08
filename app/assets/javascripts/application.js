@@ -113,7 +113,7 @@ $(document).ready(function () {
         '£' + privateAmount + ' ' + privateFrequency,
         'pension/other-pension'));
     }
-    pensionTable.innerHTML = pensionSummary;
+    pensionTable.innerHTML = pensionSummary.toString().replace(/,/g, '');
   }
 
 });

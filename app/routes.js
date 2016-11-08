@@ -12,6 +12,13 @@ var person = require("./person.js");
   var whereYouLiveLink = "Start";
   var partnerLiveText = 'Does anyone else live with you?';
   var jointOwnerText = 'Is anyone else other than your partner a joint owner of the property you live in';
+  var partnerBothText = 'you, your partner or both of you';
+  var partnerOrText = 'you or your partner';
+  var partnerAndText = 'you and your partner';
+  var partnersText = "you and your partner's";
+  var jointTennantText = 'Is anyone else other than your partner a joint tenant of the place you live';
+  var otherThanPartner = 'other than your partner';
+  var iWe = 'we';
   var resetApplication = function() {
     aboutYouStatus = "Not started";
     aboutPartnerStatus = "Not started";
@@ -24,7 +31,7 @@ var person = require("./person.js");
     jointOwnerText = 'Is anyone else other than your partner a joint owner of the property you live in';
     console.log('Resetting application now... ' + aboutPartnerStatus);
   };
-  allComplete = function () {
+  var allComplete = function () {
     if (aboutYouStatus === 'Completed' &&
       aboutPartnerStatus === 'Completed' &&
       propertyStatus === 'Completed' &&
@@ -34,7 +41,7 @@ var person = require("./person.js");
       return false;
     }
   };
-  setPartnerText = function (partner) {
+  var setPartnerText = function (partner) {
     if (applicant.partner === false) {
       partnerBothText = 'you';
       partnerOrText = 'you';
@@ -81,18 +88,18 @@ resetPeople();
 
 var
   sprint,
-  pensionNumber;
+  pensionNumber,
+  benefits,
+  myWork,
+  firstBenefit,
+  firstSavingsAcc,
+  accounts,
+  stateP,
+  privateP,
+  pensions;
   //pension,
-  //pensions,
-  //benefits,
-  //firstBenefit,
-  //myWork,
   //partnerBenefits,
   //firstPartnerBenefit,
-  //accounts,
-  //firstSavingsAcc,
-  //stateP,
-  //privateP,
 
 //create an applicant
 var applicant = person.createPerson(
@@ -1219,7 +1226,6 @@ module.exports = {
       }
     });
     
-        
     // capture address
     app.get(/homeadd-handler/, function (req, res) {
       if(req.query.linetwo === '') {
@@ -1227,7 +1233,7 @@ module.exports = {
       } else {
         applicant.homeAddress = (req.query.lineone + ', ' + req.query.linetwo);
       }
-      res.redirect('../mortgage');
+      res.redirect('../loan');
     });
     
     // rent to parents relitives friends
@@ -1237,6 +1243,13 @@ module.exports = {
       } else {
         res.redirect('../joint-tenant');
       }
+    });
+    
+    app.get(/loan/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/' + sprint + '/live/mortgaged/loan', {
+        'partnerortext' : partnerOrText
+      });
     });
 
     // home
