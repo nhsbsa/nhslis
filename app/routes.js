@@ -3,13 +3,14 @@ var person = require("./person.js");
 
 //import the LIS application constructor
   var aboutYouStatus = "Not started";
-  var aboutPartnerStatus= "Not started";
+  var aboutPartnerStatus = "Not started";
   var propertyStatus = "Not started";
   var whereYouLiveStatus = "Not started";
   var aboutYouLink = "Start";
   var aboutPartnerLink = "Start";
   var propertyLink = "Start";
   var whereYouLiveLink = "Start";
+  var partnerLiveText = 'Does anyone else live with you?';
   var jointOwnerText = 'Is anyone else other than your partner a joint owner of the property you live in';
   var resetApplication = function() {
     aboutYouStatus = "Not started";
@@ -34,7 +35,7 @@ var person = require("./person.js");
     }
   };
   setPartnerText = function (partner) {
-    if (partner === false) {
+    if (applicant.partner === false) {
       partnerBothText = 'you';
       partnerOrText = 'you';
       partnerAndText = 'you';
@@ -1195,8 +1196,6 @@ module.exports = {
 
     // hospital-handler
     app.get(/hospital-handler/, function (req, res) {
-      whereYouLiveStatus = "Started";
-      whereYouLiveLink = continueText;
       res.redirect('../you-live');
     });
 
@@ -1250,6 +1249,8 @@ module.exports = {
     // mortgaged/joint
     app.get(/joint-own/, function (req, res) {
       sprint = req.url.charAt(5);
+      whereYouLiveStatus = "Started";
+      whereYouLiveLink = continueText;
       res.render('lis/' + sprint + '/live/mortgaged/joint-own', {
         'jointOwnerText' : jointOwnerText
       });
