@@ -1226,7 +1226,6 @@ module.exports = {
       }
     });
     
-        
     // capture address
     app.get(/homeadd-handler/, function (req, res) {
       if(req.query.linetwo === '') {
@@ -1234,7 +1233,7 @@ module.exports = {
       } else {
         applicant.homeAddress = (req.query.lineone + ', ' + req.query.linetwo);
       }
-      res.redirect('../mortgage');
+      res.redirect('../loan');
     });
     
     // rent to parents relitives friends
@@ -1244,6 +1243,13 @@ module.exports = {
       } else {
         res.redirect('../joint-tenant');
       }
+    });
+    
+    app.get(/loan/, function (req, res) {
+      sprint = req.url.charAt(5);
+      res.render('lis/' + sprint + '/live/mortgaged/loan', {
+        'partnerortext' : partnerOrText
+      });
     });
 
     // home
