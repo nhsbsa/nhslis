@@ -747,8 +747,6 @@ module.exports = {
       }
     });
     
-    
-    
     app.get(/p-amount-handler/, function (req, res) {
       applicant.privatePensionAmount = req.query.moneyamount;
       applicant.privatePensionFrequency = req.query.frequency;
