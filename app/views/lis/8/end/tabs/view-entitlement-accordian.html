@@ -19,15 +19,59 @@
   </div>
 
   <nav class="tab-nav">
-    <a href="#prototype" class="tab messages selected">What you’re entitled to</a>
-    <a href="#certificate" class="tab messages">Get your certificate</a>
+    <a href="#certificate" class="tab messages selected">Get your certificate</a>
+     <a href="#entitled" class="tab messages">What you’re entitled to</a>
     <a href="#breakdown" class="tab messages">How we worked this out</a>
     <a href="#answers" class="tab messages">What you told us</a>
   </nav>
 
-<!--tab-1-->
 
-<div id="prototype" class="details-block">
+
+
+<!--tab 1-->
+<div id="certificate" class="details-block">
+
+  <div class="column-two-thirds">
+    <h1 class="heading-large">Get your certificate</h1>
+
+     <div class="callout-box">
+       <p>You will need to show a copy of this information whenever you want to use it.</p>
+     </div>
+  </div>
+
+  <div class="column-two-thirds">
+         <p class="email-text">Your  certificate has been emailed to <span style="font-weight:700" id="emailAddress">vinay.mattu@inter.net</span></p>
+    <article>
+      <div class="govspeak">
+        <section class="attachment embedded" id="attachment_hc3">
+          <div class="attachment-thumb"> <img alt="" src="/public/images/hc3-img-01.png">
+          </div>
+
+          <div class="attachment-details">
+            <p class="links"><span class="download"><a href="../../exemption/email-me?helplevel=3">
+            <strong>Email (another) copy</strong></a></span></p>
+
+            <p class="links"><span class="download">
+            <a href="javascript:window.print();"> <strong>Print</strong></a></span></p>
+
+            <p class="links"> <span class="download"><a href="/public/images/hc3.pdf">
+            <strong>Download PDF</strong>
+            9.97KB</a></span></p>
+
+            <p class="links"> <span class="download"><a href="/public/images/hc3.pdf">
+            <strong>Request a paper copy</strong></a></span></p>
+          </div>
+
+        </section>
+      </div>
+    </article>
+  </div>
+    </div>
+
+
+             <!--tab-2-->
+
+<div id="entitled" class="details-block">
 
   <div class="column-two-thirds">
 
@@ -116,47 +160,6 @@
   </div>
 
 </div>
-    </div>
-
-
-<!--tab 2-->
-<div id="certificate" class="details-block">
-
-  <div class="column-two-thirds">
-    <h1 class="heading-large">Get your certificate</h1>
-
-     <div class="callout-box">
-       <p>You will need to show a copy of this information whenever you want to use it.</p>
-     </div>
-  </div>
-
-  <div class="column-two-thirds">
-         <p class="email-text">Your  certificate has been emailed to <span style="font-weight:700" id="emailAddress">vinay.mattu@inter.net</span></p>
-    <article>
-      <div class="govspeak">
-        <section class="attachment embedded" id="attachment_hc3">
-          <div class="attachment-thumb"> <img alt="" src="/public/images/hc3-img-01.png">
-          </div>
-
-          <div class="attachment-details">
-            <p class="links"><span class="download"><a href="../../exemption/email-me?helplevel=3">
-            <strong>Email (another) copy</strong></a></span></p>
-
-            <p class="links"><span class="download">
-            <a href="javascript:window.print();"> <strong>Print</strong></a></span></p>
-
-            <p class="links"> <span class="download"><a href="/public/images/hc3.pdf">
-            <strong>Download PDF</strong>
-            9.97KB</a></span></p>
-
-            <p class="links"> <span class="download"><a href="/public/images/hc3.pdf">
-            <strong>Request a paper copy</strong></a></span></p>
-          </div>
-
-        </section>
-      </div>
-    </article>
-  </div>
     </div>
               <!--tab 3-->
   <div id="breakdown" class="details-block">
@@ -291,8 +294,8 @@
       }
 
       $(document).ready(function(){
-        $('.details-block').not("#prototype").hide();
-        $(".tab-nav a[href=#prototype]").addClass('active');
+        $('.details-block').not("#certificate").hide();
+        $(".tab-nav a[href=#certificate]").addClass('active');
 
         $('.tab-nav a').on('click',function(e){
           var viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
